@@ -7,8 +7,17 @@
     >
       <el-menu-item index="/">首页</el-menu-item>
       <el-sub-menu index="/picture">
-        <template #title>图片处理</template>
-        <el-menu-item index="/picture/crop">图片裁切</el-menu-item>
+        <template #title>
+          <el-icon><Picture /></el-icon>
+          图片处理
+        </template>
+        <el-menu-item index="/picture/crop">
+          <template #title>
+            <el-icon><Crop /></el-icon>
+            图片裁切
+          </template>
+        </el-menu-item>
+        <el-menu-item index="/picture/base64">图片压缩</el-menu-item>
         <el-menu-item index="/picture/base64">图片转base64</el-menu-item>
       </el-sub-menu>
     </el-menu>
@@ -23,19 +32,17 @@
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
-
+import { Picture, Crop } from '@element-plus/icons-vue'
 const state = reactive({
   activeIndex: '/'
 })
 
-useHead({
-  title: '工具网站',
-  meta: [
-    { name: 'description', content: '图片转base64、图片压缩' }
-  ],
-  bodyAttrs: {
-    class: 'test'
-  },
+
+
+useSeoMeta({
+  title: '前端工具网站',
+  description: '图片转base64、图片压缩',
+  keywords: '图片转base64、图片压缩、图片处理、在线工具、工具集合'
 })
 
 

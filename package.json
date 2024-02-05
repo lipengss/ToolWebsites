@@ -16,7 +16,11 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@element-plus/nuxt": "^1.0.7",
+    "@pinia/nuxt": "^0.5.1",
+    "@vueuse/nuxt": "^10.7.2",
     "element-plus": "^2.5.5",
+    "lodash": "^4.17.21",
     "nuxt-lodash": "^2.5.3",
     "sass": "^1.70.0"
   }

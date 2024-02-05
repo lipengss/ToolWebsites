@@ -1,11 +1,11 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css:[
     'element-plus/dist/index.css',
     '~/assets/css/common.scss'
   ],
-  modules: ['nuxt-lodash'],
+  modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt'],
+  elementPlus: {},
   // lodash: {
   //   prefix: '_'
   // }
