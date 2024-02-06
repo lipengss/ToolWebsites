@@ -5,21 +5,17 @@
       mode="horizontal"
       router
     >
-      <el-menu-item index="/">首页</el-menu-item>
-      <el-sub-menu index="/picture">
-        <template #title>
-          <el-icon><Picture /></el-icon>
-          图片处理
-        </template>
-        <el-menu-item index="/picture/crop">
-          <template #title>
-            <el-icon><Crop /></el-icon>
-            图片裁切
-          </template>
+      <template v-for="route in routeList" :key="route.path">
+        <el-menu-item v-if="!route.children" :index="route.path">
+          <template #title>{{ route.name }}</template>
         </el-menu-item>
-        <el-menu-item index="/picture/base64">图片压缩</el-menu-item>
-        <el-menu-item index="/picture/base64">图片转base64</el-menu-item>
-      </el-sub-menu>
+        <el-sub-menu v-else :index="route.path">
+          <template #title>{{ route.name }}</template>
+          <el-menu-item v-for="child in route.children" :index="child.path">
+            <template #title>{{ child.name }}</template>
+          </el-menu-item>
+        </el-sub-menu>
+      </template>
     </el-menu>
     <div class="container">
       <el-row justify="center">
@@ -32,12 +28,20 @@
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { Picture, Crop } from '@element-plus/icons-vue'
+import { routeList } from '~/assets/utils/routeList'
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+
 const state = reactive({
   activeIndex: '/'
 })
 
-
+watch(() => route.path, path => {
+  state.activeIndex = path
+}, {
+  immediate: true
+})
 
 useSeoMeta({
   title: '前端工具网站',
