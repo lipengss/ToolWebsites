@@ -6,6 +6,10 @@ export default defineNuxtConfig({
   ],
   modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt'],
   elementPlus: {},
+  server: {
+    port: '80',
+    host: '0.0.0.0',
+  }
   // lodash: {
   //   prefix: '_'
   // }
