@@ -1,5 +1,5 @@
 <template>
-  <el-space>
+  <el-space wrap>
     <el-color-picker :model-value="state.colorPickerValue" color-format="rgb" @change="onColorPickerChange" />
     <el-input  v-model="state.rgbValue" placeholder="请输入RGB值 如: 255,182,193" style="min-width: 300px;" @change="onRgbaToHex">
       <template #prepend>RGB</template>
@@ -10,17 +10,18 @@
     <el-input v-model="state.hexValue" maxlength="7" readonly clearable>
       <template #prepend>HEX</template>
       <template #append>
-        <el-button @click="onCopy">复制</el-button>
+        <el-button @click="onCopy(`${state.hexValue} 复制成功!`)">复制</el-button>
       </template>
       <template #suffix>
         <div class="color-pane" :style="`background-color:${state.hexValue}`"></div>
       </template>
     </el-input>
+    <el-button type="danger" :icon="Delete" plain @click="onClear">清空</el-button>
   </el-space>
 </template>
 <script setup lang="ts">
 import { reactive, toRef } from 'vue';
-import { Right } from '@element-plus/icons-vue'
+import { Right, Delete } from '@element-plus/icons-vue'
 import { useColorFormat } from '~/assets/utils/colorFormat'
 import { useCopy } from '~/hooks/useCopy'
 const { rgbToHex } = useColorFormat()
@@ -31,9 +32,11 @@ const state = reactive({
   colorPickerValue: ''
 })
 
+
 const { onCopy } = useCopy(toRef(state, 'rgbValue'))
 
 function onRgbaToHex(val: string) {
+  if (!val) return;
   let strArr = val.split(',');
   const color1 = parseInt(strArr[0]);
   const color2 = parseInt(strArr[1]);
@@ -42,6 +45,12 @@ function onRgbaToHex(val: string) {
   state.colorPickerValue = `rgb(${state.rgbValue})`
   const hexColor = rgbToHex(color1, color2, color3)
   state.hexValue = hexColor
+}
+
+function onClear() {
+  state.hexValue = ''
+  state.rgbValue = ''
+  state.colorPickerValue = ''
 }
 
 let regex = /\((.+?)\)/g;

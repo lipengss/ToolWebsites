@@ -1,8 +1,17 @@
 <template>
-  <el-upload :show-file-list="false" drag :http-request="htttpRequest">
+ 
+  <el-tooltip
+    v-if="state.textarea" 
+    effect="dark"
+    content="点击放大"
+    placement="bottom"
+  >
+    <el-image class="preview-image" :src="state.textarea" fit="cover" :preview-src-list="[state.textarea]" />
+  </el-tooltip>
+  <el-upload v-else :show-file-list="false" drag :http-request="htttpRequest">
     <el-icon class="el-icon--upload"><upload-filled /></el-icon>
     <div class="el-upload__text">
-    拖住到这里 或 <em>点击上传照片</em>
+      拖住到这里 或 <em>点击上传照片</em>
     </div>
   </el-upload>
   <div class="flex-between pt10 pb10">
@@ -11,7 +20,6 @@
       <el-tag v-if="state.file.size" type="primary" round>{{fileSize(state.file.size) }}</el-tag>
     </el-space>
     <el-space>
-      <el-button v-if="state.file.list.length" :icon="Picture" type="success">图片预览</el-button>
       <el-button :icon="Delete" type="danger" @click="onClearAll">清空所有</el-button>
     </el-space>
   </div>
@@ -64,3 +72,11 @@ function onClearAll() {
 }
 
 </script>
+<style lang="scss" scoped>
+.preview-image{
+  width: 100%;
+  height: 184px;
+  border-radius: 6px;
+}
+
+</style>

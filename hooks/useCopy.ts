@@ -6,9 +6,9 @@ export function useCopy(source: Ref<string>) {
 
   const { copy } = useClipboard({ source: source.value })
   
-  function onCopy() {
+  function onCopy(tip? = '复制成功') {
     copy(source.value)
-    ElMessage.success('复制成功！')
+    ElMessage.success(tip)
   }
   return {
     onCopy
