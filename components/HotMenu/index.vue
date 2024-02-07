@@ -7,7 +7,7 @@
     </el-card>
     <el-card header="热门推荐" shadow="never">
       <div v-for="route in rankRouteList" :key="route.path" class="link-item">
-        <el-link :icon="Link" :type="activeRoute === route.path ? 'primary' : 'default'" target="_blank" :href="route.path">{{ route.name }}</el-link>
+        <el-link :icon="Link" :type="activeRoute === route.path ? 'primary' : 'default'" :href="route.path">{{ route.name }}</el-link>
       </div>
     </el-card>
   </el-affix>

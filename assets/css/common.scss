@@ -13,3 +13,10 @@ html,body{
 .el-container{
   height: 100vh;
 }
+
+.el-form--inline .el-form-item{
+  margin-right: 10px !important;
+  .el-input-number{
+    width: 120px;
+  }
+}

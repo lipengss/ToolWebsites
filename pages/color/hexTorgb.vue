@@ -1,7 +1,7 @@
 <template>
   <el-space alignment="stretch" wrap>
     <el-color-picker :model-value="state.hexValue" @change="onColorPickerChange" />
-    <el-input v-model="state.hexValue" maxlength="7" clearable placeholder="请输入HEX值 如: # FFB6C1" style="min-width: 300px;" @input="onHexInput">
+    <el-input v-model="state.hexValue" maxlength="7" clearable placeholder="输入如：#FFB6C1" @input="onHexInput">
       <template #prepend>HEX</template>
     </el-input>
     <el-button type="primary" @click="onHexToRgb(state.hexValue)">

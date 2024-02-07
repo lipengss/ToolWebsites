@@ -1,7 +1,7 @@
 <template>
   <el-space wrap>
     <el-color-picker :model-value="state.colorPickerValue" color-format="rgb" @change="onColorPickerChange" />
-    <el-input  v-model="state.rgbValue" placeholder="请输入RGB值 如: 255,182,193" style="min-width: 300px;" @change="onRgbaToHex">
+    <el-input  v-model="state.rgbValue" placeholder="输入如: 255,182,193"  @change="onRgbaToHex">
       <template #prepend>RGB</template>
     </el-input>
     <el-button type="primary" @click="onRgbaToHex(state.rgbValue)">
