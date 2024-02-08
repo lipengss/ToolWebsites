@@ -1,3 +1,7 @@
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
+
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css:[
@@ -6,10 +10,19 @@ export default defineNuxtConfig({
   ],
   modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt'],
   elementPlus: {},
-  server: {
-    port: '80',
-    host: '0.0.0.0',
-  }
+  
+  devServer: {
+    port: 8170,
+    host: 'localhost',
+  },
+  vite: {
+    plugins: [
+      createSvgIconsPlugin({
+        iconDirs: [path.resolve(process.cwd(), 'assets/svg')]
+      })
+    ],
+  },
+  
   // lodash: {
   //   prefix: '_'
   // }

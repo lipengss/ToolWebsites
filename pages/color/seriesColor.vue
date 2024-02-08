@@ -33,7 +33,7 @@
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { Refresh, Minus } from '@element-plus/icons-vue';
+import { Refresh } from '@element-plus/icons-vue';
 import { useColorFormat } from '~/assets/utils/colorFormat'
 import numeral  from 'numeral'
 

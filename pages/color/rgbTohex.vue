@@ -4,16 +4,13 @@
     <el-input  v-model="state.rgbValue" placeholder="输入如: 255,182,193"  @change="onRgbaToHex">
       <template #prepend>RGB</template>
     </el-input>
-    <el-button type="primary" @click="onRgbaToHex(state.rgbValue)">
-      转<el-icon class="el-icon--right"><Right /></el-icon>
+    <el-button type="primary" :color="state.hexValue" @click="onRgbaToHex(state.rgbValue)">
+      <el-icon><svg-icon name="arrow-right" /></el-icon>
     </el-button>
     <el-input v-model="state.hexValue" maxlength="7" readonly clearable>
       <template #prepend>HEX</template>
       <template #append>
         <el-button @click="onCopy(`${state.hexValue} 复制成功!`)">复制</el-button>
-      </template>
-      <template #suffix>
-        <div class="color-pane" :style="`background-color:${state.hexValue}`"></div>
       </template>
     </el-input>
     <el-button type="danger" :icon="Delete" plain @click="onClear">清空</el-button>

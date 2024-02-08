@@ -4,18 +4,14 @@
     <el-input v-model="state.hexValue" maxlength="7" clearable placeholder="输入如：#FFB6C1" @input="onHexInput">
       <template #prepend>HEX</template>
     </el-input>
-    <el-button type="primary" @click="onHexToRgb(state.hexValue)">
-      转<el-icon class="el-icon--right"><Right /></el-icon>
+    <el-button type="primary" :color="showInputBgColor" @click="onHexToRgb(state.hexValue)">
+      <el-icon><svg-icon name="arrow-right" /></el-icon>
     </el-button>
-    
     <el-space direction="vertical"  alignment="stretch">
       <el-input  :model-value="state.rgbValue" readonly >
         <template #prepend>RGB</template>
         <template #append>
           <el-button @click="onCopy(`${state.hexValue} 复制成功!`)">复制</el-button>
-        </template>
-        <template #suffix>
-          <div class="color-pane" />
         </template>
       </el-input>
       <el-checkbox v-model="state.isRgbPrefix" @change="onHexToRgb(state.hexValue)">添加rgb前缀</el-checkbox>
@@ -25,7 +21,7 @@
 </template>
 <script setup lang="ts">
 import { reactive, toRef } from 'vue';
-import { Right, Delete } from '@element-plus/icons-vue'
+import { Delete } from '@element-plus/icons-vue'
 import { useColorFormat } from '~/assets/utils/colorFormat'
 import { useCopy } from '~/hooks/useCopy'
 const { hexToRgb } = useColorFormat()
@@ -73,8 +69,5 @@ function onHexInput(val:string) {
 <style lang="scss" scoped>
 .el-input-group{
   max-height: 32px;
-}
-.color-pane{
-  background-color: v-bind(showInputBgColor);
 }
 </style>

@@ -1,11 +1,17 @@
 <template>
-   <el-affix :offset="127">
-    <el-card header="在线工具" shadow="never" class="mb20">
+   <el-affix :offset="80">
+    <el-card shadow="never" class="mb20">
+      <template #header>
+        <div class="flex-center header"><svg-icon name="tool" class="mr6" /> <span>在线工具</span></div>
+      </template>
       <div v-for="link in props.anchorPoints" :key="link.id" class="link-item">
         <el-link :type="activeSection === link.id ? 'success' : 'info'" @click="scrollTo(link.id)">{{  link.name }}</el-link>
       </div>
     </el-card>
-    <el-card header="热门推荐" shadow="never">
+    <el-card shadow="never">
+       <template #header>
+        <div class="flex-center header"><svg-icon name="hot" class="mr6" /> <span>热门推荐</span></div>
+      </template>
       <div v-for="route in rankRouteList" :key="route.path" class="link-item">
         <el-link :icon="Link" :type="activeRoute === route.path ? 'primary' : 'default'" :href="route.path">{{ route.name }}</el-link>
       </div>
@@ -51,7 +57,6 @@ const updateActiveSection = () => {
     const el = document.getElementById(section.id);
     if (el) {
       const rect = el.getBoundingClientRect();
-      console.log(rect)
       if (rect.top <= 0 && rect.bottom > 0) {
         activeSection.value = section.id;
         break;
@@ -85,6 +90,9 @@ watch(() => route.path, path => {
 .link-item{
   padding: 8px;
   border-bottom: 1px solid var(--el-border-color-light);
+}
+.header{
+  line-height: 24px;
 }
 
 </style>
