@@ -47,6 +47,7 @@ watch(
 	() => route.path,
 	(path) => {
 		state.activeIndex = path;
+		console.log(route);
 	},
 	{
 		immediate: true,
