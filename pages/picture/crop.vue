@@ -1,33 +1,69 @@
 <template>
 	<TwoColumnLayout>
-		<el-upload :show-file-list="false" class="mb10" drag :http-request="htttpRequest">
-			<el-icon class="el-icon--upload"><upload-filled /></el-icon>
-			<div class="el-upload__text">拖住到这里 或 <em>点击上传照片</em></div>
-		</el-upload>
 		<div class="flex-between mb10">
 			<el-space>
 				<el-input v-model="state.file.name" readonly placeholder="文件名" />
 				<el-tag v-if="state.file.size" type="primary" round>{{ fileSize(state.file.size) }}</el-tag>
 			</el-space>
 			<el-space>
-				<el-button :icon="Delete" type="danger" @click="onClearAll">清空所有</el-button>
+				<el-upload :show-file-list="false" :http-request="htttpRequest">
+					<el-button type="primary" :icon="IconPicture">上传图片</el-button>
+				</el-upload>
+				<el-button :icon="Delete" type="danger" :disabled="!state.file.size" @click="onClearAll">清空所有</el-button>
 			</el-space>
 		</div>
-		<el-image :src="state.textarea" fit="contain">
-			<template #error>
-				<div class="image-slot">
-					<el-icon><icon-picture /></el-icon>
-				</div>
-			</template>
-		</el-image>
+		<div class="cropper-box">
+			<img class="image" :src="state.file.imageSrc" alt="" />
+		</div>
+		<el-space>
+			<el-button type="primary" @click="onHandlePicture('flip-horizontal')">
+				<el-icon class="mr6"><svg-icon name="flip-horizontal" /></el-icon>
+				水平翻转
+			</el-button>
+			<el-button type="primary" @click="onHandlePicture('flip-vertical')">
+				<el-icon class="mr6"><svg-icon name="flip-vertical" /></el-icon>
+				垂直翻转
+			</el-button>
+			<el-button-group>
+				<el-button type="primary" @click="onHandlePicture('rotate-l')">
+					<el-icon class="mr6"><svg-icon name="rotate-l" /></el-icon>
+					左旋
+				</el-button>
+				<el-button type="primary" @click="onHandlePicture('rotate-r')">
+					右旋
+					<el-icon class="ml6"><svg-icon name="rotate-r" /></el-icon>
+				</el-button>
+				<el-button type="primary" @click="onHandlePicture('resetRotate')">
+					<el-icon><svg-icon name="redo" /></el-icon>
+				</el-button>
+			</el-button-group>
+			<el-input v-model.number="state.cropper.rotateStep" style="width: 60px">
+				<template #suffix>°</template>
+			</el-input>
+			<el-button type="primary" @click="onCrop">
+				<el-icon class="mr6"><svg-icon name="cutting" /></el-icon>
+				图片裁切
+			</el-button>
+			<!-- <el-button-group>
+				<el-button type="primary" :icon="Top" @click="onHandlePicture('moveTop')" />
+				<el-button type="primary" :icon="Bottom" @click="onHandlePicture('movebottom')" />
+			</el-button-group>
+			<el-button-group>
+				<el-button type="primary" :icon="Back" @click="onHandlePicture('moveLeft')" />
+				<el-button type="primary" :icon="Right" @click="onHandlePicture('moveRight')" />
+			</el-button-group> -->
+		</el-space>
+		<div class="crop-preview" id="crop-preview">{{ state.cropper.preview }}</div>
 	</TwoColumnLayout>
 </template>
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
 import { type UploadRequestOptions } from 'element-plus';
-import { UploadFilled, Picture as IconPicture, Delete } from '@element-plus/icons-vue';
+import { UploadFilled, Picture as IconPicture, Delete, Top, Bottom, Back, Right } from '@element-plus/icons-vue';
 import { fileSize } from '~/assets/utils/tools';
+import defaultPicture from '~/assets/img/defaultPicture.jpg';
 import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.css';
 
 definePageMeta({
 	title: '图片裁切',
@@ -38,28 +74,25 @@ const state: CropState = reactive({
 	file: {
 		name: '',
 		size: 0,
-		list: [],
+		imageSrc: defaultPicture,
 	},
-	textarea: '',
+	cropper: {
+		rotateStep: 10,
+		cropPreview: '',
+	},
 });
 
-function initImage() {
+let cropperInstance: Cropper | null = null;
+
+function initCropper() {
 	const image: HTMLImageElement | null = document.querySelector('.image');
 	if (!image) return;
 	const cropper = new Cropper(image, {
 		aspectRatio: 16 / 9,
-		crop(event) {
-			console.log(event.detail.x);
-			console.log(event.detail.y);
-			console.log(event.detail.width);
-			console.log(event.detail.height);
-			console.log(event.detail.rotate);
-			console.log(event.detail.scaleX);
-			console.log(event.detail.scaleY);
-		},
 	});
+	cropperInstance = cropper;
 }
-
+// 上传图片
 function htttpRequest(options: UploadRequestOptions): XMLHttpRequest | Promise<unknown> {
 	const { name, size } = options.file;
 	state.file.name = name;
@@ -68,37 +101,73 @@ function htttpRequest(options: UploadRequestOptions): XMLHttpRequest | Promise<u
 	reader.readAsDataURL(options.file);
 	reader.onload = (event) => {
 		if (event.target === null) return;
-		state.textarea = event.target.result;
-		state.file.list = [state.textarea];
+		const result = event.target.result;
+		if (cropperInstance && typeof result === 'string') {
+			state.file.imageSrc = result;
+			cropperInstance.replace(result);
+		}
 	};
 	return Promise.resolve(true);
 }
+// 图片操作
+function onHandlePicture(type: string) {
+	if (!cropperInstance) return;
+	const { scaleX, scaleY, rotate, x, y } = cropperInstance.getData();
+	switch (type) {
+		case 'flip-horizontal':
+			cropperInstance.scaleX(scaleX === 1 ? -1 : 1);
+			break;
+		case 'flip-vertical':
+			cropperInstance.scaleY(scaleY === 1 ? -1 : 1);
+			break;
+		case 'rotate-l':
+			cropperInstance.rotateTo(rotate - state.cropper.rotateStep);
+			break;
+		case 'rotate-r':
+			cropperInstance.rotateTo(rotate + state.cropper.rotateStep);
+			break;
+		case 'resetRotate':
+			cropperInstance.rotateTo(0);
+			break;
+		case 'moveTop':
+			cropperInstance.moveTo(x, y + 1);
+			break;
+	}
+}
+// 图片裁切
+function onCrop() {
+	if (!cropperInstance) return;
+	const cropPreview = document.getElementById('crop-preview');
+	console.log(cropperInstance.getCroppedCanvas());
+	cropPreview?.appendChild(cropperInstance.getCroppedCanvas());
+	// state.cropper.cropPreview = ;
+}
 
 function onClearAll() {
-	state.textarea = '';
 	state.file.name = '';
 	state.file.size = 0;
-	state.file.list = [];
+	if (cropperInstance) {
+		cropperInstance.replace(defaultPicture);
+	}
 }
 
 onMounted(() => {
-	initImage();
+	initCropper();
 });
 </script>
 
 <style lang="scss" scoped>
-.el-image {
-	width: 100%;
-	.image-slot {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+.cropper-box {
+	height: 400px;
+	margin-bottom: 10px;
+	.image {
 		width: 100%;
 		height: 100%;
-		min-height: 400px;
-		background: var(--el-fill-color-light);
-		color: var(--el-text-color-secondary);
-		font-size: 30px;
 	}
+}
+.crop-preview {
+	width: 100%;
+	height: 400px;
+	overflow-x: auto;
 }
 </style>

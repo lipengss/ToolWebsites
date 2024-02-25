@@ -12,7 +12,9 @@ interface CropState {
 	file: {
 		name: string;
 		size: number;
-		list: UploadUserFile[];
+		imageSrc: string;
 	};
-	textarea: string | ArrayBuffrt | null;
+	cropper: {
+		rotateStep: 10;
+	};
 }
