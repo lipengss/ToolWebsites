@@ -1,89 +1,104 @@
 <template>
 	<TwoColumnLayout>
-		<ElCheckboxGroup v-model="state.checked">
-			<div v-for="item in state.list" :key="item.id">
-				<ElCheckbox :label="item.id">
-					{{ item.name }}
-				</ElCheckbox>
-			</div>
-		</ElCheckboxGroup>
-		<ElPagination
-			v-model:current-page="state.pagination.current"
-			v-model:page-size="state.pagination.pageSize"
-			:page-sizes="[10, 20, 30, 40]"
-			background
-			layout="total, sizes, prev, pager, next, jumper"
-			:total="state.pagination.total"
-			@size-change="handleSizeChange"
-			@current-change="handleCurrentChange"
-		/>
+		<el-upload :show-file-list="false" class="mb10" drag :http-request="htttpRequest">
+			<el-icon class="el-icon--upload"><upload-filled /></el-icon>
+			<div class="el-upload__text">拖住到这里 或 <em>点击上传照片</em></div>
+		</el-upload>
+		<div class="flex-between mb10">
+			<el-space>
+				<el-input v-model="state.file.name" readonly placeholder="文件名" />
+				<el-tag v-if="state.file.size" type="primary" round>{{ fileSize(state.file.size) }}</el-tag>
+			</el-space>
+			<el-space>
+				<el-button :icon="Delete" type="danger" @click="onClearAll">清空所有</el-button>
+			</el-space>
+		</div>
+		<el-image :src="state.textarea" fit="contain">
+			<template #error>
+				<div class="image-slot">
+					<el-icon><icon-picture /></el-icon>
+				</div>
+			</template>
+		</el-image>
 	</TwoColumnLayout>
 </template>
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
-interface Item {
-	id: number;
-	name: string;
-	selected: boolean;
-	swicth: boolean;
-}
-interface State {
-	list: Array<Item>;
-	allList: Array<Item>;
-	pagination: {
-		current: number;
-		pageSize: number;
-		total: number;
-	};
-	checked: Array<string>;
-}
+import { type UploadRequestOptions } from 'element-plus';
+import { UploadFilled, Picture as IconPicture, Delete } from '@element-plus/icons-vue';
+import { fileSize } from '~/assets/utils/tools';
+import Cropper from 'cropperjs';
 
-const state: State = reactive({
-	list: [],
-	allList: [],
-	pagination: {
-		current: 1,
-		pageSize: 10,
-		total: 0,
-	},
-	checked: [],
+definePageMeta({
+	title: '图片裁切',
+	rank: 100,
 });
 
-// 数据
-function getDataList() {
-	const { current, pageSize } = state.pagination;
-	const result: Array<Item> = [];
-	const elements: Array<Item> = Array.from({ length: 50 }).map((item, index) => {
-		return {
-			id: index,
-			name: `元素${index}`,
-			selected: false,
-			swicth: false,
-		};
+const state: CropState = reactive({
+	file: {
+		name: '',
+		size: 0,
+		list: [],
+	},
+	textarea: '',
+});
+
+function initImage() {
+	const image: HTMLImageElement | null = document.querySelector('.image');
+	if (!image) return;
+	const cropper = new Cropper(image, {
+		aspectRatio: 16 / 9,
+		crop(event) {
+			console.log(event.detail.x);
+			console.log(event.detail.y);
+			console.log(event.detail.width);
+			console.log(event.detail.height);
+			console.log(event.detail.rotate);
+			console.log(event.detail.scaleX);
+			console.log(event.detail.scaleY);
+		},
 	});
-	state.pagination.total = elements.length;
-	for (let i = 0; i < elements.length; i += pageSize) {
-		const chunk: Array<Item> = elements.slice(i, i + pageSize);
-		result.push(chunk);
-	}
-	state.list = result[current - 1];
-	state.allList = result;
-	console.log(state);
 }
 
-// 页码
-function handleSizeChange(size: number) {
-	state.pagination.current = 1;
-	state.pagination.pageSize = size;
-	getDataList();
+function htttpRequest(options: UploadRequestOptions): XMLHttpRequest | Promise<unknown> {
+	const { name, size } = options.file;
+	state.file.name = name;
+	state.file.size = size;
+	const reader = new FileReader();
+	reader.readAsDataURL(options.file);
+	reader.onload = (event) => {
+		if (event.target === null) return;
+		state.textarea = event.target.result;
+		state.file.list = [state.textarea];
+	};
+	return Promise.resolve(true);
 }
-// 分页
-function handleCurrentChange(page: number) {
-	state.pagination.current = page;
-	getDataList();
+
+function onClearAll() {
+	state.textarea = '';
+	state.file.name = '';
+	state.file.size = 0;
+	state.file.list = [];
 }
 
 onMounted(() => {
-	getDataList();
+	initImage();
 });
 </script>
+
+<style lang="scss" scoped>
+.el-image {
+	width: 100%;
+	.image-slot {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		min-height: 400px;
+		background: var(--el-fill-color-light);
+		color: var(--el-text-color-secondary);
+		font-size: 30px;
+	}
+}
+</style>

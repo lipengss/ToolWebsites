@@ -44,6 +44,11 @@ import { useCopy } from '~/hooks/useCopy';
 
 const notions = '本工具不会把图片上传到服务器转换，而是在浏览器中执行。';
 
+definePageMeta({
+	title: '图片转base64',
+	rank: 280,
+});
+
 const state: PictureState = reactive({
 	file: {
 		name: '',

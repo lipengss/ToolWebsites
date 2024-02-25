@@ -33,6 +33,11 @@ const notions = '本工具不会把图片上传到服务器转换，而是在浏
 import { reactive } from 'vue';
 import { Picture as IconPicture, Delete } from '@element-plus/icons-vue';
 
+definePageMeta({
+	title: 'base64转图片',
+	rank: 280,
+});
+
 const state: PictureState = reactive({
 	file: {
 		name: '',

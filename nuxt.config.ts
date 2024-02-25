@@ -8,6 +8,7 @@ export default defineNuxtConfig({
 	elementPlus: {
 		themes: ['dark'],
 	},
+	buildModules: ['@nuxtjs/router-extras'],
 	devServer: {
 		port: 8170,
 		host: 'localhost',
