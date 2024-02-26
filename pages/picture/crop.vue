@@ -15,15 +15,17 @@
 		<div class="cropper-box">
 			<img class="image" :src="state.file.imageSrc" alt="" />
 		</div>
-		<el-space>
-			<el-button type="primary" @click="onHandlePicture('flip-horizontal')">
-				<el-icon class="mr6"><svg-icon name="flip-horizontal" /></el-icon>
-				水平翻转
-			</el-button>
-			<el-button type="primary" @click="onHandlePicture('flip-vertical')">
-				<el-icon class="mr6"><svg-icon name="flip-vertical" /></el-icon>
-				垂直翻转
-			</el-button>
+		<el-space wrap size="large">
+			<el-button-group>
+				<el-button type="primary" @click="onHandlePicture('flip-horizontal')">
+					<el-icon class="mr6"><svg-icon name="flip-horizontal" /></el-icon>
+					水平翻转
+				</el-button>
+				<el-button type="primary" @click="onHandlePicture('flip-vertical')">
+					<el-icon class="mr6"><svg-icon name="flip-vertical" /></el-icon>
+					垂直翻转
+				</el-button>
+			</el-button-group>
 			<el-button-group>
 				<el-button type="primary" @click="onHandlePicture('rotate-l')">
 					<el-icon class="mr6"><svg-icon name="rotate-l" /></el-icon>
@@ -36,11 +38,14 @@
 				<el-button type="primary" @click="onHandlePicture('resetRotate')">
 					<el-icon><svg-icon name="redo" /></el-icon>
 				</el-button>
+				<el-input
+					v-model.number="state.cropper.rotateStep"
+					style="width: 60px; height: 32px; border-top-left-radius: 0; border-bottom-left-radius: 0"
+				>
+					<template #suffix>°</template>
+				</el-input>
 			</el-button-group>
-			<el-input v-model.number="state.cropper.rotateStep" style="width: 60px">
-				<template #suffix>°</template>
-			</el-input>
-			<el-button type="primary" @click="onCrop">
+			<el-button type="success" @click="onCrop">
 				<el-icon class="mr6"><svg-icon name="cutting" /></el-icon>
 				图片裁切
 			</el-button>
@@ -88,7 +93,7 @@ function initCropper() {
 	const image: HTMLImageElement | null = document.querySelector('.image');
 	if (!image) return;
 	const cropper = new Cropper(image, {
-		aspectRatio: 16 / 9,
+		viewMode: 1,
 	});
 	cropperInstance = cropper;
 }
@@ -137,9 +142,11 @@ function onHandlePicture(type: string) {
 // 图片裁切
 function onCrop() {
 	if (!cropperInstance) return;
-	const cropPreview = document.getElementById('crop-preview');
+	// const cropPreview = document.getElementById('crop-preview');
 	console.log(cropperInstance.getCroppedCanvas());
-	cropPreview?.appendChild(cropperInstance.getCroppedCanvas());
+	console.log(cropperInstance.getCropBoxData());
+	console.log(cropperInstance.getImageData());
+	// cropPreview?.appendChild(cropperInstance.getCroppedCanvas());
 	// state.cropper.cropPreview = ;
 }
 
