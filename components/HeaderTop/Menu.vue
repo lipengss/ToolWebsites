@@ -26,9 +26,10 @@
 import { defineProps, withDefaults } from 'vue';
 import { useRoute } from 'vue-router';
 import { routeList } from '~/assets/utils/routeList';
+import { useTitle } from '@vueuse/core';
 
 interface Props {
-	mode: 'horizontal' | 'vertical';
+	mode?: 'horizontal' | 'vertical';
 }
 const props = withDefaults(defineProps<Props>(), {
 	mode: 'horizontal',
@@ -44,6 +45,8 @@ watch(
 	() => route.path,
 	(path) => {
 		state.activeIndex = path;
+		const title = useTitle();
+		title.value = `-${route.meta.title}`;
 	},
 	{
 		immediate: true,

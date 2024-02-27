@@ -16,5 +16,9 @@ interface CropState {
 	};
 	cropper: {
 		rotateStep: 10;
+		url: string;
+		urlList: string[];
 	};
+	loadingCrop: boolean;
+	loadingDown: boolean;
 }

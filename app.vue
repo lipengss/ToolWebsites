@@ -1,13 +1,12 @@
 <template>
-	<el-container>
-		<header-top />
-		<el-main id="el-main-scroll-box">
-			<div class="container">
-				<NuxtPage />
-			</div>
-		</el-main>
-		<el-footer>Footer</el-footer>
-	</el-container>
+	<header-top />
+	<div class="main">
+		<div class="container">
+			<NuxtPage />
+		</div>
+	</div>
+	<el-backtop :right="100" :bottom="100" />
+	<el-footer>Footer</el-footer>
 </template>
 <script setup lang="ts">
 useSeoMeta({
@@ -17,8 +16,25 @@ useSeoMeta({
 });
 </script>
 <style lang="scss" scoped>
+.main {
+	min-height: calc(100vh - 30px);
+	padding-top: 60px;
+	box-sizing: border-box;
+}
 .container {
-	max-width: 1100px;
-	margin: 0 auto;
+	max-width: 1200px;
+	margin: 10px auto;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: var(--el-bg-color);
+}
+.el-footer {
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+	color: var(--el-text-color-regular);
+	background-color: var(--el-bg-color);
 }
 </style>

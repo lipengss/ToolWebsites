@@ -45,9 +45,9 @@
 					<template #suffix>°</template>
 				</el-input>
 			</el-button-group>
-			<el-button type="success" @click="onCrop">
+			<el-button type="primary" :loading-icon="Loading" :loading="state.loadingCrop" @click="onCrop">
 				<el-icon class="mr6"><svg-icon name="cutting" /></el-icon>
-				图片裁切
+				裁剪
 			</el-button>
 			<!-- <el-button-group>
 				<el-button type="primary" :icon="Top" @click="onHandlePicture('moveTop')" />
@@ -58,15 +58,33 @@
 				<el-button type="primary" :icon="Right" @click="onHandlePicture('moveRight')" />
 			</el-button-group> -->
 		</el-space>
-		<div class="crop-preview" id="crop-preview">{{ state.cropper.preview }}</div>
+		<el-divider></el-divider>
+		<el-space>
+			<el-button v-if="state.cropper.url" type="success" :icon="Download" :loading-icon="Loading" :loading="state.loadingDown" @click="downLoadImage">
+				下载图片
+			</el-button>
+		</el-space>
+		<div class="mt10">
+			<el-image
+				style="width: 100%; min-height: 400px"
+				:src="state.cropper.url"
+				:zoom-rate="1.2"
+				:max-scale="7"
+				:min-scale="0.2"
+				:preview-src-list="state.cropper.urlList"
+				:initial-index="4"
+				fit="cover"
+			/>
+		</div>
 	</TwoColumnLayout>
 </template>
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
 import { type UploadRequestOptions } from 'element-plus';
-import { UploadFilled, Picture as IconPicture, Delete, Top, Bottom, Back, Right } from '@element-plus/icons-vue';
+import { UploadFilled, Picture as IconPicture, Delete, Download, Top, Bottom, Back, Right, Loading } from '@element-plus/icons-vue';
 import { fileSize } from '~/assets/utils/tools';
 import defaultPicture from '~/assets/img/defaultPicture.jpg';
+import { saveAs } from 'file-saver';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
@@ -83,8 +101,11 @@ const state: CropState = reactive({
 	},
 	cropper: {
 		rotateStep: 10,
-		cropPreview: '',
+		url: '',
+		urlList: [],
 	},
+	loadingCrop: false,
+	loadingDown: false,
 });
 
 let cropperInstance: Cropper | null = null;
@@ -114,6 +135,7 @@ function htttpRequest(options: UploadRequestOptions): XMLHttpRequest | Promise<u
 	};
 	return Promise.resolve(true);
 }
+
 // 图片操作
 function onHandlePicture(type: string) {
 	if (!cropperInstance) return;
@@ -142,17 +164,29 @@ function onHandlePicture(type: string) {
 // 图片裁切
 function onCrop() {
 	if (!cropperInstance) return;
-	// const cropPreview = document.getElementById('crop-preview');
-	console.log(cropperInstance.getCroppedCanvas());
-	console.log(cropperInstance.getCropBoxData());
-	console.log(cropperInstance.getImageData());
-	// cropPreview?.appendChild(cropperInstance.getCroppedCanvas());
-	// state.cropper.cropPreview = ;
+	state.loadingCrop = true;
+	const imageUrl = cropperInstance.getCroppedCanvas().toDataURL('image/jpeg');
+	state.loadingCrop = false;
+	state.cropper.url = imageUrl;
+	state.cropper.urlList = [imageUrl];
+}
+
+// 下载图片
+function downLoadImage() {
+	if (!cropperInstance) return;
+	state.loadingDown = true;
+	cropperInstance.getCroppedCanvas().toBlob((blob) => {
+		saveAs(blob, state.file.name);
+		ElMessage.success('下载成功');
+		state.loadingDown = false;
+	});
 }
 
 function onClearAll() {
 	state.file.name = '';
 	state.file.size = 0;
+	state.cropper.url = '';
+	state.cropper.urlList = [];
 	if (cropperInstance) {
 		cropperInstance.replace(defaultPicture);
 	}
@@ -171,10 +205,5 @@ onMounted(() => {
 		width: 100%;
 		height: 100%;
 	}
-}
-.crop-preview {
-	width: 100%;
-	height: 400px;
-	overflow-x: auto;
 }
 </style>

@@ -24,6 +24,7 @@
 		"@vueuse/nuxt": "^10.7.2",
 		"cropperjs": "^1.6.1",
 		"element-plus": "^2.5.5",
+		"file-saver": "^2.0.5",
 		"lodash": "^4.17.21",
 		"numeral": "^2.0.6",
 		"nuxt-lodash": "^2.5.3",

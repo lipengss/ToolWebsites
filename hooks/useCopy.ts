@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { useClipboard, usePermission } from '@vueuse/core';
+import { useClipboard } from '@vueuse/core';
 
 export function useCopy(source: Ref<string>) {
 	const { copy } = useClipboard({ source: source.value });

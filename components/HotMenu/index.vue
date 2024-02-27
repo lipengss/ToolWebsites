@@ -36,8 +36,8 @@ const activeSection = ref('');
 
 const rankRouteList = computed(() => {
 	const sortedArray = flattenArray(routeList)
-		.filter((item) => item.meta.rank)
-		.sort((a, b) => b.meta.rank - a.meta.rank);
+		.filter((item: RouteItem) => item.meta.rank)
+		.sort((a: RouteItem, b: RouteItem) => b.meta.rank - a.meta.rank);
 	return sortedArray.slice(0, 10);
 });
 
