@@ -5,7 +5,7 @@
 			<NuxtPage />
 		</div>
 	</div>
-	<el-backtop :right="100" :bottom="100" />
+	<el-backtop :right="50" :bottom="50" />
 	<el-footer>Footer</el-footer>
 </template>
 <script setup lang="ts">

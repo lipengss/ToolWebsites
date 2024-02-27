@@ -15,7 +15,8 @@ interface CropState {
 		imageSrc: string;
 	};
 	cropper: {
-		rotateStep: 10;
+		aspectRatio: number; // 纵横比
+		rotateStep: 10; // 旋转角度步长
 		url: string;
 		urlList: string[];
 	};

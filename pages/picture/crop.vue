@@ -38,13 +38,14 @@
 				<el-button type="primary" @click="onHandlePicture('resetRotate')">
 					<el-icon><svg-icon name="redo" /></el-icon>
 				</el-button>
-				<el-input
-					v-model.number="state.cropper.rotateStep"
-					style="width: 60px; height: 32px; border-top-left-radius: 0; border-bottom-left-radius: 0"
-				>
-					<template #suffix>°</template>
-				</el-input>
 			</el-button-group>
+			<el-input v-model.number="state.cropper.rotateStep" style="width: 60px; margin-left: -10px">
+				<template #suffix>°</template>
+			</el-input>
+			<el-select v-model="state.cropper.aspectRatio" style="width: 80px" @change="onChange">
+				<el-option v-for="item in aspectRatios" :key="item.value" :label="item.label" :value="item.value" />
+			</el-select>
+			<el-checkbox>圆角</el-checkbox>
 			<el-button type="primary" :loading-icon="Loading" :loading="state.loadingCrop" @click="onCrop">
 				<el-icon class="mr6"><svg-icon name="cutting" /></el-icon>
 				裁剪
@@ -85,6 +86,7 @@ import { UploadFilled, Picture as IconPicture, Delete, Download, Top, Bottom, Ba
 import { fileSize } from '~/assets/utils/tools';
 import defaultPicture from '~/assets/img/defaultPicture.jpg';
 import { saveAs } from 'file-saver';
+import { aspectRatios } from '~/assets/utils/publicData';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
@@ -100,6 +102,7 @@ const state: CropState = reactive({
 		imageSrc: defaultPicture,
 	},
 	cropper: {
+		aspectRatio: 1,
 		rotateStep: 10,
 		url: '',
 		urlList: [],
@@ -113,8 +116,13 @@ let cropperInstance: Cropper | null = null;
 function initCropper() {
 	const image: HTMLImageElement | null = document.querySelector('.image');
 	if (!image) return;
+	let croppable = false;
 	const cropper = new Cropper(image, {
+		aspectRatio: state.cropper.aspectRatio,
 		viewMode: 1,
+		ready: () => {
+			croppable = true;
+		},
 	});
 	cropperInstance = cropper;
 }
@@ -134,6 +142,11 @@ function htttpRequest(options: UploadRequestOptions): XMLHttpRequest | Promise<u
 		}
 	};
 	return Promise.resolve(true);
+}
+
+function onChange() {
+	if (!cropperInstance) return;
+	console.log(cropperInstance.setAspectRatio(state.cropper.aspectRatio));
 }
 
 // 图片操作
@@ -192,6 +205,23 @@ function onClearAll() {
 	}
 }
 
+function getRoundedCanvas(sourceCanvas) {
+	var canvas = document.createElement('canvas');
+	var context = canvas.getContext('2d');
+	var width = sourceCanvas.width;
+	var height = sourceCanvas.height;
+
+	canvas.width = width;
+	canvas.height = height;
+	context.imageSmoothingEnabled = true;
+	context.drawImage(sourceCanvas, 0, 0, width, height);
+	context.globalCompositeOperation = 'destination-in';
+	context.beginPath();
+	context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+	context.fill();
+	return canvas;
+}
+
 onMounted(() => {
 	initCropper();
 });
@@ -205,5 +235,9 @@ onMounted(() => {
 		width: 100%;
 		height: 100%;
 	}
+}
+:deep .cropper-view-box,
+.cropper-face {
+	border-radius: 50%;
 }
 </style>
