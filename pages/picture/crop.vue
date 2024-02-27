@@ -40,12 +40,14 @@
 				</el-button>
 			</el-button-group>
 			<el-input v-model.number="state.cropper.rotateStep" style="width: 60px; margin-left: -10px">
-				<template #suffix>°</template>
+				<template #suffix>
+					<el-icon><svg-icon name="angle" /></el-icon>
+				</template>
 			</el-input>
 			<el-select v-model="state.cropper.aspectRatio" style="width: 80px" @change="onChange">
 				<el-option v-for="item in aspectRatios" :key="item.value" :label="item.label" :value="item.value" />
 			</el-select>
-			<el-checkbox>圆角</el-checkbox>
+			<el-checkbox v-model="state.cropper.circle" border>圆形</el-checkbox>
 			<el-button type="primary" :loading-icon="Loading" :loading="state.loadingCrop" @click="onCrop">
 				<el-icon class="mr6"><svg-icon name="cutting" /></el-icon>
 				裁剪
@@ -87,6 +89,7 @@ import { fileSize } from '~/assets/utils/tools';
 import defaultPicture from '~/assets/img/defaultPicture.jpg';
 import { saveAs } from 'file-saver';
 import { aspectRatios } from '~/assets/utils/publicData';
+import numeral from 'numeral';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
 
@@ -102,27 +105,28 @@ const state: CropState = reactive({
 		imageSrc: defaultPicture,
 	},
 	cropper: {
-		aspectRatio: 1,
+		aspectRatio: numeral(16).divide(9).value(),
 		rotateStep: 10,
 		url: '',
 		urlList: [],
+		circle: false,
 	},
 	loadingCrop: false,
 	loadingDown: false,
 });
 
 let cropperInstance: Cropper | null = null;
+//CroppedCanvas
+let croppedCanvas: any = null;
 
+const isCircle = computed(() => (state.cropper.circle ? '50%' : 0));
+// 初始化图片裁切
 function initCropper() {
 	const image: HTMLImageElement | null = document.querySelector('.image');
 	if (!image) return;
-	let croppable = false;
 	const cropper = new Cropper(image, {
 		aspectRatio: state.cropper.aspectRatio,
 		viewMode: 1,
-		ready: () => {
-			croppable = true;
-		},
 	});
 	cropperInstance = cropper;
 }
@@ -143,12 +147,11 @@ function htttpRequest(options: UploadRequestOptions): XMLHttpRequest | Promise<u
 	};
 	return Promise.resolve(true);
 }
-
+// 纵横比例
 function onChange() {
 	if (!cropperInstance) return;
-	console.log(cropperInstance.setAspectRatio(state.cropper.aspectRatio));
+	cropperInstance.setAspectRatio(state.cropper.aspectRatio);
 }
-
 // 图片操作
 function onHandlePicture(type: string) {
 	if (!cropperInstance) return;
@@ -178,7 +181,12 @@ function onHandlePicture(type: string) {
 function onCrop() {
 	if (!cropperInstance) return;
 	state.loadingCrop = true;
-	const imageUrl = cropperInstance.getCroppedCanvas().toDataURL('image/jpeg');
+	if (state.cropper.circle) {
+		croppedCanvas = getRoundedCanvas(cropperInstance.getCroppedCanvas());
+	} else {
+		croppedCanvas = cropperInstance.getCroppedCanvas();
+	}
+	const imageUrl = croppedCanvas.toDataURL('image/jpeg');
 	state.loadingCrop = false;
 	state.cropper.url = imageUrl;
 	state.cropper.urlList = [imageUrl];
@@ -188,7 +196,7 @@ function onCrop() {
 function downLoadImage() {
 	if (!cropperInstance) return;
 	state.loadingDown = true;
-	cropperInstance.getCroppedCanvas().toBlob((blob) => {
+	croppedCanvas.toBlob((blob: any) => {
 		saveAs(blob, state.file.name);
 		ElMessage.success('下载成功');
 		state.loadingDown = false;
@@ -205,9 +213,10 @@ function onClearAll() {
 	}
 }
 
-function getRoundedCanvas(sourceCanvas) {
+function getRoundedCanvas(sourceCanvas: any) {
 	var canvas = document.createElement('canvas');
-	var context = canvas.getContext('2d');
+	var context: CanvasRenderingContext2D | null = canvas.getContext('2d');
+	if (!context) return;
 	var width = sourceCanvas.width;
 	var height = sourceCanvas.height;
 
@@ -238,6 +247,6 @@ onMounted(() => {
 }
 :deep .cropper-view-box,
 .cropper-face {
-	border-radius: 50%;
+	border-radius: v-bind(isCircle);
 }
 </style>

@@ -19,6 +19,7 @@ interface CropState {
 		rotateStep: 10; // 旋转角度步长
 		url: string;
 		urlList: string[];
+		circle: boolean;
 	};
 	loadingCrop: boolean;
 	loadingDown: boolean;
