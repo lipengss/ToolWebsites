@@ -1,5 +1,5 @@
 // 热门网站
-const hotWebsiteList = [
+const hotWebsiteList: Array<WebHotItem> = [
 	{
 		name: 'Google',
 		key: 'google',
@@ -25,7 +25,7 @@ const hotWebsiteList = [
 		description: '搜索结果不一定是你想要的，广告还多。',
 	},
 	{
-		name: 'Github',
+		name: 'GitHub',
 		key: 'github',
 		url: 'https://www.github.com',
 		icon: 'https://www.github.com/favicon.ico',
