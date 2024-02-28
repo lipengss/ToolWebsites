@@ -1,6 +1,6 @@
 <template>
 	<TwoColumnLayout>
-		<el-alert type="warning" :title="notions" :closable="false" class="mb10" />
+		<el-alert type="warning" :title="pictureNotions" :closable="false" class="mb10" />
 		<el-card header="图片 转 base64">
 			<el-tooltip v-if="state.textarea" effect="dark" content="点击放大" placement="bottom">
 				<el-image class="preview-image" :src="state.textarea" fit="cover" :preview-src-list="[state.textarea]" />
@@ -41,8 +41,7 @@ import { UploadFilled, Delete, DocumentCopy } from '@element-plus/icons-vue';
 import { type UploadRequestOptions } from 'element-plus';
 import { formatFileSize } from '~/assets/utils/tools';
 import { useCopy } from '~/hooks/useCopy';
-
-const notions = '本工具不会把图片上传到服务器转换，而是在浏览器中执行。';
+import { pictureNotions } from '~/assets/utils/publicData';
 
 definePageMeta({
 	title: '图片转base64',

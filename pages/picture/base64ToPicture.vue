@@ -1,6 +1,6 @@
 <template>
 	<TwoColumnLayout>
-		<el-alert type="warning" :title="notions" :closable="false" class="mb10" />
+		<el-alert type="warning" :title="pictureNotions" :closable="false" class="mb10" />
 		<el-card header="base64 转 图片">
 			<div class="flex-between pt10 pb10">
 				<el-input
@@ -28,10 +28,9 @@
 	</TwoColumnLayout>
 </template>
 <script setup lang="ts">
-const notions = '本工具不会把图片上传到服务器转换，而是在浏览器中执行。';
-
 import { reactive } from 'vue';
 import { Picture as IconPicture, Delete } from '@element-plus/icons-vue';
+import { pictureNotions } from '~/assets/utils/publicData';
 
 definePageMeta({
 	title: 'base64转图片',

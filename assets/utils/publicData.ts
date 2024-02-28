@@ -11,21 +11,23 @@ const aspectRatios = [
 	},
 	{
 		label: '16:9',
-		value: numeral(16).divide(9).value(),
+		value: divide(16, 9),
 	},
 	{
 		label: '16:10',
-		value: numeral(16).divide(10).value(),
+		value: divide(16, 10),
 	},
 	{
 		label: '21:9',
-		value: numeral(21).divide(9).value(),
+		value: divide(21, 9),
 	},
 	{
 		label: '32:9',
-		value: numeral(32).divide(9).value(),
+		value: divide(32, 9),
 	},
 ];
+
+const pictureNotions = '图片不会上传到服务器转换，而是在浏览器中执行。';
 
 /**
  * 将num1除以num2并返回结果
@@ -40,4 +42,4 @@ function divide(num1: number, num2: number): number {
 	return Math.round(num1 / num2);
 }
 
-export { aspectRatios };
+export { aspectRatios, pictureNotions };
