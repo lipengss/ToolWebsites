@@ -1,4 +1,5 @@
 <template>
+	<Banner />
 	<header-top />
 	<div class="main">
 		<div class="container">
@@ -43,7 +44,6 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .main {
 	min-height: calc(100vh - 30px);
-	padding-top: 60px;
 	box-sizing: border-box;
 }
 .container {

@@ -3,7 +3,7 @@
 		<div class="flex-between mb10">
 			<el-space>
 				<el-input v-model="state.file.name" readonly placeholder="文件名" />
-				<el-tag v-if="state.file.size" type="primary" round>{{ fileSize(state.file.size) }}</el-tag>
+				<el-tag v-if="state.file.size" type="primary" round>{{ formatFileSize(state.file.size) }}</el-tag>
 			</el-space>
 			<el-space>
 				<el-upload :show-file-list="false" :http-request="htttpRequest">
@@ -85,7 +85,7 @@
 import { reactive, onMounted } from 'vue';
 import { type UploadRequestOptions } from 'element-plus';
 import { UploadFilled, Picture as IconPicture, Delete, Download, Top, Bottom, Back, Right, Loading } from '@element-plus/icons-vue';
-import { fileSize } from '~/assets/utils/tools';
+import { formatFileSize } from '~/assets/utils/tools';
 import defaultPicture from '~/assets/img/defaultPicture.jpg';
 import { saveAs } from 'file-saver';
 import { aspectRatios } from '~/assets/utils/publicData';

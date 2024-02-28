@@ -1,28 +1,30 @@
 <template>
-	<el-header class="el-header">
-		<div class="el-in-center">
-			<Menu class="menu-horizontal" />
-			<el-button class="expand" :icon="Expand" @click="state.isDrawer = !state.isDrawer" />
-			<el-space>
-				<el-autocomplete v-model="state.context" :fetch-suggestions="querySearch" clearable placeholder="搜索工具名称" @select="handleSelect">
-					<template #prefix>
-						<el-icon><Search /></el-icon>
-					</template>
-				</el-autocomplete>
-				<el-tooltip effect="dark" :content="`${isDark ? '夜间模式' : '日间模式'}`" placement="bottom">
-					<el-button :icon="isDark ? Moon : Sunny" @click="toggleDark()" />
-				</el-tooltip>
-				<el-tooltip effect="dark" content="吸色器" placement="bottom">
-					<el-button @click="open()">
-						<el-icon><svg-icon name="dye-color" /></el-icon>
-					</el-button>
-				</el-tooltip>
-			</el-space>
-			<el-drawer v-model="state.isDrawer" direction="ltr" size="80%" :show-close="false">
-				<Menu mode="vertical" />
-			</el-drawer>
-		</div>
-	</el-header>
+	<el-affix :offset="0">
+		<el-header class="el-header">
+			<div class="el-in-center">
+				<Menu class="menu-horizontal" />
+				<el-button class="expand" :icon="Expand" @click="state.isDrawer = !state.isDrawer" />
+				<el-space>
+					<el-autocomplete v-model="state.context" :fetch-suggestions="querySearch" clearable placeholder="站内搜索" @select="handleSelect">
+						<template #prefix>
+							<el-icon><Search /></el-icon>
+						</template>
+					</el-autocomplete>
+					<el-tooltip effect="dark" :content="`${isDark ? '夜间模式' : '日间模式'}`" placement="bottom">
+						<el-button :icon="isDark ? Moon : Sunny" @click="toggleDark()" />
+					</el-tooltip>
+					<el-tooltip effect="dark" content="吸色器" placement="bottom">
+						<el-button @click="open()">
+							<el-icon><svg-icon name="dye-color" /></el-icon>
+						</el-button>
+					</el-tooltip>
+				</el-space>
+				<el-drawer v-model="state.isDrawer" direction="ltr" size="80%" :show-close="false">
+					<Menu mode="vertical" />
+				</el-drawer>
+			</div>
+		</el-header>
+	</el-affix>
 </template>
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
@@ -71,34 +73,41 @@ watch(
 .el-header {
 	background-color: var(--el-bg-color);
 	border-bottom: 1px solid var(--el-border-color);
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	z-index: 100;
 	.el-in-center {
 		width: 1200px;
 		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-	}
-	.menu-horizontal {
-		flex: 1;
-	}
-	.expand {
-		display: none;
+		.menu-horizontal {
+			flex: 1;
+		}
+		.expand {
+			display: none;
+		}
 	}
 }
 
 // 显示小屏幕的菜单
 @media (max-width: 1024px) {
-	.menu-horizontal {
-		display: none;
+	.el-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.el-in-center {
+			width: 100%;
+			.expand {
+				display: block;
+			}
+			.menu-horizontal {
+				display: none;
+			}
+			:deep .el-autocomplete {
+				display: none;
+			}
+		}
 	}
-	.expand {
-		display: block;
-	}
+
 	:deep .el-drawer__body {
 		padding: 0;
 		.el-menu {

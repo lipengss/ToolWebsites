@@ -29,6 +29,9 @@
 		padding-left: #{$i}px !important;
 	}
 }
+.flex1{
+	flex: 1;
+}
 
 .flex-start{
   display: flex;
@@ -45,6 +48,12 @@
 .flex-center{
 	display: flex;
 	align-items: center;
+}
+
+.flex-around{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .flex-between{

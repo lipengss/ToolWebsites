@@ -12,7 +12,7 @@
 			<div class="flex-between pt10 pb10">
 				<el-space>
 					<el-input v-model="state.file.name" readonly placeholder="文件名" />
-					<el-tag v-if="state.file.size" type="primary" round>{{ fileSize(state.file.size) }}</el-tag>
+					<el-tag v-if="state.file.size" type="primary" round>{{ formatFileSize(state.file.size) }}</el-tag>
 				</el-space>
 				<el-space>
 					<el-button :icon="Delete" type="danger" @click="onClearAll">清空所有</el-button>
@@ -39,7 +39,7 @@
 import { reactive } from 'vue';
 import { UploadFilled, Delete, DocumentCopy } from '@element-plus/icons-vue';
 import { type UploadRequestOptions } from 'element-plus';
-import { fileSize } from '~/assets/utils/tools';
+import { formatFileSize } from '~/assets/utils/tools';
 import { useCopy } from '~/hooks/useCopy';
 
 const notions = '本工具不会把图片上传到服务器转换，而是在浏览器中执行。';

@@ -3,7 +3,7 @@ import path from 'path';
 
 export default defineNuxtConfig({
 	devtools: { enabled: true },
-	css: ['element-plus/dist/index.css', '~/assets/css/common.scss'],
+	css: ['element-plus/dist/index.css', '~/assets/css/common.scss', 'animate.css'],
 	modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt'],
 	elementPlus: {
 		themes: ['dark'],
@@ -20,7 +20,11 @@ export default defineNuxtConfig({
 			}),
 		],
 	},
-
+	app: {
+		head: {
+			viewport: 'width=device-width, initial-scale=1',
+		},
+	},
 	// lodash: {
 	//   prefix: '_'
 	// }
