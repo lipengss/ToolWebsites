@@ -30,6 +30,7 @@
 		"numeral": "^2.0.6",
 		"nuxt-lodash": "^2.5.3",
 		"pinia": "^2.1.7",
+		"qs": "^6.11.2",
 		"sass": "^1.70.0",
 		"vite-plugin-svg-icons": "^2.0.1",
 		"vue3-colorpicker": "^2.2.3"

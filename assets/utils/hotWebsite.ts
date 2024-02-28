@@ -3,7 +3,7 @@ const hotWebsiteList = [
 	{
 		name: 'Google',
 		key: 'google',
-		url: 'https://www.google.com',
+		url: 'https://www.google.com/search?q=',
 		icon: 'https://www.google.com/favicon.ico',
 		type: 'search',
 		description: '最好用，但是访问需要点技术。',
@@ -11,7 +11,7 @@ const hotWebsiteList = [
 	{
 		name: 'Bing',
 		key: 'bing',
-		url: 'https://www.bing.com',
+		url: 'https://www.bing.com/search?q=',
 		icon: 'https://www.bing.com/favicon.ico',
 		type: 'search',
 		description: '微软公司的搜索引擎，还可以。',
@@ -19,7 +19,7 @@ const hotWebsiteList = [
 	{
 		name: 'Baidu',
 		key: 'baidu',
-		url: 'https://www.baidu.com',
+		url: 'https://www.baidu.com/s?wd=',
 		icon: 'https://www.baidu.com/favicon.ico',
 		type: 'search',
 		description: '搜索结果不一定是你想要的，广告还多。',
