@@ -8,6 +8,3 @@ interface HotMenuState {
 	isDrawer: boolean;
 	context: string;
 }
-
-declare module 'numeral';
-declare module 'file-saver';

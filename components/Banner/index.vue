@@ -3,12 +3,16 @@
 		<el-row class="banner">
 			<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
 				<div class="flex-around serach-engines">
-					<el-tooltip v-for="item in filterHotWebsiteList" :key="item.key" :content="item.description" placement="top">
-						<transition enter-active-class="animate__animated animate__zoomIn" leave-active-class="animate__animated animate__zoomOut">
-							<el-link :type="state.current === item.key ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.key)">
-								{{ item.name }}
-							</el-link>
-						</transition>
+					<el-tooltip v-for="(item, index) in filterHotWebsiteList" :key="item.key" :content="item.description" placement="top">
+						<el-link
+							:type="state.current === item.key ? 'primary' : 'info'"
+							class="engines-item"
+							@click="onChangeEngines(item.key)"
+							@mouseenter="hoverAnimate('in', index)"
+							@mouseleave="hoverAnimate('out', index)"
+						>
+							{{ item.name }}
+						</el-link>
 					</el-tooltip>
 				</div>
 				<transition enter-active-class="animate__animated animate__zoomIn" leave-active-class="animate__animated animate__zoomOut">
@@ -29,8 +33,8 @@
 import { ref, computed, reactive } from 'vue';
 import { hotWebsiteList } from '~/assets/utils/hotWebsite';
 import { Search } from '@element-plus/icons-vue';
-import { useParallax } from '@vueuse/core';
-import qs from 'qs';
+import { useAnimate } from '~/hooks/useAnimate';
+const { hoverAnimate } = useAnimate('.engines-item', 'animate__bounceIn');
 
 const HOTS = ['baidu', 'bing', 'google', 'github', 'sougou'];
 
@@ -83,11 +87,12 @@ function onActionSearch() {
 		align-items: center;
 		.serach-engines {
 			width: 100%;
-			margin-bottom: 10px;
+			margin-bottom: 4px;
 			.engines-item {
 				font-size: 14px;
 				font-weight: bold;
 				text-shadow: 1px 1px 1px #000;
+				padding: 6px 4px;
 			}
 		}
 	}

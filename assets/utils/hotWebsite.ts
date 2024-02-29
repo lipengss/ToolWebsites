@@ -1,3 +1,13 @@
+const hotTypeList: Array<WebTypeItem> = [
+	{
+		name: '搜索引擎',
+		url: '/serch',
+		icon: '/search.svg',
+		type: 'search',
+		children: [],
+	},
+];
+
 // 热门网站
 const hotWebsiteList: Array<WebHotItem> = [
 	{
@@ -35,7 +45,7 @@ const hotWebsiteList: Array<WebHotItem> = [
 	{
 		name: '搜狗',
 		key: 'sougou',
-		url: 'https://www.sogou.com',
+		url: 'https://www.sogou.com/sogou?query=',
 		icon: 'https://www.sogou.com/favicon.ico',
 		type: 'search',
 		description: '搜狗提供的订阅号及文章内容搜索。',
@@ -50,4 +60,4 @@ const hotWebsiteList: Array<WebHotItem> = [
 	},
 ];
 
-export { hotWebsiteList };
+export { hotTypeList, hotWebsiteList };
