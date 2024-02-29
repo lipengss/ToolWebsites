@@ -8,7 +8,7 @@ export default defineNuxtConfig({
 	elementPlus: {
 		themes: ['dark'],
 	},
-	buildModules: ['@nuxtjs/router-extras'],
+	// buildModules: ['@nuxtjs/router-extras'],
 	devServer: {
 		port: 8170,
 		host: 'localhost',
@@ -18,10 +18,6 @@ export default defineNuxtConfig({
 			createSvgIconsPlugin({
 				iconDirs: [path.resolve(process.cwd(), 'assets/svg')],
 			}),
-			// {
-			// 	src: '~plugins/VueGridLayout.client',
-			// 	ssr: false,
-			// },
 		],
 	},
 	app: {
@@ -30,10 +26,4 @@ export default defineNuxtConfig({
 		},
 		pageTransition: { name: 'page', mode: 'out-in' },
 	},
-	// lodash: {
-	//   prefix: '_'
-	// }
-	// app: {
-	//   pageTransition: { name: 'page', mode: 'out-in' }
-	// },
 });
