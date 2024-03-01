@@ -2,6 +2,15 @@
 	<div class="banner-bg">
 		<el-row class="banner">
 			<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
+				<div ref="tickRef" class="tick">
+					<div data-repeat="true" aria-hidden="true">
+						<span data-view="flip"></span>
+					</div>
+				</div>
+				<div class="date-wrapper">
+					<div class="time">{{ state.time }}</div>
+					<div class="date">{{ state.date }} {{ currentWeek }}</div>
+				</div>
 				<div class="flex-around serach-engines">
 					<el-tooltip v-for="(item, index) in filterHotWebsiteList" :key="item.key" :content="item.description" placement="top">
 						<el-link
@@ -30,10 +39,18 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { hotWebsiteList } from '~/assets/utils/hotWebsite';
-import { Search } from '@element-plus/icons-vue';
+import { weekFormat } from '~/assets/utils/publicData';
 import { useAnimate } from '~/hooks/useAnimate';
+import { dayjs } from 'element-plus';
+import weekday from 'dayjs/plugin/weekday';
+dayjs.extend(weekday);
+
+const { $Tick } = useNuxtApp();
+
+const tickRef = ref();
+
 const { hoverAnimate } = useAnimate('.engines-item', 'animate__bounceIn');
 
 const HOTS = ['baidu', 'bing', 'google', 'github', 'sougou'];
@@ -41,12 +58,31 @@ const HOTS = ['baidu', 'bing', 'google', 'github', 'sougou'];
 const state = reactive({
 	current: 'baidu',
 	query: '',
+	date: dayjs().format('YYYY年MM月DD日'),
+	time: dayjs().format('HH:mm:ss'),
+});
+
+let timer: any = null;
+
+onMounted(() => {
+	$Tick.DOM.cteate(tickRef.value, {
+		value: 10,
+	});
+	timer = setInterval(() => {
+		state.time = dayjs().format('HH:mm:ss');
+	}, 1000);
+});
+onUnmounted(() => {
+	clearInterval(timer);
+	timer = null;
 });
 
 const currentIcon = computed(() => {
 	const item = hotWebsiteList.find((item) => item.key === state.current);
 	return item?.icon || '';
 });
+
+const currentWeek = computed(() => weekFormat[dayjs().weekday()]);
 
 const filterHotWebsiteList = hotWebsiteList.filter((item) => HOTS.includes(item.key));
 
@@ -85,6 +121,16 @@ function onActionSearch() {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		.date-wrapper {
+			color: var(--el-color-white);
+			.time {
+				font-size: 30px;
+				font-weight: bold;
+			}
+			.date {
+				font-size: 12px;
+			}
+		}
 		.serach-engines {
 			width: 100%;
 			margin-bottom: 4px;

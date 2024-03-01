@@ -18,6 +18,10 @@ export default defineNuxtConfig({
 			createSvgIconsPlugin({
 				iconDirs: [path.resolve(process.cwd(), 'assets/svg')],
 			}),
+			{
+				src: '~/plugins/VueGridLayout.client.js',
+				ssr: false,
+			},
 		],
 	},
 	app: {

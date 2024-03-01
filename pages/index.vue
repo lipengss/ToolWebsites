@@ -11,8 +11,19 @@
 			:margin="[20, 20]"
 			:use-css-transforms="true"
 		>
-			<grid-item class="grid-item" v-bind="layout[0]">
-				<Weather />
+			<grid-item
+				class="grid-item"
+				v-for="item in layout"
+				:x="item.x"
+				:y="item.y"
+				:w="item.w"
+				:h="item.h"
+				:i="item.i"
+				drag-allow-from=".vue-draggable-handle"
+				drag-ignore-from=".no-drag"
+			>
+				<el-icon color="#fff" class="drag vue-draggable-handle" title="移动"><svg-icon name="drag" /></el-icon>
+				<component v-if="item.component" :is="item.component" />
 			</grid-item>
 		</grid-layout>
 	</div>
@@ -30,17 +41,17 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, defineAsyncComponent } from 'vue';
 import { hotWebsiteList, hotTypeList } from '~/assets/utils/hotWebsite';
 import { useAnimate } from '~/hooks/useAnimate';
 const { hoverAnimate } = useAnimate('.link', 'animate__bounceIn');
 
 const layout = [
-	{ x: 0, y: 0, w: 8, h: 2, i: '0' },
-	{ x: 2, y: 0, w: 2, h: 4, i: '1' },
-	{ x: 4, y: 0, w: 2, h: 5, i: '2' },
-	{ x: 6, y: 0, w: 2, h: 3, i: '3' },
-	{ x: 8, y: 0, w: 2, h: 3, i: '4' },
+	{ x: 0, y: 0, w: 8, h: 2, i: '1', component: resolveComponent('Weather') },
+	{ x: 2, y: 0, w: 2, h: 4, i: '2' },
+	{ x: 4, y: 0, w: 2, h: 5, i: '3' },
+	{ x: 6, y: 0, w: 2, h: 3, i: '4' },
+	{ x: 8, y: 0, w: 2, h: 3, i: '5' },
 ];
 
 const reader = ref(false);
@@ -69,9 +80,17 @@ onMounted(() => {
 .header {
 	min-height: 400px;
 	.grid-item {
-		border-radius: 10px;
+		position: relative;
+		border-radius: 8px;
 		overflow: hidden;
 		border: 1px solid var(--el-color-primary-light-8);
+		.drag {
+			padding: 4px;
+			position: absolute;
+			left: -2px;
+			bottom: 0;
+			z-index: 100;
+		}
 	}
 }
 

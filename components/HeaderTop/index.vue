@@ -10,10 +10,10 @@
 							<el-icon><Search /></el-icon>
 						</template>
 					</el-autocomplete>
-					<el-tooltip effect="dark" :content="`${isDark ? '夜间模式' : '日间模式'}`" placement="bottom">
+					<el-tooltip effect="light" :content="`${isDark ? '夜间模式' : '日间模式'}`" placement="bottom">
 						<el-button :icon="isDark ? Moon : Sunny" @click="toggleDark()" />
 					</el-tooltip>
-					<el-tooltip effect="dark" content="吸色器" placement="bottom">
+					<el-tooltip effect="light" content="吸色器" placement="bottom">
 						<el-button @click="open()">
 							<el-icon><svg-icon name="dye-color" /></el-icon>
 						</el-button>

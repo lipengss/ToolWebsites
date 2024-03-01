@@ -27,6 +27,16 @@ const aspectRatios = [
 	},
 ];
 
+const weekFormat: { [key: number]: string } = {
+	1: '星期一',
+	2: '星期二',
+	3: '星期三',
+	4: '星期四',
+	5: '星期五',
+	6: '星期六',
+	7: '星期天',
+};
+
 const pictureNotions = '图片不会上传到服务器转换，而是在浏览器中执行。';
 
 /**
@@ -42,4 +52,4 @@ function divide(num1: number, num2: number): number {
 	return Math.round(num1 / num2);
 }
 
-export { aspectRatios, pictureNotions };
+export { aspectRatios, pictureNotions, weekFormat };

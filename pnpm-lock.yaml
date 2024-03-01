@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@element-plus/icons-vue':
     specifier: ^2.3.1
@@ -14,6 +10,9 @@ dependencies:
   '@pinia/nuxt':
     specifier: ^0.5.1
     version: 0.5.1(vue@3.4.15)
+  '@pqina/flip':
+    specifier: ^1.8.3
+    version: 1.8.3
   '@vue/shared':
     specifier: ^3.4.15
     version: 3.4.15
@@ -26,6 +25,9 @@ dependencies:
   cropperjs:
     specifier: ^1.6.1
     version: 1.6.1
+  dayjs:
+    specifier: ^1.11.10
+    version: 1.11.10
   element-plus:
     specifier: ^2.5.5
     version: 2.5.5(vue@3.4.15)
@@ -1619,6 +1621,10 @@ packages:
 
   /@popperjs/core@2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
+    dev: false
+
+  /@pqina/flip@1.8.3:
+    resolution: {integrity: sha512-KxlpF4xlnykYfR2TeAWtKEegWuZ6NA4ySDt+I7HLU25BIgG3EoQF3n5fFIq38cvhs4MfCoBk7UAcjolS90DYGQ==}
     dev: false
 
   /@rollup/plugin-alias@5.1.0(rollup@4.9.6):
@@ -7441,3 +7447,7 @@ packages:
       archiver-utils: 4.0.1
       compress-commons: 5.0.1
       readable-stream: 3.6.2
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

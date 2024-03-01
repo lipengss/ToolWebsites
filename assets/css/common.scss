@@ -20,11 +20,13 @@ html,body{
   .is-controls-right{
     width: 110px;
   }
-  // .el-input-number{
-  //   width: 120px;
-  // }
 }
 
-.vue-grid-item.vue-grid-placeholder {
-  background-color: var(--el-color-primary-light-3) !important;
+.vue-grid-item{
+  ~.vue-grid-placeholder {
+    background-color: var(--el-color-primary-light-3) !important;
+  }
+  >.vue-resizable-handle {
+    padding: 0 6px 6px 0 !important;
+  }
 }
