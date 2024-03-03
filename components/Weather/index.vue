@@ -13,7 +13,18 @@
 			<div class="weather-info">
 				<div>{{ toDay.weather }}</div>
 				<div>{{ toDay.winddirection }}风 {{ toDay.windpower }}级</div>
-				<div>空气湿度{{ toDay.humidity }}</div>
+				<div>空气湿度 {{ toDay.humidity }}</div>
+			</div>
+		</div>
+		<div class="forecasts">
+			<div class="info" v-for="item in forecasts[0].casts">
+				<span>{{ formatWeek(item.week, item.date) }}</span>
+				<span class="date">{{ format(item.date, 'M月D日') }}</span>
+				<el-icon :size="18" v-if="item.dayweather === '晴' && night"><svg-icon name="月亮" /></el-icon>
+				<el-icon :size="20" v-if="item.dayweather === '晴' && !night"><svg-icon name="晴" /></el-icon>
+				<el-icon :size="20" v-else-if="item.dayweather === '阴'"><svg-icon name="阴" /></el-icon>
+				<el-icon :size="20" v-if="item.dayweather === '雨夹雪'"><svg-icon name="雨夹雪" /></el-icon>
+				<el-icon :size="20" v-if="item.dayweather === '多云'"><svg-icon name="多云" /></el-icon>
 			</div>
 		</div>
 	</div>
@@ -22,6 +33,14 @@
 import { ref } from 'vue';
 import qs from 'qs';
 import { Location, Refresh } from '@element-plus/icons-vue';
+import { weekFormat } from '~/assets/utils/publicData';
+import { useDateFormat } from '~/hooks/useDateFormat';
+
+const { isToday, isTomorrow, format, dayjs } = useDateFormat();
+
+const now = dayjs();
+
+const night = computed(() => now.hour() >= 18 && now.hour() > 6);
 
 const key = 'ff03de30ff1c0ad671a12699414250e7';
 
@@ -46,6 +65,20 @@ const getWeather = useDebounce(
 		leading: true,
 	}
 );
+function formatWeek(weekNumber: string, date: string) {
+	if (isToday(date)) {
+		return '今天';
+	} else if (isTomorrow(date)) {
+		return '明天';
+	} else {
+		return weekFormat[parseInt(weekNumber)];
+	}
+}
+
+const { forecasts }: QueryWeather = await $fetch(
+	`https://restapi.amap.com/v3/weather/weatherInfo?${qs.stringify({ ...queryWeather, extensions: 'all' })}`
+);
+console.log(forecasts[0].casts);
 
 getWeather();
 const toDay = computed(() => (weatherLives.value.length ? weatherLives.value[0] : undefined));
@@ -65,13 +98,31 @@ const toDay = computed(() => (weatherLives.value.length ? weatherLives.value[0] 
 		}
 	}
 	.weather {
+		margin-bottom: 6px;
 		.temper {
-			font-size: 60px;
+			font-size: 40px;
 			font-weight: bold;
 		}
 		.weather-info {
 			text-align: right;
-			line-height: 24px;
+			line-height: 20px;
+			font-size: 13px;
+		}
+	}
+	.forecasts {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 12px;
+		.info {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			line-height: 18px;
+			.date {
+				font-size: 10px;
+			}
 		}
 	}
 }

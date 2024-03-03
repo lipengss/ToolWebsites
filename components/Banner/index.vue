@@ -2,11 +2,6 @@
 	<div class="banner-bg">
 		<el-row class="banner">
 			<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
-				<div ref="tickRef" class="tick">
-					<div data-repeat="true" aria-hidden="true">
-						<span data-view="flip"></span>
-					</div>
-				</div>
 				<div class="date-wrapper">
 					<div class="time">{{ state.time }}</div>
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
@@ -24,32 +19,26 @@
 						</el-link>
 					</el-tooltip>
 				</div>
-				<transition enter-active-class="animate__animated animate__zoomIn" leave-active-class="animate__animated animate__zoomOut">
-					<el-input v-model="state.query" clearable size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
-						<template #append>
-							<el-button type="primary" @click="onActionSearch">搜索</el-button>
-						</template>
-						<template #prefix>
-							<img width="20" height="20" :src="currentIcon" id="serach-icon" class="animate__animated animate__rotateInDownLeft" />
-						</template>
-					</el-input>
-				</transition>
+				<el-input v-model="state.query" clearable size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
+					<template #append>
+						<el-button type="primary" @click="onActionSearch">搜索</el-button>
+					</template>
+					<template #prefix>
+						<img width="20" height="20" :src="currentIcon" id="serach-icon" class="animate__animated animate__rotateInDownLeft" />
+					</template>
+				</el-input>
 			</el-col>
 		</el-row>
 	</div>
 </template>
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue';
+import { computed, reactive } from 'vue';
 import { hotWebsiteList } from '~/assets/utils/hotWebsite';
 import { weekFormat } from '~/assets/utils/publicData';
 import { useAnimate } from '~/hooks/useAnimate';
 import { dayjs } from 'element-plus';
 import weekday from 'dayjs/plugin/weekday';
 dayjs.extend(weekday);
-
-const { $Tick } = useNuxtApp();
-
-const tickRef = ref();
 
 const { hoverAnimate } = useAnimate('.engines-item', 'animate__bounceIn');
 
@@ -59,15 +48,13 @@ const state = reactive({
 	current: 'baidu',
 	query: '',
 	date: dayjs().format('YYYY年MM月DD日'),
-	time: dayjs().format('HH:mm:ss'),
+	time: '',
 });
 
 let timer: any = null;
 
 onMounted(() => {
-	$Tick.DOM.cteate(tickRef.value, {
-		value: 10,
-	});
+	state.time = dayjs().format('HH:mm:ss');
 	timer = setInterval(() => {
 		state.time = dayjs().format('HH:mm:ss');
 	}, 1000);
@@ -123,6 +110,7 @@ function onActionSearch() {
 		align-items: center;
 		.date-wrapper {
 			color: var(--el-color-white);
+			text-shadow: 1px 1px 1px #000;
 			.time {
 				font-size: 30px;
 				font-weight: bold;

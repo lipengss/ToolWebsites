@@ -44,9 +44,11 @@
 					<el-icon><svg-icon name="angle" /></el-icon>
 				</template>
 			</el-input>
-			<el-select v-model="state.cropper.aspectRatio" style="width: 80px" @change="onChange">
-				<el-option v-for="item in aspectRatios" :key="item.value" :label="item.label" :value="item.value" />
-			</el-select>
+			<ClientOnly>
+				<el-select v-model="state.cropper.aspectRatio" style="width: 80px" @change="onChange">
+					<el-option v-for="item in aspectRatios" :key="item.value" :label="item.label" :value="item.value" />
+				</el-select>
+			</ClientOnly>
 			<el-checkbox v-model="state.cropper.circle" border>圆形</el-checkbox>
 			<el-button type="primary" :loading-icon="Loading" :loading="state.loadingCrop" @click="onCrop">
 				<el-icon class="mr6"><svg-icon name="cutting" /></el-icon>
@@ -105,7 +107,7 @@ const state: CropState = reactive({
 		imageSrc: defaultPicture,
 	},
 	cropper: {
-		aspectRatio: numeral(16).divide(9).value(),
+		aspectRatio: numeral(16).divide(9).format('0.1'),
 		rotateStep: 10,
 		url: '',
 		urlList: [],

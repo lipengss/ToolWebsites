@@ -1,5 +1,5 @@
 <template>
-	<el-row :gutter="10">
+	<el-row :gutter="20">
 		<el-col :lg="18">
 			<slot />
 		</el-col>

@@ -49,7 +49,8 @@ function divide(num1: number, num2: number): number {
 	if (num2 === 0) {
 		throw new Error('Cannot divide by zero');
 	}
-	return Math.round(num1 / num2);
+	console.log();
+	return numeral(num1).divide(num2).format('0.1');
 }
 
 export { aspectRatios, pictureNotions, weekFormat };

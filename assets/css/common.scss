@@ -1,32 +1,33 @@
 @use './class.scss';
 
-html,body{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  background-color: var(--el-bg-color-page);
+html,
+body {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	background-color: var(--el-bg-color-page);
 }
-.color-pane{
-  width: 40px;
-  height: 20px;
-}
-
-.el-container{
-  height: 100vh;
+.color-pane {
+	width: 40px;
+	height: 20px;
 }
 
-.el-form--inline .el-form-item{
-  margin-right: 10px !important;
-  .is-controls-right{
-    width: 110px;
-  }
+.el-container {
+	height: 100vh;
 }
 
-.vue-grid-item{
-  ~.vue-grid-placeholder {
-    background-color: var(--el-color-primary-light-3) !important;
-  }
-  >.vue-resizable-handle {
-    padding: 0 6px 6px 0 !important;
-  }
+.el-form--inline .el-form-item {
+	margin-right: 10px !important;
+	.is-controls-right {
+		width: 110px;
+	}
+}
+
+.vue-grid-item {
+	~ .vue-grid-placeholder {
+		background-color: var(--el-color-primary-light-3) !important;
+	}
+	> .vue-resizable-handle {
+		padding: 0 6px 6px 0 !important;
+	}
 }
