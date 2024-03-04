@@ -1,41 +1,43 @@
 <template>
-	<grid-layout
-		:col-num="12"
-		:layout.sync="layout"
-		:row-height="77"
-		:is-draggable="true"
-		:is-resizable="false"
-		:is-mirrored="false"
-		:vertical-compact="true"
-		:margin="[20, 20]"
-		:responsive="true"
-	>
-		<grid-item
-			class="grid-item"
-			v-for="item in layout"
-			:x="item.x"
-			:y="item.y"
-			:w="item.w"
-			:h="item.h"
-			:i="item.i"
-			drag-allow-from=".vue-draggable-handle"
+	<div class="container" style="background-color: transparent">
+		<grid-layout
+			:col-num="12"
+			:layout.sync="layout"
+			:row-height="77"
+			:is-draggable="true"
+			:is-resizable="false"
+			:is-mirrored="false"
+			:vertical-compact="true"
+			:margin="[20, 20]"
+			:responsive="true"
 		>
-			<el-icon class="drag vue-draggable-handle" title="移动"><svg-icon name="drag" /></el-icon>
-			<component v-if="item.component" :is="item.component" v-bind="item.parame" class="component-item" />
-		</grid-item>
-	</grid-layout>
-	<!-- <div class="blok">
-		<el-card v-for="row in formatTypeList" :key="row.type" :header="row.name" class="blok-card">
-			<el-row :gutter="20">
-				<el-col v-for="(hot, index) in row.children" :lg="3" :xl="3">
-					<div class="hot-item" @mouseenter="hoverAnimate('in', index)" @mouseleave="hoverAnimate('out', index)">
-						<img class="icon" :src="hot.icon" width="20" height="20" :alt="hot.name" />
-						<el-link class="link" :href="hot.url" :underline="false" target="_blank" type="primary">{{ hot.name }}</el-link>
-					</div>
-				</el-col>
-			</el-row>
-		</el-card>
-	</div> -->
+			<grid-item
+				class="grid-item"
+				v-for="item in layout"
+				:x="item.x"
+				:y="item.y"
+				:w="item.w"
+				:h="item.h"
+				:i="item.i"
+				drag-allow-from=".vue-draggable-handle"
+			>
+				<el-icon class="drag vue-draggable-handle" title="移动"><svg-icon name="drag" /></el-icon>
+				<component v-if="item.component" :is="item.component" v-bind="item.parame" class="component-item" />
+			</grid-item>
+		</grid-layout>
+		<div class="blok">
+			<el-card v-for="row in formatTypeList" :key="row.type" :header="row.name" class="blok-card">
+				<el-row :gutter="20">
+					<el-col v-for="(hot, index) in row.routes" :lg="3" :xl="3">
+						<div class="hot-item" @mouseenter="hoverAnimate('in', index)" @mouseleave="hoverAnimate('out', index)">
+							<img class="icon" :src="hot.meta.icon" width="20" height="20" :alt="hot.name" />
+							<el-link class="link" :href="hot.path" :underline="false" target="_blank" type="primary">{{ hot.name }}</el-link>
+						</div>
+					</el-col>
+				</el-row>
+			</el-card>
+		</div>
+	</div>
 </template>
 <script setup lang="ts">
 import { computed, ref, shallowRef } from 'vue';
@@ -61,13 +63,13 @@ definePageMeta({
 	icon: 'menu-home',
 });
 
-// const formatTypeList = computed(() => {
-// 	const list = hotTypeList.map((type) => {
-// 		type.children = hotWebsiteList.filter((hot) => hot.type === type.type);
-// 		return type;
-// 	});
-// 	return list;
-// });
+const formatTypeList = computed((): Array<WebTypeItem> => {
+	const list = hotTypeList.map((type) => {
+		type.routes = hotWebsiteList.filter((hot) => hot.type === type.type);
+		return type;
+	});
+	return list;
+});
 
 onMounted(() => {
 	reader.value = true;

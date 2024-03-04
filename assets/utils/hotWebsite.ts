@@ -3,23 +3,34 @@ const hotTypeList: Array<WebTypeItem> = [
 		name: '搜索引擎',
 		type: 'search',
 		icon: '/search.svg',
+		routes: [],
 		children: [],
 	},
 	{
 		name: '热门工具',
 		type: 'hotTool',
 		icon: '',
+		routes: [],
 		children: [],
 	},
 	{
 		name: '图库/色彩',
 		type: 'art',
 		icon: '',
+		routes: [],
 		children: [
 			{
 				name: '免费图库',
 				type: 'gallery',
 				icon: '',
+				routes: [],
+				children: [],
+			},
+			{
+				name: '色彩',
+				type: 'color',
+				icon: '',
+				routes: [],
 				children: [],
 			},
 		],
@@ -93,8 +104,18 @@ const hotWebsiteList: Array<RouteItem> = [
 		type: 'gallery',
 		meta: {
 			rank: 0,
-			icon: 'https://pixabay.com/favicon.ico',
+			icon: 'https://pexels.com/favicon.ico',
 			description: '免费图库，图片质量不错。',
+		},
+	},
+	{
+		name: '在线渐变生成',
+		path: 'https://lingdaima.com/jianbianse/',
+		type: 'color',
+		meta: {
+			rank: 0,
+			icon: 'https://lingdaima.com/favicon.ico',
+			description: '在线生成CSS渐变色工具',
 		},
 	},
 ];
