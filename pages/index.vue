@@ -10,6 +10,7 @@
 			:vertical-compact="true"
 			:margin="[20, 20]"
 			:responsive="true"
+			:preventCollision="true"
 		>
 			<grid-item
 				class="grid-item"
@@ -47,13 +48,7 @@ const { hoverAnimate } = useAnimate('.link', 'animate__bounceIn');
 
 const component = resolveComponent('Site');
 
-const layout = shallowRef([
-	{ x: 0, y: 2, w: 4, h: 2, i: '1', component: resolveComponent('Weather') },
-	{ x: 4, y: 0, w: 1, h: 1, i: '2', component, parame: { url: 'https://www.baidu.com', title: '百度' } },
-	{ x: 4, y: 0, w: 1, h: 1, i: '3', component, parame: { url: 'https://www.google.com', title: '谷歌' } },
-	{ x: 6, y: 0, w: 1, h: 1, i: '4', component, parame: { url: 'https://www.bing.com', title: '必应' } },
-	{ x: 8, y: 0, w: 1, h: 1, i: '5', component, parame: { url: 'https://www.sogou.com', title: '搜狗' } },
-]);
+const layout = shallowRef([{ x: 0, y: 2, w: 4, h: 2, i: '1', component: resolveComponent('Weather') }]);
 
 const reader = ref(false);
 
