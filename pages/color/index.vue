@@ -1,12 +1,14 @@
 <template>
-	<TwoColumnLayout :anchor-points="anchorPoints">
-		<template v-for="item in anchorPoints" :key="item.id">
-			<el-card :header="`# ${item.name}`" :id="item.id">
-				<component :is="item.component" />
-			</el-card>
-			<el-divider>分割线</el-divider>
-		</template>
-	</TwoColumnLayout>
+	<div class="container">
+		<TwoColumnLayout :anchor-points="anchorPoints">
+			<template v-for="item in anchorPoints" :key="item.id">
+				<el-card :header="`# ${item.name}`" :id="item.id">
+					<component :is="item.component" />
+				</el-card>
+				<el-divider>分割线</el-divider>
+			</template>
+		</TwoColumnLayout>
+	</div>
 </template>
 <script setup lang="ts">
 import hexTorgb from './hexTorgb.vue';

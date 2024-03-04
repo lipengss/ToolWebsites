@@ -1,5 +1,5 @@
 <template>
-	<div class="wrapper" v-if="toDay">
+	<div class="wrapper" :class="toDay.weather" v-if="toDay">
 		<div class="flex-between location">
 			<div class="flex-center">
 				<el-icon><Location /></el-icon> <span class="city-name">{{ toDay.city }}</span>
@@ -89,7 +89,6 @@ const toDay = computed(() => (weatherLives.value.length ? weatherLives.value[0] 
 	height: 100%;
 	padding: 10px;
 	box-sizing: border-box;
-	background: linear-gradient(45deg, #237fca 58%, rgba(233, 241, 246, 0.91) 100%);
 	color: #fff;
 	.location {
 		.city-name {
@@ -125,5 +124,11 @@ const toDay = computed(() => (weatherLives.value.length ? weatherLives.value[0] 
 			}
 		}
 	}
+}
+.晴 {
+	background: linear-gradient(45deg, #237fca 58%, rgba(233, 241, 246, 0.91) 100%);
+}
+.阴 {
+	background: linear-gradient(61deg, rgba(147, 146, 146, 1) 0%, rgba(205, 205, 205, 1) 100%);
 }
 </style>

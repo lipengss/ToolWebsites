@@ -1,10 +1,8 @@
 <template>
 	<Banner />
-	<!-- <header-top /> -->
+	<header-top />
 	<div class="main">
-		<div class="container">
-			<NuxtPage />
-		</div>
+		<NuxtPage />
 	</div>
 	<el-backtop :right="50" :bottom="50" />
 	<el-footer>Footer</el-footer>
@@ -45,13 +43,6 @@ onUnmounted(() => {
 .main {
 	min-height: calc(100vh - 30px);
 	box-sizing: border-box;
-}
-.container {
-	max-width: 1200px;
-	margin: 10px auto;
-	padding: 10px;
-	box-sizing: border-box;
-	background-color: var(--el-bg-color);
 }
 .el-footer {
 	height: 30px;

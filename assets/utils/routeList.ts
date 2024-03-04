@@ -2,6 +2,7 @@ export const routeList: Array<RouteItem> = [
 	{
 		name: '首页',
 		path: '/',
+		type: 'onSite',
 		meta: {
 			rank: 0,
 			icon: 'menu-home',
@@ -10,6 +11,7 @@ export const routeList: Array<RouteItem> = [
 	{
 		name: '图片处理',
 		path: '/picture',
+		type: 'onSite',
 		meta: {
 			rank: 0,
 			icon: 'menu-picture',
@@ -18,6 +20,7 @@ export const routeList: Array<RouteItem> = [
 			{
 				name: '图片裁切',
 				path: '/picture/crop',
+				type: 'onSite',
 				meta: {
 					rank: 100,
 				},
@@ -25,6 +28,7 @@ export const routeList: Array<RouteItem> = [
 			{
 				name: '图片压缩',
 				path: '/picture/compress',
+				type: 'onSite',
 				meta: {
 					rank: 160,
 				},
@@ -32,6 +36,7 @@ export const routeList: Array<RouteItem> = [
 			{
 				name: '图片转base64',
 				path: '/picture/pictureToBase64',
+				type: 'onSite',
 				meta: {
 					rank: 280,
 				},
@@ -39,6 +44,7 @@ export const routeList: Array<RouteItem> = [
 			{
 				name: 'base64转图片',
 				path: '/picture/base64ToPicture',
+				type: 'onSite',
 				meta: {
 					rank: 280,
 				},
@@ -48,6 +54,7 @@ export const routeList: Array<RouteItem> = [
 	{
 		name: '颜色处理',
 		path: '/color',
+		type: 'onSite',
 		meta: {
 			rank: 300,
 			icon: 'menu-color',

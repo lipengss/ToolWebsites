@@ -7,14 +7,8 @@
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
 				</div>
 				<div class="flex-around serach-engines">
-					<el-tooltip v-for="(item, index) in filterHotWebsiteList" :key="item.key" :content="item.description" placement="top">
-						<el-link
-							:type="state.current === item.key ? 'primary' : 'info'"
-							class="engines-item"
-							@click="onChangeEngines(item.key)"
-							@mouseenter="hoverAnimate('in', index)"
-							@mouseleave="hoverAnimate('out', index)"
-						>
+					<el-tooltip v-for="(item, index) in filterHotWebsiteList" :key="item.name" :content="item.meta.description" placement="top">
+						<el-link :type="state.current === item.name ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.name)">
 							{{ item.name }}
 						</el-link>
 					</el-tooltip>
@@ -35,17 +29,14 @@
 import { computed, reactive } from 'vue';
 import { hotWebsiteList } from '~/assets/utils/hotWebsite';
 import { weekFormat } from '~/assets/utils/publicData';
-import { useAnimate } from '~/hooks/useAnimate';
 import { dayjs } from 'element-plus';
 import weekday from 'dayjs/plugin/weekday';
 dayjs.extend(weekday);
 
-const { hoverAnimate } = useAnimate('.engines-item', 'animate__bounceIn');
-
-const HOTS = ['baidu', 'bing', 'google', 'github', 'sougou'];
+const HOTS = ['Baidu', 'Bing', 'Google', 'GitHub', '搜狗'];
 
 const state = reactive({
-	current: 'baidu',
+	current: 'Baidu',
 	query: '',
 	date: dayjs().format('YYYY年MM月DD日'),
 	time: '',
@@ -65,13 +56,13 @@ onUnmounted(() => {
 });
 
 const currentIcon = computed(() => {
-	const item = hotWebsiteList.find((item) => item.key === state.current);
-	return item?.icon || '';
+	const item = hotWebsiteList.find((item) => item.name === state.current);
+	return item?.meta.icon || '';
 });
 
 const currentWeek = computed(() => weekFormat[dayjs().weekday()]);
 
-const filterHotWebsiteList = hotWebsiteList.filter((item) => HOTS.includes(item.key));
+const filterHotWebsiteList = hotWebsiteList.filter((item) => HOTS.includes(item.name));
 
 function onChangeEngines(key: string) {
 	state.current = key;

@@ -29,6 +29,18 @@
 		padding-left: #{$i}px !important;
 	}
 }
+
+.container{
+	max-width: 1200px;
+	margin: 10px auto;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: var(--el-bg-color);
+}
+.full-container{
+	width: 100%;
+}
+
 .flex1{
 	flex: 1;
 }

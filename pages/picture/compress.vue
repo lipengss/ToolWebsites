@@ -1,5 +1,7 @@
 <template>
-	<TwoColumnLayout>图片压缩</TwoColumnLayout>
+	<div class="container">
+		<TwoColumnLayout>图片压缩</TwoColumnLayout>
+	</div>
 </template>
 <script setup lang="ts">
 definePageMeta({

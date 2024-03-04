@@ -11,19 +11,9 @@ declare module '@pqina/flip';
 
 interface WebTypeItem {
 	name: string;
-	url: string;
 	icon: string;
-	type: string;
-	children: Array<WebHotItem>;
-}
-
-interface WebHotItem {
-	name: string;
-	key: string;
-	url: string;
-	icon: string;
-	type: string;
-	description: string;
+	type: 'search' | 'hotTool' | 'art' | 'gallery';
+	children: Array<WebTypeItem>;
 }
 
 interface QueryLocation {
