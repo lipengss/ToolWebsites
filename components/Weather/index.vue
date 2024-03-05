@@ -129,6 +129,6 @@ const toDay = computed(() => (weatherLives.value.length ? weatherLives.value[0] 
 	background: linear-gradient(45deg, #237fca 58%, rgba(233, 241, 246, 0.91) 100%);
 }
 .阴 {
-	background: linear-gradient(61deg, rgba(147, 146, 146, 1) 0%, rgba(205, 205, 205, 1) 100%);
+	background: linear-gradient(61deg, rgba(67, 112, 159, 1) 29%, rgba(205, 205, 205, 1) 100%);
 }
 </style>
