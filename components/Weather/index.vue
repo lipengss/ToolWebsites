@@ -78,7 +78,6 @@ function formatWeek(weekNumber: string, date: string) {
 const { forecasts }: QueryWeather = await $fetch(
 	`https://restapi.amap.com/v3/weather/weatherInfo?${qs.stringify({ ...queryWeather, extensions: 'all' })}`
 );
-console.log(forecasts[0].casts);
 
 getWeather();
 const toDay = computed(() => (weatherLives.value.length ? weatherLives.value[0] : undefined));

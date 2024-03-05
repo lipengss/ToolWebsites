@@ -35,9 +35,76 @@ const hotTypeList: Array<WebTypeItem> = [
 			},
 		],
 	},
+	{
+		name: '博客',
+		type: 'blog',
+		icon: '',
+		routes: [],
+		children: [],
+	},
+	{
+		name: '开发者',
+		type: 'developer',
+		icon: '',
+		routes: [],
+		children: [],
+	},
 ];
-// 热门网站
-const hotWebsiteList: Array<RouteItem> = [
+
+// 色彩
+const color = [
+	{
+		name: '在线渐变生成',
+		path: 'https://lingdaima.com/jianbianse/',
+		type: 'color',
+		meta: {
+			rank: 0,
+			icon: 'https://lingdaima.com/favicon.ico',
+			description: '在线生成CSS渐变色工具',
+		},
+	},
+];
+
+// 图库
+const gallery = [
+	{
+		name: 'pexels',
+		path: 'https://www.pexels.com/zh-cn/',
+		type: 'gallery',
+		meta: {
+			rank: 0,
+			icon: 'https://pexels.com/favicon.ico',
+			description: '免费图库，图片质量不错。',
+		},
+	},
+	{
+		name: 'flaticon',
+		path: 'https://www.flaticon.com/',
+		type: ['gallery', 'developer'],
+		meta: {
+			rank: 0,
+			icon: 'https://flaticon.com/favicon.ico',
+			description: '下载免费的图标和贴纸为您的项目',
+		},
+	},
+];
+
+// 博客
+const blog = [
+	{
+		name: '知乎',
+		path: 'https://www.zhihu.com',
+		type: 'blog',
+		meta: {
+			rank: 0,
+			icon: 'https://www.zhihu.com/favicon.ico',
+			description: '搜索知乎的内容',
+		},
+	},
+];
+
+// 搜索引擎
+const engine = [
 	{
 		name: 'Google',
 		type: 'search',
@@ -88,36 +155,43 @@ const hotWebsiteList: Array<RouteItem> = [
 			description: '搜狗提供的订阅号及文章内容搜索。',
 		},
 	},
+];
+
+// 开发者
+const developer = [
 	{
-		name: '知乎',
-		path: 'https://www.zhihu.com',
-		type: 'blog',
+		name: 'CssLoader',
+		path: 'https://css-loaders.com/',
+		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'https://www.zhihu.com/favicon.ico',
-			description: '搜索知乎的内容',
-		},
-	},
-	{
-		name: 'pexels',
-		path: 'https://www.pexels.com/zh-cn/',
-		type: 'gallery',
-		meta: {
-			rank: 0,
-			icon: 'https://pexels.com/favicon.ico',
-			description: '免费图库，图片质量不错。',
-		},
-	},
-	{
-		name: '在线渐变生成',
-		path: 'https://lingdaima.com/jianbianse/',
-		type: 'color',
-		meta: {
-			rank: 0,
-			icon: 'https://lingdaima.com/favicon.ico',
-			description: '在线生成CSS渐变色工具',
+			icon: 'https://css-loaders.com/favicon.ico',
+			description: '最大的纯CSS加载程序集合',
 		},
 	},
 ];
+
+// 热门网站
+const hotWebsiteList: Array<RouteItem> = [...color, ...gallery, ...blog, ...engine, ...developer];
+
+function formatHotTypeList(hotList: Array<WebTypeItem>) {
+	hotList.forEach((item) => {
+		if (item.children && item.children.length) {
+			formatHotTypeList(item.children);
+		} else {
+			const type = item.type;
+			item.routes = hotWebsiteList.filter((item) => {
+				if (typeof item.type === 'string') {
+					return item.type === type;
+				} else {
+					return item.type.includes(type);
+				}
+			});
+		}
+	});
+	return hotList;
+}
+
+console.log(formatHotTypeList(hotTypeList));
 
 export { hotTypeList, hotWebsiteList };

@@ -1,7 +1,7 @@
 interface RouteItem {
 	name: string;
 	path: string;
-	type: string;
+	type: string | string[];
 	meta: {
 		icon?: string; // 图表
 		rank: number; // 排序

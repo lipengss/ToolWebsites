@@ -12,7 +12,7 @@ declare module '@pqina/flip';
 interface WebTypeItem {
 	name: string;
 	icon: string;
-	type: 'search' | 'hotTool' | 'art' | 'gallery' | 'color';
+	type: 'search' | 'hotTool' | 'art' | 'gallery' | 'color' | 'developer' | 'blog';
 	routes: Array<RouteItem>;
 	children: Array<WebTypeItem>;
 }
