@@ -80,7 +80,7 @@ const { forecasts }: QueryWeather = await $fetch(
 );
 
 getWeather();
-const toDay = computed(() => (weatherLives.value.length ? weatherLives.value[0] : undefined));
+const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? weatherLives.value[0] : undefined));
 </script>
 <style lang="scss" scoped>
 .wrapper {

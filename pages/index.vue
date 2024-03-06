@@ -23,11 +23,24 @@
 				drag-allow-from=".vue-draggable-handle"
 			>
 				<el-icon class="drag vue-draggable-handle" title="移动"><svg-icon name="drag" /></el-icon>
-				<component v-if="item.component" :is="item.component" v-bind="item.parame" class="component-item" />
+				<component v-if="item.component" :is="item.component" class="component-item" />
 			</grid-item>
 		</grid-layout>
 		<div class="blok">
-			<el-card v-for="row in formatTypeList" :key="row.type" :header="row.name" class="blok-card">
+			<el-card v-for="row in formatHotTypeList(hotTypeList)" :key="row.type" :header="row.name" class="blok-card mb20">
+				<template #header>
+					<el-space v-if="row.children && row.children.length">
+						<span>{{ row.name }}</span>
+						<el-radio-group v-model="row.redirect" size="small">
+							<el-radio-button v-for="child in row.children" :label="child.name" :value="child.type" />
+						</el-radio-group>
+					</el-space>
+					<!-- <el-space>
+						<el-tag v-for="tag in row.children">
+							{{ tag.name }}
+						</el-tag>
+					</el-space> -->
+				</template>
 				<el-row :gutter="20">
 					<el-col v-for="(hot, index) in row.routes" :lg="3" :xl="3">
 						<div class="hot-item" @mouseenter="hoverAnimate('in', index)" @mouseleave="hoverAnimate('out', index)">
@@ -42,7 +55,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref, shallowRef } from 'vue';
-import { hotWebsiteList, hotTypeList } from '~/assets/utils/hotWebsite';
+import { hotWebsiteList, hotTypeList, formatHotTypeList } from '~/assets/utils/hotWebsite';
 import { useAnimate } from '~/hooks/useAnimate';
 const { hoverAnimate } = useAnimate('.link', 'animate__bounceIn');
 

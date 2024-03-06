@@ -177,6 +177,7 @@ const hotWebsiteList: Array<RouteItem> = [...color, ...gallery, ...blog, ...engi
 function formatHotTypeList(hotList: Array<WebTypeItem>) {
 	hotList.forEach((item) => {
 		if (item.children && item.children.length) {
+			item.redirect = item.children[0].type;
 			formatHotTypeList(item.children);
 		} else {
 			const type = item.type;
@@ -192,6 +193,4 @@ function formatHotTypeList(hotList: Array<WebTypeItem>) {
 	return hotList;
 }
 
-console.log(formatHotTypeList(hotTypeList));
-
-export { hotTypeList, hotWebsiteList };
+export { hotTypeList, hotWebsiteList, formatHotTypeList };

@@ -9,10 +9,13 @@ declare module '@vueuse/core';
 declare module 'vue3-grid-layout';
 declare module '@pqina/flip';
 
+const TYPE = 'search' | 'hotTool' | 'art' | 'gallery' | 'color' | 'developer' | 'blog';
+
 interface WebTypeItem {
 	name: string;
 	icon: string;
-	type: 'search' | 'hotTool' | 'art' | 'gallery' | 'color' | 'developer' | 'blog';
+	type: TYPE;
+	redirect?: TYPE;
 	routes: Array<RouteItem>;
 	children: Array<WebTypeItem>;
 }
