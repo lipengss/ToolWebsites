@@ -127,7 +127,8 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 .晴 {
 	background: linear-gradient(45deg, #237fca 58%, rgba(233, 241, 246, 0.91) 100%);
 }
-.阴 {
+.阴,
+.多云 {
 	background: linear-gradient(61deg, rgba(67, 112, 159, 1) 29%, rgba(205, 205, 205, 1) 100%);
 }
 </style>

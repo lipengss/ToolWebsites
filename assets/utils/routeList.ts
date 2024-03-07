@@ -60,4 +60,13 @@ export const routeList: Array<RouteItem> = [
 			icon: 'menu-color',
 		},
 	},
+	{
+		name: '编辑器',
+		path: '/editor',
+		type: 'editor',
+		meta: {
+			rank: 200,
+			icon: 'editor',
+		},
+	},
 ];

@@ -8,3 +8,7 @@ interface HotMenuState {
 	isDrawer: boolean;
 	context: string;
 }
+
+interface EditorOptions {
+	mode: 'text' | 'tree' | 'table';
+}

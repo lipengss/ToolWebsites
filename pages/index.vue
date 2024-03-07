@@ -8,7 +8,6 @@
 			:is-resizable="false"
 			:is-mirrored="false"
 			:vertical-compact="true"
-			:margin="[20, 20]"
 			:responsive="true"
 			:preventCollision="true"
 		>
@@ -27,7 +26,7 @@
 			</grid-item>
 		</grid-layout>
 		<div class="blok">
-			<el-card v-for="row in formatHotTypeList(hotTypeList)" :key="row.type" :header="row.name" class="blok-card mb20">
+			<el-card v-for="(row, rowIndex) in formatHotTypeList(hotTypeList)" :key="row.type" :header="row.name" class="blok-card mb20">
 				<template #header>
 					<el-space v-if="row.children && row.children.length">
 						<span>{{ row.name }}</span>
@@ -35,18 +34,23 @@
 							<el-radio-button v-for="child in row.children" :label="child.name" :value="child.type" />
 						</el-radio-group>
 					</el-space>
-					<!-- <el-space>
-						<el-tag v-for="tag in row.children">
-							{{ tag.name }}
-						</el-tag>
-					</el-space> -->
 				</template>
 				<el-row :gutter="20">
-					<el-col v-for="(hot, index) in row.routes" :lg="3" :xl="3">
-						<div class="hot-item" @mouseenter="hoverAnimate('in', index)" @mouseleave="hoverAnimate('out', index)">
-							<img class="icon" :src="hot.meta.icon" width="20" height="20" :alt="hot.name" />
-							<el-link class="link" :href="hot.path" :underline="false" target="_blank" type="primary">{{ hot.name }}</el-link>
-						</div>
+					<el-col v-for="(hot, index) in row.routes" :lg="4" :xl="4">
+						<el-tooltip :content="hot.description" placement="top" effect="light">
+							<el-link
+								class="hot-item"
+								@mouseenter="hoverAnimate('in', rowIndex + '-' + index)"
+								@mouseleave="hoverAnimate('out', rowIndex + '-' + index)"
+								:href="hot.path"
+								:underline="false"
+								target="_blank"
+								type="primary"
+							>
+								<img class="icon" :src="hot.meta.icon" width="20" height="20" :alt="hot.name" />
+								<span :class="`link-${rowIndex}-${index}`">{{ hot.name }}</span>
+							</el-link>
+						</el-tooltip>
 					</el-col>
 				</el-row>
 			</el-card>
@@ -54,8 +58,8 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { computed, ref, shallowRef } from 'vue';
-import { hotWebsiteList, hotTypeList, formatHotTypeList } from '~/assets/utils/hotWebsite';
+import { ref, shallowRef } from 'vue';
+import { hotTypeList, formatHotTypeList } from '~/assets/utils/hotWebsite';
 import { useAnimate } from '~/hooks/useAnimate';
 const { hoverAnimate } = useAnimate('.link', 'animate__bounceIn');
 
@@ -69,14 +73,6 @@ definePageMeta({
 	title: '首页',
 	rank: 0,
 	icon: 'menu-home',
-});
-
-const formatTypeList = computed((): Array<WebTypeItem> => {
-	const list = hotTypeList.map((type) => {
-		type.routes = hotWebsiteList.filter((hot) => hot.type === type.type);
-		return type;
-	});
-	return list;
 });
 
 onMounted(() => {

@@ -101,6 +101,16 @@ const blog = [
 			description: '搜索知乎的内容',
 		},
 	},
+	{
+		name: '稀土掘金',
+		path: 'https://juejin.cn',
+		type: 'blog',
+		meta: {
+			rank: 0,
+			icon: 'https://juejin.cn/favicon.ico',
+			description: '掘金是面向全球中文开发者的技术内容分享与交流平台',
+		},
+	},
 ];
 
 // 搜索引擎
@@ -160,12 +170,22 @@ const engine = [
 // 开发者
 const developer = [
 	{
-		name: 'CssLoader',
-		path: 'https://css-loaders.com/',
+		name: 'Css加载动画集合',
+		path: 'https://css-loaders.com',
 		type: 'developer',
 		meta: {
 			rank: 0,
 			icon: 'https://css-loaders.com/favicon.ico',
+			description: '使用单个元素制作的 600 多个纯 CSS 加载器',
+		},
+	},
+	{
+		name: 'MDN',
+		path: 'https://developer.mozilla.org',
+		type: 'developer',
+		meta: {
+			rank: 0,
+			icon: 'https://developer.mozilla.org/favicon.ico',
 			description: '最大的纯CSS加载程序集合',
 		},
 	},
