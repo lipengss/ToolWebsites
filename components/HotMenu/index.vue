@@ -2,7 +2,10 @@
 	<el-affix :offset="80">
 		<el-card shadow="never" class="mb20">
 			<template #header>
-				<div class="flex-center header"><svg-icon name="hot" class="mr6" /> <span>热门推荐</span></div>
+				<div class="flex-center header">
+					<img src="~/assets/img/fire.gif" width="18" height="18" class="mr6" />
+					<span>热门推荐</span>
+				</div>
 			</template>
 			<div v-for="route in rankRouteList" :key="route.path" class="link-item">
 				<el-link :type="activeRoute === route.path ? 'primary' : 'default'" :href="route.path">{{ route.name }}</el-link>

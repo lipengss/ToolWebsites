@@ -87,6 +87,26 @@ const gallery = [
 			description: '下载免费的图标和贴纸为您的项目',
 		},
 	},
+	{
+		name: '动图SVG图库',
+		path: 'https://livicons.com/',
+		type: ['gallery', 'developer'],
+		meta: {
+			rank: 0,
+			icon: 'https://livicons.com/favicon.ico',
+			description: '动画SVG图库',
+		},
+	},
+	{
+		name: 'iconpark',
+		path: ' https://iconpark.oceanengine.com/',
+		type: ['gallery', 'developer'],
+		meta: {
+			rank: 0,
+			icon: 'https://lf1-cdn2-tos.bytegoofy.com/bydesign/iconparksite/logo.svg',
+			description: '高质量的iconPark,字节跳动制造。',
+		},
+	},
 ];
 
 // 博客
