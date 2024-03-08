@@ -1,11 +1,11 @@
 <template>
-	<div class="off-work">
+	<div class="off-work" @click="state.visible = !state.visible">
 		<div class="title">下班还有</div>
 		<div class="time">02:04:24</div>
 		<div class="card">
 			<div class="card-item">
 				<div class="card-item-title">发薪</div>
-				<div class="card-item-content">2</div>
+				<div class="card-item-content">{{ payDay }}</div>
 				<div class="day">天</div>
 			</div>
 			<div class="card-item">
@@ -25,10 +25,36 @@
 			</div>
 		</div>
 	</div>
+	<ClientOnly>
+		<el-dialog v-model="state.visible"> </el-dialog>
+	</ClientOnly>
 </template>
 
 <script setup lang="ts">
-import {} from 'vue';
+import { reactive } from 'vue';
+import { useDateFormat } from '~/hooks/useDateFormat';
+
+const { dayjs } = useDateFormat();
+
+const state = reactive({
+	payday: 10,
+	visible: false,
+});
+
+const payDay = computed(() => {
+	const curDate = dayjs().format('YYYY-MM-DD');
+	const day = parseInt(dayjs().format('D'));
+	if (day > state.payday) {
+		const nextMonth = dayjs().add(1, 'month');
+		const payDay = dayjs(nextMonth).set('date', state.payday).format('YYYY-MM-DD');
+		return dayjs(payDay).diff(curDate, 'day');
+	} else {
+		const payDay = dayjs().set('date', state.payday).format('YYYY-MM-DD');
+		return dayjs(payDay).diff(curDate, 'day');
+	}
+});
+
+console.log(payDay.value);
 </script>
 
 <style lang="scss" scoped>
