@@ -28,26 +28,25 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
 import { hotWebsiteList } from '~/assets/utils/hotWebsite';
-import { weekFormat } from '~/assets/utils/publicData';
-import { dayjs } from 'element-plus';
-import weekday from 'dayjs/plugin/weekday';
-dayjs.extend(weekday);
+import { useDateFormat } from '~/hooks/useDateFormat';
+
+const { format, formatWeek } = useDateFormat();
 
 const HOTS = ['Baidu', 'Bing', 'Google', 'GitHub', '搜狗'];
 
 const state = reactive({
 	current: 'Baidu',
 	query: '',
-	date: dayjs().format('YYYY年MM月DD日'),
+	date: format(new Date(), 'YYYY年MM月DD日'),
 	time: '',
 });
 
 let timer: any = null;
 
 onMounted(() => {
-	state.time = dayjs().format('HH:mm:ss');
+	state.time = format(new Date(), 'HH:mm:ss');
 	timer = setInterval(() => {
-		state.time = dayjs().format('HH:mm:ss');
+		state.time = format(new Date(), 'HH:mm:ss');
 	}, 1000);
 });
 onUnmounted(() => {
@@ -60,7 +59,7 @@ const currentIcon = computed(() => {
 	return item?.meta.icon || '';
 });
 
-const currentWeek = computed(() => weekFormat[dayjs().weekday()]);
+const currentWeek = computed(() => formatWeek());
 
 const filterHotWebsiteList = hotWebsiteList.filter((item) => HOTS.includes(item.name));
 

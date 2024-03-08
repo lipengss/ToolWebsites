@@ -40,6 +40,9 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
+  lunar-typescript:
+    specifier: ^1.7.4
+    version: 1.7.4
   numeral:
     specifier: ^2.0.6
     version: 2.0.6
@@ -4872,6 +4875,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+
+  /lunar-typescript@1.7.4:
+    resolution: {integrity: sha512-HvcWP92UoodW5YYa6thj7EdYULXY9xtmjVH+TUbvWb6SXJ813W6WfhlFUlzotv227vuCkCJb5ZzdmgIcL6M73w==}
+    dev: false
 
   /magic-string-ast@0.3.0:
     resolution: {integrity: sha512-0shqecEPgdFpnI3AP90epXyxZy9g6CRZ+SZ7BcqFwYmtFEnZ1jpevcV5HoyVnlDS9gCnc1UIg3Rsvp3Ci7r8OA==}

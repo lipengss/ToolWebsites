@@ -26,7 +26,7 @@ interface QueryLocation {
 }
 
 interface WeatherItem {
-	date: string;
+	date: Date;
 	week: string;
 	dayweather: string; // 白天天气现象
 	nightweather: string; // 晚上天气现象

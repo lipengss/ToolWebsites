@@ -18,7 +18,7 @@
 		</div>
 		<div class="forecasts">
 			<div class="info" v-for="item in forecasts[0].casts">
-				<span>{{ formatWeek(item.week, item.date) }}</span>
+				<span>{{ _formatWeek(item.week, item.date) }}</span>
 				<span class="date">{{ format(item.date, 'M月D日') }}</span>
 				<el-icon :size="18" v-if="item.dayweather === '晴' && night"><svg-icon name="月亮" /></el-icon>
 				<el-icon :size="20" v-if="item.dayweather === '晴' && !night"><svg-icon name="晴" /></el-icon>
@@ -33,10 +33,9 @@
 import { ref } from 'vue';
 import qs from 'qs';
 import { Location, Refresh } from '@element-plus/icons-vue';
-import { weekFormat } from '~/assets/utils/publicData';
 import { useDateFormat } from '~/hooks/useDateFormat';
 
-const { isToday, isTomorrow, format, dayjs } = useDateFormat();
+const { isToday, isTomorrow, format, dayjs, formatWeek } = useDateFormat();
 
 const now = dayjs();
 
@@ -65,13 +64,13 @@ const getWeather = useDebounce(
 		leading: true,
 	}
 );
-function formatWeek(weekNumber: string, date: string) {
+function _formatWeek(weekNumber: string, date: Date) {
 	if (isToday(date)) {
 		return '今天';
 	} else if (isTomorrow(date)) {
 		return '明天';
 	} else {
-		return weekFormat[parseInt(weekNumber)];
+		return formatWeek(parseInt(weekNumber));
 	}
 }
 

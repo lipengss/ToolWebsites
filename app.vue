@@ -1,20 +1,27 @@
 <template>
-	<Banner />
-	<header-top />
-	<div class="main">
-		<NuxtPage />
-	</div>
-	<el-backtop :right="50" :bottom="50" />
-	<el-footer>Footer</el-footer>
+	<el-config-provider :locale="locale">
+		<Banner />
+		<header-top />
+		<div class="main">
+			<NuxtPage />
+		</div>
+		<el-backtop :right="50" :bottom="50" />
+		<el-footer>
+			<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
+		</el-footer>
+	</el-config-provider>
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive } from 'vue';
+import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 
 useSeoMeta({
 	title: '前端工具网站',
 	description: '图片转base64、图片压缩',
 	keywords: '图片转base64、图片压缩、图片处理、在线工具、工具集合',
 });
+
+const locale = ref(zhCn);
 
 const state = reactive({
 	lastScrollTop: 0,

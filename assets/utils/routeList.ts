@@ -1,6 +1,6 @@
 export const routeList: Array<RouteItem> = [
 	{
-		name: '首页',
+		name: '主页',
 		path: '/',
 		type: 'onSite',
 		meta: {

@@ -25,47 +25,18 @@
 				<component v-if="item.component" :is="item.component" class="component-item" />
 			</grid-item>
 		</grid-layout>
-		<div class="blok">
-			<el-card v-for="(row, rowIndex) in formatHotTypeList(hotTypeList)" :key="row.type" :header="row.name" class="blok-card mb20">
-				<template #header>
-					<el-space v-if="row.children && row.children.length">
-						<span>{{ row.name }}</span>
-						<el-radio-group v-model="row.redirect" size="small">
-							<el-radio-button v-for="child in row.children" :label="child.name" :value="child.type" />
-						</el-radio-group>
-					</el-space>
-				</template>
-				<el-row :gutter="20">
-					<el-col v-for="(hot, index) in row.routes" :lg="4" :xl="4">
-						<el-tooltip :content="hot.description" placement="top" effect="light">
-							<el-link
-								class="hot-item"
-								@mouseenter="hoverAnimate('in', rowIndex + '-' + index)"
-								@mouseleave="hoverAnimate('out', rowIndex + '-' + index)"
-								:href="hot.path"
-								:underline="false"
-								target="_blank"
-								type="primary"
-							>
-								<img class="icon" :src="hot.meta.icon" width="20" height="20" :alt="hot.name" />
-								<span :class="`link-${rowIndex}-${index}`">{{ hot.name }}</span>
-							</el-link>
-						</el-tooltip>
-					</el-col>
-				</el-row>
-			</el-card>
-		</div>
 	</div>
 </template>
 <script setup lang="ts">
 import { ref, shallowRef } from 'vue';
-import { hotTypeList, formatHotTypeList } from '~/assets/utils/hotWebsite';
 import { useAnimate } from '~/hooks/useAnimate';
 const { hoverAnimate } = useAnimate('.link', 'animate__bounceIn');
 
-const component = resolveComponent('Site');
-
-const layout = shallowRef([{ x: 0, y: 2, w: 4, h: 2, i: '1', component: resolveComponent('Weather') }]);
+const layout = shallowRef([
+	{ x: 0, y: 0, w: 3, h: 2, i: '1', component: resolveComponent('Weather') },
+	{ x: 3, y: 0, w: 3, h: 2, i: '2', component: resolveComponent('Calendar') },
+	{ x: 6, y: 0, w: 3, h: 2, i: '3', component: resolveComponent('OffWork') },
+]);
 
 const reader = ref(false);
 
@@ -93,6 +64,7 @@ onMounted(() => {
 	.component-item {
 		border-radius: 10px;
 		box-shadow: 1px 1px 5px var(--el-bg-color-page);
+		overflow: hidden;
 	}
 }
 

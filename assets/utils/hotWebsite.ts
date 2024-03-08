@@ -190,7 +190,7 @@ const engine = [
 // 开发者
 const developer = [
 	{
-		name: 'Css加载动画集合',
+		name: 'Css加载动画',
 		path: 'https://css-loaders.com',
 		type: 'developer',
 		meta: {
@@ -230,6 +230,7 @@ function formatHotTypeList(hotList: Array<WebTypeItem>) {
 			});
 		}
 	});
+	console.log(hotList);
 	return hotList;
 }
 
