@@ -1,7 +1,9 @@
 <template>
 	<div class="off-work" @click="state.visible = !state.visible">
 		<div class="title">下班还有</div>
-		<div class="time">02:04:24</div>
+		<ClientOnly>
+			<div class="time">{{ state.curCountDown }}</div>
+		</ClientOnly>
 		<div class="card">
 			<div class="card-item">
 				<div class="card-item-title">发薪</div>
@@ -26,19 +28,41 @@
 		</div>
 	</div>
 	<ClientOnly>
-		<el-dialog v-model="state.visible"> </el-dialog>
+		<el-dialog v-model="state.visible">
+			<el-form label-width="90px">
+				<el-form-item label="组件名称">
+					<el-input />
+				</el-form-item>
+				<el-form-item label="工作日">
+					<el-space>
+						<el-checkbox-group v-model="state.workday">
+							<el-checkbox-button v-for="week in weekFormat" :label="week" :key="week">周{{ week }}</el-checkbox-button>
+						</el-checkbox-group>
+						<el-checkbox>工作日</el-checkbox>
+					</el-space>
+				</el-form-item>
+				<el-form-item label="字体颜色">
+					<ColorPicker :default-color="predefineColors" v-model:color="state.color" />
+				</el-form-item>
+			</el-form>
+		</el-dialog>
 	</ClientOnly>
 </template>
 
 <script setup lang="ts">
 import { reactive } from 'vue';
+import { predefineColors } from '~/assets/utils/publicData';
 import { useDateFormat } from '~/hooks/useDateFormat';
 
-const { dayjs } = useDateFormat();
+const { dayjs, weekFormat } = useDateFormat();
 
 const state = reactive({
 	payday: 10,
-	visible: false,
+	visible: true,
+	countdown: '18:00:00',
+	curCountDown: dayjs().format('HH:mm:ss'),
+	workday: [],
+	color: '#fff',
 });
 
 const payDay = computed(() => {
@@ -54,7 +78,23 @@ const payDay = computed(() => {
 	}
 });
 
-console.log(payDay.value);
+const countDown = () => {
+	const splitCountDown = state.countdown.split(':');
+	const targetTime = dayjs()
+		.set('hour', parseInt(splitCountDown[0]))
+		.set('minute', parseInt(splitCountDown[1]))
+		.set('second', parseInt(splitCountDown[2]))
+		.valueOf();
+	console.log(dayjs(targetTime).format('YYYY-MM-DD HH:mm:ss'));
+	console.log(dayjs().format('YYYY-MM-DD HH:mm:ss'));
+	setInterval(() => {
+		state.curCountDown = dayjs(targetTime - dayjs().valueOf()).format('hh:mm:ss');
+	}, 1000);
+};
+
+onMounted(() => {
+	countDown();
+});
 </script>
 
 <style lang="scss" scoped>

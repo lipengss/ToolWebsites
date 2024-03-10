@@ -43,4 +43,7 @@ function divide(num1: number, num2: number): number {
 	return numeral(num1).divide(num2).format('0.1');
 }
 
-export { aspectRatios, pictureNotions };
+// 预定颜色
+const predefineColors = ['#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585'];
+
+export { aspectRatios, pictureNotions, predefineColors };

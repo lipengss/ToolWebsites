@@ -69,4 +69,13 @@ export const routeList: Array<RouteItem> = [
 			icon: 'editor',
 		},
 	},
+	{
+		name: '网格布局',
+		path: '/grid',
+		type: 'grid-layout',
+		meta: {
+			rank: 100,
+			icon: 'grid',
+		},
+	},
 ];

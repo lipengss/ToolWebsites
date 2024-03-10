@@ -11,13 +11,13 @@ dayjs.extend(isToday); // 今天
 dayjs.extend(isTomorrow); // 明天
 
 const weekFormat: { [key: number]: string } = {
-	1: '星期一',
-	2: '星期二',
-	3: '星期三',
-	4: '星期四',
-	5: '星期五',
-	6: '星期六',
-	7: '星期天',
+	1: '一',
+	2: '二',
+	3: '三',
+	4: '四',
+	5: '五',
+	6: '六',
+	7: '日',
 };
 
 export function useDateFormat() {
@@ -35,7 +35,7 @@ export function useDateFormat() {
 		return dayjs(date).format(format);
 	}
 	function formatWeek(num = weekDay()): string {
-		return weekFormat[num];
+		return `星期${weekFormat[num]}`;
 	}
 	function dayOfYear(date = curDate) {
 		return dayjs(date).dayOfYear();
@@ -51,6 +51,7 @@ export function useDateFormat() {
 		formatWeek,
 		dayOfYear,
 		week,
+		weekFormat,
 		dayjs,
 	};
 }

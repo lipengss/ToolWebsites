@@ -43,14 +43,13 @@ function initLunar() {
 	const year = parseInt(format(state.date, 'YYYY'));
 	const month = parseInt(format(state.date, 'M'));
 	const day = parseInt(format(state.date, 'D'));
-	const solar = $Solar.fromYmd(year, month, day).getLunar();
+	const solar = $Solar?.fromYmd(year, month, day).getLunar();
 	state.lunarMonth = solar.getMonthInChinese();
 	state.lunarDay = solar.getDayInChinese();
-
-	console.log();
 }
-
-initLunar();
+onMounted(() => {
+	initLunar();
+});
 </script>
 
 <style lang="scss" scoped>
