@@ -1,20 +1,20 @@
 <template>
 	<div class="calendar-panel">
-		<div class="left">
-			<div class="month">
-				<el-link class="btn" :underline="false" :icon="ArrowLeft" @click="subtractMonth" />
-				{{ format(state.date, 'YYYY年MM月') }}
-				<el-link class="btn" :underline="false" :icon="ArrowRight" @click="addMonth" />
+		<ClientOnly>
+			<div class="left">
+				<div class="month">
+					<el-link class="btn" :underline="false" :icon="ArrowLeft" @click="subtractMonth" />
+					{{ format(state.date, 'YYYY年MM月') }}
+					<el-link class="btn" :underline="false" :icon="ArrowRight" @click="addMonth" />
+				</div>
+				<div class="day">{{ format(state.date, 'D') }}</div>
+				<div class="week">第{{ dayOfYear(state.date) }}天 第{{ week(state.date) }}周</div>
+				<div class="lunar">{{ state.lunarMonth }}月{{ state.lunarDay }} {{ formatWeek() }}</div>
 			</div>
-			<div class="day">{{ format(state.date, 'D') }}</div>
-			<div class="week">第{{ dayOfYear(state.date) }}天 第{{ week(state.date) }}周</div>
-			<div class="lunar">{{ state.lunarMonth }}月{{ state.lunarDay }} {{ formatWeek() }}</div>
-		</div>
-		<div class="right">
-			<el-calendar v-model="state.date" class="my-min-calendar">
-				<template #header>xx</template>
-			</el-calendar>
-		</div>
+			<div class="right">
+				<el-calendar v-model="state.date" class="my-min-calendar" />
+			</div>
+		</ClientOnly>
 	</div>
 </template>
 <script setup lang="ts">

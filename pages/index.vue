@@ -1,30 +1,21 @@
 <template>
 	<div class="container-full">
-		<div class="grid-item" v-for="item in layout">
-			<component v-if="item.component" :is="item.component" class="component-item" />
+		<div class="grid-item">
+			<Weather />
+		</div>
+		<div class="grid-item">
+			<Calendar />
+		</div>
+		<div class="grid-item">
+			<OffWork />
 		</div>
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue';
-import { useAnimate } from '~/hooks/useAnimate';
-
-const layout = shallowRef([
-	{ component: resolveComponent('Weather') },
-	{ component: resolveComponent('Calendar') },
-	{ component: resolveComponent('OffWork') },
-]);
-
-const reader = ref(false);
-
 definePageMeta({
 	title: '首页',
 	rank: 0,
 	icon: 'menu-home',
-});
-
-onMounted(() => {
-	reader.value = true;
 });
 </script>
 <style lang="scss" scoped>

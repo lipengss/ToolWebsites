@@ -4,6 +4,8 @@ import isToday from 'dayjs/plugin/isToday';
 import isTomorrow from 'dayjs/plugin/isTomorrow';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
+import duration from 'dayjs/plugin/duration';
+dayjs.extend(duration);
 dayjs.extend(dayOfYear); // 一年第几天
 dayjs.extend(weekOfYear); // 一年第几周
 dayjs.extend(weekday); // 星期
