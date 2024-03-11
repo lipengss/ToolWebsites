@@ -1,7 +1,7 @@
 <template>
 	<ClientOnly>
 		<Card :settings="state.settings" @show-dialog="state.visible = true" />
-		<el-dialog v-model="state.visible" :show-close="false" :fullscreen="state.fullscreen" draggable>
+		<el-dialog v-model="state.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable>
 			<template #header>
 				<div class="flex-end">
 					<el-button :icon="FullScreen" circle size="small" @click="state.fullscreen = !state.fullscreen" />
@@ -52,7 +52,7 @@
 							<el-input-number v-model="state.dialogSettings.income" :min="1" />
 						</el-form-item>
 					</el-form>
-					<el-button class="w100" type="success">完成</el-button>
+					<el-button class="w100" type="success" @click="onSaveSettings">完成</el-button>
 				</el-col>
 			</el-row>
 		</el-dialog>
@@ -61,7 +61,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { predefineColors } from '~/assets/utils/publicData';
+import { predefineColors, OFF_WORK } from '~/assets/utils/publicData';
 import Card from './Card.vue';
 import { Local } from '~/assets/utils/storage';
 import { CloseBold, FullScreen } from '@element-plus/icons-vue';
@@ -79,7 +79,7 @@ const defaultSettings = {
 };
 
 const state = reactive({
-	visible: true,
+	visible: false,
 	fullscreen: false,
 	workday: [],
 	settings: cloneDeep(defaultSettings),
@@ -91,9 +91,17 @@ const days = computed(() => {
 	return Array.from({ length: dayjs().daysInMonth() }).map((item, index) => index + 1);
 });
 
+function onSaveSettings() {
+	state.settings = cloneDeep(state.dialogSettings);
+	Local.set(OFF_WORK, state.settings);
+	state.visible = false;
+}
+
 onMounted(() => {
-	if (Local.get('offWork')) {
-		state.settings = cloneDeep(Local.get('offWork'));
+	if (Local.get(OFF_WORK)) {
+		const cloneOffWork = cloneDeep(Local.get(OFF_WORK));
+		state.settings = cloneOffWork;
+		state.dialogSettings = cloneOffWork;
 	} else {
 		state.settings = cloneDeep(defaultSettings);
 	}

@@ -1,5 +1,7 @@
 import numeral from 'numeral';
 
+const OFF_WORK = 'OFF_WORK'; // 下班时间卡片的配置字段
+
 const aspectRatios = [
 	{
 		label: '1:1',
@@ -46,4 +48,4 @@ function divide(num1: number, num2: number): number {
 // 预定颜色
 const predefineColors = ['#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585'];
 
-export { aspectRatios, pictureNotions, predefineColors };
+export { aspectRatios, pictureNotions, predefineColors, OFF_WORK };
