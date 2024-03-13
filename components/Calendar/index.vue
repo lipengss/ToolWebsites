@@ -15,7 +15,7 @@
 				<el-calendar v-model="state.date" class="my-min-calendar" />
 			</div>
 		</div>
-		<Dialog v-model:visible="state.visible" width="50%">
+		<Dialog v-model:visible="state.visible" width="900px">
 			<CalendarInfo />
 		</Dialog>
 	</ClientOnly>

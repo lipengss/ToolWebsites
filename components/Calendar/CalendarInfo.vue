@@ -1,6 +1,6 @@
 <template>
 	<el-row>
-		<el-col :xs="24" :xl="17">
+		<el-col :xs="24" :md="17" :xl="17">
 			<el-calendar v-model="state.date" ref="calendar">
 				<template #header="{ date }">
 					<el-space :wrap="false">
@@ -30,7 +30,7 @@
 				</template>
 			</el-calendar>
 		</el-col>
-		<el-col :xs="24" :xl="7">
+		<el-col :xs="24" :md="7" :xl="7">
 			<div class="date-info">
 				<div class="day-info">
 					<div class="date">{{ format(state.date, 'YYYY年MM月DD日') }}</div>
