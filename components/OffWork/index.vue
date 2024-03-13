@@ -19,11 +19,21 @@
 						</el-form-item>
 						<el-form-item label="工作日">
 							<el-space>
-								<el-checkbox-group v-model="state.workday" size="small">
+								<el-checkbox-group v-model="state.dialogSettings.workday" size="small">
 									<el-checkbox-button v-for="week in weekFormat" :label="week" :key="week">周{{ week }}</el-checkbox-button>
 								</el-checkbox-group>
-								<el-checkbox>工作日</el-checkbox>
+								<el-checkbox v-model="state.dialogSettings.isWorkDay">工作日</el-checkbox>
 							</el-space>
+						</el-form-item>
+						<el-form-item label="工作时间">
+							<el-time-picker
+								v-model="state.dialogSettings.workHours"
+								:default-value="state.dialogSettings.workHours"
+								is-range
+								range-separator="至"
+								start-placeholder="开始时间"
+								end-placeholder="结束时间"
+							/>
 						</el-form-item>
 						<el-form-item label="字体颜色">
 							<ColorPicker :color-list="predefineColors" v-model:color="state.dialogSettings.color" />
@@ -58,7 +68,6 @@
 		</el-dialog>
 	</ClientOnly>
 </template>
-
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { predefineColors, OFF_WORK } from '~/assets/utils/publicData';
@@ -66,13 +75,15 @@ import Card from './Card.vue';
 import { Local } from '~/assets/utils/storage';
 import { CloseBold, FullScreen } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
-const { dayjs, weekFormat } = useDateFormat();
+const { dayjs, weekFormat, setTime } = useDateFormat();
 import { cloneDeep } from 'lodash';
 
 const defaultSettings = {
 	payday: 10,
+	workDay: [],
+	isWorkDay: true,
 	showItem: ['payDay', 'fromFriday', 'nextFestival', 'income'],
-	countdown: '18:00:00',
+	workHours: [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()],
 	income: 800,
 	color: '#fff',
 	bgColor: predefineColors[0],
@@ -81,7 +92,6 @@ const defaultSettings = {
 const state = reactive({
 	visible: false,
 	fullscreen: false,
-	workday: [],
 	settings: cloneDeep(defaultSettings),
 	dialogSettings: cloneDeep(defaultSettings),
 });
@@ -106,6 +116,17 @@ onMounted(() => {
 		state.settings = cloneDeep(defaultSettings);
 	}
 });
+
+watch(
+	() => state.dialogSettings.isWorkDay,
+	(isWorkDay) => {
+		if (isWorkDay) {
+			state.dialogSettings.workday = ['一', '二', '三', '四', '五'];
+		} else {
+			state.dialogSettings.workday = [];
+		}
+	}
+);
 </script>
 
 <style lang="scss" scoped>

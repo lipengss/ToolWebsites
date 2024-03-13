@@ -60,3 +60,16 @@ interface QueryWeather {
 	}>;
 	lives: Array<LivesItem>;
 }
+
+interface CalendarDataCell {
+	type: 'prev-month' | 'current-month' | 'next-month';
+	isSelected: boolean;
+	day: string;
+	date: Date;
+}
+
+interface HolidayItem {
+	name: string;
+	date: string;
+	diff: number;
+}

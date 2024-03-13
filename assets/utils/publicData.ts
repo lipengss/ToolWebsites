@@ -41,7 +41,6 @@ function divide(num1: number, num2: number): number {
 	if (num2 === 0) {
 		throw new Error('Cannot divide by zero');
 	}
-	console.log();
 	return numeral(num1).divide(num2).format('0.1');
 }
 

@@ -1,9 +1,10 @@
-import { Solar } from 'lunar-typescript';
+import { Solar, HolidayUtil } from 'lunar-typescript';
 
 export default defineNuxtPlugin(() => {
 	return {
 		provide: {
-			Solar: Solar,
+			Solar,
+			HolidayUtil,
 		},
 	};
 });

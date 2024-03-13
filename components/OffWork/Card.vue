@@ -12,7 +12,7 @@
 			</div>
 			<div class="card-item" v-if="props.settings.showItem.includes('fromFriday')">
 				<div class="card-item-title">周五</div>
-				<div class="card-item-content">0</div>
+				<div class="card-item-content">{{ fromFriday }}</div>
 				<div class="day">天</div>
 			</div>
 			<div class="card-item" v-if="props.settings.showItem.includes('nextFestival')">
@@ -31,16 +31,17 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
-const { dayjs } = useDateFormat();
+const { dayjs, weekFormat } = useDateFormat();
 
 interface Props {
 	settings: {
 		showItem: Array<string>;
 		payday: number;
-		countdown: string;
+		workHours: [Date, Date];
 		income: number;
 		color: string;
 		bgColor: string;
+		workday: string[];
 	};
 }
 
@@ -51,6 +52,15 @@ const state = reactive({
 });
 
 const emits = defineEmits(['showDialog']);
+
+const fromFriday = computed(() => {
+	const week = dayjs().weekday();
+	if (5 >= week) {
+		return 5 - week;
+	} else {
+		return 0;
+	}
+});
 
 // 发薪日
 const payDay = computed(() => {
@@ -68,14 +78,7 @@ const payDay = computed(() => {
 // 下班倒计时
 const updateDisplayText = () => {
 	const now = dayjs();
-	if (!props.settings.countdown) return;
-	const splitCountDown = props.settings.countdown.split(':');
-	const targetTime = dayjs()
-		.set('hour', parseInt(splitCountDown[0]))
-		.set('minute', parseInt(splitCountDown[1]))
-		.set('second', parseInt(splitCountDown[2]))
-		.format('YYYY-MM-DD HH:mm:ss');
-
+	const targetTime = props.settings.workHours[1];
 	if (now.isAfter(targetTime)) {
 		state.displayText = '休 息 时 间 啦';
 	} else {
@@ -85,11 +88,31 @@ const updateDisplayText = () => {
 	}
 };
 
+function isWork() {
+	const week = weekFormat[dayjs().weekday()];
+	const { workday } = props.settings;
+	if (workday && workday.includes(week)) {
+		// 更新倒计时
+		updateDisplayText();
+		setInterval(updateDisplayText, 1000);
+	} else {
+		state.displayText = '休 息 时 间 啦';
+	}
+}
+
 onMounted(() => {
-	// 更新倒计时
-	updateDisplayText();
-	setInterval(updateDisplayText, 1000);
+	isWork();
 });
+
+watch(
+	() => props.settings.workday,
+	() => {
+		isWork();
+	},
+	{
+		deep: true,
+	}
+);
 </script>
 <style lang="scss" scoped>
 .off-work {

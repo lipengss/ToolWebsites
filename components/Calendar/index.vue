@@ -1,6 +1,6 @@
 <template>
-	<div class="calendar-panel">
-		<ClientOnly>
+	<ClientOnly>
+		<div class="calendar-panel" @click="state.visible = true">
 			<div class="left">
 				<div class="month">
 					<el-link class="btn" :underline="false" :icon="ArrowLeft" @click="subtractMonth" />
@@ -14,19 +14,24 @@
 			<div class="right">
 				<el-calendar v-model="state.date" class="my-min-calendar" />
 			</div>
-		</ClientOnly>
-	</div>
+		</div>
+		<Dialog v-model:visible="state.visible" width="50%">
+			<CalendarInfo />
+		</Dialog>
+	</ClientOnly>
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { ArrowLeft, ArrowRight } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
+import CalendarInfo from './CalendarInfo.vue';
 
 const { format, formatWeek, dayOfYear, week, dayjs } = useDateFormat();
 
 const { $Solar } = useNuxtApp();
 
 const state = reactive({
+	visible: false,
 	date: new Date(),
 	lunarMonth: '',
 	lunarDay: '',

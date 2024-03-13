@@ -1,5 +1,6 @@
 <template>
 	<el-config-provider :locale="locale">
+		<Loading v-if="state.isRender" />
 		<Banner />
 		<header-top />
 		<div class="main">
@@ -26,6 +27,7 @@ const locale = ref(zhCn);
 const state = reactive({
 	lastScrollTop: 0,
 	scrollDirection: '',
+	isRender: true,
 });
 
 function handleScroll() {
@@ -40,6 +42,9 @@ function handleScroll() {
 
 onMounted(() => {
 	window.addEventListener('scroll', handleScroll);
+	setTimeout(() => {
+		state.isRender = false;
+	}, 300);
 });
 
 onUnmounted(() => {

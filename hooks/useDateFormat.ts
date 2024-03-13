@@ -37,6 +37,7 @@ export function useDateFormat() {
 		return dayjs(date).format(format);
 	}
 	function formatWeek(num = weekDay()): string {
+		if (num) num = dayjs(num).weekday();
 		return `星期${weekFormat[num]}`;
 	}
 	function dayOfYear(date = curDate) {
@@ -44,6 +45,10 @@ export function useDateFormat() {
 	}
 	function week(date = curDate) {
 		return dayjs(date).week();
+	}
+	function setTime(date = curDate, hours: [number, number, number]) {
+		const day = dayjs(date).set('hour', hours[0]).set('minute', hours[1]).set('second', hours[2]);
+		return day;
 	}
 	return {
 		isToday,
@@ -55,5 +60,6 @@ export function useDateFormat() {
 		week,
 		weekFormat,
 		dayjs,
+		setTime,
 	};
 }
