@@ -7,6 +7,10 @@ export default defineNuxtConfig({
 	modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt'],
 	elementPlus: {
 		themes: ['dark'],
+		importStyle: 'scss',
+	},
+	pinia: {
+		storesDirs: ['./stores/**'],
 	},
 	// buildModules: ['@nuxtjs/router-extras'],
 	devServer: {
@@ -23,6 +27,13 @@ export default defineNuxtConfig({
 				ssr: false,
 			},
 		],
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `@use "@/assets/css/element-variables.scss" as element;`,
+				},
+			},
+		},
 	},
 	app: {
 		head: {

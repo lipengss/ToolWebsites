@@ -7,6 +7,10 @@ body {
 	box-sizing: border-box;
 	background-color: var(--el-bg-color-page);
 	color: var(--el-text-color-primary);
+	background-image: url('~/assets/img/banner.jpg');
+	background-size: cover;
+	background-position: top;
+	color: rgba(233,233,233, .6);
 }
 
 ul, ol{

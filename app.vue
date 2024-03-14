@@ -1,15 +1,22 @@
 <template>
 	<el-config-provider :locale="locale">
-		<Loading v-if="state.isRender" />
-		<Banner />
-		<header-top />
+		<el-container>
+			<Aside />
+			<el-container>
+				<Banner />
+			</el-container>
+		</el-container>
+
+		<!-- <Loading v-if="state.isRender" />
+		
+		
 		<div class="main">
 			<NuxtPage />
 		</div>
 		<el-backtop :right="50" :bottom="50" />
 		<el-footer>
 			<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
-		</el-footer>
+		</el-footer> -->
 	</el-config-provider>
 </template>
 <script setup lang="ts">

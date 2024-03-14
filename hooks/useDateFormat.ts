@@ -36,9 +36,9 @@ export function useDateFormat() {
 	function format(date = curDate, format = 'YYYY-MM-DD HH:mm:ss') {
 		return dayjs(date).format(format);
 	}
-	function formatWeek(num = weekDay()): string {
-		if (num) num = dayjs(num).weekday();
-		return `星期${weekFormat[num]}`;
+	function formatWeek(date: Date | number = weekDay()): string {
+		if (date) date = dayjs(date).weekday();
+		return `星期${date === 0 ? '日' : weekFormat[date]}`;
 	}
 	function dayOfYear(date = curDate) {
 		return dayjs(date).dayOfYear();

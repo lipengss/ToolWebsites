@@ -110,6 +110,7 @@ function onSaveSettings() {
 onMounted(() => {
 	if (Local.get(OFF_WORK)) {
 		const cloneOffWork = cloneDeep(Local.get(OFF_WORK));
+		cloneOffWork.workHours = [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()];
 		state.settings = cloneOffWork;
 		state.dialogSettings = cloneOffWork;
 	} else {

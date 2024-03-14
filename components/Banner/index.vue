@@ -83,9 +83,7 @@ function onActionSearch() {
 </script>
 <style lang="scss" scoped>
 .banner-bg {
-	background-image: url('~/assets/img/banner.jpg');
-	background-size: cover;
-	background-position: top;
+	width: 100%;
 }
 .banner {
 	height: 200px;
@@ -93,7 +91,6 @@ function onActionSearch() {
 	box-sizing: border-box;
 	align-items: center;
 	justify-content: center;
-	backdrop-filter: blur(4px);
 	.content {
 		display: flex;
 		flex-direction: column;

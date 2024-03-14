@@ -79,6 +79,7 @@ const payDay = computed(() => {
 const updateDisplayText = () => {
 	const now = dayjs();
 	const targetTime = props.settings.workHours[1];
+	console.log(dayjs(targetTime).format('YYYY-MM-DD HH:mm:ss'));
 	if (now.isAfter(targetTime)) {
 		state.displayText = '休 息 时 间 啦';
 	} else {

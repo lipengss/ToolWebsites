@@ -1,0 +1,22 @@
+:root{
+  --el-fill-color-blank: transparent;
+   // 表单边框颜色
+  --el-border-color: rgba(255,255,255,.2);
+  // 表单划过高亮边框颜色
+  --el-border-color-light: rgba(255,255,255,.3);
+  // 菜单项高亮背景色
+  --el-menu-hover-bg-color: rgba(255,255,255,.1);
+  // 菜单文字颜色
+  --el-menu-text-color: #fff;
+  // 菜单边框颜色
+  --el-menu-border-color: transparent;
+  // 背景遮罩颜色
+  --el-bg-color-overlay: rgba(255,255,255,.2);
+}
+
+.el-input{
+  
+}
+.el-menu--horizontal > .el-menu-item.is-active{
+  background-color: rgba(255,255,255,.1);
+}

@@ -1,7 +1,13 @@
 <template>
 	<el-affix :offset="0">
 		<ClientOnly>
-			<el-header class="el-header">
+			<el-aside :width="_menuWidth">
+				<Menu />
+				{{ _menuWidth }}
+				<el-button @click="setMenuWidth()">增加</el-button>
+			</el-aside>
+
+			<!-- <el-header>
 				<div class="el-in-center">
 					<Menu class="menu-horizontal" />
 					<el-button class="expand" :icon="Expand" @click="state.isDrawer = !state.isDrawer" />
@@ -24,7 +30,7 @@
 						<Menu mode="vertical" />
 					</el-drawer>
 				</div>
-			</el-header>
+			</el-header> -->
 		</ClientOnly>
 	</el-affix>
 </template>
@@ -35,6 +41,12 @@ import { useDark, useToggle, useEyeDropper } from '@vueuse/core';
 import { flattenArray } from '~/assets/utils/tools';
 import { routeList } from '~/assets/utils/routeList';
 import Menu from './Menu.vue';
+import { storeToRefs } from 'pinia';
+import { useSettingsStore } from '~/stores/settings';
+
+const { menuWidth, setMenuWidth } = storeToRefs(useSettingsStore());
+
+const _menuWidth = computed(() => menuWidth.value + 'px');
 
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
@@ -72,49 +84,50 @@ watch(
 );
 </script>
 <style lang="scss" scoped>
-.el-header {
-	background-color: var(--el-bg-color);
-	border-bottom: 1px solid var(--el-border-color);
-	.el-in-center {
-		width: 1200px;
-		margin: 0 auto;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		.menu-horizontal {
-			flex: 1;
-		}
-		.expand {
-			display: none;
-		}
-	}
+.el-aside {
+	height: 100vh;
+	backdrop-filter: blur(6px);
+	background-color: rgba(1, 48, 96), 0.1;
+	// .el-in-center {
+	// 	width: 1200px;
+	// 	margin: 0 auto;
+	// 	display: flex;
+	// 	align-items: center;
+	// 	justify-content: space-between;
+	// 	.menu-horizontal {
+	// 		flex: 1;
+	// 	}
+	// 	.expand {
+	// 		display: none;
+	// 	}
+	// }
 }
 
 // 显示小屏幕的菜单
-@media (max-width: 1024px) {
-	.el-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		.el-in-center {
-			width: 100%;
-			.expand {
-				display: block;
-			}
-			.menu-horizontal {
-				display: none;
-			}
-			:deep .el-autocomplete {
-				display: none;
-			}
-		}
-	}
+// @media (max-width: 1024px) {
+// 	.el-header {
+// 		display: flex;
+// 		align-items: center;
+// 		justify-content: space-between;
+// 		.el-in-center {
+// 			width: 100%;
+// 			.expand {
+// 				display: block;
+// 			}
+// 			.menu-horizontal {
+// 				display : none;
+// 			}
+// 			:deep .el-autocomplete {
+// 				display: none;
+// 			}
+// 		}
+// 	}
 
-	:deep .el-drawer__body {
-		padding: 0;
-		.el-menu {
-			border-right: none;
-		}
-	}
-} /*>=1024的设备*/
+// 	:deep .el-drawer__body {
+// 		padding: 0;
+// 		.el-menu {
+// 			border-right: none;
+// 		}
+// 	}
+// }
 </style>
