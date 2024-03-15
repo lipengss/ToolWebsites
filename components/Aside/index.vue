@@ -1,13 +1,17 @@
 <template>
 	<el-affix :offset="0">
-		<ClientOnly>
-			<el-aside :width="_menuWidth">
-				<Menu />
-				{{ _menuWidth }}
-				<el-button @click="setMenuWidth()">增加</el-button>
-			</el-aside>
-
-			<!-- <el-header>
+		<el-aside :width="menuWidth">
+			<Menu />
+			<div class="setting">
+				<el-icon size="18px" class="icon" @click="settingStore.openSettingDrawer()" title="设置">
+					<svg-icon name="setting" />
+				</el-icon>
+				<el-icon size="18px" class="icon" @click="open()" title="吸色器">
+					<svg-icon name="dye-color" />
+				</el-icon>
+			</div>
+		</el-aside>
+		<!-- <el-header>
 				<div class="el-in-center">
 					<Menu class="menu-horizontal" />
 					<el-button class="expand" :icon="Expand" @click="state.isDrawer = !state.isDrawer" />
@@ -31,25 +35,21 @@
 					</el-drawer>
 				</div>
 			</el-header> -->
-		</ClientOnly>
 	</el-affix>
 </template>
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
 import { Moon, Sunny, Expand, Search } from '@element-plus/icons-vue';
-import { useDark, useToggle, useEyeDropper } from '@vueuse/core';
+import { useEyeDropper } from '@vueuse/core';
 import { flattenArray } from '~/assets/utils/tools';
 import { routeList } from '~/assets/utils/routeList';
 import Menu from './Menu.vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 
-const { menuWidth, setMenuWidth } = storeToRefs(useSettingsStore());
+const settingStore = useSettingsStore();
 
-const _menuWidth = computed(() => menuWidth.value + 'px');
-
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
+const menuWidth = computed(() => settingStore.setting.basic.asideMenuWidth + 'px');
 
 const { open, sRGBHex } = useEyeDropper();
 
@@ -86,21 +86,29 @@ watch(
 <style lang="scss" scoped>
 .el-aside {
 	height: 100vh;
+	display: flex;
+	flex-direction: column;
 	backdrop-filter: blur(6px);
 	background-color: rgba(1, 48, 96), 0.1;
-	// .el-in-center {
-	// 	width: 1200px;
-	// 	margin: 0 auto;
-	// 	display: flex;
-	// 	align-items: center;
-	// 	justify-content: space-between;
-	// 	.menu-horizontal {
-	// 		flex: 1;
-	// 	}
-	// 	.expand {
-	// 		display: none;
-	// 	}
-	// }
+	padding: 100px 0 60px 0;
+	color: rgba(233, 233, 233, 0.6);
+
+	.setting {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		.el-icon {
+			padding: 10px 0;
+			cursor: pointer;
+		}
+		.icon {
+			transition: all 0.3s ease-in-out;
+			&:hover {
+				transform: rotate(80deg) scale(1.2);
+			}
+		}
+	}
 }
 
 // 显示小屏幕的菜单

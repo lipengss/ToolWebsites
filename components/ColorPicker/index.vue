@@ -1,12 +1,6 @@
 <template>
 	<el-space>
-		<div
-			class="circle-item"
-			v-for="color in props.colorList"
-			:key="color"
-			:class="{ active: color === props.color }"
-			@click="() => emits('update:color', color)"
-		>
+		<div class="circle-item" v-for="color in props.colorList" :key="color" :class="{ active: color === props.color }" @click="onColorChange(color)">
 			<div class="circle" :style="`--color:${color}`"></div>
 		</div>
 		<el-color-picker v-model="props.color" @change="onColorChange" />

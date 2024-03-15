@@ -10,7 +10,6 @@ body {
 	background-image: url('~/assets/img/banner.jpg');
 	background-size: cover;
 	background-position: top;
-	color: rgba(233,233,233, .6);
 }
 
 ul, ol{
@@ -42,6 +41,15 @@ ul, ol{
 	> .vue-resizable-handle {
 		padding: 0 6px 6px 0 !important;
 	}
+}
+
+.el-form-item__label{
+	text-align: left;
+}
+.el-drawer__header{
+	margin-bottom: 0 !important;
+	padding-bottom: 20px !important;
+	background-color: var(--el-bg-color-page);
 }
 
 /* 页面宽度小于800px

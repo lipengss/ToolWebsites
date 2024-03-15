@@ -123,6 +123,9 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 		}
 	}
 }
+.霾 {
+	background-image: linear-gradient(45deg, #8d8882 20%, #bbb7af);
+}
 .晴 {
 	background: linear-gradient(45deg, #237fca 58%, rgba(233, 241, 246, 0.91) 100%);
 }

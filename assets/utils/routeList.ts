@@ -96,7 +96,7 @@ export const routeList: Array<RouteItem> = [
 		type: 'coder',
 		meta: {
 			rank: 0,
-			icon: '',
+			icon: 'editor',
 		},
 	},
 ];

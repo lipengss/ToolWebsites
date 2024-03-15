@@ -1,28 +1,12 @@
 <template>
-	<!-- <el-menu :default-active="state.activeIndex" :mode="props.mode" router>
-		<template v-for="route in routeList" :key="route.path">
-			<el-menu-item v-if="!route.children" :index="route.path">
-				<template #title>
-					<svg-icon v-if="route.meta.icon" :name="route.meta.icon" class="mr4" />
-					{{ route.name }}
-				</template>
-			</el-menu-item>
-			<el-sub-menu v-else :index="route.path">
-				<template #title>
-					<svg-icon v-if="route.meta.icon" :name="route.meta.icon" class="mr4" />
-					{{ route.name }}
-				</template>
-				<el-menu-item v-for="child in route.children" :index="child.path">
-					<template #title>
-						<svg-icon v-if="child.meta.icon" :name="child.meta.icon" class="mr4" />
-						{{ child.name }}
-					</template>
-				</el-menu-item>
-			</el-sub-menu>
-		</template>
-	</el-menu> -->
 	<div class="menu">
-		<div class="item" v-for="route in routeList" :key="route.path">
+		<div
+			class="item"
+			v-for="route in routeList"
+			:key="route.path"
+			:class="{ active: state.activeIndex === route.path }"
+			@click="state.activeIndex = route.path"
+		>
 			<div class="icon">
 				<el-icon>
 					<svg-icon v-if="route.meta.icon" :name="route.meta.icon" />
@@ -33,22 +17,9 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue';
 import { useRoute } from 'vue-router';
 import { routeList } from '~/assets/utils/routeList';
 import { useTitle } from '@vueuse/core';
-import { useSettingsStore } from '~/stores/settings';
-
-const { menuWidth } = useSettingsStore();
-
-interface Props {
-	mode?: 'horizontal' | 'vertical';
-}
-const props = withDefaults(defineProps<Props>(), {
-	mode: 'horizontal',
-});
-
-const _menuWidth = computed(() => menuWidth + 'px');
 
 const route = useRoute();
 
@@ -70,10 +41,29 @@ watch(
 </script>
 <style lang="scss" scoped>
 .menu {
+	flex: 1;
+
 	.item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 10px 0;
+		cursor: pointer;
 		.title {
 			font-size: 12px;
 		}
+		.el-icon {
+			transition: all 0.2s ease-in-out;
+		}
+		&:hover {
+			.el-icon {
+				transform: scale(1.3);
+			}
+		}
+	}
+	.active {
+		background-color: rgba(255, 255, 255, 0.1);
 	}
 }
 </style>

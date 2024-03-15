@@ -1,29 +1,27 @@
 <template>
-	<div class="banner-bg">
-		<el-row class="banner">
-			<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
-				<div class="date-wrapper">
-					<div class="time">{{ state.time }}</div>
-					<div class="date">{{ state.date }} {{ currentWeek }}</div>
-				</div>
-				<div class="flex-around serach-engines">
-					<el-tooltip v-for="(item, index) in filterHotWebsiteList" :key="item.name" :content="item.meta.description" placement="top">
-						<el-link :type="state.current === item.name ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.name)">
-							{{ item.name }}
-						</el-link>
-					</el-tooltip>
-				</div>
-				<el-input v-model="state.query" clearable size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
-					<template #append>
-						<el-button type="primary" @click="onActionSearch">搜索</el-button>
-					</template>
-					<template #prefix>
-						<img width="20" height="20" :src="currentIcon" id="serach-icon" class="animate__animated animate__rotateInDownLeft" />
-					</template>
-				</el-input>
-			</el-col>
-		</el-row>
-	</div>
+	<el-row class="engines">
+		<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
+			<div class="date-wrapper">
+				<div class="time">{{ state.time }}</div>
+				<div class="date">{{ state.date }} {{ currentWeek }}</div>
+			</div>
+			<div class="flex-around serach-engines">
+				<el-tooltip v-for="(item, index) in filterHotWebsiteList" :key="item.name" effect="light" :content="item.meta.description" placement="top">
+					<el-link :type="state.current === item.name ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.name)">
+						{{ item.name }}
+					</el-link>
+				</el-tooltip>
+			</div>
+			<el-input v-model="state.query" clearable size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
+				<template #append>
+					<el-button type="primary" @click="onActionSearch">搜索</el-button>
+				</template>
+				<template #prefix>
+					<img width="20" height="20" :src="currentIcon" id="serach-icon" class="animate__animated animate__rotateInDownLeft" />
+				</template>
+			</el-input>
+		</el-col>
+	</el-row>
 </template>
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
@@ -82,10 +80,7 @@ function onActionSearch() {
 }
 </script>
 <style lang="scss" scoped>
-.banner-bg {
-	width: 100%;
-}
-.banner {
+.engines {
 	height: 200px;
 	display: flex;
 	box-sizing: border-box;
