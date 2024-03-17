@@ -179,12 +179,7 @@ function formatHoliday(date: Dayjs) {
 	return obj;
 }
 
-function initCalendar() {
-	state.date = new Date();
-	const _date = dayjs(state.date);
-	state.year = _date.year();
-	state.month = _date.month() + 1;
-	state.day = _date.date();
+function setDateInfo() {
 	const solar = $Solar.fromDate(state.date);
 	const lunar = solar.getLunar();
 	state.yearGanZhi = lunar.getYearInGanZhi();
@@ -195,6 +190,15 @@ function initCalendar() {
 	state.festivals = solar.getFestivals().join(',');
 }
 
+function initCalendar() {
+	state.date = new Date();
+	const _date = dayjs(state.date);
+	state.year = _date.year();
+	state.month = _date.month() + 1;
+	state.day = _date.date();
+	setDateInfo();
+}
+
 onMounted(() => {
 	initCalendar();
 });
@@ -203,6 +207,12 @@ watch(
 	() => state.holiday,
 	(date) => {
 		state.date = dayjs(date).toDate();
+	}
+);
+watch(
+	() => state.date,
+	() => {
+		setDateInfo();
 	}
 );
 </script>
