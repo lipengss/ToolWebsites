@@ -1,17 +1,17 @@
 <template>
-	<el-affix :offset="0">
-		<el-aside :width="menuWidth">
-			<Menu />
-			<div class="setting">
-				<el-icon size="18px" class="icon" @click="settingStore.openSettingDrawer()" title="设置">
-					<svg-icon name="setting" />
-				</el-icon>
-				<el-icon size="18px" class="icon" @click="open()" title="吸色器">
-					<svg-icon name="dye-color" />
-				</el-icon>
-			</div>
-		</el-aside>
-		<!-- <el-header>
+	<el-aside :width="menuWidth">
+		<Menu />
+		<div class="setting">
+			<el-icon size="18px" class="icon" @click="settingStore.openSettingDrawer()" title="设置">
+				<svg-icon name="setting" />
+			</el-icon>
+			<el-icon size="18px" class="icon" @click="open()" title="吸色器">
+				<svg-icon name="dye-color" />
+			</el-icon>
+		</div>
+	</el-aside>
+
+	<!-- <el-header>
 				<div class="el-in-center">
 					<Menu class="menu-horizontal" />
 					<el-button class="expand" :icon="Expand" @click="state.isDrawer = !state.isDrawer" />
@@ -35,7 +35,6 @@
 					</el-drawer>
 				</div>
 			</el-header> -->
-	</el-affix>
 </template>
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
@@ -92,7 +91,7 @@ watch(
 	background-color: rgba(1, 48, 96), 0.1;
 	padding: 100px 0 60px 0;
 	color: rgba(233, 233, 233, 0.6);
-
+	overflow-y: hidden;
 	.setting {
 		display: flex;
 		flex-direction: column;

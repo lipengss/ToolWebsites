@@ -4,7 +4,7 @@ import { useChangeColor } from '~/hooks/useColor';
 export const useSettingsStore = defineStore('settingStore', {
 	state() {
 		return {
-			showDrawer: true,
+			showDrawer: false,
 			setting: {
 				basic: {
 					theme: '#409eff',
@@ -24,7 +24,6 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		onColorPickerChange() {
 			const { getDarkColor, getLightColor } = useChangeColor();
-			console.log('xxx', this.setting.basic.theme);
 			if (!this.setting.basic.theme) return ElMessage.warning('全局主题 primary 颜色值不能为空');
 			// 主题色
 			document.documentElement.style.setProperty('--el-color-primary', this.setting.basic.theme);

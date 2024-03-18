@@ -5,7 +5,7 @@ export const data = [
 		type: 'blog',
 		meta: {
 			rank: 0,
-			icon: 'https://static-production.npmjs.com/3dc95981de4241b35cd55fe126ab6b2c.png',
+			icon: 'npm.png',
 			description: 'npm 是Node的开放式模块登记和管理系统',
 		},
 	},

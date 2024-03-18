@@ -7,7 +7,7 @@
 				<div class="main"><NuxtPage /></div>
 			</el-container>
 		</el-container>
-		<el-drawer v-model="settingStore.showDrawer" :modal="false">
+		<el-drawer v-model="settingStore.showDrawer" :modal="false" size="600px">
 			<el-tabs tab-position="left" class="demo-tabs">
 				<el-tab-pane label="主题/壁纸">
 					<el-form label-width="100px">

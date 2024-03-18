@@ -1,19 +1,21 @@
 <template>
 	<div class="menu">
-		<div
-			class="item"
-			v-for="route in routeList"
-			:key="route.path"
-			:class="{ active: state.activeIndex === route.path }"
-			@click="state.activeIndex = route.path"
-		>
-			<div class="icon">
-				<el-icon>
-					<svg-icon v-if="route.meta.icon" :name="route.meta.icon" />
-				</el-icon>
+		<el-scrollbar>
+			<div
+				class="item"
+				v-for="route in routeList"
+				:key="route.path"
+				:class="{ active: state.activeIndex === route.path }"
+				@click="state.activeIndex = route.path"
+			>
+				<div class="icon">
+					<el-icon>
+						<svg-icon v-if="route.meta.icon" :name="route.meta.icon" />
+					</el-icon>
+				</div>
+				<div class="title">{{ route.name }}</div>
 			</div>
-			<div class="title">{{ route.name }}</div>
-		</div>
+		</el-scrollbar>
 	</div>
 </template>
 <script setup lang="ts">
@@ -42,7 +44,7 @@ watch(
 <style lang="scss" scoped>
 .menu {
 	flex: 1;
-
+	overflow-y: auto;
 	.item {
 		display: flex;
 		flex-direction: column;

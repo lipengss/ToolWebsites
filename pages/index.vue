@@ -11,7 +11,7 @@
 		</div>
 		<div class="grid-item icon-size-1x1" v-for="app in data">
 			<div class="appliaction">
-				<img :src="app.meta.icon" width="100%" height="100%" />
+				<img src="~/assets/img/npm.png" width="100%" height="100%" />
 				<span class="title">{{ app.name }}</span>
 			</div>
 		</div>
@@ -25,8 +25,6 @@ definePageMeta({
 	rank: 0,
 	icon: 'menu-home',
 });
-
-console.log(data);
 </script>
 <style lang="scss" scoped>
 .container-full {
