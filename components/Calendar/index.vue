@@ -61,6 +61,7 @@ onMounted(() => {
 .calendar-panel {
 	height: 100%;
 	display: flex;
+	border-radius: var(--app-radius);
 	background-color: var(--el-bg-color);
 	.left {
 		min-width: 130px;

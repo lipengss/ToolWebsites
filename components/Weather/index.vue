@@ -25,6 +25,7 @@
 				<el-icon :size="20" v-else-if="item.dayweather === '阴'"><svg-icon name="阴" /></el-icon>
 				<el-icon :size="20" v-if="item.dayweather === '雨夹雪'"><svg-icon name="雨夹雪" /></el-icon>
 				<el-icon :size="20" v-if="item.dayweather === '多云'"><svg-icon name="多云" /></el-icon>
+				<el-icon :size="20" v-if="item.dayweather === '扬沙'"><svg-icon name="扬沙" /></el-icon>
 			</div>
 		</div>
 	</div>
@@ -86,6 +87,7 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 	width: 100%;
 	height: 100%;
 	padding: 10px;
+	border-radius: var(--app-radius);
 	box-sizing: border-box;
 	color: #fff;
 	.location {
@@ -128,6 +130,12 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 }
 .晴 {
 	background: linear-gradient(45deg, #237fca 58%, rgba(233, 241, 246, 0.91) 100%);
+}
+.扬沙 {
+	background-image: url('~/assets/img/yangsha.png');
+	background-repeat: repeat-x;
+	background-size: 100% auto;
+	background-position: center;
 }
 .阴,
 .多云 {

@@ -4,6 +4,7 @@ interface RouteItem {
 	type: string | string[];
 	description?: string;
 	meta: {
+		[key: string]: any;
 		icon?: string; // 图表
 		rank: number; // 排序
 		description?: string; // 描述

@@ -1,7 +1,7 @@
 <template>
 	<el-config-provider :locale="locale">
-		<el-container class="el-container-parent">
-			<Aside />
+		<el-container class="el-container-parent" :class="`menu-bar-${position}`">
+			<MenuBar />
 			<el-container class="el-container-child">
 				<Engines />
 				<div class="main"><NuxtPage /></div>
@@ -16,19 +16,19 @@
 						</el-form-item>
 						<el-form-item label="主题色">
 							<color-picker
-								v-model:color="settingStore.setting.basic.theme"
+								v-model:color="settingStore.setting.menuBar.theme"
 								:color-list="predefineColors"
 								@change="settingStore.onColorPickerChange()"
 							/>
 						</el-form-item>
 						<el-form-item label="侧边栏宽度">
-							<el-slider v-model="settingStore.setting.basic.asideMenuWidth" :min="60" :max="400" class="ml10" />
+							<el-slider v-model="settingStore.setting.menuBar.width" :min="60" :max="400" class="ml10" />
 						</el-form-item>
 						<el-form-item label="遮罩透明度">
-							<el-slider v-model="settingStore.setting.basic.maskOpacity" :min="0" :max="1" :step="0.1" class="ml10" />
+							<el-slider v-model="settingStore.setting.menuBar.maskOpacity" :min="0" :max="1" :step="0.1" class="ml10" />
 						</el-form-item>
 						<el-form-item label="背景模糊">
-							<el-slider v-model="settingStore.setting.basic.maskBlur" :min="0" :max="60" :step="1" class="ml10" />
+							<el-slider v-model="settingStore.setting.menuBar.maskBlur" :min="0" :max="60" :step="1" class="ml10" />
 						</el-form-item>
 					</el-form>
 				</el-tab-pane>
@@ -52,6 +52,8 @@ const toggleDark = useToggle(isDark);
 
 const settingStore = useSettingsStore();
 
+const position = computed(() => settingStore.setting.menuBar.position);
+
 useSeoMeta({
 	title: '前端工具网站',
 	description: '图片转base64、图片压缩',
@@ -66,8 +68,9 @@ const state = reactive({
 	isRender: true,
 });
 
-const maskOpacity = computed(() => `rgba(0,0,0,${settingStore.setting.basic.maskOpacity})`);
-const maskBlur = computed(() => `blur(${settingStore.setting.basic.maskBlur}px)`);
+const menuWidth = computed(() => settingStore.setting.menuBar.width + 'px');
+const maskOpacity = computed(() => `rgba(0,0,0,${settingStore.setting.menuBar.maskOpacity})`);
+const maskBlur = computed(() => `blur(${settingStore.setting.menuBar.maskBlur}px)`);
 
 function handleScroll() {
 	const currentScrollTop = window.scrollY || document.documentElement.scrollTop;

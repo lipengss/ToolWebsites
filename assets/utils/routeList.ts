@@ -93,10 +93,19 @@ export const routeList: Array<RouteItem> = [
 	{
 		name: '程序员',
 		path: '/developer',
-		type: 'coder',
+		type: 'developer',
 		meta: {
 			rank: 0,
 			icon: 'editor',
+		},
+	},
+	{
+		name: '娱乐',
+		path: '/entertainment',
+		type: 'entertainment',
+		meta: {
+			rank: 0,
+			icon: 'entertainment',
 		},
 	},
 ];

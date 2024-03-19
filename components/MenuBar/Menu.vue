@@ -6,7 +6,7 @@
 				v-for="route in routeList"
 				:key="route.path"
 				:class="{ active: state.activeIndex === route.path }"
-				@click="state.activeIndex = route.path"
+				@click="onRouteChange(route)"
 			>
 				<div class="icon">
 					<el-icon>
@@ -19,16 +19,24 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { routeList } from '~/assets/utils/routeList';
 import { useTitle } from '@vueuse/core';
 
 const route = useRoute();
+const router = useRouter();
 
 const state = reactive({
 	activeIndex: '/',
 });
 
+// 路由切换
+function onRouteChange(route: RouteItem) {
+	router.push(route.path);
+	state.activeIndex = route.path;
+}
+
+// 路由监听
 watch(
 	() => route.path,
 	(path) => {

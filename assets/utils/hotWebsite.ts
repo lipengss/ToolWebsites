@@ -230,7 +230,6 @@ function formatHotTypeList(hotList: Array<WebTypeItem>) {
 			});
 		}
 	});
-	console.log(hotList);
 	return hotList;
 }
 
