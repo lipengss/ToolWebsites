@@ -84,5 +84,28 @@ export const entertainment: RouteItem[] = [
 			description: '抖音让每一个人看见并连接更大的世界。',
 		},
 	},
-	// https://weibo.com/newlogin?tabtype=weibo&gid=102803&openLoginLayer=0&url=https%3A%2F%2Fweibo.com%2F
+	{
+		name: '今日头条',
+		path: 'https://www.toutiao.com/',
+		type: 'entertainment',
+		meta: {
+			rank: 0,
+			icon: 'app-toutiao',
+			bgColor: '#fff',
+			size: 60,
+			description: '今日头条，头条，头条网，头条新闻，今日头条官网。',
+		},
+	},
+	{
+		name: '36氪',
+		path: 'https://36kr.com/',
+		type: 'entertainment',
+		meta: {
+			rank: 0,
+			icon: 'app-36ke',
+			bgColor: '#fff',
+			size: 60,
+			description: '独家的视角为用户深度剖析最前沿的资讯',
+		},
+	},
 ];

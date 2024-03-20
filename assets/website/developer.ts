@@ -127,4 +127,29 @@ export const developers: RouteItem[] = [
 			description: '提供网速测试，网络质量测试，宽带测速，Wi-Fi测速，5G测速等...',
 		},
 	},
+	{
+		name: '菜鸟教程',
+		path: 'https://www.runoob.com/',
+		type: 'developer',
+		meta: {
+			rank: 0,
+			icon: 'app-cainiao',
+			bgColor: '#90c751',
+			size: 64,
+			description: '各种编程语言的基础知识。 同时本站中也提供了大量的在线实例，通过实例，您可以更好的学习编程。',
+		},
+	},
+	{
+		name: '在线渐变',
+		path: 'https://www.fly63.com/tool/gradient/',
+		type: ['developer', 'onlineTool'],
+		meta: {
+			rank: 0,
+			icon: 'app-jianbian',
+			bgColor: '#00a0e9',
+			size: 50,
+			description: '各种编程语言的基础知识。 同时本站中也提供了大量的在线实例，通过实例，您可以更好的学习编程。',
+		},
+	},
+	// https://www.fly63.com/tool/gradient/
 ];
