@@ -37,4 +37,8 @@ function flattenArray(arr: any[]): any[] {
 	return result;
 }
 
-export { formatFileSize, flattenArray };
+function getRandomNumber(maxValue: number) {
+	return Math.floor(Math.random() * (maxValue + 1));
+}
+
+export { formatFileSize, flattenArray, getRandomNumber };

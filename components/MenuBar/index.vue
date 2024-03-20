@@ -29,8 +29,6 @@ const toggleDark = useToggle(isDark);
 
 const settingStore = useSettingsStore();
 
-const position = computed(() => settingStore.setting.menuBar.position);
-
 const menuWidth = computed(() => settingStore.setting.menuBar.width + 'px');
 
 const { open, sRGBHex } = useEyeDropper();

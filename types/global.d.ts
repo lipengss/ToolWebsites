@@ -8,7 +8,7 @@ declare module 'file-saver';
 declare module '@vueuse/core';
 declare module 'vue3-grid-layout';
 declare module '@pqina/flip';
-
+declare module 'element-plus/dist/locale/zh-cn.mjs';
 const TYPE = 'search' | 'hotTool' | 'art' | 'gallery' | 'color' | 'developer' | 'blog';
 
 interface WebTypeItem {

@@ -60,4 +60,29 @@ export const entertainment: RouteItem[] = [
 			description: '让人们看到更丰富和有深度的世界，收获轻松的获得感，点亮对生活的好奇',
 		},
 	},
+	{
+		name: '抖音',
+		path: 'https://www.douyin.com/?recommend=1',
+		type: 'entertainment',
+		meta: {
+			rank: 0,
+			icon: 'app-douyin',
+			bgColor: '#111',
+			size: 50,
+			description: '抖音让每一个人看见并连接更大的世界。',
+		},
+	},
+	{
+		name: '新浪微博',
+		path: 'https://weibo.com/',
+		type: 'entertainment',
+		meta: {
+			rank: 0,
+			icon: 'app-weibo',
+			bgColor: '#fff',
+			size: 60,
+			description: '抖音让每一个人看见并连接更大的世界。',
+		},
+	},
+	// https://weibo.com/newlogin?tabtype=weibo&gid=102803&openLoginLayer=0&url=https%3A%2F%2Fweibo.com%2F
 ];

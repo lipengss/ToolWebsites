@@ -1,6 +1,6 @@
 <template>
 	<ClientOnly>
-		<Card :settings="state.settings" @show-dialog="state.visible = true" />
+		<Card :settings="offWork" @show-dialog="state.visible = true" />
 		<el-dialog v-model="state.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable>
 			<template #header>
 				<div class="flex-end">
@@ -74,9 +74,16 @@ import { predefineColors, OFF_WORK } from '~/assets/utils/publicData';
 import Card from './Card.vue';
 import { Local } from '~/assets/utils/storage';
 import { CloseBold, FullScreen } from '@element-plus/icons-vue';
+import { storeToRefs } from 'pinia';
+import { useSettingsStore } from '~/stores/settings';
 import { useDateFormat } from '~/hooks/useDateFormat';
 const { dayjs, weekFormat, setTime } = useDateFormat();
 import { cloneDeep } from 'lodash';
+
+const { setting } = storeToRefs(useSettingsStore());
+const { setGlobalSetting } = useSettingsStore();
+
+const offWork = computed(() => setting.value.offWork);
 
 const defaultSettings = {
 	payday: 10,
@@ -92,8 +99,7 @@ const defaultSettings = {
 const state = reactive({
 	visible: false,
 	fullscreen: false,
-	settings: cloneDeep(defaultSettings),
-	dialogSettings: cloneDeep(defaultSettings),
+	dialogSettings: cloneDeep(offWork.value),
 });
 
 // 获取当月的天数
@@ -102,21 +108,10 @@ const days = computed(() => {
 });
 
 function onSaveSettings() {
-	state.settings = cloneDeep(state.dialogSettings);
-	Local.set(OFF_WORK, state.settings);
+	setting.value.offWork = cloneDeep(state.dialogSettings);
+	setGlobalSetting();
 	state.visible = false;
 }
-
-onMounted(() => {
-	if (Local.get(OFF_WORK)) {
-		const cloneOffWork = cloneDeep(Local.get(OFF_WORK));
-		cloneOffWork.workHours = [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()];
-		state.settings = cloneOffWork;
-		state.dialogSettings = cloneOffWork;
-	} else {
-		state.settings = cloneDeep(defaultSettings);
-	}
-});
 
 watch(
 	() => state.dialogSettings.isWorkDay,

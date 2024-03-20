@@ -1,58 +1,32 @@
 <template>
 	<el-config-provider :locale="locale">
-		<el-container class="el-container-parent" :class="`menu-bar-${position}`">
+		<el-container class="el-container-parent">
 			<MenuBar />
 			<el-container class="el-container-child">
 				<Engines />
 				<div class="main"><NuxtPage /></div>
 			</el-container>
+			<div class="wallpaper">
+				<el-icon :size="30" title="切换壁纸" @click="changeWallpaper">
+					<svg-icon name="wide" />
+				</el-icon>
+			</div>
+			<Setting />
 		</el-container>
-		<el-drawer v-model="settingStore.showDrawer" :modal="false" size="600px">
-			<el-tabs tab-position="left" class="demo-tabs">
-				<el-tab-pane label="主题/壁纸">
-					<el-form label-width="100px">
-						<el-form-item label="深色模式">
-							<el-switch :model-value="isDark" @change="toggleDark()" />
-						</el-form-item>
-						<el-form-item label="主题色">
-							<color-picker
-								v-model:color="settingStore.setting.menuBar.theme"
-								:color-list="predefineColors"
-								@change="settingStore.onColorPickerChange()"
-							/>
-						</el-form-item>
-						<el-form-item label="侧边栏宽度">
-							<el-slider v-model="settingStore.setting.menuBar.width" :min="60" :max="400" class="ml10" />
-						</el-form-item>
-						<el-form-item label="遮罩透明度">
-							<el-slider v-model="settingStore.setting.menuBar.maskOpacity" :min="0" :max="1" :step="0.1" class="ml10" />
-						</el-form-item>
-						<el-form-item label="背景模糊">
-							<el-slider v-model="settingStore.setting.menuBar.maskBlur" :min="0" :max="60" :step="1" class="ml10" />
-						</el-form-item>
-					</el-form>
-				</el-tab-pane>
-				<el-tab-pane label="侧边栏"></el-tab-pane>
-			</el-tabs>
-		</el-drawer>
 		<el-footer>
 			<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
 		</el-footer>
 	</el-config-provider>
 </template>
 <script setup lang="ts">
-import { onMounted, onUnmounted, reactive, ref } from 'vue';
+import { ref } from 'vue';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { useDark, useToggle } from '@vueuse/core';
-import { predefineColors } from '~/assets/utils/publicData';
-
-const isDark = useDark();
-const toggleDark = useToggle(isDark);
-
 const settingStore = useSettingsStore();
 
-const position = computed(() => settingStore.setting.menuBar.position);
+const { setting } = storeToRefs(settingStore);
+const { changeWallpaper, initGloabalSetting } = settingStore;
 
 useSeoMeta({
 	title: '前端工具网站',
@@ -62,35 +36,11 @@ useSeoMeta({
 
 const locale = ref(zhCn);
 
-const state = reactive({
-	lastScrollTop: 0,
-	scrollDirection: '',
-	isRender: true,
-});
-
-const menuWidth = computed(() => settingStore.setting.menuBar.width + 'px');
-const maskOpacity = computed(() => `rgba(0,0,0,${settingStore.setting.menuBar.maskOpacity})`);
-const maskBlur = computed(() => `blur(${settingStore.setting.menuBar.maskBlur}px)`);
-
-function handleScroll() {
-	const currentScrollTop = window.scrollY || document.documentElement.scrollTop;
-	if (currentScrollTop > state.lastScrollTop) {
-		state.scrollDirection = 'down';
-	} else {
-		state.scrollDirection = 'up';
-	}
-	state.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-}
+const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
+const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 
 onMounted(() => {
-	window.addEventListener('scroll', handleScroll);
-	setTimeout(() => {
-		state.isRender = false;
-	}, 300);
-});
-
-onUnmounted(() => {
-	window.removeEventListener('scroll', handleScroll);
+	initGloabalSetting();
 });
 </script>
 <style lang="scss" scoped>
@@ -106,16 +56,49 @@ onUnmounted(() => {
 		top: 0;
 	}
 	&::before {
-		background-color: v-bind(maskOpacity);
+		background-color: v-bind(bgOpacity);
 	}
 	&::before {
-		backdrop-filter: v-bind(maskBlur);
+		backdrop-filter: v-bind(bgBlur);
 	}
 	.el-container-child {
 		flex-direction: column;
 		.main {
 			position: relative;
 		}
+	}
+}
+
+.wallpaper {
+	height: 50px;
+	position: fixed;
+	top: 0;
+	right: 10%;
+	&::before {
+		content: '';
+		width: 1px;
+		height: 40px;
+		position: absolute;
+		background-color: #ffa750;
+	}
+	.el-icon {
+		position: absolute;
+		bottom: 0;
+		left: -15px;
+		cursor: pointer;
+		animation: rotate 1.6s linear infinite;
+		&:hover {
+			animation-play-state: paused;
+		}
+	}
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
 	}
 }
 

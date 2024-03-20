@@ -28,6 +28,7 @@ withDefaults(defineProps<Props>(), {});
 		align-items: center;
 		justify-content: center;
 		border-radius: var(--app-radius);
+		overflow: hidden;
 	}
 	.title {
 		color: #fff;
