@@ -7,9 +7,9 @@ import { useDateFormat } from '~/hooks/useDateFormat';
 const { setTime } = useDateFormat();
 
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
-
+let timer: any = null;
 export const useSettingsStore = defineStore('settingStore', {
-	state() {
+	state(): ISettingState {
 		return {
 			showDrawer: false,
 			setting: {
@@ -19,7 +19,7 @@ export const useSettingsStore = defineStore('settingStore', {
 					opacity: 0.5, // 遮罩层透明度
 					blur: 6, // 遮罩层模糊度
 					auto: false,
-					autoTime: 60 * 1000,
+					autoTime: 60000,
 				},
 				menuBar: {
 					width: 60, // 侧边栏菜单宽度
@@ -78,10 +78,15 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		autochangeWallpaper() {
 			const { auto, autoTime } = this.setting.bg;
-			if (!auto) return;
-			setInterval(() => {
-				this.changeWallpaper();
-			}, autoTime);
+			if (auto) {
+				timer = setInterval(() => {
+					this.changeWallpaper();
+				}, autoTime);
+			} else {
+				console.log('xxx');
+				clearInterval(timer);
+				timer = null;
+			}
 		},
 	},
 });

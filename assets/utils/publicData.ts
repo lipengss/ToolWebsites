@@ -31,11 +31,11 @@ const aspectRatios = [
 ];
 
 const timeStepList = [
-	{ label: '一分钟', value: 1000 * 60 },
-	{ label: '五分钟', value: 1000 * 60 * 5 },
-	{ label: '十分钟', value: 1000 * 60 * 10 },
-	{ label: '半小时', value: 1000 * 60 * 30 },
-	{ label: '一小时', value: 1000 * 60 * 60 },
+	{ label: '一分钟', value: 60000 },
+	{ label: '五分钟', value: 300000 },
+	{ label: '十分钟', value: 600000 },
+	{ label: '半小时', value: 1800000 },
+	{ label: '一小时', value: 3600000 },
 ];
 
 const pictureNotions = '图片不会上传到服务器转换，而是在浏览器中执行。';

@@ -2,16 +2,18 @@
 	<el-aside :width="menuWidth">
 		<Menu />
 		<div class="setting">
-			<el-icon size="18px" class="icon" @click="settingStore.openSettingDrawer()" title="设置">
-				<svg-icon name="setting" />
-			</el-icon>
-			<el-icon size="18px" class="icon" @click="open()" title="吸色器">
-				<svg-icon name="dye-color" />
-			</el-icon>
-			<el-icon size="18px" class="icon" @click="toggleDark()" :title="isDark ? '夜间模式' : '日间模式'">
-				<Moon v-if="isDark" />
-				<Sunny v-else />
-			</el-icon>
+			<ClientOnly>
+				<el-icon size="18px" class="icon" @click="settingStore.openSettingDrawer()" title="设置">
+					<svg-icon name="setting" />
+				</el-icon>
+				<el-icon size="18px" class="icon" @click="open()" title="吸色器">
+					<svg-icon name="dye-color" />
+				</el-icon>
+				<el-icon size="18px" class="icon" @click="toggleDark()" :title="isDark ? '夜间模式' : '日间模式'">
+					<Moon v-if="isDark" />
+					<Sunny v-else />
+				</el-icon>
+			</ClientOnly>
 		</div>
 	</el-aside>
 </template>
