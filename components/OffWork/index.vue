@@ -1,6 +1,6 @@
 <template>
 	<ClientOnly>
-		<Card :settings="offWork" @show-dialog="state.visible = true" />
+		<Card :settings="offWork" @show-dialog="onShowDialog" />
 		<el-dialog v-model="state.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable>
 			<template #header>
 				<div class="flex-end">
@@ -70,14 +70,13 @@
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { predefineColors, OFF_WORK } from '~/assets/utils/publicData';
+import { predefineColors } from '~/assets/utils/publicData';
 import Card from './Card.vue';
-import { Local } from '~/assets/utils/storage';
 import { CloseBold, FullScreen } from '@element-plus/icons-vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { useDateFormat } from '~/hooks/useDateFormat';
-const { dayjs, weekFormat, setTime } = useDateFormat();
+const { dayjs, weekFormat } = useDateFormat();
 import { cloneDeep } from 'lodash';
 
 const { setting } = storeToRefs(useSettingsStore());
@@ -85,22 +84,16 @@ const { setGlobalSetting } = useSettingsStore();
 
 const offWork = computed(() => setting.value.offWork);
 
-const defaultSettings = {
-	payday: 10,
-	workDay: [],
-	isWorkDay: true,
-	showItem: ['payDay', 'fromFriday', 'nextFestival', 'income'],
-	workHours: [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()],
-	income: 800,
-	color: '#fff',
-	bgColor: predefineColors[0],
-};
-
 const state = reactive({
 	visible: false,
 	fullscreen: false,
 	dialogSettings: cloneDeep(offWork.value),
 });
+
+function onShowDialog() {
+	state.visible = true;
+	state.dialogSettings = cloneDeep(offWork.value);
+}
 
 // 获取当月的天数
 const days = computed(() => {

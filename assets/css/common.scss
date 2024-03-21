@@ -9,7 +9,12 @@ body {
 	color: var(--el-text-color-primary);
 	background-image: url('~/assets/img/banner.jpg');
 	background-size: cover;
-	background-position: top;
+	background-position: center;
+}
+
+@font-face {
+	font-family: 'gomarice_rocks_serif';
+	src: url('~/assets/fonts/gomarice_rocks_serif.ttf');
 }
 
 ul, ol{
@@ -49,5 +54,5 @@ ul, ol{
 .el-drawer__header{
 	margin-bottom: 0 !important;
 	padding-bottom: 20px !important;
-	background-color: var(--el-bg-color-page);
 }
+

@@ -38,7 +38,7 @@ export const developers: RouteItem[] = [
 	{
 		name: 'iconfont',
 		path: 'https://www.iconfont.cn/',
-		type: 'developer',
+		type: ['developer', 'designer'],
 		meta: {
 			rank: 0,
 			icon: 'app-iconfont',
@@ -136,7 +136,7 @@ export const developers: RouteItem[] = [
 			icon: 'app-cainiao',
 			bgColor: '#90c751',
 			size: 64,
-			description: '各种编程语言的基础知识。 同时本站中也提供了大量的在线实例，通过实例，您可以更好的学习编程。',
+			description: '各种编程语言的基础知识。',
 		},
 	},
 	{
@@ -148,8 +148,45 @@ export const developers: RouteItem[] = [
 			icon: 'app-jianbian',
 			bgColor: '#00a0e9',
 			size: 50,
-			description: '各种编程语言的基础知识。 同时本站中也提供了大量的在线实例，通过实例，您可以更好的学习编程。',
+			description: '在线渐变生成器。',
 		},
 	},
-	// https://www.fly63.com/tool/gradient/
+	{
+		name: '字体库',
+		path: 'https://www.1001fonts.com/',
+		type: ['designer'],
+		meta: {
+			rank: 0,
+			icon: 'app-font',
+			bgColor: '#8e151e',
+			color: '#fff',
+			size: 36,
+			description: '58238种免费字体，可直接下载。',
+		},
+	},
+	{
+		name: '即时设计',
+		path: 'https://js.design/workspace',
+		type: ['designer'],
+		meta: {
+			rank: 0,
+			icon: 'app-jishisheji',
+			bgColor: '#202020',
+			color: '#fff',
+			size: 60,
+			description: '在线可协作的UI设计工具。',
+		},
+	},
+	{
+		name: '美叶',
+		path: 'https://www.meiye.art/',
+		type: ['designer'],
+		meta: {
+			rank: 0,
+			icon: 'app-meiye',
+			bgColor: '#202020',
+			color: '#fff',
+			description: '优质设计内容推荐平台。',
+		},
+	},
 ];

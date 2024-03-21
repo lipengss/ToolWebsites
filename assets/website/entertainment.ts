@@ -103,7 +103,7 @@ export const entertainment: RouteItem[] = [
 		meta: {
 			rank: 0,
 			icon: 'app-36ke',
-			bgColor: '#fff',
+			bgColor: '#4182F1',
 			size: 60,
 			description: '独家的视角为用户深度剖析最前沿的资讯',
 		},

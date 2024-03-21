@@ -13,11 +13,13 @@ export const useSettingsStore = defineStore('settingStore', {
 		return {
 			showDrawer: false,
 			setting: {
-				theme: '#409eff',
+				theme: '#2b793b',
 				bg: {
 					picture: imgList[0],
 					opacity: 0.5, // 遮罩层透明度
 					blur: 6, // 遮罩层模糊度
+					auto: false,
+					autoTime: 60 * 1000,
 				},
 				menuBar: {
 					width: 60, // 侧边栏菜单宽度
@@ -25,7 +27,7 @@ export const useSettingsStore = defineStore('settingStore', {
 				},
 				offWork: {
 					payday: 10,
-					workDay: [],
+					workday: ['一', '二', '三', '四', '五'],
 					isWorkDay: true,
 					showItem: ['payDay', 'fromFriday', 'nextFestival', 'income'],
 					workHours: [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()],
@@ -44,7 +46,10 @@ export const useSettingsStore = defineStore('settingStore', {
 				Local.set(GLOBAL_SETTING, this.setting);
 			}
 			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);
+			// 主题色
 			this.onColorPickerChange();
+			// 自动切换壁纸
+			this.autochangeWallpaper();
 		},
 		setGlobalSetting() {
 			Local.set(GLOBAL_SETTING, this.setting);
@@ -70,6 +75,13 @@ export const useSettingsStore = defineStore('settingStore', {
 			for (let i = 1; i <= 9; i++) {
 				document.documentElement.style.setProperty(`--el-color-primary-light-${i}`, `${getLightColor(this.setting.theme, i / 10)}`);
 			}
+		},
+		autochangeWallpaper() {
+			const { auto, autoTime } = this.setting.bg;
+			if (!auto) return;
+			setInterval(() => {
+				this.changeWallpaper();
+			}, autoTime);
 		},
 	},
 });

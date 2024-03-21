@@ -100,6 +100,33 @@ export const routeList: Array<RouteItem> = [
 		},
 	},
 	{
+		name: '设计师',
+		path: '/designer',
+		type: 'designer',
+		meta: {
+			rank: 0,
+			icon: 'designer',
+		},
+	},
+	{
+		name: '产品经理',
+		path: '/productManager',
+		type: 'productManager',
+		meta: {
+			rank: 0,
+			icon: 'productManager',
+		},
+	},
+	{
+		name: '工具箱',
+		path: '/tools',
+		type: 'tools',
+		meta: {
+			rank: 0,
+			icon: 'tools',
+		},
+	},
+	{
 		name: '娱乐',
 		path: '/entertainment',
 		type: 'entertainment',
