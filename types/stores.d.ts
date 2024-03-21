@@ -12,6 +12,8 @@ interface ISettingState {
 		menuBar: {
 			width: number; // 侧边栏菜单宽度
 			blur: number; // 遮罩层模糊度
+			bgColor: string; // 背景颜色
+			color: string; // 字体颜色
 		};
 		offWork: {
 			payday: number;

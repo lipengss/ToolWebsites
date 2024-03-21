@@ -91,12 +91,13 @@ function onActionSearch() {
 		flex-direction: column;
 		align-items: center;
 		.date-wrapper {
-			min-width: 100px;
-			font-family: gomarice_rocks_serif;
+			min-width: 140px;
+			text-align: center;
 			color: var(--el-color-white);
 			text-shadow: 1px 1px 1px #000;
 			.time {
-				font-size: 32px;
+				font-family: gomarice_rocks_serif;
+				font-size: 36px;
 			}
 			.date {
 				font-size: 12px;

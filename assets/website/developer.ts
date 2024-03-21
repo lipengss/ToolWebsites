@@ -84,7 +84,7 @@ export const developers: RouteItem[] = [
 	},
 	{
 		name: 'Element-plus',
-		path: 'https://juejin.cn',
+		path: 'https://element-plus.org/zh-CN/',
 		type: 'developer',
 		meta: {
 			rank: 0,

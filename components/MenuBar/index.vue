@@ -32,6 +32,8 @@ const toggleDark = useToggle(isDark);
 const settingStore = useSettingsStore();
 
 const menuWidth = computed(() => settingStore.setting.menuBar.width + 'px');
+const bgColor = computed(() => settingStore.setting.menuBar.bgColor);
+const color = computed(() => settingStore.setting.menuBar.color);
 
 const { open, sRGBHex } = useEyeDropper();
 
@@ -53,9 +55,9 @@ watch(
 	display: flex;
 	flex-direction: column;
 	backdrop-filter: blur(6px);
-	background-color: rgba(1, 48, 96), 0.1;
+	background-color: v-bind(bgColor);
 	padding: 100px 0 60px 0;
-	color: rgba(233, 233, 233, 0.6);
+	color: v-bind(color);
 	overflow-y: hidden;
 	.setting {
 		display: flex;

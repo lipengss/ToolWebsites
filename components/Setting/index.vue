@@ -32,6 +32,12 @@
 			<el-form-item label="菜单栏宽度">
 				<el-slider v-model="settingStore.setting.menuBar.width" :min="60" :max="400" class="ml10" />
 			</el-form-item>
+			<el-form-item label="背景颜色">
+				<color-picker v-model:color="settingStore.setting.menuBar.bgColor" @change="changeThemeColor" />
+			</el-form-item>
+			<el-form-item label="字体颜色">
+				<color-picker v-model:color="settingStore.setting.menuBar.color" @change="changeThemeColor" />
+			</el-form-item>
 		</el-form>
 		<el-space direction="vertical" fill class="w100">
 			<el-button type="primary" size="large" class="w100" :icon="CopyDocument">一键复制配置</el-button>

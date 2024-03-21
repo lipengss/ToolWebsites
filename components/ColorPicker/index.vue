@@ -1,6 +1,13 @@
 <template>
 	<el-space>
-		<div class="circle-item" v-for="color in props.colorList" :key="color" :class="{ active: color === props.color }" @click="onColorChange(color)">
+		<div
+			class="circle-item"
+			v-if="props.colorList"
+			v-for="color in props.colorList"
+			:key="color"
+			:class="{ active: color === props.color }"
+			@click="onColorChange(color)"
+		>
 			<div class="circle" :style="`--color:${color}`"></div>
 		</div>
 		<el-color-picker v-model="props.color" @change="onColorChange" />
@@ -10,7 +17,7 @@
 import { withDefaults, defineProps } from 'vue';
 
 interface Props {
-	colorList: Array<string>;
+	colorList?: Array<string>;
 	color: string;
 }
 const props = withDefaults(defineProps<Props>(), {});

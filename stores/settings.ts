@@ -16,14 +16,16 @@ export const useSettingsStore = defineStore('settingStore', {
 				theme: '#2b793b',
 				bg: {
 					picture: imgList[0],
-					opacity: 0.5, // 遮罩层透明度
-					blur: 6, // 遮罩层模糊度
+					opacity: 0.5,
+					blur: 6,
 					auto: false,
 					autoTime: 60000,
 				},
 				menuBar: {
-					width: 60, // 侧边栏菜单宽度
-					blur: 6, // 遮罩层模糊度
+					width: 60,
+					blur: 6,
+					bgColor: 'transparent',
+					color: 'rgba(233, 233, 233, 0.6)',
 				},
 				offWork: {
 					payday: 10,
