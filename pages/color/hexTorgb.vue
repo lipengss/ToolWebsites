@@ -11,7 +11,7 @@
 			<el-input :model-value="state.rgbValue" readonly>
 				<template #prepend>RGB</template>
 				<template #append>
-					<el-button @click="onCopy(`${state.hexValue} 复制成功!`)">复制</el-button>
+					<el-button @click="onCopy">复制</el-button>
 				</template>
 			</el-input>
 			<el-checkbox v-model="state.isRgbPrefix" @change="onHexToRgb(state.hexValue)">添加rgb前缀</el-checkbox>
@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { reactive, toRef } from 'vue';
 import { Delete } from '@element-plus/icons-vue';
-import { useColorFormat } from '~/assets/utils/colorFormat';
+import { useColorFormat } from '~/hooks/useColorFormat';
 import { useCopy } from '~/hooks/useCopy';
 const { hexToRgb } = useColorFormat();
 
@@ -55,7 +55,8 @@ function onClear() {
 	state.rgbValue = '';
 }
 
-function onColorPickerChange(color: string) {
+function onColorPickerChange(color: string | null) {
+	if (!color) return;
 	state.hexValue = color;
 	onHexToRgb(color);
 }

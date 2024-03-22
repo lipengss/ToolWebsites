@@ -48,6 +48,17 @@ export const developers: RouteItem[] = [
 		},
 	},
 	{
+		name: 'Animate.css',
+		path: 'https://animate.style/',
+		type: 'developer',
+		meta: {
+			rank: 0,
+			icon: 'app-animate',
+			bgColor: '#fce5cd',
+			description: 'Animate.css是一个现成的跨浏览器动画库，供您在项目中使用。',
+		},
+	},
+	{
 		name: 'Echarts',
 		path: 'https://echarts.apache.org/zh/index.html',
 		type: 'developer',

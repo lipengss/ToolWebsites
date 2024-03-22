@@ -7,9 +7,9 @@ body {
 	box-sizing: border-box;
 	background-color: var(--el-bg-color-page);
 	color: var(--el-text-color-primary);
-	background-image: url('~/assets/img/banner.jpg');
 	background-size: cover;
 	background-position: center;
+	transition: background-image 0.3s ease-in-out;
 }
 
 @font-face {

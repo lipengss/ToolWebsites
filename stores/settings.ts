@@ -7,6 +7,7 @@ import { useDateFormat } from '~/hooks/useDateFormat';
 const { setTime } = useDateFormat();
 
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
+
 let timer: any = null;
 export const useSettingsStore = defineStore('settingStore', {
 	state(): ISettingState {
@@ -14,6 +15,16 @@ export const useSettingsStore = defineStore('settingStore', {
 			showDrawer: false,
 			setting: {
 				theme: '#2b793b',
+				search: {
+					show: true,
+					height: 60,
+					radius: 50,
+					opacity: 0.2,
+					history: true,
+					translate: false,
+					engines: 'Baidu',
+					historyList: [],
+				},
 				bg: {
 					picture: imgList[0],
 					opacity: 0.5,
@@ -24,8 +35,9 @@ export const useSettingsStore = defineStore('settingStore', {
 				menuBar: {
 					width: 60,
 					blur: 6,
-					bgColor: 'transparent',
+					bgColor: 'rgba(255, 255, 255, 0.1)',
 					color: 'rgba(233, 233, 233, 0.6)',
+					autoHide: false,
 				},
 				offWork: {
 					payday: 10,
@@ -38,6 +50,33 @@ export const useSettingsStore = defineStore('settingStore', {
 					bgColor: predefineColors[0],
 				},
 			},
+			engineList: [
+				{
+					name: 'Google',
+					link: 'https://www.google.com/search?q=',
+					icon: 'https://www.google.com/favicon.ico',
+				},
+				{
+					name: 'Bing',
+					link: 'https://www.bing.com/search?q=',
+					icon: 'https://www.bing.com/favicon.ico',
+				},
+				{
+					name: 'Baidu',
+					link: 'https://www.baidu.com/s?wd=',
+					icon: 'https://www.baidu.com/favicon.ico',
+				},
+				{
+					name: 'GitHub',
+					link: 'https://www.github.com',
+					icon: 'https://www.github.com/favicon.ico',
+				},
+				{
+					name: '搜狗',
+					link: 'https://www.sogou.com/sogou?query=',
+					icon: 'https://www.sogou.com/favicon.ico',
+				},
+			],
 		};
 	},
 	actions: {
@@ -61,7 +100,8 @@ export const useSettingsStore = defineStore('settingStore', {
 			const maxNum = imgList.length - 1;
 			const randomNum = getRandomNumber(maxNum);
 			this.setting.bg.picture = imgList[randomNum];
-			this.setGlobalSetting();
+			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);
+			Local.set(GLOBAL_SETTING, this.setting);
 		},
 		openSettingDrawer() {
 			this.showDrawer = true;
@@ -85,10 +125,19 @@ export const useSettingsStore = defineStore('settingStore', {
 					this.changeWallpaper();
 				}, autoTime);
 			} else {
-				console.log('xxx');
 				clearInterval(timer);
 				timer = null;
 			}
+		},
+		clearGlobalSetting() {
+			Local.clear();
+			this.initGloabalSetting();
+			window.location.reload();
+		},
+		querySearch(queryString: string, cb: any) {
+			const { historyList } = this.setting.search;
+			const results = queryString ? historyList.filter(createFilter(queryString)) : historyList;
+			cb(results);
 		},
 	},
 });
