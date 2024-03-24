@@ -1,18 +1,20 @@
-interface IHistoryItem {
-	value: string;
-	link: string;
-}
-
 interface IEngineItem {
 	name: string;
 	link: string;
 	icon: string;
+	description: string;
 }
 
 interface ISettingState {
 	showDrawer: boolean;
 	setting: {
 		theme: string;
+		date: {
+			size: number;
+			color: string;
+			font: string;
+			date: string[];
+		};
 		search: {
 			show: boolean;
 			height: number;
@@ -20,8 +22,8 @@ interface ISettingState {
 			opacity: number;
 			history: boolean;
 			translate: boolean;
-			engines: 'Baidu' | 'Google' | 'Bing' | 'GitHub' | '搜狗';
-			historyList: Array<IHistoryItem>;
+			engines: string;
+			historyList: Array<string>;
 		};
 		bg: {
 			picture: string[];

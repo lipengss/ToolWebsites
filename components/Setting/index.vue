@@ -1,6 +1,43 @@
 <template>
 	<el-drawer v-model="showDrawer" title="风 格 配 置" size="450px">
 		<el-form :model="setting" ref="formRef" label-width="100px">
+			<el-divider>时间</el-divider>
+			<el-form-item label="字体大小">
+				<div class="slider-wrap">
+					<el-slider v-model="setting.date.size" :min="20" :max="100" @change="setGlobalSetting" />
+					<el-tag type="primary">{{ setting.date.size }} PX</el-tag>
+				</div>
+			</el-form-item>
+			<el-form-item label="字体颜色">
+				<div class="slider-wrap">
+					<color-picker v-model:color="setting.date.color" show-alpha @change="setGlobalSetting" />
+				</div>
+			</el-form-item>
+			<el-form-item label="字体">
+				<el-select v-model="setting.date.font">
+					<el-option value="YuurinBee">
+						<div class="flex-between">
+							<span>19:00</span>
+							<span>YuurinBee</span>
+						</div>
+					</el-option>
+					<el-option value="Gomarice">
+						<div class="flex-between">
+							<span>19:00</span>
+							<span>Gomarice</span>
+						</div>
+					</el-option>
+				</el-select>
+			</el-form-item>
+			<div class="slider-wrap">
+				<el-checkbox-group v-model="setting.date.date">
+					<el-checkbox label="monthDay">日月</el-checkbox>
+					<el-checkbox label="week">周</el-checkbox>
+					<el-checkbox label="sec">秒</el-checkbox>
+					<el-checkbox label="lunar">农历</el-checkbox>
+					<el-checkbox label="bold">粗体</el-checkbox>
+				</el-checkbox-group>
+			</div>
 			<el-divider>搜索</el-divider>
 			<el-form-item label="显示搜索框">
 				<el-switch v-model="setting.search.show" @change="setGlobalSetting" />
@@ -30,7 +67,16 @@
 				<el-switch v-model="setting.search.translate" @change="setGlobalSetting" />
 			</el-form-item>
 			<el-form-item label="搜索引擎">
-				<el-switch v-model="setting.search.engines" @change="setGlobalSetting" />
+				<el-select v-model="setting.search.engines">
+					<el-option v-for="item in engineList" :key="item.name" :label="item.name" :value="item.name">
+						<div class="flex flex-center">
+							<el-icon :size="24" class="mr10">
+								<svg-icon :name="item.icon" />
+							</el-icon>
+							{{ item.name }}
+						</div>
+					</el-option>
+				</el-select>
 			</el-form-item>
 			<el-divider>主题/壁纸</el-divider>
 			<el-form-item label="深色模式">
@@ -90,7 +136,7 @@ import { predefineColors, timeStepList } from '~/assets/utils/publicData';
 import { CopyDocument, RefreshRight } from '@element-plus/icons-vue';
 import { useDark, useToggle } from '@vueuse/core';
 
-const { setting, showDrawer } = storeToRefs(useSettingsStore());
+const { setting, showDrawer, engineList, currentEngine } = storeToRefs(useSettingsStore());
 const { setGlobalSetting, clearGlobalSetting, onColorPickerChange } = useSettingsStore();
 
 const isDark = useDark();

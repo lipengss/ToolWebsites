@@ -6,30 +6,50 @@
 					<div class="time">{{ state.time }}</div>
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
 				</div>
-				<div class="flex-around serach-engines">
-					<el-tooltip v-for="(item, index) in filterHotWebsiteList" :key="item.name" effect="light" :content="item.meta.description" placement="top">
-						<el-link :type="state.current === item.name ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.name)">
-							{{ item.name }}
-						</el-link>
-					</el-tooltip>
-				</div>
 				<template v-if="setting.search.show">
+					<div class="flex-around serach-engines">
+						<el-tooltip v-for="item in engineList" :key="item.name" effect="light" :content="item.description" placement="top">
+							<el-link :type="setting.search.engines === item.name ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.name)">
+								{{ item.name }}
+							</el-link>
+						</el-tooltip>
+					</div>
 					<el-autocomplete
 						v-if="setting.search.history"
 						v-model="state.query"
 						:fetch-suggestions="querySearch"
-						clearable
 						placeholder="请输入搜索内容"
+						size="large"
+						@keyup.enter="onActionSearch"
 						@select="handleSelect"
-					/>
-					<el-input v-else v-model="state.query" clearable size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
+					>
 						<template #suffix>
 							<el-icon :size="20">
 								<Search />
 							</el-icon>
 						</template>
 						<template #prefix>
-							<img width="20" height="20" :src="currentIcon" id="serach-icon" class="animate__animated animate__rotateInDownLeft" />
+							<el-icon :size="20">
+								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
+							</el-icon>
+						</template>
+						<template #default="{ item }">
+							<div class="flex-between">
+								<div class="value">{{ item }}</div>
+								<el-button :icon="Close" circle type="danger" size="small" plain @click.stop="removeHistoryRow(item)" />
+							</div>
+						</template>
+					</el-autocomplete>
+					<el-input v-else class="my-search" v-model="state.query" size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
+						<template #suffix>
+							<el-icon :size="20">
+								<Search />
+							</el-icon>
+						</template>
+						<template #prefix>
+							<el-icon :size="20">
+								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
+							</el-icon>
 						</template>
 					</el-input>
 				</template>
@@ -40,22 +60,19 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
-import { Search } from '@element-plus/icons-vue';
+import { Search, Close } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
 
-const { setting, engineList } = storeToRefs(useSettingsStore());
-const { querySearch } = useSettingsStore();
+const { setting, engineList, currentEngine } = storeToRefs(useSettingsStore());
+const { querySearch, setGlobalSetting, removeHistoryRow } = useSettingsStore();
 const { format, formatWeek } = useDateFormat();
 
 const inputHeight = computed(() => `${setting.value.search.height}px`);
 const inputRadius = computed(() => `${setting.value.search.radius}px`);
 const inputOpacity = computed(() => `rgba(255, 255, 255, ${setting.value.search.opacity})`);
 
-const HOTS = ['Baidu', 'Bing', 'Google', 'GitHub', '搜狗'];
-
 const state = reactive({
-	current: 'Baidu',
 	query: '',
 	date: format(new Date(), 'YYYY年MM月DD日'),
 	time: '',
@@ -74,21 +91,15 @@ onUnmounted(() => {
 	timer = null;
 });
 
-function handleSelect(item: IHistoryItem) {
-	console.log(item);
+function handleSelect(item: Record<string, any> | string): void {
+	if (typeof item === 'string') jumpQuery(item);
 }
-
-const currentIcon = computed(() => {
-	const item = engineList.find((item) => item.name === state.current);
-	return item?.meta.icon || '';
-});
 
 const currentWeek = computed(() => formatWeek());
 
-const filterHotWebsiteList = engineList.filter((item) => HOTS.includes(item.name));
-
 function onChangeEngines(key: string) {
-	state.current = key;
+	setting.value.search.engines = key;
+	setGlobalSetting();
 	const searchIconDom = document.getElementById('serach-icon');
 	if (searchIconDom) {
 		searchIconDom.classList.add('animate__animated', 'animate__rotateInDownLeft');
@@ -99,9 +110,15 @@ function onChangeEngines(key: string) {
 }
 
 function onActionSearch() {
-	const curEngines = engineList.find((item) => item.key === state.current);
-	if (!curEngines) return;
-	const searchUrl = `${curEngines.url}${state.query}`;
+	if (setting.value.search.historyList.some((queryString) => queryString === state.query)) return;
+	setting.value.search.historyList.push(state.query);
+	jumpQuery(state.query);
+	state.query = '';
+	setGlobalSetting();
+}
+
+function jumpQuery(queryString: string) {
+	const searchUrl = `${currentEngine.value.link}${queryString}`;
 	window.open(searchUrl, '_blank');
 }
 </script>
@@ -137,11 +154,17 @@ function onActionSearch() {
 				font-weight: bold;
 				text-shadow: 1px 1px 1px #000;
 				padding: 6px 4px;
+				// font-family: gomarice_rocks_serif;
+			}
+			.el-link--info {
+				color: var(--el-color-white);
 			}
 		}
 	}
 }
-:deep .el-input {
+:deep .my-search,
+:deep .el-autocomplete {
+	width: 100%;
 	margin-bottom: 20px;
 	.el-input__wrapper {
 		height: v-bind(inputHeight);

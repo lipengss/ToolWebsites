@@ -7,7 +7,6 @@ import { useDateFormat } from '~/hooks/useDateFormat';
 const { setTime } = useDateFormat();
 
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
-
 let timer: any = null;
 export const useSettingsStore = defineStore('settingStore', {
 	state(): ISettingState {
@@ -15,6 +14,12 @@ export const useSettingsStore = defineStore('settingStore', {
 			showDrawer: false,
 			setting: {
 				theme: '#2b793b',
+				date: {
+					size: 30,
+					color: '#fff',
+					font: '',
+					date: ['monthDay', 'week', 'lunar', 'sec', 'bold'],
+				},
 				search: {
 					show: true,
 					height: 60,
@@ -54,30 +59,41 @@ export const useSettingsStore = defineStore('settingStore', {
 				{
 					name: 'Google',
 					link: 'https://www.google.com/search?q=',
-					icon: 'https://www.google.com/favicon.ico',
+					icon: 'icon-chrome',
+					description: '最好用，但是访问需要点技术。',
 				},
 				{
 					name: 'Bing',
 					link: 'https://www.bing.com/search?q=',
-					icon: 'https://www.bing.com/favicon.ico',
+					icon: 'icon-bing',
+					description: '微软公司的搜索引擎，还可以。',
 				},
 				{
 					name: 'Baidu',
 					link: 'https://www.baidu.com/s?wd=',
-					icon: 'https://www.baidu.com/favicon.ico',
+					icon: 'icon-baidu',
+					description: '搜索结果不一定是你想要的，广告还多。',
 				},
 				{
 					name: 'GitHub',
 					link: 'https://www.github.com',
-					icon: 'https://www.github.com/favicon.ico',
+					icon: 'icon-github',
+					description: '最大的开源项目资源网站。',
 				},
 				{
 					name: '搜狗',
 					link: 'https://www.sogou.com/sogou?query=',
-					icon: 'https://www.sogou.com/favicon.ico',
+					icon: 'icon-sougou',
+					description: '搜狗提供的订阅号及文章内容搜索。',
 				},
 			],
 		};
+	},
+	getters: {
+		currentEngine(state) {
+			const item = state.engineList.find((item) => item.name === this.setting.search.engines);
+			return item;
+		},
 	},
 	actions: {
 		initGloabalSetting() {
@@ -136,8 +152,21 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		querySearch(queryString: string, cb: any) {
 			const { historyList } = this.setting.search;
-			const results = queryString ? historyList.filter(createFilter(queryString)) : historyList;
+			console.log(queryString);
+			const results = queryString ? historyList.filter(this.createFilter(queryString)) : historyList;
 			cb(results);
+		},
+		createFilter(queryString: string) {
+			console.log(queryString);
+			return (restaurant: string) => {
+				console.log(restaurant);
+				return restaurant.indexOf(queryString) === 0;
+			};
+		},
+		removeHistoryRow(queryString: string) {
+			const index = this.setting.search.historyList.findIndex((item) => item === queryString);
+			this.setting.search.historyList.splice(index, 1);
+			this.setGlobalSetting();
 		},
 	},
 });
