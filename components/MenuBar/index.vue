@@ -53,7 +53,7 @@ watch(
 </script>
 <style lang="scss" scoped>
 .el-aside {
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	backdrop-filter: blur(6px);

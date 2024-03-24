@@ -2,6 +2,7 @@
 @use './media.scss';
 html,
 body {
+	height: 100%;
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
@@ -12,12 +13,16 @@ body {
 	transition: background-image 0.3s ease-in-out;
 }
 
+#__nuxt {
+	height: 100%;
+}
 @font-face {
 	font-family: 'gomarice_rocks_serif';
 	src: url('~/assets/fonts/gomarice_rocks_serif.ttf');
 }
 
-ul, ol{
+ul,
+ol {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -48,11 +53,10 @@ ul, ol{
 	}
 }
 
-.el-form-item__label{
+.el-form-item__label {
 	text-align: left;
 }
-.el-drawer__header{
+.el-drawer__header {
 	margin-bottom: 0 !important;
 	padding-bottom: 20px !important;
 }
-
