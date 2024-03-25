@@ -1,15 +1,11 @@
 import { developers } from './developer';
-import { entertainment } from './entertainment';
-
-// 热门网站
-const hotWebsiteList: Array<RouteItem> = [...developers, ...entertainment];
 
 function filterHoutWebSiteList(type: string | string[]) {
 	if (typeof type === 'string') {
-		return hotWebsiteList.filter((item) => item.type.includes(type));
+		return developers.filter((item) => item.type.includes(type));
 	}
 	if (Array.isArray(type)) {
-		return hotWebsiteList.filter((item) => {
+		return developers.filter((item) => {
 			if (item.type === 'string') {
 				return type.includes(item.type);
 			}
@@ -20,4 +16,4 @@ function filterHoutWebSiteList(type: string | string[]) {
 	}
 }
 
-export { hotWebsiteList, filterHoutWebSiteList };
+export { developers, filterHoutWebSiteList };

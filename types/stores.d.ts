@@ -49,6 +49,16 @@ interface ISettingState {
 			color: string;
 			bgColor: string;
 		};
+		app: {
+			sceenWidth: number;
+			unit: '%' | 'px';
+			size: number;
+			radius: number;
+			async: boolean;
+			gap: number;
+			columnGap: number;
+			rowGap: number;
+		};
 	};
 	engineList: Array<IEngineItem>;
 }

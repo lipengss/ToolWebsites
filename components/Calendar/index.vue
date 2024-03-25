@@ -78,7 +78,7 @@ onMounted(() => {
 			align-items: center;
 		}
 		.day {
-			font-size: 60px;
+			font-size: 50px;
 			font-weight: bold;
 		}
 		.week {

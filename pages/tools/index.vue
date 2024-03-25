@@ -1,9 +1,9 @@
 <template>
-	<div class="container-grid">
+	<GirdLayout>
 		<div class="grid-item" v-for="app in siteList">
 			<Application :app="app" />
 		</div>
-	</div>
+	</GirdLayout>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';

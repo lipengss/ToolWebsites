@@ -4,7 +4,7 @@ import { Local } from '~/assets/utils/storage';
 import { getRandomNumber } from '~/assets/utils/tools';
 import { GLOBAL_SETTING, predefineColors } from '~/assets/utils/publicData';
 import { useDateFormat } from '~/hooks/useDateFormat';
-const { setTime } = useDateFormat();
+const { setTime, dayjs } = useDateFormat();
 
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
 let timer: any = null;
@@ -15,9 +15,9 @@ export const useSettingsStore = defineStore('settingStore', {
 			setting: {
 				theme: '#2b793b',
 				date: {
-					size: 30,
+					size: 35,
 					color: '#fff',
-					font: '',
+					font: 'rocks-serif',
 					date: ['monthDay', 'week', 'lunar', 'sec', 'bold'],
 				},
 				search: {
@@ -27,7 +27,7 @@ export const useSettingsStore = defineStore('settingStore', {
 					opacity: 0.2,
 					history: true,
 					translate: false,
-					engines: 'Baidu',
+					engines: 'Bing',
 					historyList: [],
 				},
 				bg: {
@@ -53,6 +53,16 @@ export const useSettingsStore = defineStore('settingStore', {
 					income: 800,
 					color: '#fff',
 					bgColor: predefineColors[0],
+				},
+				app: {
+					sceenWidth: 90,
+					unit: '%',
+					size: 60,
+					radius: 10,
+					async: true,
+					gap: 20,
+					columnGap: 20,
+					rowGap: 20,
 				},
 			},
 			engineList: [
@@ -92,7 +102,7 @@ export const useSettingsStore = defineStore('settingStore', {
 	getters: {
 		currentEngine(state) {
 			const item = state.engineList.find((item) => item.name === this.setting.search.engines);
-			return item;
+			return item || {};
 		},
 	},
 	actions: {

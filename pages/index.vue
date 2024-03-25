@@ -1,21 +1,22 @@
 <template>
-	<div class="container-grid">
-		<div class="grid-item weather-item">
+	<GirdLayout>
+		<GridItem size="5x2">
 			<Weather />
-		</div>
-		<div class="grid-item calendar-item">
+		</GridItem>
+		<GridItem size="5x2">
 			<Calendar />
-		</div>
-		<div class="grid-item off-work-item">
+		</GridItem>
+		<GridItem size="5x2">
 			<OffWork />
-		</div>
-		<div class="grid-item" v-for="app in siteList">
+		</GridItem>
+		<GridItem size="1x1" v-for="app in siteList">
 			<Application :app="app" />
-		</div>
-	</div>
+		</GridItem>
+	</GirdLayout>
 </template>
 <script setup lang="ts">
 import { filterHoutWebSiteList } from '~/assets/website/index';
+
 definePageMeta({
 	title: '首页',
 	rank: 0,
@@ -24,13 +25,3 @@ definePageMeta({
 
 const siteList = computed(() => filterHoutWebSiteList('developer'));
 </script>
-<style lang="scss" scoped>
-.container-grid {
-	.weather-item,
-	.calendar-item,
-	.off-work-item {
-		grid-column: span 5;
-		grid-row: span 2;
-	}
-}
-</style>

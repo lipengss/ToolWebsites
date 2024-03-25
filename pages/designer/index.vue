@@ -1,9 +1,9 @@
 <template>
-	<div class="container-grid">
-		<div class="grid-item" v-for="app in siteList">
+	<GirdLayout>
+		<GridItem size="1x1" v-for="app in siteList">
 			<Application :app="app" />
-		</div>
-	</div>
+		</GridItem>
+	</GirdLayout>
 </template>
 <script setup lang="ts">
 import { filterHoutWebSiteList } from '~/assets/website/index';

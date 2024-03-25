@@ -72,6 +72,11 @@ const inputHeight = computed(() => `${setting.value.search.height}px`);
 const inputRadius = computed(() => `${setting.value.search.radius}px`);
 const inputOpacity = computed(() => `rgba(255, 255, 255, ${setting.value.search.opacity})`);
 
+const dateColor = computed(() => setting.value.date.color);
+const dateFont = computed(() => setting.value.date.font);
+const dateSize = computed(() => `${setting.value.date.size}px`);
+const dateBold = computed(() => (setting.value.date.date.includes('bold') ? 'bold' : 'normal'));
+
 const state = reactive({
 	query: '',
 	date: format(new Date(), 'YYYY年MM月DD日'),
@@ -85,10 +90,6 @@ onMounted(() => {
 	timer = setInterval(() => {
 		state.time = format(new Date(), 'HH:mm:ss');
 	}, 1000);
-});
-onUnmounted(() => {
-	clearInterval(timer);
-	timer = null;
 });
 
 function handleSelect(item: Record<string, any> | string): void {
@@ -136,14 +137,15 @@ function jumpQuery(queryString: string) {
 			min-width: 140px;
 			margin-top: 10vh;
 			text-align: center;
-			color: var(--el-color-white);
+			color: v-bind(dateColor);
 			text-shadow: 1px 1px 1px #000;
 			.time {
-				font-family: gomarice_rocks_serif;
-				font-size: 36px;
+				font-family: v-bind(dateFont);
+				font-size: v-bind(dateSize);
 			}
 			.date {
 				font-size: 12px;
+				font-weight: v-bind(dateBold);
 			}
 		}
 		.serach-engines {

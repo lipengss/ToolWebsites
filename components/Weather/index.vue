@@ -13,7 +13,7 @@
 			<div class="weather-info">
 				<div>{{ toDay.weather }}</div>
 				<div>{{ toDay.winddirection }}风 {{ toDay.windpower }}级</div>
-				<div>空气湿度 {{ toDay.humidity }}</div>
+				<!-- <div>湿度 {{ toDay.humidity }}</div> -->
 			</div>
 		</div>
 		<div class="forecasts">
@@ -86,7 +86,7 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 .wrapper {
 	width: 100%;
 	height: 100%;
-	padding: 10px;
+	padding: 8px 10px 10px 10px;
 	border-radius: var(--app-radius);
 	box-sizing: border-box;
 	color: #fff;
@@ -97,7 +97,6 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 		}
 	}
 	.weather {
-		margin-bottom: 6px;
 		.temper {
 			font-size: 40px;
 			font-weight: bold;

@@ -54,6 +54,10 @@ watch(
 <style lang="scss" scoped>
 .el-aside {
 	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
 	display: flex;
 	flex-direction: column;
 	backdrop-filter: blur(6px);

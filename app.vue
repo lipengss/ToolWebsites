@@ -12,6 +12,5 @@ useSeoMeta({
 	description: '图片转base64、图片压缩',
 	keywords: '图片转base64、图片压缩、图片处理、在线工具、工具集合',
 });
-
 const locale = ref(zhCn);
 </script>

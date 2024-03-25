@@ -16,13 +16,13 @@
 				<div class="day">天</div>
 			</div>
 			<div class="card-item" v-if="props.settings.showItem.includes('nextFestival')">
-				<div class="card-item-title">妇女节</div>
-				<div class="card-item-content">0</div>
+				<div class="card-item-title">{{ holidays.name }}</div>
+				<div class="card-item-content">{{ holidays.diff }}</div>
 				<div class="day">天</div>
 			</div>
 			<div class="card-item" v-if="props.settings.showItem.includes('income')">
 				<div class="card-item-title">今天赚了</div>
-				<div class="card-item-content">799.217</div>
+				<div class="card-item-content">{{ state.currentSalary }}</div>
 				<div class="day">￥</div>
 			</div>
 		</div>
@@ -32,6 +32,7 @@
 import { reactive } from 'vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 const { dayjs, weekFormat } = useDateFormat();
+const { $Solar, $HolidayUtil } = useNuxtApp();
 
 interface Props {
 	settings: {
@@ -49,6 +50,25 @@ const props = withDefaults(defineProps<Props>(), {});
 
 const state = reactive({
 	displayText: '00:00:00',
+	currentSalary: 0,
+});
+
+// 节日安排
+const holidays = computed(() => {
+	const date = dayjs();
+	const result: Array<HolidayItem> = [];
+	$HolidayUtil.getHolidays(date.year()).forEach((holiday) => {
+		const exists = result.some((a) => {
+			return a.name == holiday.getName();
+		});
+		if (!exists) {
+			const now = $Solar.fromDate(dayjs(holiday.getDay()).toDate());
+			const target = $Solar.fromDate(dayjs(date).toDate());
+			result.push({ name: holiday.getName(), date: holiday.getDay(), diff: now.subtract(target) });
+		}
+	});
+
+	return result.filter((item) => item.diff > 0)[0] || { name: '', date: '', diff: 0 };
 });
 
 const emits = defineEmits(['showDialog']);
@@ -87,6 +107,17 @@ const updateDisplayText = () => {
 		state.displayText = duration;
 	}
 };
+function calculateSalary() {
+	const currentTime = dayjs();
+	if (currentTime.isBetween(props.settings.workHours[0], props.settings.workHours[1])) {
+		const totalSeconds = dayjs(props.settings.workHours[1]).diff(dayjs(props.settings.workHours[0]), 'second');
+		const currentSeconds = currentTime.diff(dayjs(props.settings.workHours[0]), 'second');
+		const increnmentRate = currentSeconds / totalSeconds;
+		state.currentSalary = parseFloat((props.settings.income * increnmentRate).toFixed(1));
+	} else {
+		state.currentSalary = 0;
+	}
+}
 
 function isWork() {
 	const week = weekFormat[dayjs().weekday()];
@@ -102,6 +133,8 @@ function isWork() {
 
 onMounted(() => {
 	isWork();
+	calculateSalary();
+	setInterval(calculateSalary, 1000);
 });
 
 watch(
@@ -118,7 +151,7 @@ watch(
 .off-work {
 	width: 100%;
 	height: 100%;
-	padding: 10px;
+	padding: 8px 10px 10px 10px;
 	border-radius: var(--app-radius);
 	box-sizing: border-box;
 	background-color: v-bind('props.settings.bgColor');
@@ -128,9 +161,8 @@ watch(
 	background-position: 95% center;
 	color: v-bind('props.settings.color');
 	.time {
-		font-size: 30px;
+		font-size: 28px;
 		font-weight: bold;
-		margin-bottom: 4px;
 	}
 	.card {
 		display: flex;

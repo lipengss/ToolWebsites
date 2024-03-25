@@ -5,12 +5,14 @@ import isTomorrow from 'dayjs/plugin/isTomorrow';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
 import duration from 'dayjs/plugin/duration';
+import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(duration);
 dayjs.extend(dayOfYear); // 一年第几天
 dayjs.extend(weekOfYear); // 一年第几周
 dayjs.extend(weekday); // 星期
 dayjs.extend(isToday); // 今天
 dayjs.extend(isTomorrow); // 明天
+dayjs.extend(isBetween); // 一个时间是否介于两个时间之间
 
 const weekFormat: { [key: number]: string } = {
 	1: '一',
