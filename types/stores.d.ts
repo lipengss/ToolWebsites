@@ -58,7 +58,9 @@ interface ISettingState {
 			gap: number;
 			columnGap: number;
 			rowGap: number;
+			opacity: number;
 		};
+		hotWebRanks: { [key: string]: number };
 	};
 	engineList: Array<IEngineItem>;
 }

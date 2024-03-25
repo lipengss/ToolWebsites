@@ -152,7 +152,6 @@ watch(
 	width: 100%;
 	height: 100%;
 	padding: 8px 10px 10px 10px;
-	border-radius: var(--app-radius);
 	box-sizing: border-box;
 	background-color: v-bind('props.settings.bgColor');
 	background-image: url('~/assets/img/boy.svg');

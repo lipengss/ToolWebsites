@@ -63,7 +63,9 @@ export const useSettingsStore = defineStore('settingStore', {
 					gap: 20,
 					columnGap: 20,
 					rowGap: 20,
+					opacity: 1,
 				},
+				hotWebRanks: {},
 			},
 			engineList: [
 				{

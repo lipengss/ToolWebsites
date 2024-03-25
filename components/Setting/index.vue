@@ -2,24 +2,6 @@
 	<el-drawer v-model="showDrawer" title="风 格 配 置" size="450px">
 		<el-form :model="setting" ref="formRef" label-width="80px">
 			<el-collapse v-model="activeName" accordion>
-				<el-collapse-item name="app">
-					<template #title>
-						<div class="collapse-title">
-							<el-icon :size="20"><svg-icon name="app" /> </el-icon>
-							<span>图标布局</span>
-						</div>
-					</template>
-					<!-- 
-							sceenWidth: 90,
-							unit: '%',
-							size: 60,
-							radius: 10,
-							async: true,
-							gap: 20,
-							columnGap: 20,
-							rowGap: 20,
-					 -->
-				</el-collapse-item>
 				<el-collapse-item name="theme">
 					<template #title>
 						<div class="collapse-title">
@@ -52,6 +34,66 @@
 								<el-option v-for="item in timeStepList" :key="item.value" :label="item.label" :value="item.value" />
 							</el-select>
 						</el-space>
+					</el-form-item>
+				</el-collapse-item>
+				<el-collapse-item name="app">
+					<template #title>
+						<div class="collapse-title">
+							<el-icon :size="20"><svg-icon name="app" /> </el-icon>
+							<span>图标布局</span>
+						</div>
+					</template>
+					<el-form-item label="图标大小">
+						<div class="slider-wrap">
+							<el-slider v-model="setting.app.size" :min="60" :max="100" :step="1" @change="setGlobalSetting" />
+							<el-tag type="primary">{{ setting.app.size }}PX</el-tag>
+						</div>
+					</el-form-item>
+					<el-form-item label="图标圆角">
+						<div class="slider-wrap">
+							<el-slider v-model="setting.app.radius" :min="0" :max="50" :step="1" @change="setGlobalSetting" />
+							<el-tag type="primary">{{ setting.app.radius }}PX</el-tag>
+						</div>
+					</el-form-item>
+					<el-form-item label="不透明度">
+						<div class="slider-wrap">
+							<el-slider v-model="setting.app.opacity" :min="0" :max="1" :step="0.01" @change="setGlobalSetting" />
+							<el-tag type="primary">{{ setting.app.opacity }}%</el-tag>
+						</div>
+					</el-form-item>
+					<el-form-item label="间距同步">
+						<el-switch v-model="setting.app.async" @change="setGlobalSetting" />
+					</el-form-item>
+					<template v-if="setting.app.async">
+						<el-form-item label="图标间距">
+							<div class="slider-wrap">
+								<el-slider v-model="setting.app.gap" :min="20" :max="60" :step="1" @change="setGlobalSetting" />
+								<el-tag type="primary">{{ setting.app.gap }}PX</el-tag>
+							</div>
+						</el-form-item>
+					</template>
+					<template v-else>
+						<el-form-item label="X间距">
+							<div class="slider-wrap">
+								<el-slider v-model="setting.app.columnGap" :min="20" :max="60" :step="1" @change="setGlobalSetting" />
+								<el-tag type="primary">{{ setting.app.columnGap }}PX</el-tag>
+							</div>
+						</el-form-item>
+						<el-form-item label="Y间距">
+							<div class="slider-wrap">
+								<el-slider v-model="setting.app.rowGap" :min="20" :max="60" :step="1" @change="setGlobalSetting" />
+								<el-tag type="primary">{{ setting.app.rowGap }}PX</el-tag>
+							</div>
+						</el-form-item>
+					</template>
+					<el-form-item label="宽度单位">
+						<el-switch v-model="setting.app.unit" active-value="PX" ctive-text="PX" inactive-value="%" inactive-text="%" @change="setGlobalSetting" />
+					</el-form-item>
+					<el-form-item label="最大宽度">
+						<div class="slider-wrap">
+							<el-slider v-model="setting.app.sceenWidth" :min="40" :max="100" :step="1" @change="setGlobalSetting" />
+							<el-tag type="primary">{{ setting.app.sceenWidth }}{{ setting.app.unit }}</el-tag>
+						</div>
 					</el-form-item>
 				</el-collapse-item>
 				<el-collapse-item name="date">
@@ -221,6 +263,12 @@ function changeThemeColor() {
 				background-color: var(--el-text-color-regular);
 				color: var(--el-color-white);
 			}
+		}
+		.el-tag {
+			min-width: 60px;
+		}
+		:deep .el-collapse-item__wrap {
+			padding-right: 10px;
 		}
 	}
 }

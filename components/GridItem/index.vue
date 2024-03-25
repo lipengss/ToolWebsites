@@ -1,6 +1,9 @@
 <template>
-	<div :class="`app-size-${props.size}`" class="app-box">
-		<slot />
+	<div :class="`app-size-${props.size}`" class="app-wrapper">
+		<div class="app-box">
+			<slot />
+		</div>
+		<div class="name singe-line">{{ props.name }}</div>
 	</div>
 </template>
 <script setup lang="ts">
@@ -17,6 +20,8 @@ const columnGap = computed(() => {
 	return (async ? gap : columnGap) + 'px';
 });
 
+const columnPosition = computed(() => -columnGap.value);
+
 const rowGap = computed(() => {
 	const { async, gap, rowGap } = setting.value.app;
 	return (async ? gap : rowGap) + 'px';
@@ -24,24 +29,39 @@ const rowGap = computed(() => {
 
 interface Props {
 	size: '1x1' | '1x2' | '2x2' | '5x2';
-	borderRadius?: 10;
+	name?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
 	size: '1x1',
-	borderRadius: 10,
 });
 
-const radius = computed(() => props.borderRadius + 'px');
+const radius = computed(() => setting.value.app.radius + 'px');
+const opacity = computed(() => setting.value.app.opacity);
 </script>
 <style lang="scss" scoped>
 $width: v-bind(appSize);
 $height: v-bind(appSize);
 $columnGap: v-bind(columnGap);
 $rowGap: v-bind(rowGap);
-
+.app-wrapper {
+	position: relative;
+	opacity: v-bind(opacity);
+	.name {
+		width: 100%;
+		height: v-bind(columnGap);
+		line-height: v-bind(columnGap);
+		position: absolute;
+		bottom: v-bind(columnPosition);
+		font-size: 12px;
+		text-align: center;
+		color: #fff;
+	}
+}
 .app-box {
+	height: 100%;
 	border-radius: v-bind(radius);
+	overflow: hidden;
 }
 .app-size-1x1 {
 	width: $width;

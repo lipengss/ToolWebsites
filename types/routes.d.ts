@@ -5,7 +5,7 @@ interface RouteItem {
 	description?: string;
 	meta: {
 		[key: string]: any;
-		icon?: string; // 图表
+		icon: string; // 图表
 		rank: number; // 排序
 		description?: string; // 描述
 		hidden?: boolean; // 是否隐藏

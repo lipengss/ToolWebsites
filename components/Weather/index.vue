@@ -87,7 +87,6 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 	width: 100%;
 	height: 100%;
 	padding: 8px 10px 10px 10px;
-	border-radius: var(--app-radius);
 	box-sizing: border-box;
 	color: #fff;
 	.location {
