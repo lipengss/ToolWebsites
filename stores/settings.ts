@@ -4,69 +4,72 @@ import { Local } from '~/assets/utils/storage';
 import { getRandomNumber } from '~/assets/utils/tools';
 import { GLOBAL_SETTING, predefineColors } from '~/assets/utils/publicData';
 import { useDateFormat } from '~/hooks/useDateFormat';
+import { developers } from '~/assets/website';
 const { setTime, dayjs } = useDateFormat();
-
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
+
+const defaultSetting: ISetting = {
+	theme: '#2b793b',
+	date: {
+		size: 35,
+		color: '#fff',
+		font: 'rocks-serif',
+		date: ['monthDay', 'week', 'lunar', 'sec', 'bold'],
+	},
+	search: {
+		show: true,
+		height: 60,
+		radius: 50,
+		opacity: 0.2,
+		history: true,
+		translate: false,
+		engines: 'Bing',
+		historyList: [],
+	},
+	bg: {
+		picture: imgList[0],
+		opacity: 0.5,
+		blur: 6,
+		auto: false,
+		autoTime: 60000,
+	},
+	menuBar: {
+		width: 60,
+		blur: 6,
+		bgColor: 'rgba(255, 255, 255, 0.1)',
+		color: 'rgba(233, 233, 233, 0.6)',
+		autoHide: false,
+	},
+	offWork: {
+		payday: 10,
+		workday: ['一', '二', '三', '四', '五'],
+		isWorkDay: true,
+		showItem: ['payDay', 'fromFriday', 'nextFestival', 'income'],
+		workHours: [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()],
+		income: 800,
+		color: '#fff',
+		bgColor: predefineColors[0],
+	},
+	app: {
+		sceenWidth: 80,
+		unit: '%',
+		size: 60,
+		radius: 10,
+		async: true,
+		gap: 30,
+		columnGap: 30,
+		rowGap: 30,
+		opacity: 1,
+	},
+	hotWebRanks: {},
+};
+
 let timer: any = null;
 export const useSettingsStore = defineStore('settingStore', {
 	state(): ISettingState {
 		return {
 			showDrawer: false,
-			setting: {
-				theme: '#2b793b',
-				date: {
-					size: 35,
-					color: '#fff',
-					font: 'rocks-serif',
-					date: ['monthDay', 'week', 'lunar', 'sec', 'bold'],
-				},
-				search: {
-					show: true,
-					height: 60,
-					radius: 50,
-					opacity: 0.2,
-					history: true,
-					translate: false,
-					engines: 'Bing',
-					historyList: [],
-				},
-				bg: {
-					picture: imgList[0],
-					opacity: 0.5,
-					blur: 6,
-					auto: false,
-					autoTime: 60000,
-				},
-				menuBar: {
-					width: 60,
-					blur: 6,
-					bgColor: 'rgba(255, 255, 255, 0.1)',
-					color: 'rgba(233, 233, 233, 0.6)',
-					autoHide: false,
-				},
-				offWork: {
-					payday: 10,
-					workday: ['一', '二', '三', '四', '五'],
-					isWorkDay: true,
-					showItem: ['payDay', 'fromFriday', 'nextFestival', 'income'],
-					workHours: [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()],
-					income: 800,
-					color: '#fff',
-					bgColor: predefineColors[0],
-				},
-				app: {
-					sceenWidth: 90,
-					unit: '%',
-					size: 60,
-					radius: 10,
-					async: true,
-					gap: 20,
-					columnGap: 20,
-					rowGap: 20,
-					opacity: 1,
-				},
-				hotWebRanks: {},
-			},
+			setting: useCloneDeep(defaultSetting),
 			engineList: [
 				{
 					name: 'Google',
@@ -109,9 +112,11 @@ export const useSettingsStore = defineStore('settingStore', {
 	},
 	actions: {
 		initGloabalSetting() {
+			// 保存默认配置
 			if (Local.get(GLOBAL_SETTING)) {
 				this.setting = Local.get(GLOBAL_SETTING);
 			} else {
+				this.setDefaultHotWebSiteList();
 				Local.set(GLOBAL_SETTING, this.setting);
 			}
 			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);
@@ -159,8 +164,8 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		clearGlobalSetting() {
 			Local.clear();
+			this.setting = useCloneDeep(defaultSetting);
 			this.initGloabalSetting();
-			window.location.reload();
 		},
 		querySearch(queryString: string, cb: any) {
 			const { historyList } = this.setting.search;
@@ -179,6 +184,13 @@ export const useSettingsStore = defineStore('settingStore', {
 			const index = this.setting.search.historyList.findIndex((item) => item === queryString);
 			this.setting.search.historyList.splice(index, 1);
 			this.setGlobalSetting();
+		},
+		setDefaultHotWebSiteList() {
+			const hot = developers.filter((item) => item.meta.rank !== 0);
+			hot.forEach((item) => {
+				const { icon, rank } = item.meta;
+				this.setting.hotWebRanks[icon] = rank;
+			});
 		},
 	},
 });

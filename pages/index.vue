@@ -1,7 +1,7 @@
 <template>
 	<GirdLayout>
 		<GridItem size="5x2" name="天气">
-			<!-- <Weather /> -->
+			<Weather />
 		</GridItem>
 		<GridItem size="5x2" name="日历">
 			<Calendar />

@@ -50,7 +50,7 @@ $rowGap: v-bind(rowGap);
 	.name {
 		width: 100%;
 		height: v-bind(columnGap);
-		line-height: v-bind(columnGap);
+		line-height: 24px;
 		position: absolute;
 		bottom: v-bind(columnPosition);
 		font-size: 12px;

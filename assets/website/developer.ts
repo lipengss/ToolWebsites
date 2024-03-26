@@ -370,4 +370,16 @@ export const developers: RouteItem[] = [
 			description: '独家的视角为用户深度剖析最前沿的资讯',
 		},
 	},
+	{
+		name: 'ChatGPT',
+		path: 'https://chat.openai.com/',
+		type: ['developer', 'designer'],
+		meta: {
+			rank: 30,
+			icon: 'app-openAi',
+			bgColor: '#75A99C',
+			color: '#fff',
+			description: '独家的视角为用户深度剖析最前沿的资讯',
+		},
+	},
 ];

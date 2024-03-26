@@ -1,9 +1,9 @@
 <template>
 	<el-tooltip effect="light" :content="app.meta.description" placement="top">
 		<div class="appliaction">
-			<nuxt-link :to="app.path" target="_blank" class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }" @click="onclick">
+			<div class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }" @click="onclick">
 				<el-icon :size="app.meta.size || 40" v-if="app.meta.icon"><svg-icon :name="app.meta.icon" :color="app.meta.color"></svg-icon></el-icon>
-			</nuxt-link>
+			</div>
 		</div>
 	</el-tooltip>
 </template>
@@ -21,6 +21,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 
 function onclick() {
+	window.open(props.app.path);
 	const { icon } = props.app.meta;
 	if (Object.prototype.hasOwnProperty.call(setting.value.hotWebRanks, icon)) {
 		setting.value.hotWebRanks[icon]++;
