@@ -382,4 +382,27 @@ export const developers: RouteItem[] = [
 			description: '独家的视角为用户深度剖析最前沿的资讯',
 		},
 	},
+	{
+		name: '百度翻译',
+		path: 'https://fanyi.baidu.com/mtpe-individual/multimodal?aldtype=16047#/auto/zh',
+		type: 'developer',
+		meta: {
+			rank: 20,
+			icon: 'app-baidufanyi',
+			bgColor: '#0299FF',
+			color: '#fff',
+			description: '百度翻译',
+		},
+	},
+	{
+		name: '语雀',
+		path: 'https://www.yuque.com/',
+		type: 'developer',
+		meta: {
+			rank: 18,
+			icon: 'app-yuque',
+			bgColor: '#fff',
+			description: '博客技术栈在线工具资源网站UI库后端技术稀土掘金微信百...',
+		},
+	},
 ];

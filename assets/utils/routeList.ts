@@ -14,7 +14,7 @@ export const routeList: Array<RouteItem> = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'editor',
+			icon: 'menu-editor',
 		},
 	},
 	{
@@ -23,7 +23,7 @@ export const routeList: Array<RouteItem> = [
 		type: 'designer',
 		meta: {
 			rank: 0,
-			icon: 'designer',
+			icon: 'menu-designer',
 		},
 	},
 	{
@@ -32,7 +32,7 @@ export const routeList: Array<RouteItem> = [
 		type: 'productManager',
 		meta: {
 			rank: 0,
-			icon: 'productManager',
+			icon: 'menu-productManager',
 		},
 	},
 	{
@@ -41,7 +41,7 @@ export const routeList: Array<RouteItem> = [
 		type: 'tools',
 		meta: {
 			rank: 0,
-			icon: 'tools',
+			icon: 'menu-tools',
 		},
 	},
 	{
@@ -50,7 +50,7 @@ export const routeList: Array<RouteItem> = [
 		type: 'entertainment',
 		meta: {
 			rank: 0,
-			icon: 'entertainment',
+			icon: 'menu-entertainment',
 		},
 	},
 ];

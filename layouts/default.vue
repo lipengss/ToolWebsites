@@ -2,8 +2,13 @@
 	<el-container class="el-container-parent" @contextmenu.prevent="contextmenu">
 		<MenuBar />
 		<el-container class="el-container-child">
-			<Engines />
-			<div class="main"><slot /></div>
+			<el-scrollbar>
+				<Engines />
+				<div class="main"><slot /></div>
+				<el-footer>
+					<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
+				</el-footer>
+			</el-scrollbar>
 		</el-container>
 		<div v-if="!loading" class="loading" />
 		<div class="wallpaper">
@@ -12,9 +17,6 @@
 			</el-icon>
 		</div>
 		<Setting />
-		<el-footer>
-			<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
-		</el-footer>
 		<transition name="popup">
 			<div class="contextmenu" v-if="context.show" :style="{ left: context.clientX + 'px', top: context.clientY + 'px' }">
 				<div class="item" @click="changeWallpaper">
