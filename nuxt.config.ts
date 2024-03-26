@@ -17,6 +17,10 @@ export default defineNuxtConfig({
 		port: 8170,
 		host: 'localhost',
 	},
+	server: {
+		host: '0.0.0.0',
+		port: 8170,
+	},
 	vite: {
 		plugins: [
 			createSvgIconsPlugin({

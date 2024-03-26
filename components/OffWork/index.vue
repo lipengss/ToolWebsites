@@ -77,7 +77,6 @@ import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { useDateFormat } from '~/hooks/useDateFormat';
 const { dayjs, weekFormat } = useDateFormat();
-import { cloneDeep } from 'lodash';
 
 const { setting } = storeToRefs(useSettingsStore());
 const { setGlobalSetting } = useSettingsStore();
@@ -87,12 +86,12 @@ const offWork = computed(() => setting.value.offWork);
 const state = reactive({
 	visible: false,
 	fullscreen: false,
-	dialogSettings: cloneDeep(offWork.value),
+	dialogSettings: useCloneDeep(offWork.value),
 });
 
 function onShowDialog() {
 	state.visible = true;
-	state.dialogSettings = cloneDeep(offWork.value);
+	state.dialogSettings = useCloneDeep(offWork.value);
 }
 
 // 获取当月的天数
@@ -101,7 +100,7 @@ const days = computed(() => {
 });
 
 function onSaveSettings() {
-	setting.value.offWork = cloneDeep(state.dialogSettings);
+	setting.value.offWork = useCloneDeep(state.dialogSettings);
 	setGlobalSetting();
 	state.visible = false;
 }

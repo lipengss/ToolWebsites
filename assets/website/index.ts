@@ -1,8 +1,6 @@
 import { developers } from './developer';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { orderBy } from 'lodash';
-
 function filterHoutWebSiteList(type: string | string[]) {
 	let result: Array<RouteItem> = [];
 	if (typeof type === 'string') {
@@ -32,7 +30,7 @@ function sortWebRanks(webList: Array<RouteItem>) {
 				item.meta.rank = hotWebRanks[icon];
 			}
 		});
-		const orderByList = orderBy(webList, 'meta.rank', 'desc');
+		const orderByList = useOrderBy(webList, 'meta.rank', 'desc');
 		return orderByList;
 	} else {
 		return webList;

@@ -37,9 +37,6 @@ dependencies:
   json-editor-vue:
     specifier: ^0.12.0
     version: 0.12.0(@lezer/common@1.2.1)(vue@3.4.15)
-  lodash:
-    specifier: ^4.17.21
-    version: 4.17.21
   lunar-typescript:
     specifier: ^1.7.4
     version: 1.7.4
