@@ -64,10 +64,10 @@ onMounted(() => {
 	}
 
 	.el-container-child {
-		padding: 0 v-bind(asideWidth);
 		flex-direction: column;
 		.main {
 			position: relative;
+			padding: 0 calc(v-bind(asideWidth) + 10px);
 		}
 	}
 }
