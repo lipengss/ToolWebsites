@@ -50,14 +50,16 @@ interface LivesItem {
 	reporttime: string; // 数据发布时间
 }
 
+interface IForecasts {
+	adcode: string;
+	city: string;
+	province: string;
+	reporttime: string;
+	casts: Array<WeatherItem>;
+}
+
 interface QueryWeather {
-	forecasts: Array<{
-		adcode: string;
-		city: string;
-		province: string;
-		reporttime: string;
-		casts: Array<WeatherItem>;
-	}>;
+	forecasts: Array<IForecasts>;
 	lives: Array<LivesItem>;
 }
 

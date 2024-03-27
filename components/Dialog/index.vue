@@ -1,5 +1,5 @@
 <template>
-	<el-dialog v-model="props.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable>
+	<el-dialog v-model="state.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable>
 		<template #header>
 			<div class="flex-end">
 				<el-button :icon="FullScreen" circle size="small" @click="state.fullscreen = !state.fullscreen" />
@@ -19,8 +19,16 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 
 const state = reactive({
+	visible: false,
 	fullscreen: false,
 });
 
 const emits = defineEmits(['update:visible']);
+
+watch(
+	() => props.visible,
+	(visible: boolean) => {
+		state.visible = visible;
+	}
+);
 </script>

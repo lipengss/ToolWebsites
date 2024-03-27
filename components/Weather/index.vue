@@ -5,7 +5,7 @@
 				<el-icon><Location /></el-icon> <span class="city-name">{{ toDay.city }}</span>
 			</div>
 			<el-tooltip content="更新天气" placement="top" effect="light">
-				<el-icon @click="getWeather"><Refresh /></el-icon>
+				<el-icon @click="getCurrentWeather"><Refresh /></el-icon>
 			</el-tooltip>
 		</div>
 		<div class="weather flex-between">
@@ -13,58 +13,92 @@
 			<div class="weather-info">
 				<div>{{ toDay.weather }}</div>
 				<div>{{ toDay.winddirection }}风 {{ toDay.windpower }}级</div>
-				<!-- <div>湿度 {{ toDay.humidity }}</div> -->
 			</div>
 		</div>
-		<div class="forecasts">
-			<div class="info" v-for="item in forecasts[0].casts">
+		<div class="forecasts" v-if="state.forecasts.length">
+			<div class="info" v-for="item in state.forecasts[0].casts">
 				<span>{{ _formatWeek(item.date) }}</span>
 				<span class="date">{{ format(item.date, 'M月D日') }}</span>
-				<el-icon :size="18" v-if="item.dayweather === '晴' && night"><svg-icon name="月亮" /></el-icon>
-				<el-icon :size="20" v-if="item.dayweather === '晴' && !night"><svg-icon name="晴" /></el-icon>
-				<el-icon :size="20" v-else-if="item.dayweather === '阴'"><svg-icon name="阴" /></el-icon>
-				<el-icon :size="20" v-if="item.dayweather === '雨夹雪'"><svg-icon name="雨夹雪" /></el-icon>
-				<el-icon :size="20" v-if="item.dayweather === '多云'"><svg-icon name="多云" /></el-icon>
-				<el-icon :size="20" v-if="item.dayweather === '扬沙'"><svg-icon name="扬沙" /></el-icon>
+				<el-icon v-if="item.dayweather === '晴' && night" :size="20" :title="item.dayweather">
+					<svg-icon name="月亮" />
+				</el-icon>
+				<el-icon v-else-if="item.dayweather === '晴' && !night" :size="20" :title="item.dayweather">
+					<svg-icon name="晴" />
+				</el-icon>
+				<el-icon v-else :size="20" :title="item.dayweather">
+					<svg-icon :name="item.dayweather" />
+				</el-icon>
 			</div>
 		</div>
 	</div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import qs from 'qs';
+import { ElMessage } from 'element-plus';
 import { Location, Refresh } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 
 const { isToday, isTomorrow, format, dayjs, formatWeek } = useDateFormat();
 
+// var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]{1,}/;
+// const svgList = Object.keys(import.meta.glob('/assets/svg/*.*'))
+// 	.filter((item) => reg.test(item))
+// 	.map((item) => {
+// 		const s = item.split('/');
+// 		return s[s.length - 1].split('.')[0];
+// 	});
+
 const now = dayjs();
 
 const night = computed(() => now.hour() >= 18 && now.hour() > 6);
 
-const key = 'ff03de30ff1c0ad671a12699414250e7';
-
-// 查询位置
-const { adcode }: QueryLocation = await $fetch(`https://restapi.amap.com/v3/ip?${qs.stringify({ key })}`);
-
-// 查询天气
-const queryWeather = {
-	key,
-	city: adcode,
-};
-
-const weatherLives = ref<LivesItem[]>([]);
-
-const getWeather = useDebounce(
-	async () => {
-		const { lives }: QueryWeather = await $fetch(`https://restapi.amap.com/v3/weather/weatherInfo?${qs.stringify(queryWeather)}`);
-		weatherLives.value = lives;
+const state: IWeatherState = reactive({
+	forecasts: [],
+	payload: {
+		key: 'ff03de30ff1c0ad671a12699414250e7',
+		city: '',
 	},
-	1000,
-	{
-		leading: true,
+	lives: [],
+});
+
+async function initCity() {
+	try {
+		const { data }: any = await useAsyncData('getAdcode', () => $fetch(`https://restapi.amap.com/v3/ip?${qs.stringify({ key: state.payload.key })}`));
+		const { adcode, status, info } = data.value;
+		if (status === '0') return ElMessage.error(info);
+		state.payload.city = adcode;
+		await getCurrentWeather();
+		await getAllWeather();
+	} catch (err) {}
+}
+
+async function getCurrentWeather() {
+	try {
+		const { data }: any = await useFetch('https://restapi.amap.com/v3/weather/weatherInfo', { query: state.payload });
+		const { lives, status, info }: any = data.value;
+		if (status === '0') return ElMessage.error(info);
+		state.lives = lives;
+	} catch (err) {
+		console.log(err);
 	}
-);
+}
+
+async function getAllWeather() {
+	try {
+		const { data }: any = await useAsyncData('getWeather', () =>
+			$fetch(`https://restapi.amap.com/v3/weather/weatherInfo?${qs.stringify({ ...state.payload, extensions: 'all' })}`)
+		);
+		const { forecasts, status, info } = data.value;
+		if (status === '0') return ElMessage.error(info);
+		state.forecasts = forecasts;
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+initCity();
+
 function _formatWeek(date: Date) {
 	if (isToday(date)) {
 		return '今天';
@@ -75,12 +109,7 @@ function _formatWeek(date: Date) {
 	}
 }
 
-const { forecasts }: QueryWeather = await $fetch(
-	`https://restapi.amap.com/v3/weather/weatherInfo?${qs.stringify({ ...queryWeather, extensions: 'all' })}`
-);
-
-getWeather();
-const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? weatherLives.value[0] : undefined));
+const toDay = computed(() => (state.lives && state.lives.length ? state.lives[0] : undefined));
 </script>
 <style lang="scss" scoped>
 .wrapper {
@@ -89,6 +118,7 @@ const toDay = computed(() => (weatherLives.value && weatherLives.value.length ? 
 	padding: 8px 10px 10px 10px;
 	box-sizing: border-box;
 	color: #fff;
+	background: linear-gradient(45deg, #237fca 58%, rgba(233, 241, 246, 0.91) 100%);
 	.location {
 		.city-name {
 			font-size: 14px;

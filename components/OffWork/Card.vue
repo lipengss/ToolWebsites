@@ -38,7 +38,7 @@ interface Props {
 	settings: {
 		showItem: Array<string>;
 		payday: number;
-		workHours: [Date, Date];
+		workHours: [string, string];
 		income: number;
 		color: string;
 		bgColor: string;
@@ -82,6 +82,18 @@ const fromFriday = computed(() => {
 	}
 });
 
+const startTime = computed(() => {
+	const [h, m, s] = props.settings.workHours[0].split(':');
+	const startTime = dayjs().hour(parseInt(h)).minute(parseInt(m)).second(parseInt(s));
+	return startTime;
+});
+
+const targetTime = computed(() => {
+	const [h, m, s] = props.settings.workHours[1].split(':');
+	const targetTime = dayjs().hour(parseInt(h)).minute(parseInt(m)).second(parseInt(s));
+	return targetTime;
+});
+
 // 发薪日
 const payDay = computed(() => {
 	const now = dayjs().format('YYYY-MM-DD');
@@ -98,20 +110,19 @@ const payDay = computed(() => {
 // 下班倒计时
 const updateDisplayText = () => {
 	const now = dayjs();
-	const targetTime = props.settings.workHours[1];
-	if (now.isAfter(targetTime)) {
+	if (now.isAfter(targetTime.value)) {
 		state.displayText = '休 息 时 间 啦';
 	} else {
-		const diff = dayjs(targetTime).diff(now);
+		const diff = dayjs(targetTime.value).diff(now);
 		const duration = dayjs.duration(diff).format('HH:mm:ss');
 		state.displayText = duration;
 	}
 };
 function calculateSalary() {
 	const currentTime = dayjs();
-	if (currentTime.isBetween(props.settings.workHours[0], props.settings.workHours[1])) {
-		const totalSeconds = dayjs(props.settings.workHours[1]).diff(dayjs(props.settings.workHours[0]), 'second');
-		const currentSeconds = currentTime.diff(dayjs(props.settings.workHours[0]), 'second');
+	if (currentTime.isBetween(startTime.value, targetTime.value)) {
+		const totalSeconds = dayjs(targetTime.value).diff(dayjs(startTime.value), 'second');
+		const currentSeconds = currentTime.diff(dayjs(startTime.value), 'second');
 		const increnmentRate = currentSeconds / totalSeconds;
 		state.currentSalary = parseFloat((props.settings.income * increnmentRate).toFixed(1));
 	} else {

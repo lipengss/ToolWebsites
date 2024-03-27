@@ -7,5 +7,6 @@
 </template>
 <script setup lang="ts">
 import { filterHoutWebSiteList } from '~/assets/website/index';
-const siteList = computed(() => filterHoutWebSiteList('entertainment'));
+const siteList = computed(() => filterHoutWebSiteList('amusement'));
+definePageMeta({ title: '娱乐' });
 </script>

@@ -42,7 +42,7 @@ interface ISetting {
 		workday: string[];
 		isWorkDay: boolean;
 		showItem: string[];
-		workHours: [Date, Date];
+		workHours: [string, string];
 		income: number;
 		color: string;
 		bgColor: string;

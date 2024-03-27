@@ -42,7 +42,7 @@ watch(
 	(path) => {
 		state.activeIndex = path;
 		const title = useTitle();
-		title.value = `-${route.meta.title}`;
+		title.value = `我的工具-${route.meta.title}`;
 	},
 	{
 		immediate: true,

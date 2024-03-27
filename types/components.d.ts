@@ -26,3 +26,12 @@ interface StateCalendar {
 	yi: string; // 宜
 	ji: string; // 忌
 }
+
+interface IWeatherState {
+	forecasts: IForecasts[];
+	payload: {
+		key: string;
+		city: string;
+	};
+	lives: LivesItem[];
+}

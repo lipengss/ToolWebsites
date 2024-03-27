@@ -1,13 +1,7 @@
 <template>
 	<ClientOnly>
 		<Card :settings="offWork" @show-dialog="onShowDialog" />
-		<el-dialog v-model="state.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable>
-			<template #header>
-				<div class="flex-end">
-					<el-button :icon="FullScreen" circle size="small" @click="state.fullscreen = !state.fullscreen" />
-					<el-button :icon="CloseBold" circle size="small" @click="state.visible = false" />
-				</div>
-			</template>
+		<Dialog v-model:visible="state.visible" width="900px">
 			<el-row :gutter="20" align="middle">
 				<el-col :xs="24" :lg="9">
 					<Card :settings="state.dialogSettings" class="dialog-card" />
@@ -28,7 +22,7 @@
 						<el-form-item label="工作时间">
 							<el-time-picker
 								v-model="state.dialogSettings.workHours"
-								:default-value="state.dialogSettings.workHours"
+								value-format="HH:mm:ss"
 								is-range
 								range-separator="至"
 								start-placeholder="开始时间"
@@ -65,7 +59,7 @@
 					<el-button class="w100" type="success" @click="onSaveSettings">完成</el-button>
 				</el-col>
 			</el-row>
-		</el-dialog>
+		</Dialog>
 	</ClientOnly>
 </template>
 <script setup lang="ts">

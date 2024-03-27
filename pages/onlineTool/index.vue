@@ -8,4 +8,5 @@
 <script setup lang="ts">
 import { filterHoutWebSiteList } from '~/assets/website/index';
 const siteList = computed(() => filterHoutWebSiteList('onlineTool'));
+definePageMeta({ title: '在线工具' });
 </script>

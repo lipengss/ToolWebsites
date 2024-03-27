@@ -8,4 +8,5 @@
 <script setup lang="ts">
 import { filterHoutWebSiteList } from '~/assets/website/index';
 const siteList = computed(() => filterHoutWebSiteList('productManager'));
+definePageMeta({ title: '产品' });
 </script>

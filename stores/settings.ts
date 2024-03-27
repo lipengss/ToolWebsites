@@ -3,8 +3,9 @@ import { useChangeColor } from '~/hooks/useColor';
 import { Local } from '~/assets/utils/storage';
 import { getRandomNumber } from '~/assets/utils/tools';
 import { GLOBAL_SETTING, predefineColors } from '~/assets/utils/publicData';
-import { useDateFormat } from '~/hooks/useDateFormat';
 import { developers } from '~/assets/website';
+import { useDateFormat } from '~/hooks/useDateFormat';
+
 const { setTime, dayjs } = useDateFormat();
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
 
@@ -45,7 +46,7 @@ const defaultSetting: ISetting = {
 		workday: ['一', '二', '三', '四', '五'],
 		isWorkDay: true,
 		showItem: ['payDay', 'fromFriday', 'nextFestival', 'income'],
-		workHours: [setTime(new Date(), [9, 0, 0]).toDate(), setTime(new Date(), [18, 30, 0]).toDate()],
+		workHours: ['09:00:00', '18:30:00'],
 		income: 800,
 		color: '#fff',
 		bgColor: predefineColors[0],
@@ -146,6 +147,9 @@ export const useSettingsStore = defineStore('settingStore', {
 			document.documentElement.style.setProperty('--el-color-primary', this.setting.theme);
 			// 颜色加深
 			document.documentElement.style.setProperty('--el-color-primary-dark-2', `${getDarkColor(this.setting.theme, 0.1)}`);
+			// for (let i = 1; i <= 9; i++) {
+			// 	document.documentElement.style.setProperty(`--el-color-primary-dark-${i}`, `${getDarkColor(this.setting.theme, i / 10)}`);
+			// }
 			// 颜色变浅
 			for (let i = 1; i <= 9; i++) {
 				document.documentElement.style.setProperty(`--el-color-primary-light-${i}`, `${getLightColor(this.setting.theme, i / 10)}`);

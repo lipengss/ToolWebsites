@@ -17,11 +17,7 @@
 <script setup lang="ts">
 import { developers, sortWebRanks } from '~/assets/website/index';
 
-definePageMeta({
-	title: '首页',
-	rank: 0,
-	icon: 'menu-home',
-});
+definePageMeta({ title: '首页' });
 
 const siteList = computed(() => sortWebRanks(developers));
 </script>

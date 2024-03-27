@@ -132,7 +132,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '测网速',
 		path: 'https://www.speedtest.cn/',
-		type: ['developer', 'onlineTool'],
+		type: ['onlineTool'],
 		meta: {
 			rank: 0,
 			icon: 'app-network-speed',
@@ -216,7 +216,7 @@ export const developers: RouteItem[] = [
 	{
 		name: 'bilibili',
 		path: 'https://www.bilibili.com/',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-bilibili',
@@ -229,7 +229,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '虎 嗅 网',
 		path: 'https://www.bilibili.com/',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-huxiu',
@@ -242,7 +242,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '豆 瓣 网',
 		path: 'https://www.douban.com/',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-douban',
@@ -255,7 +255,7 @@ export const developers: RouteItem[] = [
 	{
 		name: 'QQ音乐',
 		path: 'https://y.qq.com/',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-qq-music',
@@ -314,7 +314,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '西瓜视频',
 		path: 'https://www.ixigua.com/?wid_try=1',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-xigua',
@@ -325,7 +325,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '抖音',
 		path: 'https://www.douyin.com/?recommend=1',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-douyin',
@@ -337,7 +337,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '新浪微博',
 		path: 'https://weibo.com/',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-weibo',
@@ -349,7 +349,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '今日头条',
 		path: 'https://www.toutiao.com/',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-toutiao',
@@ -361,7 +361,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '36氪',
 		path: 'https://36kr.com/',
-		type: 'entertainment',
+		type: 'amusement',
 		meta: {
 			rank: 0,
 			icon: 'app-36ke',
@@ -373,7 +373,7 @@ export const developers: RouteItem[] = [
 	{
 		name: 'ChatGPT',
 		path: 'https://chat.openai.com/',
-		type: ['developer', 'designer'],
+		type: ['developer', 'c'],
 		meta: {
 			rank: 30,
 			icon: 'app-openAi',
@@ -397,12 +397,48 @@ export const developers: RouteItem[] = [
 	{
 		name: '语雀',
 		path: 'https://www.yuque.com/',
-		type: 'developer',
+		type: ['developer', 'onlineTools'],
 		meta: {
 			rank: 18,
 			icon: 'app-yuque',
 			bgColor: '#fff',
 			description: '博客技术栈在线工具资源网站UI库后端技术稀土掘金微信百...',
+		},
+	},
+	{
+		name: 'Discord',
+		path: 'https://discord.com/',
+		type: ['designer', 'amusement'],
+		meta: {
+			rank: 18,
+			icon: 'app-discord',
+			bgColor: '#5865f2',
+			color: '#fff',
+			description: '用户可以创建和加入各种类型的服务器',
+		},
+	},
+	{
+		name: '高德地图',
+		path: 'https://ditu.amap.com/',
+		type: ['onlineTool'],
+		meta: {
+			rank: 40,
+			icon: 'app-gaode',
+			bgColor: '#fff',
+			size: 66,
+			description: '高德地图',
+		},
+	},
+	{
+		name: 'loading',
+		path: 'https://css-loaders.com/shapes/',
+		type: ['developer', 'designer'],
+		meta: {
+			rank: 40,
+			icon: 'app-loading',
+			bgColor: '#fff',
+			color: '',
+			description: '高德地图',
 		},
 	},
 ];

@@ -24,8 +24,10 @@ const rowGap = computed(() => {
 .container-grid {
 	width: v-bind(screenWidth);
 	display: grid;
+	justify-content: center;
 	grid-template-columns: repeat(auto-fill, v-bind(appSize));
 	grid-template-rows: repeat(auto-fill, v-bind(appSize));
+	grid-auto-flow: dense;
 	column-gap: v-bind(columnGap);
 	row-gap: v-bind(rowGap);
 	margin: 0 auto;

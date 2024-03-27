@@ -8,4 +8,5 @@
 <script setup lang="ts">
 import { filterHoutWebSiteList } from '~/assets/website/index';
 const siteList = computed(() => filterHoutWebSiteList('developer'));
+definePageMeta({ title: '程序员' });
 </script>
