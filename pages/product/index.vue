@@ -7,6 +7,6 @@
 </template>
 <script setup lang="ts">
 import { filterHoutWebSiteList } from '~/assets/website/index';
-const siteList = computed(() => filterHoutWebSiteList('productManager'));
+const siteList = computed(() => filterHoutWebSiteList('product'));
 definePageMeta({ title: '产品' });
 </script>

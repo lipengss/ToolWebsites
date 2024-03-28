@@ -12,11 +12,12 @@ const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager:
 const defaultSetting: ISetting = {
 	theme: '#2b793b',
 	date: {
+		show: true,
 		size: 35,
 		color: '#fff',
 		font: 'rocks-serif',
 		date: ['monthDay', 'week', 'lunar', 'sec', 'bold'],
-	},
+	}, 
 	search: {
 		show: true,
 		height: 60,

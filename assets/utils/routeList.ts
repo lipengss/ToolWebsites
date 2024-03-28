@@ -28,11 +28,11 @@ export const routeList: Array<RouteItem> = [
 	},
 	{
 		name: '产品',
-		path: '/productManager',
-		type: 'productManager',
+		path: '/product',
+		type: 'product',
 		meta: {
 			rank: 0,
-			icon: 'menu-productManager',
+			icon: 'menu-product',
 		},
 	},
 	{
@@ -46,11 +46,11 @@ export const routeList: Array<RouteItem> = [
 	},
 	{
 		name: '娱乐',
-		path: '/entertainment',
-		type: 'entertainment',
+		path: '/amusement',
+		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'menu-entertainment',
+			icon: 'menu-amusement',
 		},
 	},
 ];

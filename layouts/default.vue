@@ -1,37 +1,44 @@
 <template>
 	<el-container class="el-container-parent" @contextmenu.prevent="contextmenuRef.contextmenu($event)">
 		<MenuBar />
-		<el-container class="el-container-child">
-			<el-scrollbar>
+		<el-scrollbar>
+			<div class="el-container-child">
 				<Engines />
-				<div class="main"><slot /></div>
-				<el-footer>
-					<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
-				</el-footer>
-			</el-scrollbar>
-		</el-container>
-		<loading />
+				<slot />
+			</div>
+			<el-footer>
+				<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
+			</el-footer>
+		</el-scrollbar>
+		<Loading />
 		<!-- 壁纸切换 -->
 		<toggleWallpaper />
 		<!-- 风格配置 -->
 		<Setting />
 		<!-- 右键菜单 -->
-		<contextmenu ref="contextmenuRef" />
+		<Contextmenu ref="contextmenuRef">
+			<div class="item" @click="changeWallpaper">
+				<el-icon><svg-icon name="menu-picture" /></el-icon>
+				<span>换壁纸</span>
+			</div>
+			<div class="item" @click="showDrawer = true">
+				<el-icon><svg-icon name="setting" /></el-icon>
+				<span>设置</span>
+			</div>
+		</Contextmenu>
 	</el-container>
 </template>
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 
-const loading = defineAsyncComponent(() => import('./components/loading.vue'));
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
-const contextmenu = defineAsyncComponent(() => import('./components/contextmenu.vue'));
 
 import { useSettingsStore } from '~/stores/settings';
 const settingStore = useSettingsStore();
 
-const { setting } = storeToRefs(settingStore);
-const { initGloabalSetting } = settingStore;
+const { setting, showDrawer } = storeToRefs(settingStore);
+const { initGloabalSetting, changeWallpaper } = settingStore;
 
 const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
 const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
@@ -62,12 +69,15 @@ onMounted(() => {
 	&::before {
 		backdrop-filter: v-bind(bgBlur);
 	}
-
-	.el-container-child {
-		flex-direction: column;
-		.main {
-			position: relative;
-			padding: 0 calc(v-bind(asideWidth) + 10px);
+	:deep .el-scrollbar {
+		flex: 1;
+		.el-scrollbar__view {
+			height: 100%;
+			.el-container-child {
+				min-height: 100%;
+				box-sizing: border-box;
+				padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
+			}
 		}
 	}
 }
@@ -77,11 +87,11 @@ onMounted(() => {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	font-size: 12px;
-	color: var(--el-text-color-regular);
+	margin-top: -30px;
+	backdrop-filter: blur(10px);
+	a {
+		font-size: 12px;
+		color: var(--el-text-color-regular);
+	}
 }
 </style>
-././components/loading.vue./components/toggleWallpaper.vuecomponents/contextmenu.vue

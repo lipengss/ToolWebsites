@@ -8,6 +8,7 @@ interface IEngineItem {
 interface ISetting {
 	theme: string;
 	date: {
+		show: boolean;
 		size: number;
 		color: string;
 		font: string;

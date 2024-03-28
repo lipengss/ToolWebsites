@@ -1,23 +1,10 @@
 <template>
 	<div class="contextmenu" v-if="context.show" :style="{ left: context.clientX + 'px', top: context.clientY + 'px' }">
-		<div class="item" @click="changeWallpaper">
-			<el-icon><svg-icon name="menu-picture" /></el-icon>
-			<span>换壁纸</span>
-		</div>
-		<div class="item" @click="showDrawer = true">
-			<el-icon><svg-icon name="setting" /></el-icon>
-			<span>设置</span>
-		</div>
+		<slot />
 	</div>
 </template>
 <script setup lang="ts">
 import { reactive, defineExpose } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useSettingsStore } from '~/stores/settings';
-const settingStore = useSettingsStore();
-
-const { showDrawer } = storeToRefs(settingStore);
-const { changeWallpaper } = settingStore;
 
 const context = reactive({
 	show: false,
@@ -52,7 +39,7 @@ defineExpose({
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 	background-color: #0b0b0bcc;
 	backdrop-filter: blur(10px);
-	.item {
+	:deep .item {
 		min-width: 100px;
 		line-height: 24px;
 		display: flex;

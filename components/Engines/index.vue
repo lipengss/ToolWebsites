@@ -2,7 +2,7 @@
 	<ClientOnly>
 		<el-row class="engines">
 			<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
-				<div class="date-wrapper">
+				<div class="date-wrapper" v-if="setting.date.show">
 					<div class="time">{{ state.time }}</div>
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
 				</div>
@@ -129,13 +129,13 @@ function jumpQuery(queryString: string) {
 	box-sizing: border-box;
 	align-items: center;
 	justify-content: center;
+	padding-top: 10vh;
 	.content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		.date-wrapper {
 			min-width: 140px;
-			margin-top: 10vh;
 			text-align: center;
 			color: v-bind(dateColor);
 			text-shadow: 1px 1px 1px #000;

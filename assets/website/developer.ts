@@ -114,14 +114,15 @@ export const developers: RouteItem[] = [
 		meta: {
 			rank: 0,
 			icon: 'app-mdn',
-			bgColor: '#15141A',
+			bgColor: '#303133',
+			size: 50,
 			description: '自2005年以来记录web技术，包括CSS、HTML和JavaScript。',
 		},
 	},
 	{
 		name: '图片压缩',
 		path: 'https://squoosh.app/',
-		type: ['developer', 'onlineTool'],
+		type: 'onlineTool',
 		meta: {
 			rank: 0,
 			icon: 'app-picture-zip',

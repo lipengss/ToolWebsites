@@ -33,5 +33,6 @@ const rowGap = computed(() => {
 	margin: 0 auto;
 	box-sizing: border-box;
 	padding: 20px;
+	padding-bottom: 60px;
 }
 </style>

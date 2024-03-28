@@ -1,5 +1,5 @@
 <template>
-	<div :class="`app-size-${props.size}`" class="app-wrapper">
+	<div :class="`app-size-${props.size}`" class="app-wrapper" @contextmenu.stop="funct">
 		<div class="app-box">
 			<slot />
 		</div>
@@ -21,6 +21,11 @@ const columnGap = computed(() => {
 });
 
 const columnPosition = computed(() => -columnGap.value);
+
+function funct(event) {
+	event.preventDefault();
+	console.log('去你妈的');
+}
 
 const rowGap = computed(() => {
 	const { async, gap, rowGap } = setting.value.app;
