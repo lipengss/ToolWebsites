@@ -1,5 +1,5 @@
 <template>
-	<div :class="`app-size-${props.size}`" class="app-wrapper" @contextmenu.stop="funct">
+	<div :class="`app-size-${props.size}`" class="app-wrapper" @contextmenu.stop="contextmenu">
 		<div class="app-box">
 			<slot />
 		</div>
@@ -10,35 +10,33 @@
 import { withDefaults, defineProps, computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-
-const { setting } = storeToRefs(useSettingsStore());
-
-const appSize = computed(() => `${setting.value.app.size}px`);
-const columnGap = computed(() => {
-	const { async, gap, columnGap } = setting.value.app;
-
-	return (async ? gap : columnGap) + 'px';
-});
-
-const columnPosition = computed(() => -columnGap.value);
-
-function funct(event) {
-	event.preventDefault();
-	console.log('去你妈的');
-}
-
-const rowGap = computed(() => {
-	const { async, gap, rowGap } = setting.value.app;
-	return (async ? gap : rowGap) + 'px';
-});
+import mitt from '~/assets/utils/mitt';
 
 interface Props {
 	size: '1x1' | '1x2' | '2x2' | '5x2';
 	name?: string;
 }
-
 const props = withDefaults(defineProps<Props>(), {
 	size: '1x1',
+});
+
+const { setting } = storeToRefs(useSettingsStore());
+const appSize = computed(() => `${setting.value.app.size}px`);
+const columnGap = computed(() => {
+	const { async, gap, columnGap } = setting.value.app;
+	return (async ? gap : columnGap) + 'px';
+});
+
+const columnPosition = computed(() => -columnGap.value);
+
+function contextmenu(event: Event) {
+	event.preventDefault();
+	mitt.emit('contextmenuApp', { event: event, name: props.name });
+}
+
+const rowGap = computed(() => {
+	const { async, gap, rowGap } = setting.value.app;
+	return (async ? gap : rowGap) + 'px';
 });
 
 const radius = computed(() => setting.value.app.radius + 'px');

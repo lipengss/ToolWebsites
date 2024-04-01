@@ -2,7 +2,7 @@
 	"name": "nuxt-app",
 	"private": true,
 	"scripts": {
-		"build": "nuxt build",
+		"build": "nuxi build && mkdir .output/server/node_modules/@popperjs && mv .output/server/node_modules/@sxzz/popperjs-es .output/server/node_modules/@popperjs/core",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
@@ -20,6 +20,7 @@
 		"@element-plus/icons-vue": "^2.3.1",
 		"@element-plus/nuxt": "^1.0.7",
 		"@pinia/nuxt": "^0.5.1",
+		"@popperjs/core": "npm:@sxzz/popperjs-es@^2.11.7",
 		"@pqina/flip": "^1.8.3",
 		"@vue/shared": "^3.4.15",
 		"@vueuse/nuxt": "^10.7.2",
@@ -30,6 +31,7 @@
 		"file-saver": "^2.0.5",
 		"json-editor-vue": "^0.12.0",
 		"lunar-typescript": "^1.7.4",
+		"mitt": "^3.0.1",
 		"numeral": "^2.0.6",
 		"nuxt-lodash": "^2.5.3",
 		"nuxt-swiper": "^1.2.2",
@@ -38,8 +40,7 @@
 		"sass": "^1.70.0",
 		"vite-plugin-svg-icons": "^2.0.1",
 		"vue3-colorpicker": "^2.2.3",
-		"vue3-grid-layout": "^1.0.0",
-		"@popperjs/core": "npm:@sxzz/popperjs-es@^2.11.7"
+		"vue3-grid-layout": "^1.0.0"
 	},
 	"config": {
 		"nuxt": {
