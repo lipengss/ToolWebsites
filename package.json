@@ -36,10 +36,7 @@
 		"pinia": "^2.1.7",
 		"qs": "^6.11.2",
 		"sass": "^1.70.0",
-		"vite-plugin-svg-icons": "^2.0.1",
-		"vue3-colorpicker": "^2.2.3",
-		"vue3-grid-layout": "^1.0.0",
-		"@popperjs/core": "npm:@sxzz/popperjs-es@^2.11.7"
+		"vite-plugin-svg-icons": "^2.0.1"
 	},
 	"config": {
 		"nuxt": {
