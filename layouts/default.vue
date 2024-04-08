@@ -28,11 +28,11 @@
 				</div>
 			</template>
 			<template v-else>
-				<div class="item" @click="showDrawer = true">
-					<el-input-number v-model="curApp.meta.rank" controls-position="right" size="small" @change.prevent="onRankChange" />
+				<div class="item">
+					<el-input-number v-model="curApp.meta.rank" controls-position="right" size="small" @change="onRankChange" />
 					<span>排序</span>
 				</div>
-				<div class="item" @click="showDrawer = true">
+				<div class="item" @click="">
 					<el-icon><Delete /></el-icon>
 					<span>删除</span>
 				</div>

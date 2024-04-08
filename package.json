@@ -38,13 +38,7 @@
 		"pinia": "^2.1.7",
 		"qs": "^6.11.2",
 		"sass": "^1.70.0",
-<<<<<<< HEAD
 		"vite-plugin-svg-icons": "^2.0.1"
-=======
-		"vite-plugin-svg-icons": "^2.0.1",
-		"vue3-colorpicker": "^2.2.3",
-		"vue3-grid-layout": "^1.0.0"
->>>>>>> f523197ba2fe429788219c19b611f0eb26098c12
 	},
 	"config": {
 		"nuxt": {
