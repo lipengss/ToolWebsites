@@ -54,6 +54,8 @@ defineExpose({
 		}
 		span {
 			font-size: 12px;
+			flex-shrink: 0;
+			margin-left: 10px;
 		}
 		&:hover {
 			background-color: #ffffff1a;

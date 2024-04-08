@@ -29,10 +29,14 @@
 			</template>
 			<template v-else>
 				<div class="item">
-					<el-input-number v-model="curApp.meta.rank" controls-position="right" size="small" @change="onRankChange" />
-					<span>排序</span>
+					<el-icon><Edit /></el-icon>
+					<span>编辑</span>
 				</div>
-				<div class="item" @click="">
+				<div class="item">
+					<el-icon><svg-icon name="batchEdit" /></el-icon>
+					<span>批量编辑</span>
+				</div>
+				<div class="item" @click="onDeleteApp">
 					<el-icon><Delete /></el-icon>
 					<span>删除</span>
 				</div>
@@ -44,7 +48,7 @@
 import { ref, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import mitt from '~/assets/utils/mitt';
-import { Delete } from '@element-plus/icons-vue';
+import { Delete, Edit } from '@element-plus/icons-vue';
 import { useSettingsStore } from '~/stores/settings';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
 
@@ -55,7 +59,7 @@ const settingStore = useSettingsStore();
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
 
 const { setting, showDrawer } = storeToRefs(settingStore);
-const { initGloabalSetting, changeWallpaper } = settingStore;
+const { initGloabalSetting, changeWallpaper, setGlobalSetting } = settingStore;
 
 const curApp = ref<RouteItem>({
 	name: '',
@@ -71,22 +75,27 @@ const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
 const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 const asideWidth = computed(() => setting.value.menuBar.width + 'px');
 
-const siteList = computed(() => (route.name === '/' ? developers : filterHoutWebSiteList('developer')));
-
 const contextmenuRef = ref();
 const global = ref();
 
-function onRankChange(currentValue: number) {
-	console.log(currentValue);
+function onDeleteApp() {
+	const { name } = curApp.value;
+	const names = setting.value.excludeWeb.map((item) => item.name);
+	if (!names.includes(name)) {
+		const index = developers.findIndex((item) => item.name === name);
+		if (index !== -1) {
+			developers.splice(index, 1);
+		}
+		setting.value.excludeWeb.push(curApp.value);
+	}
+	setGlobalSetting();
 }
 
 mitt.on('contextmenuApp', ({ event, name }) => {
 	global.value = name ? false : true;
-	if (name) {
-		const app = siteList.value.find((item) => item.name === name);
-		if (app) {
-			curApp.value = app;
-		}
+	if (!global.value) {
+		const app = filterHoutWebSiteList('/').find((item) => item.name === name);
+		app && (curApp.value = app);
 	}
 	contextmenuRef.value.contextmenu(event);
 });

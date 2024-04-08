@@ -1,13 +1,14 @@
 import { developers } from './developer';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-function filterHoutWebSiteList(type: string | string[]) {
+function filterHoutWebSiteList(type: string | string[]): Array<RouteItem> {
 	let result: Array<RouteItem> = [];
+	const _developers = excludes(developers);
 	if (typeof type === 'string') {
-		result = developers.filter((item) => item.type.includes(type));
+		result = type === '/' ? _developers : _developers.filter((item) => item.type.includes(type));
 	}
 	if (Array.isArray(type)) {
-		result = developers.filter((item) => {
+		result = _developers.filter((item) => {
 			if (item.type === 'string') {
 				return type.includes(item.type);
 			}
@@ -17,6 +18,12 @@ function filterHoutWebSiteList(type: string | string[]) {
 		});
 	}
 	return sortWebRanks(result);
+}
+
+function excludes(developers: Array<RouteItem>) {
+	const { setting } = storeToRefs(useSettingsStore());
+	const names = setting.value.excludeWeb.map((item) => item.name);
+	return developers.filter((item) => !names.includes(item.name));
 }
 
 function sortWebRanks(webList: Array<RouteItem>) {

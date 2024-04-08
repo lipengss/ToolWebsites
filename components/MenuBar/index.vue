@@ -3,15 +3,18 @@
 		<el-aside :width="menuWidth" :class="{ 'hide-sidebar': autoHide && x > settingStore.setting.menuBar.width }">
 			<Menu />
 			<div class="setting">
-				<el-icon size="18px" class="icon" @click="settingStore.openSettingDrawer()" title="设置">
+				<el-icon size="18px" class="icon rotate" @click="settingStore.openSettingDrawer()" title="设置">
 					<svg-icon name="setting" />
 				</el-icon>
-				<el-icon size="18px" class="icon" @click="open()" title="吸色器">
+				<el-icon size="18px" class="icon zoom" @click="open()" title="吸色器">
 					<svg-icon name="dye-color" />
 				</el-icon>
-				<el-icon size="18px" class="icon" @click="toggleDark()" :title="isDark ? '夜间模式' : '日间模式'">
+				<el-icon size="18px" class="icon rotate" @click="toggleDark()" :title="isDark ? '夜间模式' : '日间模式'">
 					<Moon v-if="isDark" />
 					<Sunny v-else />
+				</el-icon>
+				<el-icon size="18px" class="icon zoom" @click="onJumpTrashPage" title="回收站">
+					<svg-icon name="trash" />
 				</el-icon>
 			</div>
 		</el-aside>
@@ -23,7 +26,9 @@ import Menu from './Menu.vue';
 import { Moon, Sunny } from '@element-plus/icons-vue';
 import { useDark, useToggle, useEyeDropper, useMouseInElement } from '@vueuse/core';
 import { useSettingsStore } from '~/stores/settings';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const { x } = useMouseInElement();
@@ -38,6 +43,10 @@ const color = computed(() => settingStore.setting.menuBar.color);
 const translateX = computed(() => -settingStore.setting.menuBar.width + 'px');
 
 const { open, sRGBHex } = useEyeDropper();
+
+function onJumpTrashPage() {
+	router.push({ path: '/trash' });
+}
 
 watch(
 	() => sRGBHex.value,
@@ -75,11 +84,16 @@ watch(
 		.el-icon {
 			padding: 10px 0;
 			cursor: pointer;
-		}
-		.icon {
 			transition: all 0.3s ease-in-out;
+		}
+		.rotate {
 			&:hover {
 				transform: rotate(80deg) scale(1.2);
+			}
+		}
+		.zoom {
+			&:hover {
+				transform: scale(1.3);
 			}
 		}
 	}
@@ -87,32 +101,4 @@ watch(
 .hide-sidebar {
 	transform: translateX(v-bind(translateX));
 }
-
-// 显示小屏幕的菜单
-// @media (max-width: 1024px) {
-// 	.el-header {
-// 		display: flex;
-// 		align-items: center;
-// 		justify-content: space-between;
-// 		.el-in-center {
-// 			width: 100%;
-// 			.expand {
-// 				display: block;
-// 			}
-// 			.menu-horizontal {
-// 				display : none;
-// 			}
-// 			:deep .el-autocomplete {
-// 				display: none;
-// 			}
-// 		}
-// 	}
-
-// 	:deep .el-drawer__body {
-// 		padding: 0;
-// 		.el-menu {
-// 			border-right: none;
-// 		}
-// 	}
-// }
 </style>

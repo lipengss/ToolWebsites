@@ -15,9 +15,11 @@ import mitt from '~/assets/utils/mitt';
 interface Props {
 	size: '1x1' | '1x2' | '2x2' | '5x2';
 	name?: string;
+	disabledContextmenu?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
 	size: '1x1',
+	disabledContextmenu: false,
 });
 
 const { setting } = storeToRefs(useSettingsStore());
@@ -31,6 +33,7 @@ const columnPosition = computed(() => -columnGap.value);
 
 function contextmenu(event: Event) {
 	event.preventDefault();
+	if (props.disabledContextmenu) return;
 	mitt.emit('contextmenuApp', { event: event, name: props.name });
 }
 
