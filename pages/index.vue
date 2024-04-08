@@ -15,9 +15,9 @@
 	</GirdLayout>
 </template>
 <script setup lang="ts">
-import { developers, sortWebRanks } from '~/assets/website/index';
+import { filterHoutWebSiteList } from '~/assets/website/index';
 
 definePageMeta({ title: '首页' });
 
-const siteList = computed(() => sortWebRanks(developers));
+const siteList = computed(() => filterHoutWebSiteList('/'));
 </script>

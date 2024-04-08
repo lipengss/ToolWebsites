@@ -60,6 +60,8 @@ interface ISetting {
 		opacity: number;
 	};
 	hotWebRanks: { [key: string]: number };
+	excludeWeb: RouteItem[];
+	addedWeb: RouteItem[];
 }
 
 interface ISettingState {

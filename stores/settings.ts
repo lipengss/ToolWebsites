@@ -17,7 +17,7 @@ const defaultSetting: ISetting = {
 		color: '#fff',
 		font: 'rocks-serif',
 		date: ['monthDay', 'week', 'lunar', 'sec', 'bold'],
-	}, 
+	},
 	search: {
 		show: true,
 		height: 60,
@@ -64,6 +64,8 @@ const defaultSetting: ISetting = {
 		opacity: 1,
 	},
 	hotWebRanks: {},
+	excludeWeb: [],
+	addedWeb: [],
 };
 
 let timer: any = null;
@@ -113,6 +115,7 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 	},
 	actions: {
+		// 初始化配置
 		initGloabalSetting() {
 			// 保存默认配置
 			if (Local.get(GLOBAL_SETTING)) {
@@ -127,20 +130,16 @@ export const useSettingsStore = defineStore('settingStore', {
 			// 自动切换壁纸
 			this.autochangeWallpaper();
 		},
+		// 更新配置
 		setGlobalSetting() {
 			Local.set(GLOBAL_SETTING, this.setting);
 			this.initGloabalSetting();
 		},
-		changeWallpaper() {
-			const maxNum = imgList.length - 1;
-			const randomNum = getRandomNumber(maxNum);
-			this.setting.bg.picture = imgList[randomNum];
-			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);
-			Local.set(GLOBAL_SETTING, this.setting);
-		},
+		// 打开配置
 		openSettingDrawer() {
 			this.showDrawer = true;
 		},
+		// 主题切换
 		onColorPickerChange() {
 			const { getDarkColor, getLightColor } = useChangeColor();
 			if (!this.setting.theme) return ElMessage.warning('全局主题 primary 颜色值不能为空');
@@ -156,6 +155,15 @@ export const useSettingsStore = defineStore('settingStore', {
 				document.documentElement.style.setProperty(`--el-color-primary-light-${i}`, `${getLightColor(this.setting.theme, i / 10)}`);
 			}
 		},
+		// 背景切换
+		changeWallpaper() {
+			const maxNum = imgList.length - 1;
+			const randomNum = getRandomNumber(maxNum);
+			this.setting.bg.picture = imgList[randomNum];
+			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);
+			Local.set(GLOBAL_SETTING, this.setting);
+		},
+		// 是否开启自动切换背景
 		autochangeWallpaper() {
 			const { auto, autoTime } = this.setting.bg;
 			if (auto) {
@@ -167,29 +175,31 @@ export const useSettingsStore = defineStore('settingStore', {
 				timer = null;
 			}
 		},
+		// 恢复默认设置
 		clearGlobalSetting() {
 			Local.clear();
 			this.setting = useCloneDeep(defaultSetting);
 			this.initGloabalSetting();
 		},
+		// 搜索历史
 		querySearch(queryString: string, cb: any) {
 			const { historyList } = this.setting.search;
-			console.log(queryString);
 			const results = queryString ? historyList.filter(this.createFilter(queryString)) : historyList;
 			cb(results);
 		},
 		createFilter(queryString: string) {
-			console.log(queryString);
 			return (restaurant: string) => {
 				console.log(restaurant);
 				return restaurant.indexOf(queryString) === 0;
 			};
 		},
+		// 删除历史
 		removeHistoryRow(queryString: string) {
 			const index = this.setting.search.historyList.findIndex((item) => item === queryString);
 			this.setting.search.historyList.splice(index, 1);
 			this.setGlobalSetting();
 		},
+		// 设置默认的网站排行
 		setDefaultHotWebSiteList() {
 			const hot = developers.filter((item) => item.meta.rank !== 0);
 			hot.forEach((item) => {
