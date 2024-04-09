@@ -3,7 +3,7 @@
 		<div class="app-box">
 			<slot />
 		</div>
-		<div class="name singe-line">{{ props.name }}</div>
+		<div v-if="setting.app.showTitle" class="name singe-line">{{ props.name }}</div>
 	</div>
 </template>
 <script setup lang="ts">

@@ -4,7 +4,7 @@ import path from 'path';
 export default defineNuxtConfig({
 	devtools: { enabled: true },
 	css: ['element-plus/dist/index.css', '~/assets/css/common.scss', 'animate.css'],
-	modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt'],
+	modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-swiper'],
 	elementPlus: {
 		themes: ['dark'],
 		importStyle: 'scss',

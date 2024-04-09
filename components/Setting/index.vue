@@ -43,6 +43,11 @@
 							<span>图标布局</span>
 						</div>
 					</template>
+					<el-form-item label="图标名称">
+						<div class="slider-wrap">
+							<el-switch v-model="setting.app.showTitle" @change="setGlobalSetting" />
+						</div>
+					</el-form-item>
 					<el-form-item label="图标大小">
 						<div class="slider-wrap">
 							<el-slider v-model="setting.app.size" :min="60" :max="100" :step="1" @change="setGlobalSetting" />

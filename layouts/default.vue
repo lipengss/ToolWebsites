@@ -1,15 +1,17 @@
 <template>
 	<el-container class="el-container-parent" @contextmenu.prevent="contextmenu">
 		<MenuBar />
-		<el-scrollbar>
-			<div class="el-container-child">
-				<Engines />
+		<!-- <el-scrollbar> -->
+		<div class="el-container-child">
+			<Engines />
+			<div class="container-main">
 				<slot />
 			</div>
-			<el-footer>
-				<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
-			</el-footer>
-		</el-scrollbar>
+		</div>
+		<!-- <el-footer>
+			<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
+		</el-footer> -->
+		<!-- </el-scrollbar> -->
 		<Loading />
 		<!-- 壁纸切换 -->
 		<toggleWallpaper />
@@ -128,17 +130,29 @@ onMounted(() => {
 	&::before {
 		backdrop-filter: v-bind(bgBlur);
 	}
-	:deep .el-scrollbar {
-		flex: 1;
-		.el-scrollbar__view {
-			height: 100%;
-			.el-container-child {
-				min-height: 100%;
-				box-sizing: border-box;
-				padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
-			}
+	.el-container-child {
+		width: 100%;
+		min-height: 100%;
+		box-sizing: border-box;
+		padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
+		display: flex;
+		flex-direction: column;
+		.container-main {
+			flex: 1;
+			overflow: hidden;
 		}
 	}
+	// :deep .el-scrollbar {
+	// 	flex: 1;
+	// 	.el-scrollbar__view {
+	// 		height: 100%;
+	// 		.el-container-child {
+	// 			min-height: 100%;
+	// 			box-sizing: border-box;
+	// 			padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
+	// 		}
+	// 	}
+	// }
 }
 .el-footer {
 	width: 100%;

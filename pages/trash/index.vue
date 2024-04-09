@@ -4,7 +4,7 @@
 			<Application :app="app" />
 			<div class="mask" @click="onResetWebSite(app)">
 				<el-icon :size="20"><Refresh /></el-icon>
-				<span>恢复</span>
+				<span>还原</span>
 			</div>
 		</GridItem>
 	</GirdLayout>
@@ -16,16 +16,17 @@ import { Refresh } from '@element-plus/icons-vue';
 import { useSettingsStore } from '~/stores/settings';
 
 const { setting } = storeToRefs(useSettingsStore());
+const { setGlobalSetting } = useSettingsStore();
 
 const siteList = computed(() => setting.value.excludeWeb);
 
-// import { filterHoutWebSiteList } from '~/assets/website/index';
-// const siteList = computed(() => filterHoutWebSiteList('developer'));
-
 function onResetWebSite(app: RouteItem) {
 	const { name } = app;
-	const index = setting.value.excludeWeb;
-	console.log(app);
+	const index = siteList.value.findIndex((item) => item.name === name);
+	if (index !== -1) {
+		setting.value.excludeWeb.splice(index, 1);
+		setGlobalSetting();
+	}
 }
 
 definePageMeta({ title: '回收站' });

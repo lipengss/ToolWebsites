@@ -58,6 +58,7 @@ interface ISetting {
 		columnGap: number;
 		rowGap: number;
 		opacity: number;
+		showTitle: boolean;
 	};
 	hotWebRanks: { [key: string]: number };
 	excludeWeb: RouteItem[];
@@ -67,5 +68,6 @@ interface ISetting {
 interface ISettingState {
 	showDrawer: boolean;
 	setting: ISetting;
+	appSlideIndex: number;
 	engineList: Array<IEngineItem>;
 }

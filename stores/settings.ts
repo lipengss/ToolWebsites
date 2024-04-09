@@ -62,6 +62,7 @@ const defaultSetting: ISetting = {
 		columnGap: 30,
 		rowGap: 30,
 		opacity: 1,
+		showTitle: true,
 	},
 	hotWebRanks: {},
 	excludeWeb: [],
@@ -73,6 +74,7 @@ export const useSettingsStore = defineStore('settingStore', {
 	state(): ISettingState {
 		return {
 			showDrawer: false,
+			appSlideIndex: 0,
 			setting: useCloneDeep(defaultSetting),
 			engineList: [
 				{

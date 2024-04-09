@@ -3,19 +3,27 @@
 		<el-aside :width="menuWidth" :class="{ 'hide-sidebar': autoHide && x > settingStore.setting.menuBar.width }">
 			<Menu />
 			<div class="setting">
-				<el-icon size="18px" class="icon rotate" @click="settingStore.openSettingDrawer()" title="设置">
-					<svg-icon name="setting" />
-				</el-icon>
-				<el-icon size="18px" class="icon zoom" @click="open()" title="吸色器">
-					<svg-icon name="dye-color" />
-				</el-icon>
-				<el-icon size="18px" class="icon rotate" @click="toggleDark()" :title="isDark ? '夜间模式' : '日间模式'">
-					<Moon v-if="isDark" />
-					<Sunny v-else />
-				</el-icon>
-				<el-icon size="18px" class="icon zoom" @click="onJumpTrashPage" title="回收站">
-					<svg-icon name="trash" />
-				</el-icon>
+				<el-tooltip content="设置" placement="right">
+					<el-icon size="18px" class="icon rotate" @click="settingStore.openSettingDrawer()">
+						<svg-icon name="setting" />
+					</el-icon>
+				</el-tooltip>
+				<el-tooltip content="吸色器" placement="right">
+					<el-icon size="18px" class="icon zoom" @click="open()">
+						<svg-icon name="dye-color" />
+					</el-icon>
+				</el-tooltip>
+				<el-tooltip :content="isDark ? '夜间模式' : '日间模式'" placement="right">
+					<el-icon size="18px" class="icon rotate" @click="toggleDark()">
+						<Moon v-if="isDark" />
+						<Sunny v-else />
+					</el-icon>
+				</el-tooltip>
+				<el-tooltip content="回收站" placement="right">
+					<el-icon size="18px" class="icon zoom" @click="onJumpTrashPage">
+						<svg-icon name="trash" />
+					</el-icon>
+				</el-tooltip>
 			</div>
 		</el-aside>
 	</ClientOnly>
