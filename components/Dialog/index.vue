@@ -29,6 +29,9 @@ watch(
 	() => props.visible,
 	(visible: boolean) => {
 		state.visible = visible;
+	},
+	{
+		immediate: true,
 	}
 );
 </script>

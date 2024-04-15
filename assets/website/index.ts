@@ -5,7 +5,7 @@ function filterHoutWebSiteList(type: string | string[]): Array<RouteItem> {
 	let result: Array<RouteItem> = [];
 	const _developers = excludes(developers);
 	if (typeof type === 'string') {
-		result = type === '/' ? _developers : _developers.filter((item) => item.type.includes(type));
+		result = type === '/' ? developers : _developers.filter((item) => item.type.includes(type));
 	}
 	if (Array.isArray(type)) {
 		result = _developers.filter((item) => {

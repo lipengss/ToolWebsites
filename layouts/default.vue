@@ -1,17 +1,18 @@
 <template>
 	<el-container class="el-container-parent" @contextmenu.prevent="contextmenu">
 		<MenuBar />
-		<!-- <el-scrollbar> -->
 		<div class="el-container-child">
 			<Engines />
-			<div class="container-main">
-				<slot />
-			</div>
+			<!--  @wheel="handleWheel" -->
+			<el-scrollbar class="my-scrollbar">
+				<div class="main" ref="mainRef">
+					<slot />
+				</div>
+			</el-scrollbar>
+			<el-footer>
+				<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
+			</el-footer>
 		</div>
-		<!-- <el-footer>
-			<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
-		</el-footer> -->
-		<!-- </el-scrollbar> -->
 		<Loading />
 		<!-- 壁纸切换 -->
 		<toggleWallpaper />
@@ -56,6 +57,8 @@ import { developers, filterHoutWebSiteList } from '~/assets/website/index';
 
 import { useRoute } from 'vue-router';
 
+const mainRef = ref();
+
 const route = useRoute();
 const settingStore = useSettingsStore();
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
@@ -70,6 +73,7 @@ const curApp = ref<RouteItem>({
 	meta: {
 		rank: 0,
 		icon: '',
+		layout: '',
 	},
 });
 
@@ -79,6 +83,18 @@ const asideWidth = computed(() => setting.value.menuBar.width + 'px');
 
 const contextmenuRef = ref();
 const global = ref();
+
+/* function handleWheel(event) {
+	const { deltaY } = event;
+	if (deltaY > 1) {
+		console.log('down');
+	} else {
+		console.log('up');
+	}
+
+	// 内容盒子的高度
+	const clinetHeight = mainRef.value.clinetHeight;
+} */
 
 function onDeleteApp() {
 	const { name } = curApp.value;
@@ -134,25 +150,16 @@ onMounted(() => {
 		width: 100%;
 		min-height: 100%;
 		box-sizing: border-box;
-		padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
 		display: flex;
 		flex-direction: column;
-		.container-main {
-			flex: 1;
-			overflow: hidden;
+	}
+	:deep .my-scrollbar {
+		flex: 1;
+		.el-scrollbar__view {
+			box-sizing: border-box;
+			padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
 		}
 	}
-	// :deep .el-scrollbar {
-	// 	flex: 1;
-	// 	.el-scrollbar__view {
-	// 		height: 100%;
-	// 		.el-container-child {
-	// 			min-height: 100%;
-	// 			box-sizing: border-box;
-	// 			padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
-	// 		}
-	// 	}
-	// }
 }
 .el-footer {
 	width: 100%;

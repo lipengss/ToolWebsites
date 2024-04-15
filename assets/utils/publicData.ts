@@ -42,6 +42,26 @@ const pictureNotions = '图片不会上传到服务器转换，而是在浏览�
 
 const fontList = ['rocks-serif', 'SAIBA-45'];
 
+const tagList = [
+	{ label: '浏览器', value: 'browser' },
+	{ label: 'AI', value: 'ai' },
+	{ label: '热门', value: 'hot' },
+	{ label: '应用', value: 'appliance' },
+	{ label: '新闻', value: 'news' },
+	{ label: '影音', value: 'video' },
+	{ label: '科技', value: 'science' },
+	{ label: '图片', value: 'picture' },
+	{ label: '效率', value: 'efficiency' },
+	{ label: '学习', value: 'learning' },
+	{ label: '游戏', value: 'game' },
+	{ label: '购物', value: 'shopping' },
+	{ label: '社交', value: 'socialize' },
+	{ label: '阅读', value: 'read' },
+	{ label: '出行', value: 'travel' },
+	{ label: '金融', value: 'finance' },
+	{ label: '其他', value: 'other' },
+];
+
 /**
  * 将num1除以num2并返回结果
  * @param {number} num1 - 被除数
@@ -58,4 +78,4 @@ function divide(num1: number, num2: number): number {
 // 预定颜色
 const predefineColors = ['#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585'];
 
-export { aspectRatios, pictureNotions, predefineColors, OFF_WORK, GLOBAL_SETTING, timeStepList, fontList };
+export { aspectRatios, pictureNotions, predefineColors, OFF_WORK, GLOBAL_SETTING, timeStepList, fontList, tagList };

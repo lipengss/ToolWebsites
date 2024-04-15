@@ -3,10 +3,10 @@
 		<el-scrollbar>
 			<div
 				class="item"
-				v-for="(route, index) in routeList"
+				v-for="route in routeList"
 				:key="route.path"
-				:class="{ active: state.activeIndex === appSlideIndex }"
-				@click="onRouteChange(index)"
+				:class="{ active: state.activeIndex === route.path }"
+				@click="onRouteChange(route)"
 			>
 				<div class="icon">
 					<el-icon>
@@ -23,33 +23,31 @@ import { useRoute, useRouter } from 'vue-router';
 import { routeList } from '~/assets/utils/routeList';
 import { useTitle } from '@vueuse/core';
 
-import { storeToRefs } from 'pinia';
-import { useSettingsStore } from '~/stores/settings';
-
-const { appSlideIndex } = storeToRefs(useSettingsStore());
-
 const route = useRoute();
+const router = useRouter();
 
 const state = reactive({
-	activeIndex: 0,
+	activeIndex: '/',
 });
 
 // 路由切换
-function onRouteChange(index: number) {
-	state.activeIndex = index;
+function onRouteChange(route: RouteItem) {
+	router.push(route.path);
+	state.activeIndex = route.path;
 }
 
 // 路由监听
-// watch(
-// 	() => route.path,
-// 	(path) => {
-// 		const title = useTitle();
-// 		title.value = `我的工具-${route.meta.title}`;
-// 	},
-// 	{
-// 		immediate: true,
-// 	}
-// );
+watch(
+	() => route.path,
+	(path) => {
+		state.activeIndex = path;
+		const title = useTitle();
+		title.value = `我的工具-${route.meta.title}`;
+	},
+	{
+		immediate: true,
+	}
+);
 </script>
 <style lang="scss" scoped>
 .menu {
