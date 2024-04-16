@@ -2,7 +2,11 @@
 	<el-tooltip effect="light" :content="app.meta.description" placement="top">
 		<div class="appliaction">
 			<div class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }" @click="onclick">
-				<el-icon :size="app.meta.size || 40" v-if="app.meta.icon"><svg-icon :name="app.meta.icon" :color="app.meta.color"></svg-icon></el-icon>
+				<img v-if="app.meta.type === 'img'" :src="app.meta.value" :width="app.meta.size" :height="app.meta.size" />
+				<el-icon v-else-if="app.meta.type === 'icon' && app.meta.value" :size="app.meta.size || 40">
+					<svg-icon :name="app.meta.value" :color="app.meta.color"></svg-icon>
+				</el-icon>
+				<div v-else class="icon-text" :style="{ width: app.meta.size + 'px', height: app.meta.size + 'px' }">{{ app.meta.value }}</div>
 			</div>
 		</div>
 	</el-tooltip>
@@ -23,6 +27,7 @@ const props = withDefaults(defineProps<Props>(), {});
 function onclick() {
 	window.open(props.app.path);
 	const { icon } = props.app.meta;
+	if (!icon) return;
 	if (Object.prototype.hasOwnProperty.call(setting.value.hotWebRanks, icon)) {
 		setting.value.hotWebRanks[icon]++;
 	} else {

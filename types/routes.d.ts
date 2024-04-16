@@ -6,7 +6,8 @@ interface RouteItem {
 	children?: Array<RouteItem>;
 	meta: {
 		[key: string]: any;
-		icon?: string; // 图表
+		value?: string; // 图标
+		type?: 'img' | 'icon' | 'text';
 		rank: number; // 排序
 		size?: number; // 图标大小
 		layout: string; // 1x1 2x2 5x2

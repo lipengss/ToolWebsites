@@ -41,7 +41,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-npm',
+			type: 'icon',
+			value: 'app-npm',
 			color: '#fff',
 			bgColor: '#cb3837',
 			layout: '1x1',
@@ -54,7 +55,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-github',
+			type: 'icon',
+			value: 'app-github',
 			color: '#333',
 			bgColor: '#fff',
 			layout: '1x1',
@@ -67,7 +69,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-gitee',
+			type: 'icon',
+			value: 'app-gitee',
 			color: '#333',
 			bgColor: '#c71d23',
 			layout: '1x1',
@@ -80,10 +83,11 @@ export const developers: RouteItem[] = [
 		type: ['developer', 'designer'],
 		meta: {
 			rank: 0,
-			icon: 'app-iconfont',
+			type: 'icon',
+			value: 'app-iconfont',
 			color: '#fff',
 			bgColor: '#1E1E1E',
-			size: '1x1',
+			layout: '1x1',
 			description: '丰富的矢量图标库，提供矢量图标下载、在线存储、格式转换等功能。',
 		},
 	},
@@ -93,7 +97,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-animate',
+			type: 'icon',
+			value: 'app-animate',
 			bgColor: '#1E1E1E',
 			color: '#fff',
 			size: 70,
@@ -107,7 +112,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-echarts',
+			type: 'icon',
+			value: 'app-echarts',
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '一款基于JavaScript的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。',
@@ -119,7 +125,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-zhihu',
+			type: 'icon',
+			value: 'app-zhihu',
 			color: '#fff',
 			bgColor: '#0066ff',
 			layout: '1x1',
@@ -132,7 +139,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-juejin',
+			type: 'icon',
+			value: 'app-juejin',
 			color: '#fff',
 			bgColor: '#1E80FF',
 			layout: '1x1',
@@ -145,7 +153,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-element-plus',
+			type: 'icon',
+			value: 'app-element-plus',
 			color: '#fff',
 			bgColor: '#fff',
 			layout: '1x1',
@@ -158,7 +167,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-mdn',
+			type: 'icon',
+			value: 'app-mdn',
 			bgColor: '#303133',
 			size: 50,
 			layout: '1x1',
@@ -171,7 +181,8 @@ export const developers: RouteItem[] = [
 		type: 'onlineTool',
 		meta: {
 			rank: 0,
-			icon: 'app-picture-zip',
+			type: 'icon',
+			value: 'app-picture-zip',
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '在浏览器中压缩和比较不同编解码器的图像',
@@ -183,7 +194,8 @@ export const developers: RouteItem[] = [
 		type: ['onlineTool'],
 		meta: {
 			rank: 0,
-			icon: 'app-network-speed',
+			type: 'icon',
+			value: 'app-network-speed',
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '提供网速测试，网络质量测试，宽带测速，Wi-Fi测速，5G测速等...',
@@ -195,7 +207,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 0,
-			icon: 'app-cainiao',
+			type: 'icon',
+			value: 'app-cainiao',
 			bgColor: '#90c751',
 			size: 64,
 			layout: '1x1',
@@ -208,7 +221,8 @@ export const developers: RouteItem[] = [
 		type: ['developer', 'onlineTool'],
 		meta: {
 			rank: 0,
-			icon: 'app-jianbian',
+			type: 'icon',
+			value: 'app-jianbian',
 			bgColor: '#00a0e9',
 			size: 50,
 			layout: '1x1',
@@ -221,7 +235,8 @@ export const developers: RouteItem[] = [
 		type: ['designer'],
 		meta: {
 			rank: 0,
-			icon: 'app-font',
+			type: 'icon',
+			value: 'app-font',
 			bgColor: '#8e151e',
 			color: '#fff',
 			size: 36,
@@ -235,7 +250,8 @@ export const developers: RouteItem[] = [
 		type: ['designer'],
 		meta: {
 			rank: 0,
-			icon: 'app-jishisheji',
+			type: 'icon',
+			value: 'app-jishisheji',
 			bgColor: '#202020',
 			color: '#fff',
 			size: 60,
@@ -249,7 +265,8 @@ export const developers: RouteItem[] = [
 		type: ['designer'],
 		meta: {
 			rank: 0,
-			icon: 'app-meiye',
+			type: 'icon',
+			value: 'app-meiye',
 			bgColor: '#202020',
 			color: '#fff',
 			layout: '1x1',
@@ -262,7 +279,8 @@ export const developers: RouteItem[] = [
 		type: ['designer'],
 		meta: {
 			rank: 0,
-			icon: 'app-figma',
+			type: 'icon',
+			value: 'app-figma',
 			bgColor: '#202020',
 			layout: '1x1',
 			description: 'Figma支持多人同时在线编辑、查看和提供反馈，使得设计师、产品经理和开发人员等团队成员可以实时协作，提高设计效率。',
@@ -274,7 +292,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-bilibili',
+			type: 'icon',
+			value: 'app-bilibili',
 			color: '#fff',
 			bgColor: '#ff679a',
 			size: 60,
@@ -288,7 +307,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-huxiu',
+			type: 'icon',
+			value: 'app-huxiu',
 			color: '#ffff',
 			bgColor: '#fff',
 			size: 50,
@@ -302,7 +322,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-douban',
+			type: 'icon',
+			value: 'app-douban',
 			color: '#fff',
 			bgColor: '#2f973e',
 			size: 36,
@@ -316,7 +337,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-qq-music',
+			type: 'icon',
+			value: 'app-qq-music',
 			bgColor: '#fff',
 			layout: '1x1',
 			description: 'QQ音乐是腾讯公司推出的一款网络音乐服务产品',
@@ -328,7 +350,8 @@ export const developers: RouteItem[] = [
 		type: ['designer', 'developer'],
 		meta: {
 			rank: 0,
-			icon: 'app-animation-svg',
+			type: 'icon',
+			value: 'app-animation-svg',
 			size: 50,
 			bgColor: '#20252a',
 			layout: '1x1',
@@ -341,7 +364,8 @@ export const developers: RouteItem[] = [
 		type: 'designer',
 		meta: {
 			rank: 0,
-			icon: 'app-flaticon',
+			type: 'icon',
+			value: 'app-flaticon',
 			bgColor: '#fff',
 			size: 60,
 			layout: '1x1',
@@ -354,7 +378,8 @@ export const developers: RouteItem[] = [
 		type: 'designer',
 		meta: {
 			rank: 0,
-			icon: 'app-pexels',
+			type: 'icon',
+			value: 'app-pexels',
 			bgColor: '#07a081',
 			size: 60,
 			layout: '1x1',
@@ -367,7 +392,8 @@ export const developers: RouteItem[] = [
 		type: ['designer', 'developer'],
 		meta: {
 			rank: 0,
-			icon: 'app-iconPark',
+			type: 'icon',
+			value: 'app-iconPark',
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '高质量的iconPark,字节跳动制造。',
@@ -380,7 +406,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-xigua',
+			type: 'icon',
+			value: 'app-xigua',
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '让人们看到更丰富和有深度的世界，收获轻松的获得感，点亮对生活的好奇',
@@ -392,7 +419,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-douyin',
+			type: 'icon',
+			value: 'app-douyin',
 			bgColor: '#111',
 			size: 50,
 			layout: '1x1',
@@ -405,7 +433,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-weibo',
+			type: 'icon',
+			value: 'app-weibo',
 			bgColor: '#fff',
 			size: 60,
 			layout: '1x1',
@@ -418,7 +447,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-toutiao',
+			type: 'icon',
+			value: 'app-toutiao',
 			bgColor: '#fff',
 			size: 60,
 			layout: '1x1',
@@ -431,7 +461,8 @@ export const developers: RouteItem[] = [
 		type: 'amusement',
 		meta: {
 			rank: 0,
-			icon: 'app-36ke',
+			type: 'icon',
+			value: 'app-36ke',
 			bgColor: '#4182F1',
 			size: 60,
 			layout: '1x1',
@@ -444,7 +475,8 @@ export const developers: RouteItem[] = [
 		type: ['developer', 'c'],
 		meta: {
 			rank: 30,
-			icon: 'app-openAi',
+			type: 'icon',
+			value: 'app-openAi',
 			bgColor: '#75A99C',
 			color: '#fff',
 			layout: '1x1',
@@ -457,7 +489,8 @@ export const developers: RouteItem[] = [
 		type: 'developer',
 		meta: {
 			rank: 20,
-			icon: 'app-baidufanyi',
+			type: 'icon',
+			value: 'app-baidufanyi',
 			bgColor: '#0299FF',
 			color: '#fff',
 			layout: '1x1',
@@ -470,7 +503,8 @@ export const developers: RouteItem[] = [
 		type: ['developer', 'onlineTools'],
 		meta: {
 			rank: 18,
-			icon: 'app-yuque',
+			type: 'icon',
+			value: 'app-yuque',
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '博客技术栈在线工具资源网站UI库后端技术稀土掘金微信百...',
@@ -482,7 +516,8 @@ export const developers: RouteItem[] = [
 		type: ['designer', 'amusement'],
 		meta: {
 			rank: 18,
-			icon: 'app-discord',
+			type: 'icon',
+			value: 'app-discord',
 			bgColor: '#5865f2',
 			color: '#fff',
 			layout: '1x1',
@@ -495,7 +530,8 @@ export const developers: RouteItem[] = [
 		type: ['onlineTool'],
 		meta: {
 			rank: 40,
-			icon: 'app-gaode',
+			type: 'icon',
+			value: 'app-gaode',
 			bgColor: '#fff',
 			size: 66,
 			layout: '1x1',
@@ -508,7 +544,8 @@ export const developers: RouteItem[] = [
 		type: ['developer', 'designer'],
 		meta: {
 			rank: 40,
-			icon: 'app-loading',
+			type: 'icon',
+			value: 'app-loading',
 			bgColor: '#fff',
 			color: '',
 			layout: '1x1',
