@@ -1,9 +1,10 @@
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import path from 'path';
 
+// 'element-plus/dist/index.css',
 export default defineNuxtConfig({
 	devtools: { enabled: true },
-	css: ['element-plus/dist/index.css', '~/assets/css/common.scss', 'animate.css'],
+	css: ['~/assets/css/common.scss', 'animate.css'],
 	modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-swiper'],
 	elementPlus: {
 		themes: ['dark'],

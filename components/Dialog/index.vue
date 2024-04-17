@@ -42,7 +42,7 @@ watch(
 );
 </script>
 <style lang="scss" scoped>
-.el-dialog {
-	background-image: v-bind('picture.value');
+:deep .el-dialog {
+	background-image: v-bind('picture.values');
 }
 </style>

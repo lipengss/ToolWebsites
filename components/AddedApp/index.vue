@@ -27,9 +27,14 @@
 							<el-input v-model="state.customIconForm.meta.value" placeholder="网站名称" :prefix-icon="Edit" />
 						</el-form-item>
 						<el-form-item>
-							<GridItem name="文字图标" class="custom-item" :style="{ backgroundColor: state.customIconForm.meta.bgColor }">
-								{{ state.customIconForm.meta.value }}
-							</GridItem>
+							<el-space>
+								<GridItem name="文字图标" class="custom-item" :style="{ backgroundColor: state.customIconForm.meta.bgColor }">
+									<img :src="icoUrl" />
+								</GridItem>
+								<GridItem name="文字图标" class="custom-item" :style="{ backgroundColor: state.customIconForm.meta.bgColor }">
+									{{ state.customIconForm.meta.value }}
+								</GridItem>
+							</el-space>
 						</el-form-item>
 						<el-form-item>
 							<el-button type="primary">保存</el-button>
@@ -57,7 +62,7 @@ const state = reactive({
 		path: '',
 		type: '',
 		meta: {
-			value: '',
+			value: 'A',
 			type: 'text',
 			bgColor: '#FF4500',
 			description: '',
@@ -70,6 +75,15 @@ async function getWebsiteIcon() {
 	const img = document.createElement('img');
 	img.src = `${path}favicon.ico`;
 }
+
+const icoUrl = computed(() => {
+	const { path } = state.customIconForm;
+	if (path.endsWith('/')) {
+		return path + 'favicon.ico';
+	} else {
+		return path + '/favicon.ico';
+	}
+});
 
 function onAdded() {
 	state.visible = true;
