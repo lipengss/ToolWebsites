@@ -28,11 +28,35 @@
 						</el-form-item>
 						<el-form-item>
 							<el-space>
-								<GridItem name="文字图标" class="custom-item" :style="{ backgroundColor: state.customIconForm.meta.bgColor }">
+								<GridItem
+									name="图标"
+									class="custom-item"
+									:class="{ active: state.customIconForm.meta.type === 'img' }"
+									:style="{ backgroundColor: state.customIconForm.meta.bgColor }"
+									@click="onSelectIcon('img')"
+								>
 									<img :src="icoUrl" />
 								</GridItem>
-								<GridItem name="文字图标" class="custom-item" :style="{ backgroundColor: state.customIconForm.meta.bgColor }">
+								<GridItem
+									name="文字图标"
+									class="custom-item"
+									:class="{ active: state.customIconForm.meta.type === 'text' }"
+									:style="{ backgroundColor: state.customIconForm.meta.bgColor }"
+									@click="onSelectIcon('text')"
+								>
 									{{ state.customIconForm.meta.value }}
+								</GridItem>
+								<GridItem
+									name="自定义图标"
+									class="custom-item"
+									:class="{ active: state.customIconForm.meta.type === 'icon' }"
+									:style="{ backgroundColor: state.customIconForm.meta.bgColor }"
+									@click="onSelectIcon('icon')"
+								>
+									<el-upload class="avatar-uploader" action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :show-file-list="false">
+										<img v-if="imageUrl" :src="imageUrl" class="avatar" />
+										<el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+									</el-upload>
 								</GridItem>
 							</el-space>
 						</el-form-item>
@@ -49,7 +73,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { CirclePlusFilled, Link, Edit } from '@element-plus/icons-vue';
+import { CirclePlusFilled, Link, Edit, Plus } from '@element-plus/icons-vue';
 import { tagList, predefineColors } from '~/assets/utils/publicData';
 
 const { setting } = storeToRefs(useSettingsStore());
@@ -85,6 +109,10 @@ const icoUrl = computed(() => {
 	}
 });
 
+function onSelectIcon(icon: string) {
+	state.customIconForm.meta.value = icon;
+}
+
 function onAdded() {
 	state.visible = true;
 }
@@ -102,5 +130,9 @@ function onAdded() {
 }
 .custom-item {
 	border-radius: 8px;
+	cursor: pointer;
+}
+.active {
+	border: 1px solid var(--el-color-primary);
 }
 </style>

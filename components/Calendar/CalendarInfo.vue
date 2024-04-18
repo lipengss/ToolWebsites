@@ -250,7 +250,7 @@ watch(
 		color: #fff;
 	}
 }
-.light {
+.next .light {
 	background-color: var(--el-color-error-light-9);
 	color: var(--el-color-error-light-3);
 	opacity: 0.8;
@@ -258,6 +258,16 @@ watch(
 		background-color: var(--el-color-error-light-3);
 	}
 }
+
+.current .light {
+	background-color: var(--el-color-danger-light-8);
+	color: var(--el-color-error-light-3);
+	opacity: 1;
+	.holiday {
+		background-color: var(--el-color-error-light-3);
+	}
+}
+
 .primary {
 	background-color: var(--el-color-warning-light-9);
 	color: var(--el-color-warning-light-3);
@@ -274,9 +284,15 @@ watch(
 	tr td,
 	th {
 		&:first-child {
+			&.prev {
+				color: var(--el-color-danger-light-5);
+			}
 			color: var(--el-color-danger);
 		}
 		&:last-child {
+			&.next {
+				color: var(--el-color-danger-light-5);
+			}
 			color: var(--el-color-danger);
 		}
 	}

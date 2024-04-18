@@ -2,7 +2,9 @@
 	<el-tooltip effect="light" :content="app.meta.description" placement="top">
 		<div class="appliaction">
 			<div class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }" @click="onclick">
-				<img v-if="app.meta.type === 'img'" :src="app.meta.value" :width="app.meta.size" :height="app.meta.size" />
+				<div v-if="app.meta.type === 'img'" class="favicon" :width="app.meta.size" :height="app.meta.size">
+					<img :src="app.meta.value" width="70%" height="70%" />
+				</div>
 				<el-icon v-else-if="app.meta.type === 'icon' && app.meta.value" :size="app.meta.size || 40">
 					<svg-icon :name="app.meta.value" :color="app.meta.color"></svg-icon>
 				</el-icon>
@@ -22,16 +24,19 @@ const { setGlobalSetting } = useSettingsStore();
 interface Props {
 	app: RouteItem;
 }
+
 const props = withDefaults(defineProps<Props>(), {});
+
+const size = computed(() => props.app.meta.size + 'px');
 
 function onclick() {
 	window.open(props.app.path);
-	const { icon } = props.app.meta;
-	if (!icon) return;
-	if (Object.prototype.hasOwnProperty.call(setting.value.hotWebRanks, icon)) {
-		setting.value.hotWebRanks[icon]++;
+	const { name } = props.app;
+	if (!name) return;
+	if (Object.prototype.hasOwnProperty.call(setting.value.hotWebRanks, name)) {
+		setting.value.hotWebRanks[name]++;
 	} else {
-		setting.value.hotWebRanks[icon] = 1;
+		setting.value.hotWebRanks[name] = 1;
 	}
 	setGlobalSetting();
 }
@@ -53,6 +58,14 @@ function onclick() {
 			align-items: center;
 			justify-content: center;
 			color: #fff;
+		}
+		.favicon {
+			width: v-bind(size);
+			height: v-bind(size);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #fff;
 		}
 	}
 }

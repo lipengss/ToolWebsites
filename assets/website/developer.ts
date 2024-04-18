@@ -474,7 +474,7 @@ export const developers: RouteItem[] = [
 		path: 'https://chat.openai.com/',
 		type: ['developer', 'c'],
 		meta: {
-			rank: 30,
+			rank: 0,
 			type: 'icon',
 			value: 'app-openAi',
 			bgColor: '#75A99C',
@@ -488,7 +488,7 @@ export const developers: RouteItem[] = [
 		path: 'https://fanyi.baidu.com/mtpe-individual/multimodal?aldtype=16047#/auto/zh',
 		type: 'developer',
 		meta: {
-			rank: 20,
+			rank: 0,
 			type: 'icon',
 			value: 'app-baidufanyi',
 			bgColor: '#0299FF',
@@ -502,7 +502,7 @@ export const developers: RouteItem[] = [
 		path: 'https://www.yuque.com/',
 		type: ['developer', 'onlineTools'],
 		meta: {
-			rank: 18,
+			rank: 0,
 			type: 'icon',
 			value: 'app-yuque',
 			bgColor: '#fff',
@@ -515,7 +515,7 @@ export const developers: RouteItem[] = [
 		path: 'https://discord.com/',
 		type: ['designer', 'amusement'],
 		meta: {
-			rank: 18,
+			rank: 0,
 			type: 'icon',
 			value: 'app-discord',
 			bgColor: '#5865f2',
@@ -529,7 +529,7 @@ export const developers: RouteItem[] = [
 		path: 'https://ditu.amap.com/',
 		type: ['onlineTool'],
 		meta: {
-			rank: 40,
+			rank: 0,
 			type: 'icon',
 			value: 'app-gaode',
 			bgColor: '#fff',
@@ -543,13 +543,52 @@ export const developers: RouteItem[] = [
 		path: 'https://css-loaders.com/shapes/',
 		type: ['developer', 'designer'],
 		meta: {
-			rank: 40,
+			rank: 0,
 			type: 'icon',
 			value: 'app-loading',
 			bgColor: '#fff',
 			color: '',
 			layout: '1x1',
 			description: '加载状态',
+		},
+	},
+	{
+		name: '人人都是产品经理',
+		path: 'http://www.woshipm.com/',
+		type: ['product'],
+		meta: {
+			rank: 0,
+			type: 'icon',
+			value: 'app-product',
+			bgColor: '#fff',
+			layout: '1x1',
+			description: '人人都是产品经理致力为产品新人',
+		},
+	},
+	{
+		name: '墨刀',
+		path: 'https://modao.cc/brand/',
+		type: ['product'],
+		meta: {
+			rank: 0,
+			type: 'icon',
+			value: 'app-modao',
+			bgColor: '#fff',
+			layout: '1x1',
+			description: 'AI时代的专业级原型设计工具',
+		},
+	},
+	{
+		name: '腾讯视频',
+		path: 'https://v.qq.com/',
+		type: ['amusement'],
+		meta: {
+			rank: 0,
+			type: 'icon',
+			value: 'app-tenxun',
+			bgColor: '#fff',
+			layout: '1x1',
+			description: '腾讯视频',
 		},
 	},
 ];

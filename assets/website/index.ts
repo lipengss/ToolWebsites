@@ -32,9 +32,9 @@ function sortWebRanks(webList: Array<RouteItem>) {
 	if (hotWebRanks && Object.keys(hotWebRanks).length) {
 		const keys = Object.keys(hotWebRanks);
 		webList.forEach((item) => {
-			const { icon } = item.meta;
-			if (keys.includes(icon)) {
-				item.meta.rank = hotWebRanks[icon];
+			const { name } = item;
+			if (keys.includes(name)) {
+				item.meta.rank = hotWebRanks[name];
 			}
 		});
 		const orderByList = useOrderBy(webList, 'meta.rank', 'desc');
