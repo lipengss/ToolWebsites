@@ -57,7 +57,11 @@ function onclick() {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			color: #fff;
+			text-align: center;
+			font-size: 1.5em;
+			line-height: 26px;
+			font-weight: bold;
+			color: v-bind('props.app.meta.color');
 		}
 		.favicon {
 			width: v-bind(size);

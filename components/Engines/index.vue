@@ -63,6 +63,7 @@ import { storeToRefs } from 'pinia';
 import { Search, Close } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
+import { developers } from '~/assets/website/developer';
 
 const { setting, engineList, currentEngine } = storeToRefs(useSettingsStore());
 const { querySearch, setGlobalSetting, removeHistoryRow } = useSettingsStore();
@@ -111,12 +112,18 @@ function onChangeEngines(key: string) {
 }
 
 function onActionSearch() {
+	if (setting.value.search.engines === '本地') {
+		localSearch();
+		return;
+	}
 	if (setting.value.search.historyList.some((queryString) => queryString === state.query)) return;
 	setting.value.search.historyList.push(state.query);
 	jumpQuery(state.query);
 	state.query = '';
 	setGlobalSetting();
 }
+
+function localSearch() {}
 
 function jumpQuery(queryString: string) {
 	const searchUrl = `${currentEngine.value.link}${queryString}`;

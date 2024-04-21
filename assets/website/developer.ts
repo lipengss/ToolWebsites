@@ -591,4 +591,18 @@ export const developers: RouteItem[] = [
 			description: '腾讯视频',
 		},
 	},
+	{
+		name: '菜鸟工具',
+		path: 'https://www.jyshare.com/',
+		type: ['developer'],
+		meta: {
+			rank: 0,
+			type: 'text',
+			value: '菜鸟',
+			color: '#d9534f',
+			bgColor: '#fff',
+			layout: '1x1',
+			description: '为开发设计人员提供在线工具',
+		},
+	},
 ];

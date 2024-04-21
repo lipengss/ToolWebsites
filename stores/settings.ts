@@ -107,6 +107,12 @@ export const useSettingsStore = defineStore('settingStore', {
 					icon: 'icon-sougou',
 					description: '搜狗提供的订阅号及文章内容搜索。',
 				},
+				{
+					name: '本地',
+					link: 'local',
+					icon: 'icon-local',
+					description: '本地搜索APP',
+				},
 			],
 		};
 	},
