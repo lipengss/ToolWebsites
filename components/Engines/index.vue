@@ -29,7 +29,7 @@
 							</el-icon>
 						</template>
 						<template #prefix>
-							<el-icon :size="20">
+							<el-icon :size="30">
 								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
 							</el-icon>
 						</template>
@@ -47,7 +47,7 @@
 							</el-icon>
 						</template>
 						<template #prefix>
-							<el-icon :size="20">
+							<el-icon :size="30">
 								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
 							</el-icon>
 						</template>
@@ -123,7 +123,14 @@ function onActionSearch() {
 	setGlobalSetting();
 }
 
-function localSearch() {}
+function localSearch() {
+	const filterList = developers.filter((item) => {
+		if (item.name.includes(state.query) || item.meta.description?.includes(state.query)) {
+			return item;
+		}
+	});
+	console.log(filterList);
+}
 
 function jumpQuery(queryString: string) {
 	const searchUrl = `${currentEngine.value.link}${queryString}`;
