@@ -1,8 +1,7 @@
 <template>
 	<el-container class="el-container-parent" @contextmenu.prevent="contextmenu">
-		<MenuBar />
+		<!-- <MenuBar />
 		<div class="el-container-child">
-			<!-- <Engines /> -->
 			<el-scrollbar class="my-scrollbar">
 				<div class="main" ref="mainRef">
 					<Engines />
@@ -12,7 +11,12 @@
 			<el-footer>
 				<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
 			</el-footer>
-		</div>
+		</div> -->
+		<Swiper direction="vertical">
+			<SwiperSlide><div class="slide-text">1</div></SwiperSlide>
+			<SwiperSlide><div class="slide-text">2</div></SwiperSlide>
+			<SwiperSlide><div class="slide-text">3</div></SwiperSlide>
+		</Swiper>
 		<Loading />
 		<!-- 壁纸切换 -->
 		<toggleWallpaper />
@@ -163,6 +167,15 @@ onMounted(() => {
 	.main {
 		padding-top: calc(10vh + 153px);
 	}
+}
+.slide-text {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 60px;
+	color: #fff;
 }
 .el-footer {
 	width: 100%;
