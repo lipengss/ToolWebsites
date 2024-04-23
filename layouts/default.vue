@@ -2,10 +2,10 @@
 	<el-container class="el-container-parent" @contextmenu.prevent="contextmenu">
 		<MenuBar />
 		<div class="el-container-child">
-			<Engines />
-			<!--  @wheel="handleWheel" -->
+			<!-- <Engines /> -->
 			<el-scrollbar class="my-scrollbar">
 				<div class="main" ref="mainRef">
+					<Engines />
 					<slot />
 				</div>
 			</el-scrollbar>
@@ -159,6 +159,9 @@ onMounted(() => {
 			box-sizing: border-box;
 			padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
 		}
+	}
+	.main {
+		padding-top: calc(10vh + 153px);
 	}
 }
 .el-footer {

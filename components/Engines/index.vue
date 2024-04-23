@@ -7,13 +7,13 @@
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
 				</div>
 				<template v-if="setting.search.show">
-					<div class="flex-around serach-engines">
+					<!-- <div class="flex-around serach-engines">
 						<el-tooltip v-for="item in engineList" :key="item.name" effect="light" :content="item.description" placement="top">
 							<el-link :type="setting.search.engines === item.name ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.name)">
 								{{ item.name }}
 							</el-link>
 						</el-tooltip>
-					</div>
+					</div> -->
 					<el-autocomplete
 						v-if="setting.search.history"
 						v-model="state.query"
@@ -71,7 +71,7 @@ const { format, formatWeek } = useDateFormat();
 
 const inputHeight = computed(() => `${setting.value.search.height}px`);
 const inputRadius = computed(() => `${setting.value.search.radius}px`);
-const inputOpacity = computed(() => `rgba(255, 255, 255, ${setting.value.search.opacity})`);
+const inputOpacity = computed(() => `rgba(0, 0, 0, ${setting.value.search.opacity})`);
 
 const dateColor = computed(() => setting.value.date.color);
 const dateFont = computed(() => setting.value.date.font);
@@ -143,13 +143,17 @@ function jumpQuery(queryString: string) {
 	box-sizing: border-box;
 	align-items: center;
 	justify-content: center;
-	padding-top: 10vh;
+	width: 100%;
+	z-index: 100;
+	position: absolute;
+	top: 10vh;
 	.content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		.date-wrapper {
 			min-width: 140px;
+			margin-bottom: 20px;
 			text-align: center;
 			color: v-bind(dateColor);
 			text-shadow: 1px 1px 1px #000;
