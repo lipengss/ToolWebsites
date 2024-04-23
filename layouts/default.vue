@@ -12,10 +12,11 @@
 				<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
 			</el-footer>
 		</div> -->
-		<Swiper direction="vertical">
+		<Swiper direction="vertical" :mousewheel="true" :loop="true" :modules="[SwiperMousewheel, SwiperPagination, SwiperNavigation]">
 			<SwiperSlide><div class="slide-text">1</div></SwiperSlide>
 			<SwiperSlide><div class="slide-text">2</div></SwiperSlide>
 			<SwiperSlide><div class="slide-text">3</div></SwiperSlide>
+			<SwiperPagination />
 		</Swiper>
 		<Loading />
 		<!-- 壁纸切换 -->
