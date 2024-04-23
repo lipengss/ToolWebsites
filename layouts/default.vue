@@ -12,11 +12,29 @@
 				<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
 			</el-footer>
 		</div> -->
-		<Swiper direction="vertical" :mousewheel="true" :loop="true" :modules="[SwiperMousewheel, SwiperPagination, SwiperNavigation]">
-			<SwiperSlide><div class="slide-text">1</div></SwiperSlide>
-			<SwiperSlide><div class="slide-text">2</div></SwiperSlide>
-			<SwiperSlide><div class="slide-text">3</div></SwiperSlide>
-			<SwiperPagination />
+		<Swiper
+			direction="vertical"
+			:mousewheel="true"
+			:loop="true"
+			:pagination="{
+				clickable: true,
+			}"
+			:modules="[SwiperMousewheel, SwiperPagination, SwiperNavigation]"
+			@slideChange="slideChange"
+		>
+			<SwiperSlide v-for="route in swiperSlideData" :key="route.path">
+				<GirdLayout v-if="route.children">
+					<template v-for="app in route.children">
+						<GridItem v-if="app.type === 'card'" size="5x2" :name="app.name">
+							<component :is="card[app.component]" />
+						</GridItem>
+						<GridItem v-else size="1x1" :name="app.name">
+							<Application :app="app" />
+						</GridItem>
+					</template>
+					<AddedApp />
+				</GirdLayout>
+			</SwiperSlide>
 		</Swiper>
 		<Loading />
 		<!-- 壁纸切换 -->
@@ -59,12 +77,10 @@ import mitt from '~/assets/utils/mitt';
 import { Delete, Edit } from '@element-plus/icons-vue';
 import { useSettingsStore } from '~/stores/settings';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
-
-import { useRoute } from 'vue-router';
+import { routeList } from '~/assets/utils/routeList';
 
 const mainRef = ref();
 
-const route = useRoute();
 const settingStore = useSettingsStore();
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
 
@@ -82,6 +98,12 @@ const curApp = ref<RouteItem>({
 	},
 });
 
+const card: any = {
+	Weather: resolveComponent('Weather'),
+	Calendar: resolveComponent('Calendar'),
+	OffWork: resolveComponent('OffWork'),
+};
+
 const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
 const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 const asideWidth = computed(() => setting.value.menuBar.width + 'px');
@@ -89,17 +111,14 @@ const asideWidth = computed(() => setting.value.menuBar.width + 'px');
 const contextmenuRef = ref();
 const global = ref();
 
-/* function handleWheel(event) {
-	const { deltaY } = event;
-	if (deltaY > 1) {
-		console.log('down');
-	} else {
-		console.log('up');
-	}
-
-	// 内容盒子的高度
-	const clinetHeight = mainRef.value.clinetHeight;
-} */
+const swiperSlideData = computed(() => {
+	const result = routeList.map((route) => {
+		route.children = filterHoutWebSiteList(route.type);
+		return route;
+	});
+	console.log(result);
+	return result;
+});
 
 function onDeleteApp() {
 	const { name } = curApp.value;
@@ -128,6 +147,10 @@ function contextmenu(event: any) {
 	contextmenuRef.value.contextmenu(event);
 }
 
+function slideChange({ activeIndex }) {
+	console.log(activeIndex);
+}
+
 onMounted(() => {
 	initGloabalSetting();
 });
@@ -150,6 +173,9 @@ onMounted(() => {
 	}
 	&::before {
 		backdrop-filter: v-bind(bgBlur);
+	}
+	.swiper {
+		width: 100%;
 	}
 	.el-container-child {
 		width: 100%;
