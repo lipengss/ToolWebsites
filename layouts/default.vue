@@ -14,27 +14,42 @@
 		</div> -->
 		<Swiper
 			direction="vertical"
-			:mousewheel="true"
 			:loop="true"
 			:pagination="{
 				clickable: true,
 			}"
-			:modules="[SwiperMousewheel, SwiperPagination, SwiperNavigation]"
+			:modules="[SwiperPagination, SwiperNavigation]"
 			@slideChange="slideChange"
 		>
-			<SwiperSlide v-for="route in swiperSlideData" :key="route.path">
-				<GirdLayout v-if="route.children">
-					<template v-for="app in route.children">
-						<GridItem v-if="app.type === 'card'" size="5x2" :name="app.name">
-							<component :is="card[app.component]" />
-						</GridItem>
-						<GridItem v-else size="1x1" :name="app.name">
-							<Application :app="app" />
-						</GridItem>
-					</template>
-					<AddedApp />
-				</GirdLayout>
+			<!--  v-for="route in swiperSlideData" :key="route.path" -->
+			<SwiperSlide>
+				<Swiper
+					direction="vertical"
+					:scrollbar="true"
+					:nested="true"
+					:freeMode="true"
+					:mousewheel="true"
+					:modules="[SwiperScrollbar, SwiperMousewheel, SwiperFreeMode]"
+				>
+					<SwiperSlide>
+						<!-- <GirdLayout v-if="route.children">
+							<template v-for="app in route.children">
+								<GridItem v-if="app.type === 'card'" size="5x2" :name="app.name">
+									<component :is="card[app.component]" />
+								</GridItem>
+								<GridItem v-else size="1x1" :name="app.name">
+									<Application :app="app" />
+								</GridItem>
+							</template>
+							<AddedApp />
+						</GirdLayout> -->
+						<div class="text-content" style="background-color: red">
+							<div v-for="num in 100">{{ num }}</div>
+						</div>
+					</SwiperSlide>
+				</Swiper>
 			</SwiperSlide>
+			<SwiperSlide> <div class="text-content" style="background-color: yellow">我是大傻逼</div> </SwiperSlide>
 		</Swiper>
 		<Loading />
 		<!-- 壁纸切换 -->
@@ -78,8 +93,6 @@ import { Delete, Edit } from '@element-plus/icons-vue';
 import { useSettingsStore } from '~/stores/settings';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
 import { routeList } from '~/assets/utils/routeList';
-
-const mainRef = ref();
 
 const settingStore = useSettingsStore();
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
@@ -176,20 +189,17 @@ onMounted(() => {
 	}
 	.swiper {
 		width: 100%;
+		height: 100%;
 	}
-	.el-container-child {
+	.text-content {
 		width: 100%;
-		min-height: 100%;
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: column;
-	}
-	:deep .my-scrollbar {
-		flex: 1;
-		.el-scrollbar__view {
-			box-sizing: border-box;
-			padding: 0 calc(v-bind(asideWidth) + 10px) 30px;
-		}
+		height: 100%;
+		// display: flex;
+		// justify-content: center;
+		// align-items: center;
+		// text-align: center;
+		color: #fff;
+		font-size: 38px;
 	}
 	.main {
 		padding-top: calc(10vh + 153px);
