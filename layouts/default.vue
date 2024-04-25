@@ -1,38 +1,28 @@
 <template>
-	<el-container class="el-container-parent" @contextmenu.prevent="contextmenu">
-		<!-- <MenuBar />
-		<div class="el-container-child">
-			<el-scrollbar class="my-scrollbar">
-				<div class="main" ref="mainRef">
-					<Engines />
-					<slot />
-				</div>
-			</el-scrollbar>
-			<el-footer>
-				<NuxtLink to="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">京ICP备2024051908号-1</NuxtLink>
-			</el-footer>
-		</div> -->
+	<div class="container">
+		<Engines />
 		<Swiper
+			class="swiper-parent"
+			:modules="[SwiperMousewheel]"
+			loop
 			direction="vertical"
-			:loop="true"
-			:pagination="{
-				clickable: true,
-			}"
-			:modules="[SwiperPagination, SwiperNavigation]"
-			@slideChange="slideChange"
+			:mousewheel="true"
+			:initialSlide="appSlideIndex"
+			@swiper="onSwiper"
+			@slideChange="onSlideChange"
+			@contextmenu.prevent="contextmenu"
 		>
-			<!--  v-for="route in swiperSlideData" :key="route.path" -->
-			<SwiperSlide>
-				<Swiper
-					direction="vertical"
-					:scrollbar="true"
-					:nested="true"
-					:freeMode="true"
-					:mousewheel="true"
-					:modules="[SwiperScrollbar, SwiperMousewheel, SwiperFreeMode]"
-				>
-					<SwiperSlide>
-						<!-- <GirdLayout v-if="route.children">
+			<template v-for="route in swiperSlideData" :key="route.path">
+				<SwiperSlide v-if="route.children" style="overflow: hidden">
+					<Swiper
+						:modules="[SwiperFreeMode, SwiperMousewheel]"
+						direction="vertical"
+						slidesPerView="auto"
+						:nested="true"
+						:freeMode="true"
+						:mousewheel="true"
+					>
+						<SwiperSlide class="swiper-slide-child">
 							<template v-for="app in route.children">
 								<GridItem v-if="app.type === 'card'" size="5x2" :name="app.name">
 									<component :is="card[app.component]" />
@@ -42,63 +32,77 @@
 								</GridItem>
 							</template>
 							<AddedApp />
-						</GirdLayout> -->
-						<div class="text-content" style="background-color: red">
-							<div v-for="num in 100">{{ num }}</div>
-						</div>
-					</SwiperSlide>
-				</Swiper>
-			</SwiperSlide>
-			<SwiperSlide> <div class="text-content" style="background-color: yellow">我是大傻逼</div> </SwiperSlide>
+						</SwiperSlide>
+					</Swiper>
+				</SwiperSlide>
+			</template>
 		</Swiper>
-		<Loading />
-		<!-- 壁纸切换 -->
-		<toggleWallpaper />
-		<!-- 风格配置 -->
+	</div>
+	<Loading />
+	<!-- 壁纸切换 -->
+	<toggleWallpaper />
+	<!-- 风格配置 -->
+	<ClientOnly>
 		<Setting />
-		<!-- 右键菜单 -->
-		<Contextmenu ref="contextmenuRef">
-			<template v-if="global">
-				<div class="item" @click="changeWallpaper">
-					<el-icon><svg-icon name="menu-picture" /></el-icon>
-					<span>换壁纸</span>
-				</div>
-				<div class="item" @click="showDrawer = true">
-					<el-icon><svg-icon name="setting" /></el-icon>
-					<span>设置</span>
-				</div>
-			</template>
-			<template v-else>
-				<div class="item">
-					<el-icon><Edit /></el-icon>
-					<span>编辑</span>
-				</div>
-				<div class="item">
-					<el-icon><svg-icon name="batchEdit" /></el-icon>
-					<span>批量编辑</span>
-				</div>
-				<div class="item" @click="onDeleteApp">
-					<el-icon><Delete /></el-icon>
-					<span>删除</span>
-				</div>
-			</template>
-		</Contextmenu>
-	</el-container>
+	</ClientOnly>
+	<!-- 菜单 -->
+	<MenuBar />
+	<!-- 右键菜单 -->
+	<Contextmenu ref="contextmenuRef">
+		<template v-if="global">
+			<div class="item" @click="changeWallpaper">
+				<el-icon><svg-icon name="menu-picture" /></el-icon>
+				<span>换壁纸</span>
+			</div>
+			<div class="item" @click="showDrawer = true">
+				<el-icon><svg-icon name="setting" /></el-icon>
+				<span>设置</span>
+			</div>
+		</template>
+		<template v-else>
+			<div class="item">
+				<el-icon><Edit /></el-icon>
+				<span>编辑</span>
+			</div>
+			<div class="item">
+				<el-icon><svg-icon name="batchEdit" /></el-icon>
+				<span>批量编辑</span>
+			</div>
+			<div class="item" @click="onDeleteApp">
+				<el-icon><Delete /></el-icon>
+				<span>删除</span>
+			</div>
+		</template>
+	</Contextmenu>
 </template>
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
-import mitt from '~/assets/utils/mitt';
-import { Delete, Edit } from '@element-plus/icons-vue';
 import { useSettingsStore } from '~/stores/settings';
+import { Delete, Edit } from '@element-plus/icons-vue';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
 import { routeList } from '~/assets/utils/routeList';
-
-const settingStore = useSettingsStore();
+import mitt from '~/assets/utils/mitt';
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
-
-const { setting, showDrawer } = storeToRefs(settingStore);
+const settingStore = useSettingsStore();
+const { setting, appSlideIndex } = storeToRefs(useSettingsStore());
 const { initGloabalSetting, changeWallpaper, setGlobalSetting } = settingStore;
+
+const contextmenuRef = ref();
+const global = ref();
+
+const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
+const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
+const screenWidth = computed(() => setting.value.app.sceenWidth + setting.value.app.unit);
+const appSize = computed(() => setting.value.app.size + 'px');
+const columnGap = computed(() => {
+	const { async, gap, columnGap } = setting.value.app;
+	return (async ? gap : columnGap) + 'px';
+});
+const rowGap = computed(() => {
+	const { async, gap, rowGap } = setting.value.app;
+	return (async ? gap : rowGap) + 'px';
+});
 
 const curApp = ref<RouteItem>({
 	name: '',
@@ -116,22 +120,18 @@ const card: any = {
 	Calendar: resolveComponent('Calendar'),
 	OffWork: resolveComponent('OffWork'),
 };
-
-const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
-const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
-const asideWidth = computed(() => setting.value.menuBar.width + 'px');
-
-const contextmenuRef = ref();
-const global = ref();
-
 const swiperSlideData = computed(() => {
 	const result = routeList.map((route) => {
 		route.children = filterHoutWebSiteList(route.type);
 		return route;
 	});
-	console.log(result);
 	return result;
 });
+
+function contextmenu(event: any) {
+	global.value = true;
+	contextmenuRef.value.contextmenu(event);
+}
 
 function onDeleteApp() {
 	const { name } = curApp.value;
@@ -155,23 +155,32 @@ mitt.on('contextmenuApp', ({ event, name }) => {
 	contextmenuRef.value.contextmenu(event);
 });
 
-function contextmenu(event: any) {
-	global.value = true;
-	contextmenuRef.value.contextmenu(event);
+let swiper: any = null;
+
+function onSwiper(instance: any) {
+	swiper = instance;
 }
 
-function slideChange({ activeIndex }) {
-	console.log(activeIndex);
+function onSlideChange(obj: any) {
+	const { realIndex } = obj;
+	appSlideIndex.value = realIndex;
 }
+
+mitt.on('onMenuChange', (index: number) => {
+	swiper.slideTo(index);
+});
 
 onMounted(() => {
 	initGloabalSetting();
 });
 </script>
 <style lang="scss" scoped>
-.el-container-parent {
-	flex-direction: row;
+.container {
+	height: 100%;
 	position: relative;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 	&::before,
 	&::before {
 		content: '';
@@ -187,44 +196,29 @@ onMounted(() => {
 	&::before {
 		backdrop-filter: v-bind(bgBlur);
 	}
-	.swiper {
-		width: 100%;
-		height: 100%;
-	}
-	.text-content {
-		width: 100%;
-		height: 100%;
-		// display: flex;
-		// justify-content: center;
-		// align-items: center;
-		// text-align: center;
-		color: #fff;
-		font-size: 38px;
-	}
-	.main {
-		padding-top: calc(10vh + 153px);
+	.swiper-parent {
+		flex: 1;
+		height: calc(100% - (10vh + 153px));
 	}
 }
-.slide-text {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 60px;
-	color: #fff;
-}
-.el-footer {
+.swiper {
 	width: 100%;
-	height: 30px;
-	display: flex;
-	align-items: center;
+	height: 100%;
+}
+
+.swiper-slide-child {
+	width: v-bind(screenWidth);
+	height: auto;
+	box-sizing: border-box;
+	display: grid;
 	justify-content: center;
-	margin-top: -30px;
-	backdrop-filter: blur(10px);
-	a {
-		font-size: 12px;
-		color: var(--el-text-color-regular);
-	}
+	grid-template-columns: repeat(auto-fill, v-bind(appSize));
+	grid-template-rows: repeat(auto-fill, v-bind(appSize));
+	grid-auto-flow: dense;
+	column-gap: v-bind(columnGap);
+	row-gap: v-bind(rowGap);
+	margin: 0 auto;
+	padding-top: 20px;
+	padding-bottom: 50px;
 }
 </style>

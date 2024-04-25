@@ -1,10 +1,27 @@
 <template>
 	<ClientOnly>
-		<el-aside :width="menuWidth" :class="{ 'hide-sidebar': autoHide && x > settingStore.setting.menuBar.width }">
-			<Menu />
+		<el-aside :width="menuWidth" :class="{ 'hide-sidebar': autoHide && x > setting.menuBar.width }">
+			<div class="menu">
+				<el-scrollbar>
+					<div
+						class="item"
+						v-for="(route, index) in routeList"
+						:key="route.path"
+						:class="{ active: appSlideIndex === index }"
+						@click="onSwiperSlideChange(index)"
+					>
+						<div class="icon">
+							<el-icon>
+								<svg-icon v-if="route.meta.icon" :name="route.meta.icon" />
+							</el-icon>
+						</div>
+						<div class="title">{{ route.name }}</div>
+					</div>
+				</el-scrollbar>
+			</div>
 			<div class="setting">
 				<el-tooltip content="设置" placement="right">
-					<el-icon size="18px" class="icon rotate" @click="settingStore.openSettingDrawer()">
+					<el-icon size="18px" class="icon rotate" @click="openSettingDrawer()">
 						<svg-icon name="setting" />
 					</el-icon>
 				</el-tooltip>
@@ -30,30 +47,37 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
-import Menu from './Menu.vue';
-import { Moon, Sunny } from '@element-plus/icons-vue';
-import { useDark, useToggle, useEyeDropper, useMouseInElement } from '@vueuse/core';
+import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
+import { Moon, Sunny } from '@element-plus/icons-vue';
+import { routeList } from '~/assets/utils/routeList';
+import { useDark, useToggle, useEyeDropper, useMouseInElement } from '@vueuse/core';
+import mitt from '~/assets/utils/mitt';
 import { useRouter } from 'vue-router';
+const { openSettingDrawer } = useSettingsStore();
+const { setting, appSlideIndex } = storeToRefs(useSettingsStore());
 
 const router = useRouter();
 const isDark = useDark();
 const toggleDark = useToggle(isDark);
 const { x } = useMouseInElement();
 
-const settingStore = useSettingsStore();
+const autoHide = computed(() => setting.value.menuBar.autoHide);
+const menuWidth = computed(() => setting.value.menuBar.width + 'px');
+const bgColor = computed(() => setting.value.menuBar.bgColor);
+const color = computed(() => setting.value.menuBar.color);
 
-const autoHide = computed(() => settingStore.setting.menuBar.autoHide);
-const menuWidth = computed(() => settingStore.setting.menuBar.width + 'px');
-const bgColor = computed(() => settingStore.setting.menuBar.bgColor);
-const color = computed(() => settingStore.setting.menuBar.color);
-
-const translateX = computed(() => -settingStore.setting.menuBar.width + 'px');
+const translateX = computed(() => -setting.value.menuBar.width + 'px');
 
 const { open, sRGBHex } = useEyeDropper();
 
 function onJumpTrashPage() {
 	router.push({ path: '/trash' });
+}
+
+function onSwiperSlideChange(index: number) {
+	appSlideIndex.value = index;
+	mitt.emit('onMenuChange', index);
 }
 
 watch(
@@ -84,6 +108,32 @@ watch(
 	overflow-y: hidden;
 	transition: all 0.2s ease-in-out;
 	transform: translateX(0);
+	.menu {
+		flex: 1;
+		overflow-y: auto;
+		.item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 10px 0;
+			cursor: pointer;
+			.title {
+				font-size: 12px;
+			}
+			.el-icon {
+				transition: all 0.2s ease-in-out;
+			}
+			&:hover {
+				.el-icon {
+					transform: scale(1.3);
+				}
+			}
+		}
+		.active {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+	}
 	.setting {
 		display: flex;
 		flex-direction: column;

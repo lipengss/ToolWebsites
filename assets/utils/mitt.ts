@@ -1,5 +1,6 @@
 declare type MittType<T = any> = {
 	contextmenuApp: T;
+	onMenuChange: T;
 };
 
 import mitt, { type Emitter } from 'mitt';

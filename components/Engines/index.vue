@@ -65,18 +65,19 @@ import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
 import { developers } from '~/assets/website/developer';
 
-const { setting, engineList, currentEngine } = storeToRefs(useSettingsStore());
-const { querySearch, setGlobalSetting, removeHistoryRow } = useSettingsStore();
+const { setting, engineList } = storeToRefs(useSettingsStore());
+const { querySearch, setGlobalSetting, removeHistoryRow, currentEngine } = useSettingsStore();
 const { format, formatWeek } = useDateFormat();
 
 const inputHeight = computed(() => `${setting.value.search.height}px`);
 const inputRadius = computed(() => `${setting.value.search.radius}px`);
 const inputOpacity = computed(() => `rgba(0, 0, 0, ${setting.value.search.opacity})`);
-
 const dateColor = computed(() => setting.value.date.color);
 const dateFont = computed(() => setting.value.date.font);
 const dateSize = computed(() => `${setting.value.date.size}px`);
 const dateBold = computed(() => (setting.value.date.date.includes('bold') ? 'bold' : 'normal'));
+const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
+const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 
 const state = reactive({
 	query: '',
@@ -144,13 +145,13 @@ function jumpQuery(queryString: string) {
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	z-index: 100;
-	position: absolute;
-	top: 10vh;
+	padding-top: 10vh;
 	.content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		position: relative;
+		z-index: 100;
 		.date-wrapper {
 			min-width: 140px;
 			margin-bottom: 20px;
