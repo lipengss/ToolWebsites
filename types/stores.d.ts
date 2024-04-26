@@ -37,6 +37,7 @@ interface ISetting {
 		bgColor: string; // 背景颜色
 		color: string; // 字体颜色
 		autoHide: boolean;
+		appSlideIndex: number;
 	};
 	offWork: {
 		payday: number;
@@ -68,6 +69,5 @@ interface ISetting {
 interface ISettingState {
 	showDrawer: boolean;
 	setting: ISetting;
-	appSlideIndex: number;
 	engineList: Array<IEngineItem>;
 }

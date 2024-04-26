@@ -7,7 +7,7 @@
 						class="item"
 						v-for="(route, index) in routeList"
 						:key="route.path"
-						:class="{ active: appSlideIndex === index }"
+						:class="{ active: setting.menuBar.appSlideIndex === index }"
 						@click="onSwiperSlideChange(index)"
 					>
 						<div class="icon">
@@ -55,7 +55,7 @@ import { useDark, useToggle, useEyeDropper, useMouseInElement } from '@vueuse/co
 import mitt from '~/assets/utils/mitt';
 import { useRouter } from 'vue-router';
 const { openSettingDrawer } = useSettingsStore();
-const { setting, appSlideIndex } = storeToRefs(useSettingsStore());
+const { setting } = storeToRefs(useSettingsStore());
 
 const router = useRouter();
 const isDark = useDark();
@@ -76,7 +76,6 @@ function onJumpTrashPage() {
 }
 
 function onSwiperSlideChange(index: number) {
-	appSlideIndex.value = index;
 	mitt.emit('onMenuChange', index);
 }
 

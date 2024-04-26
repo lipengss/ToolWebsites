@@ -7,9 +7,9 @@
 			loop
 			direction="vertical"
 			:mousewheel="true"
-			:initialSlide="appSlideIndex"
-			@swiper="onSwiper"
-			@slideChange="onSlideChange"
+			:initialSlide="setting.menuBar.appSlideIndex"
+			@swiper="(instance) => (swiper = instance)"
+			@slideChange="({ realIndex }) => (setting.menuBar.appSlideIndex = realIndex)"
 			@contextmenu.prevent="contextmenu"
 		>
 			<template v-for="route in swiperSlideData" :key="route.path">
@@ -85,11 +85,23 @@ import { routeList } from '~/assets/utils/routeList';
 import mitt from '~/assets/utils/mitt';
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
 const settingStore = useSettingsStore();
-const { setting, appSlideIndex } = storeToRefs(useSettingsStore());
+const { setting } = storeToRefs(useSettingsStore());
 const { initGloabalSetting, changeWallpaper, setGlobalSetting } = settingStore;
 
-const contextmenuRef = ref();
+let swiper: any = null;
+
 const global = ref();
+const contextmenuRef = ref();
+const curApp = ref<RouteItem>({
+	name: '',
+	path: '',
+	type: '',
+	meta: {
+		rank: 0,
+		icon: '',
+		layout: '',
+	},
+});
 
 const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
 const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
@@ -103,23 +115,6 @@ const rowGap = computed(() => {
 	const { async, gap, rowGap } = setting.value.app;
 	return (async ? gap : rowGap) + 'px';
 });
-
-const curApp = ref<RouteItem>({
-	name: '',
-	path: '',
-	type: '',
-	meta: {
-		rank: 0,
-		icon: '',
-		layout: '',
-	},
-});
-
-const card: any = {
-	Weather: resolveComponent('Weather'),
-	Calendar: resolveComponent('Calendar'),
-	OffWork: resolveComponent('OffWork'),
-};
 const swiperSlideData = computed(() => {
 	const result = routeList.map((route) => {
 		route.children = filterHoutWebSiteList(route.type);
@@ -128,11 +123,15 @@ const swiperSlideData = computed(() => {
 	return result;
 });
 
+const card: any = {
+	Weather: resolveComponent('Weather'),
+	Calendar: resolveComponent('Calendar'),
+	OffWork: resolveComponent('OffWork'),
+};
 function contextmenu(event: any) {
 	global.value = true;
 	contextmenuRef.value.contextmenu(event);
 }
-
 function onDeleteApp() {
 	const { name } = curApp.value;
 	const names = setting.value.excludeWeb.map((item) => item.name);
@@ -155,19 +154,8 @@ mitt.on('contextmenuApp', ({ event, name }) => {
 	contextmenuRef.value.contextmenu(event);
 });
 
-let swiper: any = null;
-
-function onSwiper(instance: any) {
-	swiper = instance;
-}
-
-function onSlideChange(obj: any) {
-	const { realIndex } = obj;
-	appSlideIndex.value = realIndex;
-}
-
 mitt.on('onMenuChange', (index: number) => {
-	swiper.slideTo(index);
+	swiper.slideToLoop(index, 500);
 });
 
 onMounted(() => {
@@ -198,7 +186,7 @@ onMounted(() => {
 	}
 	.swiper-parent {
 		flex: 1;
-		height: calc(100% - (10vh + 153px));
+		height: 100%;
 	}
 }
 .swiper {
@@ -218,7 +206,7 @@ onMounted(() => {
 	column-gap: v-bind(columnGap);
 	row-gap: v-bind(rowGap);
 	margin: 0 auto;
-	padding-top: 20px;
+	padding-top: 40px;
 	padding-bottom: 50px;
 }
 </style>

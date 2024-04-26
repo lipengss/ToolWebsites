@@ -7,13 +7,6 @@
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
 				</div>
 				<template v-if="setting.search.show">
-					<!-- <div class="flex-around serach-engines">
-						<el-tooltip v-for="item in engineList" :key="item.name" effect="light" :content="item.description" placement="top">
-							<el-link :type="setting.search.engines === item.name ? 'primary' : 'info'" class="engines-item" @click="onChangeEngines(item.name)">
-								{{ item.name }}
-							</el-link>
-						</el-tooltip>
-					</div> -->
 					<el-autocomplete
 						v-if="setting.search.history"
 						v-model="state.query"
@@ -29,9 +22,22 @@
 							</el-icon>
 						</template>
 						<template #prefix>
-							<el-icon :size="30">
+							<el-icon :size="30" ref="buttonRef">
 								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
 							</el-icon>
+							<el-popover ref="popoverRef" :virtual-ref="buttonRef" trigger="click" title="With title" virtual-triggering>
+								<div class="flex-around serach-engines">
+									<el-tooltip v-for="item in engineList" :key="item.name" effect="light" :content="item.description" placement="top">
+										<el-link
+											:type="setting.search.engines === item.name ? 'primary' : 'info'"
+											class="engines-item"
+											@click="onChangeEngines(item.name)"
+										>
+											{{ item.name }}
+										</el-link>
+									</el-tooltip>
+								</div>
+							</el-popover>
 						</template>
 						<template #default="{ item }">
 							<div class="flex-between">
@@ -40,7 +46,7 @@
 							</div>
 						</template>
 					</el-autocomplete>
-					<el-input v-else class="my-search" v-model="state.query" size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
+					<!-- <el-input v-else class="my-search" v-model="state.query" size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
 						<template #suffix>
 							<el-icon :size="20">
 								<Search />
@@ -51,7 +57,7 @@
 								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
 							</el-icon>
 						</template>
-					</el-input>
+					</el-input> -->
 				</template>
 			</el-col>
 		</el-row>
@@ -86,7 +92,7 @@ const state = reactive({
 });
 
 let timer: any = null;
-
+const buttonRef = ref();
 onMounted(() => {
 	state.time = format(new Date(), 'HH:mm:ss');
 	timer = setInterval(() => {
@@ -186,7 +192,6 @@ function jumpQuery(queryString: string) {
 :deep .my-search,
 :deep .el-autocomplete {
 	width: 100%;
-	margin-bottom: 20px;
 	.el-input__wrapper {
 		height: v-bind(inputHeight);
 		border-radius: v-bind(inputRadius);

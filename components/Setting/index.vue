@@ -193,6 +193,11 @@
 							<span>菜单栏</span>
 						</div>
 					</template>
+					<el-form-item label="默认菜单">
+						<el-select v-model="setting.menuBar.appSlideIndex" @change="setGlobalSetting">
+							<el-option v-for="(route, index) in routeList" :key="route.path" :value="index" :label="route.name" />
+						</el-select>
+					</el-form-item>
 					<el-form-item label="自动隐藏">
 						<el-switch v-model="setting.menuBar.autoHide" @change="setGlobalSetting" />
 					</el-form-item>
@@ -224,6 +229,7 @@ import { useSettingsStore } from '~/stores/settings';
 import { predefineColors, timeStepList, fontList } from '~/assets/utils/publicData';
 import { CopyDocument, RefreshRight, Search } from '@element-plus/icons-vue';
 import { useDark, useToggle } from '@vueuse/core';
+import { routeList } from '~/assets/utils/routeList';
 
 const { setting, showDrawer, engineList } = storeToRefs(useSettingsStore());
 const { setGlobalSetting, clearGlobalSetting, onColorPickerChange } = useSettingsStore();
@@ -238,6 +244,11 @@ const activeName = ref('theme');
 function changeThemeColor() {
 	onColorPickerChange();
 	setGlobalSetting();
+}
+
+function onSetDefaultMenu(idx: number) {
+	console.log('idx', idx);
+	console.log('setting', setting.value.menuBar.appSlideIndex);
 }
 </script>
 <style lang="scss" scoped>

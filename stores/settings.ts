@@ -36,6 +36,7 @@ const defaultSetting: ISetting = {
 		autoTime: 60000,
 	},
 	menuBar: {
+		appSlideIndex: 0,
 		width: 60,
 		blur: 6,
 		bgColor: 'rgba(255, 255, 255, 0.1)',
@@ -74,7 +75,6 @@ export const useSettingsStore = defineStore('settingStore', {
 	state(): ISettingState {
 		return {
 			showDrawer: false,
-			appSlideIndex: 0,
 			setting: useCloneDeep(defaultSetting),
 			engineList: [
 				{
