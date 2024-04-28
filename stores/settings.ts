@@ -116,12 +116,6 @@ export const useSettingsStore = defineStore('settingStore', {
 			],
 		};
 	},
-	getters: {
-		currentEngine(state) {
-			const item = state.engineList.find((item) => item.name === this.setting.search.engines);
-			return item || {};
-		},
-	},
 	actions: {
 		// 初始化配置
 		initGloabalSetting() {

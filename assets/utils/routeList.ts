@@ -38,7 +38,7 @@ export const routeList: Array<RouteItem> = [
 	{
 		name: '在线工具',
 		path: '/tools',
-		type: 'tools',
+		type: 'onlineTool',
 		meta: {
 			rank: 0,
 			icon: 'menu-tools',

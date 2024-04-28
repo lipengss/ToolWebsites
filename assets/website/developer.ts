@@ -500,7 +500,7 @@ export const developers: RouteItem[] = [
 	{
 		name: '语雀',
 		path: 'https://www.yuque.com/',
-		type: ['developer', 'onlineTools'],
+		type: ['developer', 'onlineTool'],
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -603,6 +603,19 @@ export const developers: RouteItem[] = [
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '为开发设计人员提供在线工具',
+		},
+	},
+	{
+		name: '蓝湖',
+		path: 'https://lanhuapp.com/',
+		type: ['developer', 'product', 'designer'],
+		meta: {
+			rank: 0,
+			type: 'icon',
+			value: 'app-lanhu',
+			bgColor: '#fff',
+			layout: '1x1',
+			description: '助互联网团队更好地管理文档和设计图',
 		},
 	},
 ];

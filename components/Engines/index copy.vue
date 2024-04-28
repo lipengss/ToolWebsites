@@ -8,9 +8,10 @@
 				</div>
 				<template v-if="setting.search.show">
 					<el-autocomplete
+						v-if="setting.search.history"
 						v-model="state.query"
 						:fetch-suggestions="querySearch"
-						placeholder="本地应用搜索"
+						placeholder="请输入搜索内容"
 						size="large"
 						@keyup.enter="onActionSearch"
 						@select="handleSelect"
@@ -22,8 +23,21 @@
 						</template>
 						<template #prefix>
 							<el-icon :size="30" ref="buttonRef">
-								<svg-icon name="icon-local" />
+								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
 							</el-icon>
+							<el-popover ref="popoverRef" :virtual-ref="buttonRef" trigger="click" title="With title" virtual-triggering>
+								<div class="flex-around serach-engines">
+									<el-tooltip v-for="item in engineList" :key="item.name" effect="light" :content="item.description" placement="top">
+										<el-link
+											:type="setting.search.engines === item.name ? 'primary' : 'info'"
+											class="engines-item"
+											@click="onChangeEngines(item.name)"
+										>
+											{{ item.name }}
+										</el-link>
+									</el-tooltip>
+								</div>
+							</el-popover>
 						</template>
 						<template #default="{ item }">
 							<div class="flex-between">
@@ -32,6 +46,18 @@
 							</div>
 						</template>
 					</el-autocomplete>
+					<!-- <el-input v-else class="my-search" v-model="state.query" size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
+						<template #suffix>
+							<el-icon :size="20">
+								<Search />
+							</el-icon>
+						</template>
+						<template #prefix>
+							<el-icon :size="30">
+								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
+							</el-icon>
+						</template>
+					</el-input> -->
 				</template>
 			</el-col>
 		</el-row>
@@ -46,7 +72,7 @@ import { useSettingsStore } from '~/stores/settings';
 import { developers } from '~/assets/website/developer';
 
 const { setting, engineList } = storeToRefs(useSettingsStore());
-const { querySearch, setGlobalSetting, removeHistoryRow } = useSettingsStore();
+const { querySearch, setGlobalSetting, removeHistoryRow, currentEngine } = useSettingsStore();
 const { format, formatWeek } = useDateFormat();
 
 const inputHeight = computed(() => `${setting.value.search.height}px`);
@@ -55,6 +81,9 @@ const inputOpacity = computed(() => `rgba(0, 0, 0, ${setting.value.search.opacit
 const dateColor = computed(() => setting.value.date.color);
 const dateFont = computed(() => setting.value.date.font);
 const dateSize = computed(() => `${setting.value.date.size}px`);
+const dateBold = computed(() => (setting.value.date.date.includes('bold') ? 'bold' : 'normal'));
+const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
+const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 
 const state = reactive({
 	query: '',
@@ -141,7 +170,7 @@ function jumpQuery(queryString: string) {
 			}
 			.date {
 				font-size: 12px;
-				font-weight: bold;
+				font-weight: v-bind(dateBold);
 			}
 		}
 		.serach-engines {
@@ -152,6 +181,7 @@ function jumpQuery(queryString: string) {
 				font-weight: bold;
 				text-shadow: 1px 1px 1px #000;
 				padding: 6px 4px;
+				// font-family: gomarice_rocks_serif;
 			}
 			.el-link--info {
 				color: var(--el-color-white);
