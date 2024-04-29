@@ -185,9 +185,9 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		// 搜索历史
 		querySearch(queryString: string, cb: any) {
-			const { historyList } = this.setting.search;
-			const results = queryString ? historyList.filter(this.createFilter(queryString)) : historyList;
-			cb(results);
+			// const { historyList } = this.setting.search;
+			// const results = queryString ? historyList.filter(this.createFilter(queryString)) : historyList;
+			// cb(results);
 		},
 		createFilter(queryString: string) {
 			return (restaurant: string) => {

@@ -26,7 +26,7 @@ function excludes(developers: Array<RouteItem>) {
 	return developers.filter((item) => !names.includes(item.name));
 }
 
-function sortWebRanks(webList: Array<RouteItem>) {
+function sortWebRanks(webList: Array<RouteItem>): Array<RouteItem> {
 	const { setting } = storeToRefs(useSettingsStore());
 	const { hotWebRanks } = setting.value;
 	if (hotWebRanks && Object.keys(hotWebRanks).length) {

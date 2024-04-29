@@ -16,6 +16,7 @@ interface Props {
 	size: '1x1' | '1x2' | '2x2' | '5x2';
 	name?: string;
 	disabledContextmenu?: boolean;
+	color?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
 	size: '1x1',
@@ -36,6 +37,8 @@ function contextmenu(event: Event) {
 	if (props.disabledContextmenu) return;
 	mitt.emit('contextmenuApp', { event: event, name: props.name });
 }
+
+const color = computed(() => props.color || '#fff');
 
 const rowGap = computed(() => {
 	const { async, gap, rowGap } = setting.value.app;
@@ -61,7 +64,7 @@ $rowGap: v-bind(rowGap);
 		bottom: v-bind(columnPosition);
 		font-size: 12px;
 		text-align: center;
-		color: #fff;
+		color: v-bind(color);
 	}
 }
 .app-box {

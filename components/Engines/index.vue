@@ -1,37 +1,38 @@
 <template>
 	<ClientOnly>
-		<el-row class="engines">
+		<el-row class="engines-wrap">
 			<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
 				<div class="date-wrapper" v-if="setting.date.show">
 					<div class="time">{{ state.time }}</div>
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
 				</div>
 				<template v-if="setting.search.show">
-					<el-autocomplete
-						v-model="state.query"
-						:fetch-suggestions="querySearch"
-						placeholder="本地应用搜索"
-						size="large"
-						@keyup.enter="onActionSearch"
-						@select="handleSelect"
-					>
-						<template #suffix>
-							<el-icon :size="20">
-								<Search />
-							</el-icon>
+					<el-popover placement="bottom" :width="560" :visible="state.show" :hide-after="0">
+						<template #reference>
+							<el-input
+								v-model="state.query"
+								size="large"
+								placeholder="本地应用搜索"
+								class="my-search"
+								clearable
+								@focus="state.show = true"
+								@blur="state.show = false"
+							>
+								<template #prefix>
+									<el-icon :size="30">
+										<svg-icon name="icon-local" />
+									</el-icon>
+								</template>
+							</el-input>
 						</template>
-						<template #prefix>
-							<el-icon :size="30" ref="buttonRef">
-								<svg-icon name="icon-local" />
-							</el-icon>
-						</template>
-						<template #default="{ item }">
-							<div class="flex-between">
-								<div class="value">{{ item }}</div>
-								<el-button :icon="Close" circle type="danger" size="small" plain @click.stop="removeHistoryRow(item)" />
-							</div>
-						</template>
-					</el-autocomplete>
+						<el-scrollbar>
+							<GirdLayout style="width: 100%; grid-gap: 30px">
+								<GridItem v-for="app in list" :key="app.name" size="1x1" :name="app.name" color="#333">
+									<Application :app="app" />
+								</GridItem>
+							</GirdLayout>
+						</el-scrollbar>
+					</el-popover>
 				</template>
 			</el-col>
 		</el-row>
@@ -40,13 +41,11 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
-import { Search, Close } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
-import { developers } from '~/assets/website/developer';
+import { developers, sortWebRanks } from '~/assets/website/index';
 
-const { setting, engineList } = storeToRefs(useSettingsStore());
-const { querySearch, setGlobalSetting, removeHistoryRow } = useSettingsStore();
+const { setting } = storeToRefs(useSettingsStore());
 const { format, formatWeek } = useDateFormat();
 
 const inputHeight = computed(() => `${setting.value.search.height}px`);
@@ -60,63 +59,38 @@ const state = reactive({
 	query: '',
 	date: format(new Date(), 'YYYY年MM月DD日'),
 	time: '',
+	show: false,
 });
 
+const hotRankList = computed(() =>
+	sortWebRanks(developers)
+		.filter((item: RouteItem) => item.type !== 'card')
+		.slice(0, 20)
+);
+
 let timer: any = null;
-const buttonRef = ref();
+
+const currentWeek = computed(() => formatWeek());
+
+const list = computed(() => {
+	if (state.query === '') return hotRankList.value;
+	return developers.filter((item) => {
+		if (item.name.includes(state.query) || item.meta.description?.includes(state.query)) {
+			return item;
+		} else {
+		}
+	});
+});
+
 onMounted(() => {
 	state.time = format(new Date(), 'HH:mm:ss');
 	timer = setInterval(() => {
 		state.time = format(new Date(), 'HH:mm:ss');
 	}, 1000);
 });
-
-function handleSelect(item: Record<string, any> | string): void {
-	if (typeof item === 'string') jumpQuery(item);
-}
-
-const currentWeek = computed(() => formatWeek());
-
-function onChangeEngines(key: string) {
-	setting.value.search.engines = key;
-	setGlobalSetting();
-	const searchIconDom = document.getElementById('serach-icon');
-	if (searchIconDom) {
-		searchIconDom.classList.add('animate__animated', 'animate__rotateInDownLeft');
-		setTimeout(() => {
-			searchIconDom.classList.remove('animate__animated', 'animate__rotateInDownLeft');
-		}, 1000);
-	}
-}
-
-function onActionSearch() {
-	if (setting.value.search.engines === '本地') {
-		localSearch();
-		return;
-	}
-	if (setting.value.search.historyList.some((queryString) => queryString === state.query)) return;
-	setting.value.search.historyList.push(state.query);
-	jumpQuery(state.query);
-	state.query = '';
-	setGlobalSetting();
-}
-
-function localSearch() {
-	const filterList = developers.filter((item) => {
-		if (item.name.includes(state.query) || item.meta.description?.includes(state.query)) {
-			return item;
-		}
-	});
-	console.log(filterList);
-}
-
-function jumpQuery(queryString: string) {
-	const searchUrl = `${currentEngine.value.link}${queryString}`;
-	window.open(searchUrl, '_blank');
-}
 </script>
 <style lang="scss" scoped>
-.engines {
+.engines-wrap {
 	display: flex;
 	box-sizing: border-box;
 	align-items: center;
@@ -158,6 +132,13 @@ function jumpQuery(queryString: string) {
 			}
 		}
 	}
+	.engines {
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		padding-top: 6px;
+		padding-bottom: 6px;
+	}
 }
 :deep .my-search,
 :deep .el-autocomplete {
@@ -167,11 +148,15 @@ function jumpQuery(queryString: string) {
 		border-radius: v-bind(inputRadius);
 		background-color: v-bind(inputOpacity);
 		backdrop-filter: blur(10px);
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
 		font-size: 18px;
 		.el-input__inner {
 			letter-spacing: 1px;
 			color: #fff;
 		}
+	}
+	.el-input__clear {
+		font-size: 20px;
 	}
 }
 </style>

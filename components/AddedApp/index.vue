@@ -10,6 +10,9 @@
 				</el-tab-pane>
 				<el-tab-pane label="自定义图标" name="customIcons">
 					<el-form :model="state.customIconForm" label-width="100px">
+						<el-form-item label="名称" prop="name">
+							<el-input v-model="state.customIconForm.name" placeholder="网站名称" :prefix-icon="Edit" />
+						</el-form-item>
 						<el-form-item label="地址" prop="path">
 							<el-input v-model="state.customIconForm.path" placeholder="https://" :prefix-icon="Link">
 								<template #append>
@@ -17,16 +20,20 @@
 								</template>
 							</el-input>
 						</el-form-item>
-						<el-form-item label="名称" prop="name">
-							<el-input v-model="state.customIconForm.name" placeholder="网站名称" :prefix-icon="Edit" />
-						</el-form-item>
 						<el-form-item label="图标颜色">
 							<ColorPicker :colorList="predefineColors" v-model:color="state.customIconForm.meta.bgColor" />
 						</el-form-item>
-						<el-form-item label="图标文字">
-							<el-input v-model="state.customIconForm.meta.value" placeholder="网站名称" :prefix-icon="Edit" />
+						<el-form-item label="图标类型">
+							<el-radio-group v-model="state.customIconForm.meta.type" size="large">
+								<el-radio-button label="图标" value="icon" />
+								<el-radio-button label="文字" value="text" />
+								<el-radio-button label="图片" value="img" />
+							</el-radio-group>
 						</el-form-item>
-						<el-form-item>
+						<el-form-item v-if="state.customIconForm.meta.type === 'text'" label="图标文字" prop="meta.type">
+							<el-input v-model="state.customIconForm.meta.value" placeholder="图标文字" :prefix-icon="Edit" />
+						</el-form-item>
+						<!-- <el-form-item>
 							<el-space>
 								<GridItem
 									name="图标"
@@ -59,7 +66,7 @@
 									</el-upload>
 								</GridItem>
 							</el-space>
-						</el-form-item>
+						</el-form-item> -->
 						<el-form-item>
 							<el-button type="primary">保存</el-button>
 							<el-button type="default">保存并继续</el-button>
@@ -80,7 +87,7 @@ const { setting } = storeToRefs(useSettingsStore());
 
 const state = reactive({
 	visible: false,
-	activeTab: 'website',
+	activeTab: 'customIcons',
 	customIconForm: {
 		name: '',
 		path: '',

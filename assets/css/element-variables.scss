@@ -24,3 +24,21 @@
 	// 表单划过高亮边框颜色
 	--el-border-color-light: rgba(255, 255, 255, 0.3);
 }
+
+.el-popover{
+  min-height: 300px;
+  border-radius: 10px;
+  overflow-y: auto;
+  padding: 0 !important;
+  --el-popover-bg-color: rgba(255,255,255,.5);
+  --el-popover-border-color: rgba(255,255,255,.5); 
+  backdrop-filter: blur(15px); 
+}
+.el-popper__arrow{
+  display: none;
+}
+.el-popper.is-light .el-popper__arrow::before{
+  background-color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.5);
+  backdrop-filter: blur(15px);
+}

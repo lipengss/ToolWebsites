@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" @contextmenu.prevent="contextmenu">
 		<Engines />
 		<Swiper
 			class="swiper-parent"
@@ -10,7 +10,6 @@
 			:initialSlide="setting.menuBar.appSlideIndex"
 			@swiper="(instance) => (swiper = instance)"
 			@slideChange="({ realIndex }) => (setting.menuBar.appSlideIndex = realIndex)"
-			@contextmenu.prevent="contextmenu"
 		>
 			<template v-for="route in swiperSlideData" :key="route.path">
 				<SwiperSlide v-if="route.children" style="overflow: hidden">
@@ -85,7 +84,7 @@ import { routeList } from '~/assets/utils/routeList';
 import mitt from '~/assets/utils/mitt';
 const toggleWallpaper = defineAsyncComponent(() => import('./components/toggleWallpaper.vue'));
 const settingStore = useSettingsStore();
-const { setting } = storeToRefs(useSettingsStore());
+const { setting, showDrawer } = storeToRefs(useSettingsStore());
 const { initGloabalSetting, changeWallpaper, setGlobalSetting } = settingStore;
 
 let swiper: any = null;
