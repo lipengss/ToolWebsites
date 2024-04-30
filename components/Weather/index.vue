@@ -41,14 +41,6 @@ import { useDateFormat } from '~/hooks/useDateFormat';
 
 const { isToday, isTomorrow, format, dayjs, formatWeek } = useDateFormat();
 
-// var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]{1,}/;
-// const svgList = Object.keys(import.meta.glob('/assets/svg/*.*'))
-// 	.filter((item) => reg.test(item))
-// 	.map((item) => {
-// 		const s = item.split('/');
-// 		return s[s.length - 1].split('.')[0];
-// 	});
-
 const now = dayjs();
 
 const night = computed(() => now.hour() >= 18 && now.hour() > 6);
