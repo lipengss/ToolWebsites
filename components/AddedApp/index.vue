@@ -10,65 +10,62 @@
 				</el-tab-pane>
 				<el-tab-pane label="自定义图标" name="customIcons">
 					<el-form :model="state.customIconForm" label-width="100px">
-						<el-form-item label="名称" prop="name">
-							<el-input v-model="state.customIconForm.name" placeholder="网站名称" :prefix-icon="Edit" />
+						<el-form-item label="应用名称" prop="name" :rules="{ required: true, message: '请输入应用名称' }">
+							<el-input v-model="state.customIconForm.name" placeholder="应用名称" :prefix-icon="Edit" />
 						</el-form-item>
-						<el-form-item label="地址" prop="path">
+						<el-form-item label="访问地址" prop="path" :rules="{ required: true, message: '请输入访问地址' }">
 							<el-input v-model="state.customIconForm.path" placeholder="https://" :prefix-icon="Link">
 								<template #append>
 									<el-button @click="getWebsiteIcon">获取图标</el-button>
 								</template>
 							</el-input>
 						</el-form-item>
-						<el-form-item label="图标颜色">
-							<ColorPicker :colorList="predefineColors" v-model:color="state.customIconForm.meta.bgColor" />
+						<el-form-item label="应用分类" prop="type" :rules="{ required: true, message: '请选择应用分类' }">
+							<el-select v-model="state.customIconForm.type" multiple placeholder="选择应用分类">
+								<el-option v-for="menu in routeList.filter((n) => n.type !== '/')" :key="menu.name" :value="menu.type" :label="menu.name" />
+							</el-select>
+						</el-form-item>
+						<el-form-item label="排行" prop="meta.rank">
+							<el-input-number v-model="state.customIconForm.meta.rank" />
 						</el-form-item>
 						<el-form-item label="图标类型">
-							<el-radio-group v-model="state.customIconForm.meta.type" size="large">
-								<el-radio-button label="图标" value="icon" />
-								<el-radio-button label="文字" value="text" />
-								<el-radio-button label="图片" value="img" />
+							<el-space>
+								<el-radio-group v-model="state.customIconForm.meta.type" @change="onChangeIconType">
+									<el-radio-button label="图标" value="icon" />
+									<el-radio-button label="文字" value="text" />
+									<el-radio-button label="图片" value="img" />
+								</el-radio-group>
+								<el-form-item prop="meta.value">
+									<el-input v-model="state.customIconForm.meta.value" placeholder="图标值" :prefix-icon="Edit" />
+								</el-form-item>
+								<el-form-item>
+									<ColorPicker v-model:color="state.customIconForm.meta.color" />
+								</el-form-item>
+							</el-space>
+						</el-form-item>
+						<el-form-item label="图标背景色">
+							<ColorPicker :colorList="predefineColors" v-model:color="state.customIconForm.meta.bgColor" />
+						</el-form-item>
+						<el-form-item label="标签">
+							<el-checkbox-group v-model="state.customIconForm.meta.tag">
+								<el-checkbox v-for="tag in tagList" :key="tag.value" :label="tag.label" :value="tag.value" />
+							</el-checkbox-group>
+						</el-form-item>
+						<el-form-item label="图标大小" prop="size">
+							<el-slider v-model="state.customIconForm.meta.size" :min="40" :max="100" />
+						</el-form-item>
+						<el-form-item label="图标布局" prop="layout">
+							<el-radio-group v-model="state.customIconForm.meta.layout">
+								<el-radio-button label="1x1" value="1x1" />
+								<el-radio-button label="2x2" value="2x2" />
+								<el-radio-button label="5x2" value="5x2" />
 							</el-radio-group>
 						</el-form-item>
-						<el-form-item v-if="state.customIconForm.meta.type === 'text'" label="图标文字" prop="meta.type">
-							<el-input v-model="state.customIconForm.meta.value" placeholder="图标文字" :prefix-icon="Edit" />
+						<el-form-item label="描述" prop="description">
+							<el-input v-model="state.customIconForm.meta.description" type="textarea" placeholder="应用介绍..." />
 						</el-form-item>
-						<!-- <el-form-item>
-							<el-space>
-								<GridItem
-									name="图标"
-									class="custom-item"
-									:class="{ active: state.customIconForm.meta.type === 'img' }"
-									:style="{ backgroundColor: state.customIconForm.meta.bgColor }"
-									@click="onSelectIcon('img')"
-								>
-									<img :src="icoUrl" />
-								</GridItem>
-								<GridItem
-									name="文字图标"
-									class="custom-item"
-									:class="{ active: state.customIconForm.meta.type === 'text' }"
-									:style="{ backgroundColor: state.customIconForm.meta.bgColor }"
-									@click="onSelectIcon('text')"
-								>
-									{{ state.customIconForm.meta.value }}
-								</GridItem>
-								<GridItem
-									name="自定义图标"
-									class="custom-item"
-									:class="{ active: state.customIconForm.meta.type === 'icon' }"
-									:style="{ backgroundColor: state.customIconForm.meta.bgColor }"
-									@click="onSelectIcon('icon')"
-								>
-									<el-upload class="avatar-uploader" action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" :show-file-list="false">
-										<img v-if="imageUrl" :src="imageUrl" class="avatar" />
-										<el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
-									</el-upload>
-								</GridItem>
-							</el-space>
-						</el-form-item> -->
 						<el-form-item>
-							<el-button type="primary">保存</el-button>
+							<el-button type="primary" @click="onSave">复制JSON</el-button>
 							<el-button type="default">保存并继续</el-button>
 						</el-form-item>
 					</el-form>
@@ -80,10 +77,12 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { CirclePlusFilled, Link, Edit, Plus } from '@element-plus/icons-vue';
+import { CirclePlusFilled, Link, Edit } from '@element-plus/icons-vue';
 import { tagList, predefineColors } from '~/assets/utils/publicData';
-
+import { routeList } from '~/assets/utils/routeList';
+import type { Action } from 'element-plus';
 const { setting } = storeToRefs(useSettingsStore());
+import { useCopy } from '~/hooks/useCopy';
 
 const state = reactive({
 	visible: false,
@@ -91,11 +90,16 @@ const state = reactive({
 	customIconForm: {
 		name: '',
 		path: '',
-		type: '',
+		type: [],
 		meta: {
-			value: 'A',
-			type: 'text',
+			rank: 0,
+			type: 'icon',
+			value: 'app-',
+			tag: [],
+			size: 60,
+			color: '#fff',
 			bgColor: '#FF4500',
+			layout: '1x1',
 			description: '',
 		},
 	},
@@ -105,6 +109,26 @@ async function getWebsiteIcon() {
 	const { path } = state.customIconForm;
 	const img = document.createElement('img');
 	img.src = `${path}favicon.ico`;
+}
+
+function onChangeIconType(type: string | number | boolean | undefined) {
+	switch (type) {
+		case 'icon':
+			state.customIconForm.meta.value = 'app-';
+			break;
+		case 'text':
+			state.customIconForm.meta.value = 'A';
+			break;
+		default:
+			state.customIconForm.meta.value = 'https://';
+			break;
+	}
+}
+
+function onSave() {
+	const str = JSON.stringify(state.customIconForm, null, '\t');
+	const { onCopy } = useCopy(toRef(JSON.stringify(state.customIconForm)));
+	onCopy();
 }
 
 const icoUrl = computed(() => {
