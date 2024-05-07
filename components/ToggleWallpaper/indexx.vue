@@ -15,7 +15,7 @@ const { changeWallpaper } = useSettingsStore();
 	position: fixed;
 	top: 0;
 	right: 10%;
-	z-index: 100;
+	z-index: 200;
 	&::before {
 		content: '';
 		width: 1px;

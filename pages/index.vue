@@ -1,6 +1,10 @@
 <template>
 	<div class="container" @contextmenu.prevent="contextmenu">
 		<Engines />
+		<div class="tags">
+			<el-tag>全部</el-tag>
+			<el-tag v-for="tag in tagList" :key="tag.value">{{ tag.label }}</el-tag>
+		</div>
 		<Swiper
 			class="swiper-parent"
 			:modules="[SwiperMousewheel]"
@@ -39,7 +43,7 @@
 	</div>
 	<Loading />
 	<!-- 壁纸切换 -->
-	<!-- <ToggleWallpaper /> -->
+	<ToggleWallpaper />
 	<!-- 风格配置 -->
 	<ClientOnly>
 		<Setting />
@@ -75,11 +79,12 @@
 	</Contextmenu>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { Delete, Edit } from '@element-plus/icons-vue';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
+import { tagList } from '~/assets/utils/publicData';
 import { routeList } from '~/assets/utils/routeList';
 import mitt from '~/assets/utils/mitt';
 const settingStore = useSettingsStore();
@@ -100,6 +105,7 @@ const curApp = ref<RouteItem>({
 		layout: '',
 	},
 });
+const tagChecked = reactive({});
 
 const screenWidth = computed(() => setting.value.app.sceenWidth + setting.value.app.unit);
 const appSize = computed(() => setting.value.app.size + 'px');
@@ -186,6 +192,20 @@ onMounted(() => {
 	&::before {
 		backdrop-filter: v-bind(bgBlur);
 	}
+	.tags {
+		width: v-bind(screenWidth);
+		position: relative;
+		margin: auto;
+		display: flex;
+		justify-content: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		.el-tag {
+			&:not(:last-child) {
+				margin-right: 10px;
+			}
+		}
+	}
 	.swiper-parent {
 		flex: 1;
 		height: 100%;
@@ -208,7 +228,7 @@ onMounted(() => {
 	column-gap: v-bind(columnGap);
 	row-gap: v-bind(rowGap);
 	margin: 0 auto;
-	padding-top: 40px;
+	padding-top: 20px;
 	padding-bottom: 50px;
 }
 </style>
