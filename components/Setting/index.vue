@@ -129,15 +129,6 @@
 							<color-picker v-model:color="setting.date.color" show-alpha @change="setGlobalSetting" />
 						</div>
 					</el-form-item>
-					<!-- <el-form-item label="显示更多">
-				<el-checkbox-group v-model="setting.date.date" @change="setGlobalSetting">
-					<el-checkbox label="monthDay">日月</el-checkbox>
-					<el-checkbox label="sec">秒</el-checkbox>
-					<el-checkbox label="week">周</el-checkbox>
-					<el-checkbox label="lunar">农历</el-checkbox>
-					<el-checkbox label="bold">粗体</el-checkbox>
-				</el-checkbox-group>
-			</el-form-item> -->
 				</el-collapse-item>
 				<el-collapse-item name="search">
 					<template #title>
@@ -166,24 +157,6 @@
 							<el-slider v-model="setting.search.opacity" :min="0" :max="1" :step="0.1" @change="setGlobalSetting" />
 							<el-tag type="primary">{{ setting.search.opacity }} PX</el-tag>
 						</div>
-					</el-form-item>
-					<el-form-item label="搜索历史">
-						<el-switch v-model="setting.search.history" @change="setGlobalSetting" />
-					</el-form-item>
-					<el-form-item label="关闭翻译">
-						<el-switch v-model="setting.search.translate" @change="setGlobalSetting" />
-					</el-form-item>
-					<el-form-item label="搜索引擎">
-						<el-select v-model="setting.search.engines">
-							<el-option v-for="item in engineList" :key="item.name" :label="item.name" :value="item.name">
-								<div class="flex flex-center">
-									<el-icon :size="24" class="mr10">
-										<svg-icon :name="item.icon" />
-									</el-icon>
-									{{ item.name }}
-								</div>
-							</el-option>
-						</el-select>
 					</el-form-item>
 				</el-collapse-item>
 				<el-collapse-item name="menu">

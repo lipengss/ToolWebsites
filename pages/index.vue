@@ -2,8 +2,8 @@
 	<div class="container" @contextmenu.prevent="contextmenu">
 		<Engines />
 		<div class="tags">
-			<el-tag>全部</el-tag>
-			<el-tag v-for="tag in tagList" :key="tag.value">{{ tag.label }}</el-tag>
+			<el-check-tag type="success">全部</el-check-tag>
+			<el-check-tag v-for="tag in tagList" :key="tag.value" type="success">{{ tag.label }}</el-check-tag>
 		</div>
 		<Swiper
 			class="swiper-parent"
@@ -41,9 +41,6 @@
 			</template>
 		</Swiper>
 	</div>
-	<Loading />
-	<!-- 壁纸切换 -->
-	<ToggleWallpaper />
 	<!-- 风格配置 -->
 	<ClientOnly>
 		<Setting />
@@ -124,8 +121,6 @@ const swiperSlideData = computed(() => {
 	});
 	return result;
 });
-const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
-const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 
 const card: any = {
 	Weather: resolveComponent('Weather'),
@@ -170,28 +165,12 @@ onMounted(() => {
 </script>
 <style lang="scss" scoped>
 .container {
-	height: 100%;
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
 	position: relative;
-	&::before,
-	&::before {
-		content: '';
-		width: 100%;
-		height: 100%;
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-	&::before {
-		background-color: v-bind(bgOpacity);
-	}
-	&::before {
-		backdrop-filter: v-bind(bgBlur);
-	}
 	.tags {
 		width: v-bind(screenWidth);
 		position: relative;
@@ -200,7 +179,7 @@ onMounted(() => {
 		justify-content: center;
 		padding-top: 20px;
 		padding-bottom: 20px;
-		.el-tag {
+		.el-check-tag {
 			&:not(:last-child) {
 				margin-right: 10px;
 			}

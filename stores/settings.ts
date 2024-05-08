@@ -24,9 +24,6 @@ const defaultSetting: ISetting = {
 		radius: 50,
 		opacity: 0.2,
 		history: true,
-		translate: false,
-		engines: 'Bing',
-		historyList: [],
 	},
 	bg: {
 		picture: imgList[0],
@@ -126,6 +123,7 @@ export const useSettingsStore = defineStore('settingStore', {
 				this.setDefaultHotWebSiteList();
 				Local.set(GLOBAL_SETTING, this.setting);
 			}
+			console.log('this.setting.bg.picture', this.setting.bg.picture);
 			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);
 			// 主题色
 			this.onColorPickerChange();
@@ -183,23 +181,11 @@ export const useSettingsStore = defineStore('settingStore', {
 			this.setting = useCloneDeep(defaultSetting);
 			this.initGloabalSetting();
 		},
-		// 搜索历史
-		querySearch(queryString: string, cb: any) {
-			// const { historyList } = this.setting.search;
-			// const results = queryString ? historyList.filter(this.createFilter(queryString)) : historyList;
-			// cb(results);
-		},
 		createFilter(queryString: string) {
 			return (restaurant: string) => {
 				console.log(restaurant);
 				return restaurant.indexOf(queryString) === 0;
 			};
-		},
-		// 删除历史
-		removeHistoryRow(queryString: string) {
-			const index = this.setting.search.historyList.findIndex((item) => item === queryString);
-			this.setting.search.historyList.splice(index, 1);
-			this.setGlobalSetting();
 		},
 		// 设置默认的网站排行
 		setDefaultHotWebSiteList() {

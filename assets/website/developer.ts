@@ -805,7 +805,7 @@ export const developers: RouteItem[] = [
 			type: 'text',
 			value: '35PHOTO',
 			tag: ['appliance', 'video'],
-			size: 40,
+			size: 20,
 			color: '#fff',
 			bgColor: '#FF4500',
 			layout: '1x1',
