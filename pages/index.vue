@@ -203,6 +203,7 @@ onMounted(() => {
 	justify-content: center;
 	grid-template-columns: repeat(auto-fill, v-bind(appSize));
 	grid-template-rows: repeat(auto-fill, v-bind(appSize));
+	grid-row: auto;
 	grid-auto-flow: dense;
 	column-gap: v-bind(columnGap);
 	row-gap: v-bind(rowGap);
