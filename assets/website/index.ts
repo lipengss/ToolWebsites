@@ -1,23 +1,33 @@
 import { developers } from './developer';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
+
 function filterHoutWebSiteList(type: string | string[]): Array<RouteItem> {
-	let result: Array<RouteItem> = [];
-	const _developers = excludes(developers);
+	let excludeDevelopers: Array<RouteItem> = excludes(developers); // 更清晰的变量命名
 	if (typeof type === 'string') {
-		result = type === '/' ? developers : _developers.filter((item) => item.type.includes(type));
+		excludeDevelopers = type === '/' ? developers : excludeBySingleType(excludeDevelopers, type);
+	} else if (Array.isArray(type)) {
+		excludeDevelopers = excludeByMultipleTypes(excludeDevelopers, type);
 	}
-	if (Array.isArray(type)) {
-		result = _developers.filter((item) => {
-			if (item.type === 'string') {
-				return type.includes(item.type);
-			}
-			if (Array.isArray(item.type)) {
-				return item.type.some((some) => item.type.includes(some));
-			}
-		});
-	}
-	return sortWebRanks(result);
+	return sortWebRanks(excludeDevelopers);
+}
+
+// 根据单个类型字符串进行过滤
+function excludeBySingleType(developers: Array<RouteItem>, type: string): Array<RouteItem> {
+	return developers.filter((item) => item.type.includes(type));
+}
+
+// 根据多个类型字符串进行过滤
+function excludeByMultipleTypes(developers: Array<RouteItem>, types: string[]): Array<RouteItem> {
+	return developers.filter((item) => {
+		if (typeof item.type === 'string') {
+			return types.includes(item.type);
+		}
+		if (Array.isArray(item.type)) {
+			return item.type.some((itemType) => types.includes(itemType));
+		}
+		return false; // 对于非字符串且非数组的item.type，默认返回false
+	});
 }
 
 function excludes(developers: Array<RouteItem>) {

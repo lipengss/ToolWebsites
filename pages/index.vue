@@ -2,8 +2,15 @@
 	<div class="container" @contextmenu.prevent="contextmenu">
 		<Engines />
 		<div class="tags">
-			<el-check-tag type="success">全部</el-check-tag>
-			<el-check-tag v-for="tag in tagList" :key="tag.value" type="success">{{ tag.label }}</el-check-tag>
+			<el-tag
+				v-for="tag in allTagList"
+				:key="tag.value"
+				:type="activeTag === tag.value ? 'success' : 'info'"
+				effect="light"
+				round
+				@click="activeTag = tag.value"
+				>{{ tag.label }}</el-tag
+			>
 		</div>
 		<Swiper
 			class="swiper-parent"
@@ -12,6 +19,7 @@
 			direction="vertical"
 			:mousewheel="true"
 			:initialSlide="setting.menuBar.appSlideIndex"
+			:layz="{}"
 			@swiper="(instance) => (swiper = instance)"
 			@slideChange="({ realIndex }) => (setting.menuBar.appSlideIndex = realIndex)"
 		>
@@ -76,7 +84,7 @@
 	</Contextmenu>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { Delete, Edit } from '@element-plus/icons-vue';
@@ -85,7 +93,7 @@ import { tagList } from '~/assets/utils/publicData';
 import { routeList } from '~/assets/utils/routeList';
 import mitt from '~/assets/utils/mitt';
 const settingStore = useSettingsStore();
-const { setting, showDrawer } = storeToRefs(useSettingsStore());
+const { setting, showDrawer, activeTag } = storeToRefs(useSettingsStore());
 const { initGloabalSetting, changeWallpaper, setGlobalSetting } = settingStore;
 
 let swiper: any = null;
@@ -102,7 +110,10 @@ const curApp = ref<RouteItem>({
 		layout: '',
 	},
 });
-const tagChecked = reactive({});
+
+const allTagList = computed(() => {
+	return [{ label: '全部', value: 'all' }, ...tagList];
+});
 
 const screenWidth = computed(() => setting.value.app.sceenWidth + setting.value.app.unit);
 const appSize = computed(() => setting.value.app.size + 'px');
@@ -144,6 +155,16 @@ function onDeleteApp() {
 	setGlobalSetting();
 }
 
+watch(
+	() => activeTag.value,
+	(tag) => {
+		const index = setting.value.menuBar.appSlideIndex;
+		const list = filterHoutWebSiteList(routeList[index].type);
+		const filterList = tag === 'all' ? list : list.filter((item) => item.meta.tag && item.meta.tag.includes(tag));
+		swiperSlideData.value[index].children = filterList;
+	}
+);
+
 mitt.on('contextmenuApp', ({ event, name }) => {
 	global.value = name ? false : true;
 	if (!global.value) {
@@ -179,7 +200,8 @@ onMounted(() => {
 		justify-content: center;
 		padding-top: 20px;
 		padding-bottom: 20px;
-		.el-check-tag {
+		.el-tag {
+			cursor: pointer;
 			&:not(:last-child) {
 				margin-right: 10px;
 			}

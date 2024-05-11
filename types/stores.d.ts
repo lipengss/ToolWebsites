@@ -67,4 +67,5 @@ interface ISettingState {
 	showDrawer: boolean;
 	setting: ISetting;
 	engineList: Array<IEngineItem>;
+	activeTag: string;
 }

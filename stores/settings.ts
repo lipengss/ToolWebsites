@@ -111,6 +111,7 @@ export const useSettingsStore = defineStore('settingStore', {
 					description: '本地搜索APP',
 				},
 			],
+			activeTag: 'all',
 		};
 	},
 	actions: {

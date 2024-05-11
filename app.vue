@@ -1,10 +1,15 @@
 <template>
 	<el-config-provider :locale="locale">
-		<div class="nuxt-container">
+		<div class="nuxt-container" id="nuxt-container">
 			<NuxtLayout> <NuxtPage /></NuxtLayout>
 			<Loading />
 			<ToggleWallpaper />
 		</div>
+		<div id="tooltip" class="tooltip">
+			<div class="name"></div>
+		</div>
+		<div id="x-line" class="x-line"></div>
+		<div id="y-line" class="y-line"></div>
 	</el-config-provider>
 </template>
 <script setup lang="ts">
@@ -12,7 +17,7 @@ import { ref } from 'vue';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-
+import autofit from 'autofit.js';
 const { initGloabalSetting } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
@@ -21,6 +26,14 @@ const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 
 onMounted(() => {
 	initGloabalSetting();
+	autofit.init(
+		{
+			el: '#nuxt-container',
+			dw: 1920,
+			dh: 794,
+		},
+		false
+	);
 });
 
 useSeoMeta({
@@ -48,6 +61,32 @@ const locale = ref(zhCn);
 	}
 	&::before {
 		backdrop-filter: v-bind(bgBlur);
+	}
+}
+.x-line,
+.y-line {
+	width: 1px;
+	height: 1px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: blue;
+}
+.tooltip {
+	width: 200px;
+	height: 240px;
+	position: fixed;
+	transform: translate(20px, 20px);
+	z-index: 100;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	.name {
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;
+		line-height: 40px;
+		background-color: aliceblue;
 	}
 }
 </style>
