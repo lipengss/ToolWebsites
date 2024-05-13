@@ -1,4 +1,5 @@
 <template>
+	<MenuBar :routeList="[]" />
 	<GirdLayout>
 		<GridItem size="1x1" v-for="app in siteList" :name="app.name" disabledContextmenu>
 			<Application :app="app" />

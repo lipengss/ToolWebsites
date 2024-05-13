@@ -36,6 +36,34 @@
 						</el-space>
 					</el-form-item>
 				</el-collapse-item>
+				<el-collapse-item name="menu">
+					<template #title>
+						<div class="collapse-title">
+							<el-icon :size="20"><svg-icon name="aside" /> </el-icon>
+							<span>菜单栏</span>
+						</div>
+					</template>
+					<el-form-item label="默认菜单">
+						<el-select v-model="setting.menuBar.appSlideIndex" @change="setGlobalSetting">
+							<el-option v-for="(route, index) in routeList" :key="route.path" :value="index" :label="route.name" />
+						</el-select>
+					</el-form-item>
+					<el-form-item label="自动隐藏">
+						<el-switch v-model="setting.menuBar.autoHide" @change="setGlobalSetting" />
+					</el-form-item>
+					<el-form-item label="菜单宽度">
+						<div class="slider-wrap">
+							<el-slider v-model="setting.menuBar.width" :min="60" :max="400" />
+							<el-tag type="primary">{{ setting.menuBar.width }} PX</el-tag>
+						</div>
+					</el-form-item>
+					<el-form-item label="背景颜色">
+						<color-picker v-model:color="setting.menuBar.bgColor" show-alpha @change="changeThemeColor" />
+					</el-form-item>
+					<el-form-item label="字体颜色">
+						<color-picker v-model:color="setting.menuBar.color" show-alpha @change="changeThemeColor" />
+					</el-form-item>
+				</el-collapse-item>
 				<el-collapse-item name="app">
 					<template #title>
 						<div class="collapse-title">
@@ -159,34 +187,6 @@
 						</div>
 					</el-form-item>
 				</el-collapse-item>
-				<el-collapse-item name="menu">
-					<template #title>
-						<div class="collapse-title">
-							<el-icon :size="20"><svg-icon name="aside" /> </el-icon>
-							<span>菜单栏</span>
-						</div>
-					</template>
-					<el-form-item label="默认菜单">
-						<el-select v-model="setting.menuBar.appSlideIndex" @change="setGlobalSetting">
-							<el-option v-for="(route, index) in routeList" :key="route.path" :value="index" :label="route.name" />
-						</el-select>
-					</el-form-item>
-					<el-form-item label="自动隐藏">
-						<el-switch v-model="setting.menuBar.autoHide" @change="setGlobalSetting" />
-					</el-form-item>
-					<el-form-item label="菜单宽度">
-						<div class="slider-wrap">
-							<el-slider v-model="setting.menuBar.width" :min="60" :max="400" />
-							<el-tag type="primary">{{ setting.menuBar.width }} PX</el-tag>
-						</div>
-					</el-form-item>
-					<el-form-item label="背景颜色">
-						<color-picker v-model:color="setting.menuBar.bgColor" show-alpha @change="changeThemeColor" />
-					</el-form-item>
-					<el-form-item label="字体颜色">
-						<color-picker v-model:color="setting.menuBar.color" show-alpha @change="changeThemeColor" />
-					</el-form-item>
-				</el-collapse-item>
 			</el-collapse>
 		</el-form>
 		<el-space direction="vertical" fill class="w100">
@@ -202,7 +202,7 @@ import { useSettingsStore } from '~/stores/settings';
 import { predefineColors, timeStepList, fontList } from '~/assets/utils/publicData';
 import { CopyDocument, RefreshRight, Search } from '@element-plus/icons-vue';
 import { useDark, useToggle } from '@vueuse/core';
-import { routeList } from '~/assets/utils/routeList';
+import { routeList } from '~/assets/website/routeList';
 
 const { setting, showDrawer, engineList } = storeToRefs(useSettingsStore());
 const { setGlobalSetting, clearGlobalSetting, onColorPickerChange } = useSettingsStore();

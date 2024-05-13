@@ -37,6 +37,7 @@ interface ISetting {
 		appSlideIndex: number;
 	};
 	offWork: {
+		name: '下班倒计时';
 		payday: number;
 		workday: string[];
 		isWorkDay: boolean;
@@ -65,6 +66,7 @@ interface ISetting {
 
 interface ISettingState {
 	showDrawer: boolean;
+	tour: boolean;
 	setting: ISetting;
 	engineList: Array<IEngineItem>;
 	activeTag: string;

@@ -36,7 +36,7 @@ export const routeList: Array<RouteItem> = [
 		},
 	},
 	{
-		name: '在线工具',
+		name: '工具',
 		path: '/tools',
 		type: 'onlineTool',
 		meta: {
@@ -51,6 +51,15 @@ export const routeList: Array<RouteItem> = [
 		meta: {
 			rank: 0,
 			icon: 'menu-amusement',
+		},
+	},
+	{
+		name: '收藏',
+		path: '/like',
+		type: 'like',
+		meta: {
+			rank: 0,
+			icon: 'menu-like',
 		},
 	},
 ];

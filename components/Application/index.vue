@@ -1,5 +1,5 @@
 <template>
-	<el-tooltip effect="light" :content="app.meta.description" placement="top">
+	<el-tooltip effect="light" :content="app.meta.description" placement="top" :show-after="500">
 		<div class="appliaction">
 			<div class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }" @click="onclick">
 				<div v-if="app.meta.type === 'img'" class="favicon" :width="app.meta.size" :height="app.meta.size">

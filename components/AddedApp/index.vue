@@ -79,7 +79,7 @@ import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { CirclePlusFilled, Link, Edit } from '@element-plus/icons-vue';
 import { tagList, predefineColors } from '~/assets/utils/publicData';
-import { routeList } from '~/assets/utils/routeList';
+import { routeList } from '~/assets/website/routeList';
 import type { Action } from 'element-plus';
 const { setting } = storeToRefs(useSettingsStore());
 import { useCopy } from '~/hooks/useCopy';

@@ -1,6 +1,6 @@
 <template>
 	<div class="wallpaper">
-		<el-icon :size="30" title="切换壁纸" @click="changeWallpaper">
+		<el-icon :size="30" title="切换壁纸" id="global-switch" @click="changeWallpaper">
 			<svg-icon name="wide" />
 		</el-icon>
 	</div>

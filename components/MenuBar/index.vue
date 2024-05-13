@@ -20,23 +20,28 @@
 				</el-scrollbar>
 			</div>
 			<div class="setting">
-				<el-tooltip content="设置" placement="right">
-					<el-icon size="18px" class="icon rotate" @click="openSettingDrawer()">
+				<el-tooltip content="设置" placement="right" effect="light">
+					<el-icon size="18px" class="icon rotate" id="global-setting" @click="openSettingDrawer()">
 						<svg-icon name="setting" />
 					</el-icon>
 				</el-tooltip>
-				<el-tooltip content="吸色器" placement="right">
+				<el-tooltip content="引导" placement="right" effect="light">
+					<el-icon size="18px" class="icon zoom" id="global-setting" @click="openTour()">
+						<svg-icon name="tour" />
+					</el-icon>
+				</el-tooltip>
+				<el-tooltip content="吸色器" placement="right" effect="light">
 					<el-icon size="18px" class="icon zoom" @click="open()">
 						<svg-icon name="dye-color" />
 					</el-icon>
 				</el-tooltip>
-				<el-tooltip :content="isDark ? '夜间模式' : '日间模式'" placement="right">
+				<el-tooltip :content="isDark ? '夜间模式' : '日间模式'" placement="right" effect="light">
 					<el-icon size="18px" class="icon rotate" @click="toggleDark()">
 						<Moon v-if="isDark" />
 						<Sunny v-else />
 					</el-icon>
 				</el-tooltip>
-				<el-tooltip content="回收站" placement="right">
+				<el-tooltip content="回收站" placement="right" effect="light">
 					<el-icon size="18px" class="icon zoom" @click="onJumpTrashPage">
 						<svg-icon name="trash" />
 					</el-icon>
@@ -50,12 +55,17 @@ import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { Moon, Sunny } from '@element-plus/icons-vue';
-import { routeList } from '~/assets/utils/routeList';
 import { useDark, useToggle, useEyeDropper, useMouseInElement } from '@vueuse/core';
 import mitt from '~/assets/utils/mitt';
 import { useRouter } from 'vue-router';
-const { openSettingDrawer } = useSettingsStore();
+const { openSettingDrawer, openTour } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
+
+interface Props {
+	routeList: Array<RouteItem>;
+}
+
+withDefaults(defineProps<Props>(), {});
 
 const router = useRouter();
 const isDark = useDark();
@@ -97,7 +107,7 @@ watch(
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 200;
 	display: flex;
 	flex-direction: column;
 	backdrop-filter: blur(6px);

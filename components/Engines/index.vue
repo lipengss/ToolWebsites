@@ -97,6 +97,7 @@ onMounted(() => {
 	justify-content: center;
 	width: 100%;
 	padding-top: 10vh;
+	margin-bottom: 20px;
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -148,7 +149,7 @@ onMounted(() => {
 		border-radius: v-bind(inputRadius);
 		background-color: v-bind(inputOpacity);
 		backdrop-filter: blur(10px);
-		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset;
 		font-size: 18px;
 		.el-input__inner {
 			letter-spacing: 1px;

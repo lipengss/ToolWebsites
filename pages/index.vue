@@ -1,7 +1,6 @@
 <template>
 	<div class="container" @contextmenu.prevent="contextmenu">
 		<Engines />
-
 		<Swiper
 			class="swiper-parent"
 			:modules="[SwiperMousewheel]"
@@ -9,7 +8,6 @@
 			direction="vertical"
 			:mousewheel="true"
 			:initialSlide="setting.menuBar.appSlideIndex"
-			:layz="{}"
 			@swiper="(instance) => (swiper = instance)"
 			@slideChange="({ realIndex }) => (setting.menuBar.appSlideIndex = realIndex)"
 		>
@@ -43,19 +41,21 @@
 									<Application :app="app" />
 								</GridItem>
 							</template>
-							<AddedApp />
+							<AddedApp v-if="isDeveloper" />
 						</SwiperSlide>
 					</Swiper>
 				</SwiperSlide>
 			</template>
 		</Swiper>
 	</div>
+	<!-- 引导 -->
+	<tour />
 	<!-- 风格配置 -->
 	<ClientOnly>
 		<Setting />
 	</ClientOnly>
 	<!-- 菜单 -->
-	<MenuBar />
+	<MenuBar :routeList="routeList" />
 	<!-- 右键菜单 -->
 	<Contextmenu ref="contextmenuRef">
 		<template v-if="global">
@@ -90,8 +90,9 @@ import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { Delete, Edit } from '@element-plus/icons-vue';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
+import tour from './tour/index.vue';
 import { tagList } from '~/assets/utils/publicData';
-import { routeList } from '~/assets/utils/routeList';
+import { routeList } from '~/assets/website/routeList';
 import mitt from '~/assets/utils/mitt';
 const settingStore = useSettingsStore();
 const { setting, showDrawer, activeTag } = storeToRefs(useSettingsStore());
@@ -133,6 +134,7 @@ const swiperSlideData = computed(() => {
 	});
 	return result;
 });
+const isDeveloper = computed(() => process.env.NODE_ENV === 'development');
 
 const card: any = {
 	Weather: resolveComponent('Weather'),
@@ -156,6 +158,7 @@ function onDeleteApp() {
 	setGlobalSetting();
 }
 
+// 根据标签过滤
 watch(
 	() => activeTag.value,
 	(tag) => {
@@ -183,15 +186,15 @@ mitt.on('onMenuChange', (index: number) => {
 
 onMounted(() => {
 	initGloabalSetting();
+	swiper.slideToLoop(setting.value.menuBar.appSlideIndex);
 });
 </script>
 <style lang="scss" scoped>
 .container {
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
 	width: 100%;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 	position: relative;
 	.tags {
 		width: v-bind(screenWidth);
@@ -199,10 +202,10 @@ onMounted(() => {
 		margin: auto;
 		display: flex;
 		justify-content: center;
-		padding-top: 20px;
-		padding-bottom: 20px;
+		flex-wrap: wrap;
 		.el-tag {
 			cursor: pointer;
+			margin-bottom: 10px;
 			&:not(:last-child) {
 				margin-right: 10px;
 			}
@@ -231,7 +234,6 @@ onMounted(() => {
 	column-gap: v-bind(columnGap);
 	row-gap: v-bind(rowGap);
 	margin: 0 auto;
-	padding-top: 20px;
 	padding-bottom: 50px;
 }
 </style>

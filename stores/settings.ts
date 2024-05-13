@@ -41,6 +41,7 @@ const defaultSetting: ISetting = {
 		autoHide: false,
 	},
 	offWork: {
+		name: '下班倒计时',
 		payday: 10,
 		workday: ['一', '二', '三', '四', '五'],
 		isWorkDay: true,
@@ -72,6 +73,7 @@ export const useSettingsStore = defineStore('settingStore', {
 	state(): ISettingState {
 		return {
 			showDrawer: false,
+			tour: false,
 			setting: useCloneDeep(defaultSetting),
 			engineList: [
 				{
@@ -124,7 +126,6 @@ export const useSettingsStore = defineStore('settingStore', {
 				this.setDefaultHotWebSiteList();
 				Local.set(GLOBAL_SETTING, this.setting);
 			}
-			console.log('this.setting.bg.picture', this.setting.bg.picture);
 			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);
 			// 主题色
 			this.onColorPickerChange();
@@ -139,6 +140,9 @@ export const useSettingsStore = defineStore('settingStore', {
 		// 打开配置
 		openSettingDrawer() {
 			this.showDrawer = true;
+		},
+		openTour() {
+			this.tour = true;
 		},
 		// 主题切换
 		onColorPickerChange() {

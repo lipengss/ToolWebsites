@@ -23,17 +23,10 @@ const { setting } = storeToRefs(useSettingsStore());
 
 const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
 const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
+const menuWidth = computed(() => setting.value.menuBar.width + 'px');
 
 onMounted(() => {
 	initGloabalSetting();
-	autofit.init(
-		{
-			el: '#nuxt-container',
-			dw: 1920,
-			dh: 794,
-		},
-		false
-	);
 });
 
 useSeoMeta({
@@ -47,6 +40,8 @@ const locale = ref(zhCn);
 .nuxt-container {
 	width: 100%;
 	height: 100%;
+	padding-left: v-bind(menuWidth);
+	box-sizing: border-box;
 	&:before,
 	&:before {
 		content: '';

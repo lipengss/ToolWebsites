@@ -1,6 +1,6 @@
 <template>
 	<ClientOnly>
-		<Card :settings="offWork" @show-dialog="onShowDialog" />
+		<Card :settings="offWork" id="card-off-work" @show-dialog="onShowDialog" />
 		<Dialog v-model:visible="state.visible" width="900px">
 			<el-row :gutter="20" align="middle">
 				<el-col :xs="24" :lg="9">
@@ -9,7 +9,7 @@
 				<el-col :xs="24" :lg="15">
 					<el-form label-width="80px" class="el-form">
 						<el-form-item label="组件名称">
-							<el-input />
+							<el-input v-model="state.dialogSettings.name" />
 						</el-form-item>
 						<el-form-item label="工作日">
 							<el-space>
