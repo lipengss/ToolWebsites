@@ -1,17 +1,7 @@
 <template>
 	<div class="container" @contextmenu.prevent="contextmenu">
 		<Engines />
-		<div class="tags">
-			<el-tag
-				v-for="tag in allTagList"
-				:key="tag.value"
-				:type="activeTag === tag.value ? 'success' : 'info'"
-				effect="light"
-				round
-				@click="activeTag = tag.value"
-				>{{ tag.label }}</el-tag
-			>
-		</div>
+
 		<Swiper
 			class="swiper-parent"
 			:modules="[SwiperMousewheel]"
@@ -23,8 +13,19 @@
 			@swiper="(instance) => (swiper = instance)"
 			@slideChange="({ realIndex }) => (setting.menuBar.appSlideIndex = realIndex)"
 		>
-			<template v-for="route in swiperSlideData" :key="route.path">
+			<template v-for="(route, index) in swiperSlideData" :key="route.path">
 				<SwiperSlide v-if="route.children" style="overflow: hidden">
+					<div class="tags" v-if="index === 0">
+						<el-tag
+							v-for="tag in allTagList"
+							:key="tag.value"
+							:type="activeTag === tag.value ? 'success' : 'info'"
+							effect="light"
+							round
+							@click="activeTag = tag.value"
+							>{{ tag.label }}</el-tag
+						>
+					</div>
 					<Swiper
 						:modules="[SwiperFreeMode, SwiperMousewheel]"
 						direction="vertical"
