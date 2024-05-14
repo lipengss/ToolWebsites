@@ -54,28 +54,11 @@ const state: IWeatherState = reactive({
 	lives: [],
 });
 
-let i = 1;
-
-async function initCity() {
-	try {
-		const { data }: any = await useAsyncData(
-			'getAdcode',
-			() => $fetch(`https://restapi.amap.com/v3/ip?${qs.stringify({ key: state.payload.key })}`),
-			{
-				server: false,
-			}
-		);
-		if (data.value) {
-			const { adcode, status, info } = data.value;
-			if (status === '0') return ElMessage.error(info);
-			state.payload.city = adcode;
-			await getCurrentWeather();
-			await getAllWeather();
-		}
-	} catch (err) {
-		console.log(err);
-	}
-}
+const { data }: any = await useAsyncData('getAdcode', () => $fetch(`https://restapi.amap.com/v3/ip?${qs.stringify({ key: state.payload.key })}`));
+const { adcode } = data.value;
+state.payload.city = adcode;
+await getCurrentWeather();
+await getAllWeather();
 
 async function getCurrentWeather() {
 	try {
@@ -101,7 +84,6 @@ async function getAllWeather() {
 	}
 }
 
-initCity();
 function _formatWeek(date: Date) {
 	if (isToday(date)) {
 		return '今天';
