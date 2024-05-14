@@ -1,16 +1,16 @@
 export const developers: RouteItem[] = [
-	// {
-	// 	name: '天气',
-	// 	type: 'card',
-	// 	meta: {
-	// 		rank: 0,
-	// 		color: '#fff',
-	// 		bgColor: '#cb3837',
-	// 		layout: '5x2',
-	// 		description: '',
-	// 	},
-	// 	component: 'Weather',
-	// },
+	{
+		name: '天气',
+		type: 'card',
+		meta: {
+			rank: 0,
+			color: '#fff',
+			bgColor: '#cb3837',
+			layout: '5x2',
+			description: '',
+		},
+		component: 'Weather',
+	},
 	{
 		name: '日历',
 		type: 'card',

@@ -54,12 +54,23 @@ const state: IWeatherState = reactive({
 	lives: [],
 });
 
-const { data }: any = await useAsyncData('getAdcode', () => $fetch(`https://restapi.amap.com/v3/ip?${qs.stringify({ key: state.payload.key })}`));
-const { adcode } = data.value;
-state.payload.city = adcode;
-await getCurrentWeather();
-await getAllWeather();
+async function initCity() {
+	console.log('wai cao')
+	try{
+		console.log('cao')
+		const { data }:any = await useFetch('https://restapi.amap.com/v3/ip', { query: { key: state.payload.key }})
+		console.log('data data', data);
+		const { adcode } = data.value;
+		state.payload.city = adcode;
+		await getCurrentWeather();
+		await getAllWeather();
+	} catch(err) {
+		console.log('err', err)
+	}
+}
 
+
+initCity()
 async function getCurrentWeather() {
 	try {
 		const { data }: any = await useFetch('https://restapi.amap.com/v3/weather/weatherInfo', { query: state.payload });
@@ -73,9 +84,7 @@ async function getCurrentWeather() {
 
 async function getAllWeather() {
 	try {
-		const { data }: any = await useAsyncData('getWeather', () =>
-			$fetch(`https://restapi.amap.com/v3/weather/weatherInfo?${qs.stringify({ ...state.payload, extensions: 'all' })}`)
-		);
+		const { data }: any = await useFetch('https://restapi.amap.com/v3/weather/weatherInfo', { query: { ...state.payload, extensions: 'all' } });
 		const { forecasts, status, info } = data.value;
 		if (status === '0') return ElMessage.error(info);
 		state.forecasts = forecasts;
