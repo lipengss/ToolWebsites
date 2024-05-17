@@ -17,8 +17,7 @@ import { ref } from 'vue';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import autofit from 'autofit.js';
-const { initGloabalSetting } = useSettingsStore();
+const { initGlobalSetting } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
 const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
@@ -26,7 +25,7 @@ const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 const menuWidth = computed(() => setting.value.menuBar.width + 'px');
 
 onMounted(() => {
-	initGloabalSetting();
+  initGlobalSetting();
 });
 
 useSeoMeta({

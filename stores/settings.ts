@@ -64,6 +64,7 @@ const defaultSetting: ISetting = {
 		showTitle: true,
 	},
 	hotWebRanks: {},
+	likes: [],
 	excludeWeb: [],
 	addedWeb: [],
 };
@@ -118,7 +119,7 @@ export const useSettingsStore = defineStore('settingStore', {
 	},
 	actions: {
 		// 初始化配置
-		initGloabalSetting() {
+		initGlobalSetting() {
 			// 保存默认配置
 			if (Local.get(GLOBAL_SETTING)) {
 				this.setting = Local.get(GLOBAL_SETTING);
@@ -135,7 +136,7 @@ export const useSettingsStore = defineStore('settingStore', {
 		// 更新配置
 		setGlobalSetting() {
 			Local.set(GLOBAL_SETTING, this.setting);
-			this.initGloabalSetting();
+			this.initGlobalSetting();
 		},
 		// 打开配置
 		openSettingDrawer() {
@@ -184,7 +185,7 @@ export const useSettingsStore = defineStore('settingStore', {
 		clearGlobalSetting() {
 			Local.clear();
 			this.setting = useCloneDeep(defaultSetting);
-			this.initGloabalSetting();
+			this.initGlobalSetting();
 		},
 		createFilter(queryString: string) {
 			return (restaurant: string) => {

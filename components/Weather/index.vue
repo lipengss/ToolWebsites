@@ -58,7 +58,7 @@ async function initCity() {
 	console.log('wai cao')
 	try{
 		console.log('cao')
-		const { data }:any = await useFetch('https://restapi.amap.com/v3/ip', { query: { key: state.payload.key }})
+		const { data }:any = await useFetch('https://restapi.amap.com/v3/ip', { query: { key: state.payload.key }}, { server: false})
 		console.log('data data', data);
 		const { adcode } = data.value;
 		state.payload.city = adcode;

@@ -59,6 +59,7 @@ interface ISetting {
 		opacity: number;
 		showTitle: boolean;
 	};
+	likes: string[],
 	hotWebRanks: { [key: string]: number };
 	excludeWeb: RouteItem[];
 	addedWeb: RouteItem[];

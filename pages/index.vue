@@ -81,6 +81,10 @@
 				<el-icon><Delete /></el-icon>
 				<span>删除</span>
 			</div>
+      <div class="item" @click="onLikeApp">
+        <el-icon><svg-icon name="like" /></el-icon>
+        <span>收藏</span>
+      </div>
 		</template>
 	</Contextmenu>
 </template>
@@ -96,7 +100,7 @@ import { routeList } from '~/assets/website/routeList';
 import mitt from '~/assets/utils/mitt';
 const settingStore = useSettingsStore();
 const { setting, showDrawer, activeTag } = storeToRefs(useSettingsStore());
-const { initGloabalSetting, changeWallpaper, setGlobalSetting } = settingStore;
+const { initGlobalSetting, changeWallpaper, setGlobalSetting } = settingStore;
 
 let swiper: any = null;
 
@@ -158,6 +162,10 @@ function onDeleteApp() {
 	setGlobalSetting();
 }
 
+function onLikeApp() {
+  const { name } = curApp.value;
+}
+
 // 根据标签过滤
 watch(
 	() => activeTag.value,
@@ -185,7 +193,7 @@ mitt.on('onMenuChange', (index: number) => {
 });
 
 onMounted(() => {
-	initGloabalSetting();
+	initGlobalSetting();
 	swiper.slideToLoop(setting.value.menuBar.appSlideIndex);
 });
 </script>
