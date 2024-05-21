@@ -45,7 +45,7 @@
 					</template>
 					<el-form-item label="默认菜单">
 						<el-select v-model="setting.menuBar.appSlideIndex" @change="setGlobalSetting">
-							<el-option v-for="(route, index) in routeList" :key="route.path" :value="index" :label="route.name" />
+							<el-option v-for="(route, index) in appTypeList" :key="route.path" :value="index" :label="route.name" />
 						</el-select>
 					</el-form-item>
 					<el-form-item label="自动隐藏">
@@ -199,10 +199,9 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { predefineColors, timeStepList, fontList } from '~/assets/utils/publicData';
+import {predefineColors, timeStepList, fontList, appTypeList} from '~/assets/utils/publicData';
 import { CopyDocument, RefreshRight, Search } from '@element-plus/icons-vue';
 import { useDark, useToggle } from '@vueuse/core';
-import { routeList } from '~/assets/website/routeList';
 
 const { setting, showDrawer, engineList } = storeToRefs(useSettingsStore());
 const { setGlobalSetting, clearGlobalSetting, onColorPickerChange } = useSettingsStore();
@@ -219,10 +218,6 @@ function changeThemeColor() {
 	setGlobalSetting();
 }
 
-function onSetDefaultMenu(idx: number) {
-	console.log('idx', idx);
-	console.log('setting', setting.value.menuBar.appSlideIndex);
-}
 </script>
 <style lang="scss" scoped>
 .slider-wrap {

@@ -4,9 +4,7 @@ import { Local } from '~/assets/utils/storage';
 import { getRandomNumber } from '~/assets/utils/tools';
 import { GLOBAL_SETTING, predefineColors } from '~/assets/utils/publicData';
 import { developers } from '~/assets/website';
-import { useDateFormat } from '~/hooks/useDateFormat';
 
-const { setTime, dayjs } = useDateFormat();
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
 
 const defaultSetting: ISetting = {
@@ -64,7 +62,7 @@ const defaultSetting: ISetting = {
 		showTitle: true,
 	},
 	hotWebRanks: {},
-	likes: [],
+	likeWeb: [],
 	excludeWeb: [],
 	addedWeb: [],
 };
@@ -131,7 +129,7 @@ export const useSettingsStore = defineStore('settingStore', {
 			// 主题色
 			this.onColorPickerChange();
 			// 自动切换壁纸
-			this.autochangeWallpaper();
+			this.autoChangeWallpaper();
 		},
 		// 更新配置
 		setGlobalSetting() {
@@ -170,7 +168,7 @@ export const useSettingsStore = defineStore('settingStore', {
 			Local.set(GLOBAL_SETTING, this.setting);
 		},
 		// 是否开启自动切换背景
-		autochangeWallpaper() {
+		autoChangeWallpaper() {
 			const { auto, autoTime } = this.setting.bg;
 			if (auto) {
 				timer = setInterval(() => {

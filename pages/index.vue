@@ -55,7 +55,7 @@
 		<Setting />
 	</ClientOnly>
 	<!-- 菜单 -->
-	<MenuBar :routeList="routeList" />
+	<MenuBar :list="appTypeList" />
 	<!-- 右键菜单 -->
 	<Contextmenu ref="contextmenuRef">
 		<template v-if="global">
@@ -95,8 +95,7 @@ import { useSettingsStore } from '~/stores/settings';
 import { Delete, Edit } from '@element-plus/icons-vue';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
 import tour from './tour/index.vue';
-import { tagList } from '~/assets/utils/publicData';
-import { routeList } from '~/assets/website/routeList';
+import { tagList, appTypeList } from '~/assets/utils/publicData';
 import mitt from '~/assets/utils/mitt';
 const settingStore = useSettingsStore();
 const { setting, showDrawer, activeTag } = storeToRefs(useSettingsStore());
@@ -132,11 +131,10 @@ const rowGap = computed(() => {
 	return (async ? gap : rowGap) + 'px';
 });
 const swiperSlideData = computed(() => {
-	const result = routeList.map((route) => {
+  return appTypeList.map((route) => {
 		route.children = filterHoutWebSiteList(route.type);
 		return route;
 	});
-	return result;
 });
 const isDeveloper = computed(() => process.env.NODE_ENV === 'development');
 
@@ -164,6 +162,19 @@ function onDeleteApp() {
 
 function onLikeApp() {
   const { name } = curApp.value;
+  const names = setting.value.likeWeb.map((item) => item.name);
+  if (!names.includes(name)) {
+    // const index = developers.findIndex((item) => item.name === name);
+    // if (index !== -1) {
+    //   developers.splice(index, 1);
+    // }
+    setting.value.excludeWeb.push(curApp.value);
+    ElMessage.success('已收藏了');
+  } else {
+    ElMessage.warning('已收藏了');
+    return
+  }
+  setGlobalSetting();
 }
 
 // 根据标签过滤
@@ -171,14 +182,13 @@ watch(
 	() => activeTag.value,
 	(tag) => {
 		const index = setting.value.menuBar.appSlideIndex;
-		const list = filterHoutWebSiteList(routeList[index].type);
-		const filterList = tag === 'all' ? list : list.filter((item) => item.meta.tag && item.meta.tag.includes(tag));
-		swiperSlideData.value[index].children = filterList;
+		const list = filterHoutWebSiteList(appTypeLisrt[index].type);
+		swiperSlideData.value[index].children = tag === 'all' ? list : list.filter((item) => item.meta.tag && item.meta.tag.includes(tag));
 	}
 );
 
 mitt.on('contextmenuApp', ({ event, name }) => {
-	global.value = name ? false : true;
+	global.value = !name;
 	if (!global.value) {
 		const app = filterHoutWebSiteList('/').find((item) => item.name === name);
 		app && (curApp.value = app);

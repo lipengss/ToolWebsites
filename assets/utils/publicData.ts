@@ -75,7 +75,66 @@ function divide(num1: number, num2: number): number {
 	return numeral(num1).divide(num2).format('0.1');
 }
 
+const appTypeList: Array<RouteItem> = [
+	{
+		name: '主页',
+		path: '/',
+		type: '/',
+		meta: {
+			rank: 0,
+			icon: 'menu-home',
+		},
+	},
+	{
+		name: '程序员',
+		path: '/developer',
+		type: 'developer',
+		meta: {
+			rank: 0,
+			icon: 'menu-editor',
+		},
+	},
+	{
+		name: '设计师',
+		path: '/designer',
+		type: 'designer',
+		meta: {
+			rank: 0,
+			icon: 'menu-designer',
+		},
+	},
+	{
+		name: '产品',
+		path: '/product',
+		type: 'product',
+		meta: {
+			rank: 0,
+			icon: 'menu-product',
+		},
+	},
+	{
+		name: '工具',
+		path: '/tools',
+		type: 'onlineTool',
+		meta: {
+			rank: 0,
+			icon: 'menu-tools',
+		},
+	},
+	{
+		name: '娱乐',
+		path: '/amusement',
+		type: 'amusement',
+		meta: {
+			rank: 0,
+			icon: 'menu-amusement',
+		},
+	},
+];
+
+
+
 // 预定颜色
 const predefineColors = ['#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585'];
 
-export { aspectRatios, pictureNotions, predefineColors, OFF_WORK, GLOBAL_SETTING, timeStepList, fontList, tagList };
+export { aspectRatios, pictureNotions, predefineColors, OFF_WORK, GLOBAL_SETTING, timeStepList, fontList, tagList, appTypeList };

@@ -5,7 +5,7 @@
 				<el-scrollbar>
 					<div
 						class="item"
-						v-for="(route, index) in routeList"
+						v-for="(route, index) in list"
 						:key="route.path"
 						:class="{ active: setting.menuBar.appSlideIndex === index }"
 						@click="onSwiperSlideChange(index)"
@@ -25,20 +25,9 @@
 						<svg-icon name="setting" />
 					</el-icon>
 				</el-tooltip>
-				<el-tooltip content="引导" placement="right" effect="light">
-					<el-icon size="18px" class="icon zoom" id="global-setting" @click="openTour()">
-						<svg-icon name="tour" />
-					</el-icon>
-				</el-tooltip>
 				<el-tooltip content="吸色器" placement="right" effect="light">
 					<el-icon size="18px" class="icon zoom" @click="open()">
 						<svg-icon name="dye-color" />
-					</el-icon>
-				</el-tooltip>
-				<el-tooltip :content="isDark ? '夜间模式' : '日间模式'" placement="right" effect="light">
-					<el-icon size="18px" class="icon rotate" @click="toggleDark()">
-						<Moon v-if="isDark" />
-						<Sunny v-else />
 					</el-icon>
 				</el-tooltip>
 				<el-tooltip content="回收站" placement="right" effect="light">
@@ -54,7 +43,6 @@
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { Moon, Sunny } from '@element-plus/icons-vue';
 import { useDark, useToggle, useEyeDropper, useMouseInElement } from '@vueuse/core';
 import mitt from '~/assets/utils/mitt';
 import { useRouter } from 'vue-router';
@@ -62,14 +50,13 @@ const { openSettingDrawer, openTour } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
 interface Props {
-	routeList: Array<RouteItem>;
+	list: Array<RouteItem>;
 }
 
 withDefaults(defineProps<Props>(), {});
 
 const router = useRouter();
 const isDark = useDark();
-const toggleDark = useToggle(isDark);
 const { x } = useMouseInElement();
 
 const autoHide = computed(() => setting.value.menuBar.autoHide);
