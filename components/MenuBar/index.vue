@@ -21,33 +21,37 @@
 			</div>
 			<div class="setting">
 				<el-tooltip content="设置" placement="right" effect="light">
-					<el-icon size="18px" class="icon rotate" id="global-setting" @click="openSettingDrawer()">
+					<el-icon :size="18" class="icon rotate" id="global-setting" @click="openSettingDrawer()">
 						<svg-icon name="setting" />
 					</el-icon>
 				</el-tooltip>
-				<el-tooltip content="吸色器" placement="right" effect="light">
-					<el-icon size="18px" class="icon zoom" @click="open()">
-						<svg-icon name="dye-color" />
-					</el-icon>
-				</el-tooltip>
+        <el-tooltip content="收藏" placement="right" effect="light">
+          <el-icon :size="20" class="icon zoom" id="global-setting" @click="router.push({ path: '/collection' })">
+            <Star />
+          </el-icon>
+        </el-tooltip>
 				<el-tooltip content="回收站" placement="right" effect="light">
-					<el-icon size="18px" class="icon zoom" @click="onJumpTrashPage">
+					<el-icon :size="18" class="icon zoom" @click="router.push({ path: '/trash' })">
 						<svg-icon name="trash" />
 					</el-icon>
 				</el-tooltip>
 			</div>
 		</el-aside>
 	</ClientOnly>
+  <!-- 风格配置 -->
+  <Setting />
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { useDark, useToggle, useEyeDropper, useMouseInElement } from '@vueuse/core';
+import { useEyeDropper, useMouseInElement } from '@vueuse/core';
+import { Star } from '@element-plus/icons-vue'
 import mitt from '~/assets/utils/mitt';
 import { useRouter } from 'vue-router';
 const { openSettingDrawer, openTour } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
+
 
 interface Props {
 	list: Array<RouteItem>;
@@ -56,7 +60,6 @@ interface Props {
 withDefaults(defineProps<Props>(), {});
 
 const router = useRouter();
-const isDark = useDark();
 const { x } = useMouseInElement();
 
 const autoHide = computed(() => setting.value.menuBar.autoHide);
@@ -66,11 +69,7 @@ const color = computed(() => setting.value.menuBar.color);
 
 const translateX = computed(() => -setting.value.menuBar.width + 'px');
 
-const { open, sRGBHex } = useEyeDropper();
-
-function onJumpTrashPage() {
-	router.push({ path: '/trash' });
-}
+const { sRGBHex } = useEyeDropper();
 
 function onSwiperSlideChange(index: number) {
 	mitt.emit('onMenuChange', index);

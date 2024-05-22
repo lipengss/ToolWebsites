@@ -48,12 +48,6 @@
 			</template>
 		</Swiper>
 	</div>
-	<!-- 引导 -->
-	<tour />
-	<!-- 风格配置 -->
-	<ClientOnly>
-		<Setting />
-	</ClientOnly>
 	<!-- 菜单 -->
 	<MenuBar :list="appTypeList" />
 	<!-- 右键菜单 -->
@@ -94,7 +88,6 @@ import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { Delete, Edit } from '@element-plus/icons-vue';
 import { developers, filterHoutWebSiteList } from '~/assets/website/index';
-import tour from './tour/index.vue';
 import { tagList, appTypeList } from '~/assets/utils/publicData';
 import mitt from '~/assets/utils/mitt';
 const settingStore = useSettingsStore();
@@ -162,7 +155,7 @@ function onDeleteApp() {
 
 function onLikeApp() {
   const { name } = curApp.value;
-  const names = setting.value.likeWeb.map((item) => item.name);
+  const names = setting.value.collectionWeb.map((item) => item.name);
   if (!names.includes(name)) {
     // const index = developers.findIndex((item) => item.name === name);
     // if (index !== -1) {

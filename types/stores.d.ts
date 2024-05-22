@@ -48,7 +48,7 @@ interface ISetting {
 		bgColor: string;
 	};
 	app: {
-		sceenWidth: number;
+		screenWidth: number;
 		unit: '%' | 'px';
 		size: number;
 		radius: number;
@@ -59,7 +59,7 @@ interface ISetting {
 		opacity: number;
 		showTitle: boolean;
 	};
-	likeWeb: string[],
+	collectionWeb: string[],
 	hotWebRanks: { [key: string]: number };
 	excludeWeb: RouteItem[];
 	addedWeb: RouteItem[];

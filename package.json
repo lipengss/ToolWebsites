@@ -37,8 +37,7 @@
 		"qs": "^6.11.2",
 		"sass": "^1.70.0",
 		"vite-plugin-svg-icons": "^2.0.1",
-		"vue3-colorpicker": "^2.2.3",
-		"vue3-grid-layout": "^1.0.0"
+		"vue3-colorpicker": "^2.2.3"
 	},
 	"config": {
 		"nuxt": {

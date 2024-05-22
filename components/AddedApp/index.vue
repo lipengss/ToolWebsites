@@ -22,7 +22,7 @@
 						</el-form-item>
 						<el-form-item label="应用分类" prop="type" :rules="{ required: true, message: '请选择应用分类' }">
 							<el-select v-model="state.customIconForm.type" multiple placeholder="选择应用分类">
-								<el-option v-for="menu in routeList.filter((n) => n.type !== '/')" :key="menu.name" :value="menu.type" :label="menu.name" />
+								<el-option v-for="menu in appTypeList.filter((n) => n.type !== '/')" :key="menu.name" :value="menu.type" :label="menu.name" />
 							</el-select>
 						</el-form-item>
 						<el-form-item label="排行" prop="meta.rank">
@@ -75,13 +75,9 @@
 	</ClientOnly>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useSettingsStore } from '~/stores/settings';
 import { CirclePlusFilled, Link, Edit } from '@element-plus/icons-vue';
-import { tagList, predefineColors } from '~/assets/utils/publicData';
-import { routeList } from '~/assets/website/routeList';
-import type { Action } from 'element-plus';
-const { setting } = storeToRefs(useSettingsStore());
+import { tagList, predefineColors, appTypeList } from '~/assets/utils/publicData';
+
 import { useCopy } from '~/hooks/useCopy';
 
 const state = reactive({
@@ -129,19 +125,6 @@ function onSave() {
 	const str = JSON.stringify(state.customIconForm, null, '\t');
 	const { onCopy } = useCopy(toRef(JSON.stringify(state.customIconForm)));
 	onCopy();
-}
-
-const icoUrl = computed(() => {
-	const { path } = state.customIconForm;
-	if (path.endsWith('/')) {
-		return path + 'favicon.ico';
-	} else {
-		return path + '/favicon.ico';
-	}
-});
-
-function onSelectIcon(icon: string) {
-	state.customIconForm.meta.value = icon;
 }
 
 function onAdded() {

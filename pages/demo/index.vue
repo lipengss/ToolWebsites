@@ -218,7 +218,6 @@ function onmousemove(event: any) {
 			}
 		});
 	} else {
-		console.log('xxxxx');
 		toolTip.style.display = 'none';
 	}
 }

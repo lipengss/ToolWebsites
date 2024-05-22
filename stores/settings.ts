@@ -5,7 +5,7 @@ import { getRandomNumber } from '~/assets/utils/tools';
 import { GLOBAL_SETTING, predefineColors } from '~/assets/utils/publicData';
 import { developers } from '~/assets/website';
 
-const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v) => v.default);
+const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v:any) => v.default);
 
 const defaultSetting: ISetting = {
 	theme: '#2b793b',
@@ -50,7 +50,7 @@ const defaultSetting: ISetting = {
 		bgColor: predefineColors[0],
 	},
 	app: {
-		sceenWidth: 80,
+		screenWidth: 80,
 		unit: '%',
 		size: 60,
 		radius: 10,
@@ -62,7 +62,7 @@ const defaultSetting: ISetting = {
 		showTitle: true,
 	},
 	hotWebRanks: {},
-	likeWeb: [],
+	collectionWeb: [],
 	excludeWeb: [],
 	addedWeb: [],
 };

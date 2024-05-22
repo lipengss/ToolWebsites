@@ -5,7 +5,7 @@
 			<Application :app="app" />
 			<div class="mask" @click="onResetWebSite(app)">
 				<el-icon :size="20"><Refresh /></el-icon>
-				<span>还原</span>
+				<span>取消</span>
 			</div>
 		</GridItem>
 	</GirdLayout>
@@ -19,18 +19,18 @@ import { useSettingsStore } from '~/stores/settings';
 const { setting } = storeToRefs(useSettingsStore());
 const { setGlobalSetting } = useSettingsStore();
 
-const siteList = computed(() => setting.value.collectionWeb);
+const siteList = computed(() => setting.value.excludeWeb);
 
 function onResetWebSite(app: RouteItem) {
 	const { name } = app;
 	const index = siteList.value.findIndex((item) => item.name === name);
 	if (index !== -1) {
-		setting.value.collectionWeb.splice(index, 1);
+		setting.value.excludeWeb.splice(index, 1);
 		setGlobalSetting();
 	}
 }
 
-definePageMeta({ title: '我的喜欢' });
+definePageMeta({ title: '收藏夹' });
 </script>
 <style scoped lang="scss">
 .app-box {
