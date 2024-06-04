@@ -173,50 +173,6 @@ let row = 0;
 let timer:any = null;
 
 
-function showNextFloor() {
-  const cells = document.querySelectorAll('.floor');
-  // 计算当前元素的索引
-  const currentIndex = row * cloneBuilds.value[0].children.length + col
-
-  // 如果不是第一个元素，移除上一个元素的高亮
-  if (currentIndex > 0) {
-    const prevIndex = currentIndex - 1
-    cells[prevIndex].classList.remove("light")
-  } else {
-    // 如果是第一个元素，需要移除最后一个元素的高亮
-    cells[cells.length - 1].classList.remove("light")
-  }
-
-  // 高亮当前元素
-  cells[currentIndex].classList.add("light")
-  // 移动到下一个列
-  col++;
-
-  // 如果当前行的元素已经遍历完，移动到下一行
-  if (col >= cloneBuilds.value[row].children.length) {
-    col = 0; // 重置列索引
-    row++; // 移动到下一行
-  }
-
-  // 如果所有行的元素都遍历完，重置行和列索引
-  if (row >= cloneBuilds.value.length) {
-    row = 0;
-    col = 0;
-  }
-}
-
-function resumeLoop() {
-  timer = setInterval(showNextFloor, 1000)
-}
-
-function pauseLoop() {
-  clearInterval(timer)
-}
-
-onMounted(() => {
-  resumeLoop()
-})
-
 </script>
 <style lang="scss" scoped>
 .container {

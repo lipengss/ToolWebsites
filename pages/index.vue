@@ -113,7 +113,7 @@ const allTagList = computed(() => {
 	return [{ label: '全部', value: 'all' }, ...tagList];
 });
 
-const screenWidth = computed(() => setting.value.app.sceenWidth + setting.value.app.unit);
+const screenWidth = computed(() => setting.value.app.screenWidth + setting.value.app.unit);
 const appSize = computed(() => setting.value.app.size + 'px');
 const columnGap = computed(() => {
 	const { async, gap, columnGap } = setting.value.app;

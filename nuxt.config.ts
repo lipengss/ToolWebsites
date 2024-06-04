@@ -15,12 +15,12 @@ export default defineNuxtConfig({
 	},
 	// buildModules: ['@nuxtjs/router-extras'],
 	devServer: {
-		port: 8170,
+		port: 8669,
 		host: 'localhost',
 	},
 	server: {
 		host: '0.0.0.0',
-		port: 8170,
+		port: 8669,
 	},
 	vite: {
 		plugins: [
