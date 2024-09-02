@@ -132,8 +132,6 @@ const appTypeList: Array<RouteItem> = [
 	},
 ];
 
-
-
 // 预定颜色
 const predefineColors = ['#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585'];
 

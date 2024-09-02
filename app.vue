@@ -1,6 +1,8 @@
 <template>
 	<el-config-provider :locale="locale">
 		<div class="nuxt-container" id="nuxt-container">
+			<!-- 菜单 -->
+			<MenuBar />
 			<NuxtLayout> <NuxtPage /></NuxtLayout>
 			<Loading />
 			<ToggleWallpaper />
@@ -25,7 +27,7 @@ const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 const menuWidth = computed(() => setting.value.menuBar.width + 'px');
 
 onMounted(() => {
-  initGlobalSetting();
+	initGlobalSetting();
 });
 
 useSeoMeta({

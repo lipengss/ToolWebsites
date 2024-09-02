@@ -1,33 +1,7 @@
 <template>
 	<div class="container" @contextmenu.prevent="contextmenu">
 		<Engines />
-		<div class="tags">
-			<el-tag
-				v-for="tag in allTagList"
-				:key="tag.value"
-				:type="activeTag === tag.value ? 'success' : 'info'"
-				effect="light"
-				round
-				@click="activeTag = tag.value"
-			>
-				{{ tag.label }}
-			</el-tag>
-		</div>
-		<GirdLayout>
-			<GridItem size="5x2">
-				<component :is="card.Weather" />
-			</GridItem>
-			<GridItem size="5x2">
-				<component :is="card.Calendar" />
-			</GridItem>
-			<GridItem size="5x2">
-				<component :is="card.OffWork" />
-			</GridItem>
-			<!-- <GridItem v-for="app in route.children"></GridItem> -->
-		</GirdLayout>
-		<!-- <GridItem  size="5x2" :name="app.name">
-									<component :is="card[app.component]" />
-								</GridItem> -->
+		<NuxtChild />
 		<!-- <Swiper
 			class="swiper-parent"
 			:modules="[SwiperMousewheel]"
@@ -75,6 +49,8 @@
 			</template>
 		</Swiper> -->
 	</div>
+	<!-- 菜单 -->
+	<MenuBar />
 	<!-- 右键菜单 -->
 	<Contextmenu ref="contextmenuRef">
 		<template v-if="global">
@@ -149,14 +125,11 @@ const rowGap = computed(() => {
 	return (async ? gap : rowGap) + 'px';
 });
 const swiperSlideData = computed(() => {
-	console.log('xx', route);
 	return appTypeList.map((route) => {
 		route.children = filterHoutWebSiteList(route.type);
 		return route;
 	});
 });
-
-console.log('swiperSlideData', swiperSlideData);
 const isDeveloper = computed(() => process.env.NODE_ENV === 'development');
 
 const card: any = {

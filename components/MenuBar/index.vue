@@ -5,61 +5,60 @@
 				<el-scrollbar>
 					<div
 						class="item"
-						v-for="(route, index) in list"
+						v-for="route in appTypeList"
 						:key="route.path"
-						:class="{ active: setting.menuBar.appSlideIndex === index }"
-						@click="onSwiperSlideChange(index)"
+						:class="{ active: route.path === routePath }"
+						@click="onChangeMenu(route.path)"
 					>
-						<div class="icon">
-							<el-icon>
-								<svg-icon v-if="route.meta.icon" :name="route.meta.icon" />
-							</el-icon>
-						</div>
+						<el-icon>
+							<svg-icon v-if="route.meta.icon" :name="route.meta.icon" />
+						</el-icon>
 						<div class="title">{{ route.name }}</div>
 					</div>
 				</el-scrollbar>
 			</div>
 			<div class="setting">
 				<el-tooltip content="设置" placement="right" effect="light">
-					<el-icon :size="18" class="icon rotate" id="global-setting" @click="openSettingDrawer()">
-						<svg-icon name="setting" />
-					</el-icon>
+					<div class="item" @click="openSettingDrawer()">
+						<el-icon :size="18" class="icon rotate" id="global-setting">
+							<svg-icon name="setting" />
+						</el-icon>
+					</div>
 				</el-tooltip>
-        <el-tooltip content="收藏" placement="right" effect="light">
-          <el-icon :size="20" class="icon zoom" id="global-setting" @click="router.push({ path: '/collection' })">
-            <Star />
-          </el-icon>
-        </el-tooltip>
+				<el-tooltip content="收藏" placement="right" effect="light">
+					<div class="item" :class="{ active: '/collection' === routePath }" @click="onChangeMenu('/collection')">
+						<el-icon :size="20" class="icon zoom" id="global-setting">
+							<Star />
+						</el-icon>
+					</div>
+				</el-tooltip>
 				<el-tooltip content="回收站" placement="right" effect="light">
-					<el-icon :size="18" class="icon zoom" @click="router.push({ path: '/trash' })">
-						<svg-icon name="trash" />
-					</el-icon>
+					<div class="item" :class="{ active: '/trash' === routePath }" @click="onChangeMenu('/trash')">
+						<el-icon :size="18" class="icon zoom">
+							<svg-icon name="trash" />
+						</el-icon>
+					</div>
 				</el-tooltip>
 			</div>
 		</el-aside>
 	</ClientOnly>
-  <!-- 风格配置 -->
-  <Setting />
+	<!-- 风格配置 -->
+	<Setting />
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { useEyeDropper, useMouseInElement } from '@vueuse/core';
-import { Star } from '@element-plus/icons-vue'
-import mitt from '~/assets/utils/mitt';
-import { useRouter } from 'vue-router';
+import { Star } from '@element-plus/icons-vue';
+import { useRouter, useRoute } from 'vue-router';
+import { appTypeList } from '~/assets/utils/publicData';
 const { openSettingDrawer, openTour } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
-
-interface Props {
-	list: Array<RouteItem>;
-}
-
-withDefaults(defineProps<Props>(), {});
-
+const route = useRoute();
 const router = useRouter();
+
 const { x } = useMouseInElement();
 
 const autoHide = computed(() => setting.value.menuBar.autoHide);
@@ -71,8 +70,12 @@ const translateX = computed(() => -setting.value.menuBar.width + 'px');
 
 const { sRGBHex } = useEyeDropper();
 
-function onSwiperSlideChange(index: number) {
-	mitt.emit('onMenuChange', index);
+const routePath = ref(route.path);
+
+function onChangeMenu(path: string | undefined) {
+	if (typeof path !== 'string') return;
+	router.push({ path });
+	routePath.value = path;
 }
 
 watch(
@@ -115,6 +118,7 @@ watch(
 			cursor: pointer;
 			.title {
 				font-size: 12px;
+				padding-top: 4px;
 			}
 			.el-icon {
 				transition: all 0.2s ease-in-out;
@@ -134,9 +138,19 @@ watch(
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		.el-icon {
-			padding: 10px 0;
+		.item {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 16px 0;
 			cursor: pointer;
+		}
+		.active {
+			background-color: rgba(255, 255, 255, 0.1);
+		}
+		.el-icon {
 			transition: all 0.3s ease-in-out;
 		}
 		.rotate {
