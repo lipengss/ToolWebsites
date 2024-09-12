@@ -3,8 +3,7 @@
 		<GridItem size="1x1" v-for="app in siteList" :name="app.name" disabledContextmenu>
 			<Application :app="app" />
 			<div class="mask" @click="onResetWebSite(app)">
-				<el-icon :size="20"><Refresh /></el-icon>
-				<span>取消</span>
+				<el-icon :size="28"><svg-icon name="unlike" /></el-icon>
 			</div>
 		</GridItem>
 	</GirdLayout>
@@ -12,22 +11,22 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
-import { Refresh } from '@element-plus/icons-vue';
 import { useSettingsStore } from '~/stores/settings';
 
 const { setting } = storeToRefs(useSettingsStore());
 const { setGlobalSetting } = useSettingsStore();
 
-const siteList = computed(() => setting.value.excludeWeb);
+const siteList = computed(() => setting.value.collectionWeb);
 
 function onResetWebSite(app: RouteItem) {
 	const { name } = app;
 	const index = siteList.value.findIndex((item) => item.name === name);
 	if (index !== -1) {
-		setting.value.excludeWeb.splice(index, 1);
+		setting.value.collectionWeb.splice(index, 1);
 		setGlobalSetting();
 	}
 }
+const radius = computed(() => setting.value.app.radius + 'px');
 
 definePageMeta({ title: '收藏夹' });
 </script>
@@ -48,6 +47,7 @@ definePageMeta({ title: '收藏夹' });
 		cursor: pointer;
 		transition: all 0.1s ease-in;
 		background-color: rgba(0, 0, 0, 0);
+		border-radius: v-bind(radius);
 		color: #fff;
 		opacity: 0;
 		span {

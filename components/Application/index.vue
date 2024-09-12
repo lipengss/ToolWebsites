@@ -1,7 +1,8 @@
 <template>
 	<el-tooltip effect="light" :content="app.meta.description" placement="top" :show-after="500">
-		<div class="appliaction">
-			<div class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }" @click="onclick">
+		<div class="appliaction" data-type="app" @contextmenu.prevent="onContextmenu" @click="onclick">
+			<div class="mask"></div>
+			<div class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }">
 				<div v-if="app.meta.type === 'img'" class="favicon" :width="app.meta.size" :height="app.meta.size">
 					<img :src="app.meta.value" width="70%" height="70%" />
 				</div>
@@ -17,6 +18,7 @@
 import { withDefaults, defineProps } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
+import mitt from '~/assets/utils/mitt';
 
 const { setting } = storeToRefs(useSettingsStore());
 const { setGlobalSetting } = useSettingsStore();
@@ -40,12 +42,32 @@ function onclick() {
 	}
 	setGlobalSetting();
 }
+
+function onContextmenu(event: any) {
+	const { clientX, clientY } = event;
+	const { type } = event.target.parentNode.dataset;
+	mitt.emit('contextmenuApp', {
+		app: props.app,
+		type,
+		clientX,
+		clientY,
+	});
+}
 </script>
 <style lang="scss" scoped>
 .appliaction {
 	width: 100%;
 	height: 100%;
 	cursor: pointer;
+	position: relative;
+	.mask {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 100;
+	}
 	.icon-wrap {
 		width: 100%;
 		height: 100%;

@@ -55,22 +55,18 @@ const state: IWeatherState = reactive({
 });
 
 async function initCity() {
-	console.log('wai cao')
-	try{
-		console.log('cao')
-		const { data }:any = await useFetch('https://restapi.amap.com/v3/ip', { query: { key: state.payload.key }}, { server: false})
-		console.log('data data', data);
+	try {
+		const { data }: any = await useFetch('https://restapi.amap.com/v3/ip', { query: { key: state.payload.key } }, { server: false });
 		const { adcode } = data.value;
 		state.payload.city = adcode;
 		await getCurrentWeather();
 		await getAllWeather();
-	} catch(err) {
-		console.log('err', err)
+	} catch (err) {
+		console.log('err', err);
 	}
 }
 
-
-initCity()
+initCity();
 async function getCurrentWeather() {
 	try {
 		const { data }: any = await useFetch('https://restapi.amap.com/v3/weather/weatherInfo', { query: state.payload });

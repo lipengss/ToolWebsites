@@ -1,9 +1,6 @@
 <template>
-	<GridItem size="1x1" disabled-contextmenu>
-		<el-icon :size="38" color="#409eff" @click="onAdded"> <CirclePlusFilled /></el-icon>
-	</GridItem>
 	<ClientOnly>
-		<Dialog v-model:visible="state.visible" title="添加应用">
+		<Dialog v-model:visible="props.visible" title="添加应用">
 			<el-tabs tab-position="left" v-model="state.activeTab">
 				<el-tab-pane label="网址导航" name="website">
 					<el-tag v-for="tag in tagList" :key="tag.value" :wrap="true">{{ tag.label }}</el-tag>
@@ -75,13 +72,17 @@
 	</ClientOnly>
 </template>
 <script setup lang="ts">
+import { withDefaults, defineProps } from 'vue';
 import { CirclePlusFilled, Link, Edit } from '@element-plus/icons-vue';
 import { tagList, predefineColors, appTypeList } from '~/assets/utils/publicData';
-
 import { useCopy } from '~/hooks/useCopy';
-
-const state = reactive({
+interface Props {
+	visible: boolean;
+}
+const props = withDefaults(defineProps<Props>(), {
 	visible: false,
+});
+const state = reactive({
 	activeTab: 'customIcons',
 	customIconForm: {
 		name: '',
@@ -125,10 +126,6 @@ function onSave() {
 	const str = JSON.stringify(state.customIconForm, null, '\t');
 	const { onCopy } = useCopy(toRef(JSON.stringify(state.customIconForm)));
 	onCopy();
-}
-
-function onAdded() {
-	state.visible = true;
 }
 </script>
 <style lang="scss" scoped>

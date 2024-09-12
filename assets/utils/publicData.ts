@@ -43,6 +43,7 @@ const pictureNotions = '图片不会上传到服务器转换，而是在浏览�
 const fontList = ['rocks-serif', 'SAIBA-45'];
 
 const tagList = [
+	{ label: '全部', value: 'all' },
 	{ label: '浏览器', value: 'browser' },
 	{ label: 'AI', value: 'ai' },
 	{ label: '热门', value: 'hot' },
@@ -114,7 +115,7 @@ const appTypeList: Array<RouteItem> = [
 	},
 	{
 		name: '工具',
-		path: '/tools',
+		path: '/onlineTool',
 		type: 'onlineTool',
 		meta: {
 			rank: 0,

@@ -3,7 +3,12 @@
 		<div class="nuxt-container" id="nuxt-container">
 			<!-- 菜单 -->
 			<MenuBar />
-			<NuxtLayout> <NuxtPage /></NuxtLayout>
+			<NuxtLayout>
+				<el-scrollbar>
+					<Engines />
+					<NuxtPage />
+				</el-scrollbar>
+			</NuxtLayout>
 			<Loading />
 			<ToggleWallpaper />
 		</div>

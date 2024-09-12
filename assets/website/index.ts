@@ -2,6 +2,7 @@ import { developers } from './developer';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 
+// 热点排行
 function filterHoutWebSiteList(type: string | string[]): Array<RouteItem> {
 	let excludeDevelopers: Array<RouteItem> = excludes(developers); // 更清晰的变量命名
 	if (typeof type === 'string') {

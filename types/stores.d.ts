@@ -59,7 +59,7 @@ interface ISetting {
 		opacity: number;
 		showTitle: boolean;
 	};
-	collectionWeb: string[],
+	collectionWeb: RouteItem[];
 	hotWebRanks: { [key: string]: number };
 	excludeWeb: RouteItem[];
 	addedWeb: RouteItem[];
@@ -70,5 +70,4 @@ interface ISettingState {
 	tour: boolean;
 	setting: ISetting;
 	engineList: Array<IEngineItem>;
-	activeTag: string;
 }

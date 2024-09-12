@@ -1,15 +1,73 @@
 <template>
 	<div class="contextmenu" v-if="context.show" :style="{ left: context.clientX + 'px', top: context.clientY + 'px' }">
-		<slot />
+		<template v-if="context.type === 'app'">
+			<div class="item">
+				<el-icon><Edit /></el-icon>
+				<span>编辑</span>
+			</div>
+			<div class="item">
+				<el-icon><svg-icon name="batchEdit" /></el-icon>
+				<span>批量编辑</span>
+			</div>
+			<div class="item" @click="onDeleteApp">
+				<el-icon><Delete /></el-icon>
+				<span>删除</span>
+			</div>
+			<div class="item" @click="onLikeApp">
+				<el-icon><svg-icon name="like" /></el-icon>
+				<span>收藏</span>
+			</div>
+		</template>
+		<template v-else>
+			<div class="item" @click="changeWallpaper">
+				<el-icon><svg-icon name="menu-picture" /></el-icon>
+				<span>换壁纸</span>
+			</div>
+			<div class="item" @click="showDrawer = true">
+				<el-icon><svg-icon name="setting" /></el-icon>
+				<span>设置</span>
+			</div>
+			<div class="item" @click="visibleApp = true">
+				<el-icon><CirclePlus /></el-icon>
+				<span>添加应用</span>
+			</div>
+		</template>
 	</div>
+	<AddedApp v-model:visible="visibleApp" />
 </template>
 <script setup lang="ts">
-import { reactive, defineExpose } from 'vue';
+import { reactive, defineAsyncComponent } from 'vue';
+import { Delete, Edit, CirclePlus } from '@element-plus/icons-vue';
+import { developers } from '~/assets/website/index';
+import { useSettingsStore } from '~/stores/settings';
+import mitt from '~/assets/utils/mitt';
+
+const settingStore = useSettingsStore();
+
+const { setting, showDrawer } = storeToRefs(useSettingsStore());
+
+const { setGlobalSetting, changeWallpaper } = settingStore;
+
+const AddedApp = defineAsyncComponent(() => import('~/components/AddedApp/index.vue'));
+
+const visibleApp = ref(false);
+
+const curApp = ref<RouteItem>({
+	name: '',
+	path: '',
+	type: '',
+	meta: {
+		rank: 0,
+		icon: '',
+		layout: '',
+	},
+});
 
 const context = reactive({
 	show: false,
 	clientX: 0,
 	clientY: 0,
+	type: '',
 });
 
 function contextmenu(event: any) {
@@ -19,14 +77,50 @@ function contextmenu(event: any) {
 	context.show = true;
 }
 
+function onDeleteApp() {
+	const { name } = curApp.value;
+	const names = setting.value.excludeWeb.map((item) => item.name);
+	if (!names.includes(name)) {
+		const index = developers.findIndex((item) => item.name === name);
+		if (index !== -1) {
+			developers.splice(index, 1);
+		}
+		setting.value.excludeWeb.push(curApp.value);
+	}
+	setGlobalSetting();
+}
+
+function onLikeApp() {
+	const { name } = curApp.value;
+	const names = setting.value.collectionWeb.map((item) => item.name);
+	if (!names.includes(name)) {
+		setting.value.collectionWeb.push(curApp.value);
+		ElMessage.success('已收藏了');
+	} else {
+		ElMessage.warning('已收藏了');
+		return;
+	}
+	setGlobalSetting();
+}
+
+mitt.on('contextmenuApp', ({ app, type, clientX, clientY }: { app: RouteItem; type: string; clientX: number; clientY: number }) => {
+	if (type === 'app') {
+		curApp.value = app;
+		context.type = type;
+		context.clientX = clientX;
+		context.clientY = clientY;
+		context.show = true;
+	}
+});
+
 onMounted(() => {
 	window.addEventListener('click', () => {
 		context.show = false;
 	});
-});
-
-defineExpose({
-	contextmenu,
+	window.addEventListener('contextmenu', (event) => {
+		event.preventDefault();
+		contextmenu(event);
+	});
 });
 </script>
 <style lang="scss" scoped>

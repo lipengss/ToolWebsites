@@ -1,15 +1,15 @@
 <template>
-	<div class="developer">
-		<el-button @click="router.push('developer/developerChildx')">xx</el-button>
-		<NuxtChild />
-	</div>
+	<GirdLayout>
+		<template v-for="app in getApps()">
+			<GridItem size="1x1" :name="app.name">
+				<Application :app="app" />
+			</GridItem>
+		</template>
+	</GirdLayout>
 </template>
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router';
-import {} from 'vue';
-
-const route = useRoute();
-const router = useRouter();
+import { useApp } from '~/hooks/useApp';
+const { getApps } = useApp();
 </script>
 <style lang="scss" scoped>
 .developer {
