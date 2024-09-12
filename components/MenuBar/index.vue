@@ -1,8 +1,8 @@
 <template>
 	<ClientOnly>
-		<el-aside :width="menuWidth" :class="{ 'hide-sidebar': autoHide && x > setting.menuBar.width }">
-			<div class="menu">
-				<el-scrollbar>
+		<el-aside :width="menuWidth" :class="[hideSidebar, setting.menuBar.position]">
+			<el-scrollbar>
+				<div class="menu">
 					<div
 						class="item"
 						v-for="route in appTypeList"
@@ -15,8 +15,8 @@
 						</el-icon>
 						<div class="title">{{ route.name }}</div>
 					</div>
-				</el-scrollbar>
-			</div>
+				</div>
+			</el-scrollbar>
 			<div class="setting">
 				<el-tooltip content="设置" placement="right" effect="light">
 					<div class="item" @click="openSettingDrawer()">
@@ -59,14 +59,44 @@ const { setting } = storeToRefs(useSettingsStore());
 const route = useRoute();
 const router = useRouter();
 
-const { x } = useMouseInElement();
+const { x, y } = useMouseInElement();
 
 const autoHide = computed(() => setting.value.menuBar.autoHide);
 const menuWidth = computed(() => setting.value.menuBar.width + 'px');
 const bgColor = computed(() => setting.value.menuBar.bgColor);
 const color = computed(() => setting.value.menuBar.color);
 
-const translateX = computed(() => -setting.value.menuBar.width + 'px');
+const translateX = computed(() => {
+	switch (setting.value.menuBar.position) {
+		case 'left':
+			return `translateX(${-setting.value.menuBar.width + 'px'})`;
+		case 'right':
+			return `translateX(${setting.value.menuBar.width + 'px'})`;
+		case 'top':
+			return `translateY(${-setting.value.menuBar.width + 'px'})`;
+		case 'bottom':
+			return `translateY(${setting.value.menuBar.width + 'px'})`;
+	}
+});
+
+const hideSidebar = computed(() => {
+	const { width } = setting.value.menuBar;
+	const { innerWidth, innerHeight } = window;
+	if (autoHide.value) {
+		switch (setting.value.menuBar.position) {
+			case 'left':
+				return x > width ? 'hide-sidebar' : '';
+			case 'right':
+				return innerWidth - x < width ? 'hide-sidebar' : '';
+			case 'top':
+				return y > width ? 'hide-sidebar' : '';
+			case 'bottom':
+				return innerHeight - x < width ? 'hide-sidebar' : '';
+		}
+	} else {
+		return '';
+	}
+});
 
 const { sRGBHex } = useEyeDropper();
 
@@ -92,10 +122,7 @@ watch(
 </script>
 <style lang="scss" scoped>
 .el-aside {
-	height: 100%;
 	position: fixed;
-	top: 0;
-	left: 0;
 	z-index: 200;
 	display: flex;
 	flex-direction: column;
@@ -165,7 +192,52 @@ watch(
 		}
 	}
 }
+.left {
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.right {
+	height: 100%;
+	top: 0;
+	right: 0;
+}
+.bottom {
+	bottom: 0;
+}
+.top {
+	top: 0;
+}
+
+.bottom,
+.top {
+	width: 100%;
+	padding: 0;
+	flex-direction: row;
+	.el-scrollbar {
+		width: 100%;
+		height: v-bind(menuWidth);
+		:deep .el-scrollbar__view {
+			height: 100%;
+			.menu {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				.item {
+					padding: 0 16px;
+				}
+			}
+		}
+	}
+	.setting {
+		flex-direction: row;
+		.item {
+			padding: 0 16px;
+		}
+	}
+}
 .hide-sidebar {
-	transform: translateX(v-bind(translateX));
+	transform: v-bind(translateX);
 }
 </style>

@@ -23,8 +23,6 @@
 			</template>
 		</GirdLayout>
 	</div>
-	<!-- 右键菜单 -->
-	<Contextmenu />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';

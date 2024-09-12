@@ -29,12 +29,13 @@ interface ISetting {
 		autoTime: number;
 	};
 	menuBar: {
+		position: string;
 		width: number; // 侧边栏菜单宽度
 		blur: number; // 遮罩层模糊度
 		bgColor: string; // 背景颜色
 		color: string; // 字体颜色
 		autoHide: boolean;
-		appSlideIndex: number;
+		defaultRoute: string;
 	};
 	offWork: {
 		name: '下班倒计时';

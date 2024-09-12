@@ -31,7 +31,8 @@ const defaultSetting: ISetting = {
 		autoTime: 60000,
 	},
 	menuBar: {
-		appSlideIndex: 0,
+		position: 'left',
+		defaultRoute: '/',
 		width: 60,
 		blur: 6,
 		bgColor: 'rgba(255, 255, 255, 0.1)',

@@ -1,6 +1,6 @@
 <template>
 	<el-config-provider :locale="locale">
-		<div class="nuxt-container" id="nuxt-container">
+		<div class="nuxt-container" id="nuxt-container" :style="style">
 			<!-- 菜单 -->
 			<MenuBar />
 			<NuxtLayout>
@@ -18,6 +18,8 @@
 		<div id="x-line" class="x-line"></div>
 		<div id="y-line" class="y-line"></div>
 	</el-config-provider>
+	<!-- 右键菜单 -->
+	<Contextmenu />
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
@@ -30,6 +32,7 @@ const { setting } = storeToRefs(useSettingsStore());
 const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
 const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 const menuWidth = computed(() => setting.value.menuBar.width + 'px');
+const style = computed(() => `padding-${setting.value.menuBar.position}: ${menuWidth.value}`);
 
 onMounted(() => {
 	initGlobalSetting();
@@ -46,7 +49,6 @@ const locale = ref(zhCn);
 .nuxt-container {
 	width: 100%;
 	height: 100%;
-	padding-left: v-bind(menuWidth);
 	box-sizing: border-box;
 	&:before,
 	&:before {
