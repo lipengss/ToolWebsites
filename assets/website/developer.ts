@@ -263,6 +263,7 @@ export const developers: RouteItem[] = [
 			size: 62,
 			layout: '1x1',
 			description: '在线可协作的UI设计工具。',
+			tag: ['appliance', 'efficiency'],
 		},
 	},
 	{

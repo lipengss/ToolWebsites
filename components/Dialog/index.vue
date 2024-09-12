@@ -1,5 +1,13 @@
 <template>
-	<el-dialog v-model="state.visible" :show-close="false" width="900px" append-to-body :fullscreen="state.fullscreen" draggable>
+	<el-dialog
+		v-model="state.visible"
+		:show-close="false"
+		width="900px"
+		append-to-body
+		:fullscreen="state.fullscreen"
+		draggable
+		@close="emits('onClose')"
+	>
 		<template #header>
 			<div class="flex-end">
 				<el-button :icon="FullScreen" circle size="small" @click="state.fullscreen = !state.fullscreen" />
@@ -29,7 +37,7 @@ const state = reactive({
 
 const picture = computed(() => setting.value.bg.picture);
 
-const emits = defineEmits(['update:visible']);
+const emits = defineEmits(['update:visible', 'onClose']);
 
 watch(
 	() => props.visible,

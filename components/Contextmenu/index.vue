@@ -1,7 +1,7 @@
 <template>
 	<div class="contextmenu" v-if="context.show" :style="{ left: context.clientX + 'px', top: context.clientY + 'px' }">
 		<template v-if="context.type === 'app'">
-			<div class="item">
+			<div class="item" @click="appDialogRef.edit(curApp)">
 				<el-icon><Edit /></el-icon>
 				<span>编辑</span>
 			</div>
@@ -27,13 +27,13 @@
 				<el-icon><svg-icon name="setting" /></el-icon>
 				<span>设置</span>
 			</div>
-			<div class="item" @click="visibleApp = true">
+			<div class="item" @click="appDialogRef.open()">
 				<el-icon><CirclePlus /></el-icon>
 				<span>添加应用</span>
 			</div>
 		</template>
 	</div>
-	<AddedApp v-model:visible="visibleApp" />
+	<AddedApp ref="appDialogRef" />
 </template>
 <script setup lang="ts">
 import { reactive, defineAsyncComponent } from 'vue';
@@ -50,7 +50,7 @@ const { setGlobalSetting, changeWallpaper } = settingStore;
 
 const AddedApp = defineAsyncComponent(() => import('~/components/AddedApp/index.vue'));
 
-const visibleApp = ref(false);
+const appDialogRef = ref();
 
 const curApp = ref<RouteItem>({
 	name: '',
@@ -118,6 +118,7 @@ onMounted(() => {
 		context.show = false;
 	});
 	window.addEventListener('contextmenu', (event) => {
+		context.type = 'global';
 		event.preventDefault();
 		contextmenu(event);
 	});
