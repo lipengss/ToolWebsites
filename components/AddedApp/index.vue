@@ -8,6 +8,11 @@
 				<el-tab-pane label="自定义图标" name="customIcons">
 					<div class="split-pane">
 						<el-form :model="state.customIconForm" label-width="100px">
+							<el-form-item label="应用图标">
+								<div class="app-icon">
+									<Application :app="state.customIconForm" />
+								</div>
+							</el-form-item>
 							<el-form-item label="应用名称" prop="name" :rules="{ required: true, message: '请输入应用名称' }">
 								<el-input v-model="state.customIconForm.name" placeholder="应用名称" :prefix-icon="Edit" />
 							</el-form-item>
@@ -176,5 +181,12 @@ defineExpose({ open, edit });
 	display: grid;
 	grid-gap: 20px;
 	grid-template-columns: 1fr 450px;
+}
+
+.app-icon {
+	width: 60px;
+	height: 60px;
+	border-radius: 10px;
+	overflow: hidden;
 }
 </style>
