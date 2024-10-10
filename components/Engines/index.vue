@@ -27,7 +27,7 @@
 						</template>
 						<el-scrollbar>
 							<GirdLayout style="width: 100%; grid-gap: 30px">
-								<GridItem v-for="app in list" :key="app.name" size="1x1" :name="app.name" color="#333">
+								<GridItem v-for="(app, index) in list" :key="app.name" size="1x1" :name="app.name" :index="index" color="#333">
 									<Application :app="app" />
 								</GridItem>
 							</GirdLayout>

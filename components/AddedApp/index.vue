@@ -68,9 +68,9 @@
 								<el-input v-model="state.customIconForm.meta.description" type="textarea" placeholder="应用介绍..." />
 							</el-form-item>
 							<el-form-item>
-								<el-button type="danger">上一个</el-button>
+								<el-button type="danger" @click="prevEditApp">上一个</el-button>
 								<el-button type="primary">保存并继续</el-button>
-								<el-button type="warning">下一个</el-button>
+								<el-button type="warning" @click="nextEditApp">下一个</el-button>
 							</el-form-item>
 						</el-form>
 						<el-form>
@@ -90,6 +90,7 @@
 <script setup lang="ts">
 import { nextTick } from 'vue';
 import { Link, Edit } from '@element-plus/icons-vue';
+import { developers } from '~/assets/website/index';
 import { tagList, predefineColors, appTypeList } from '~/assets/utils/publicData';
 import { useCopy } from '~/hooks/useCopy';
 const state = reactive({
@@ -139,6 +140,20 @@ function onSave() {
 	const str = JSON.stringify(state.customIconForm, null, '\t');
 	const { onCopy } = useCopy(toRef(JSON.stringify(state.customIconForm)));
 	onCopy();
+}
+
+function prevEditApp() {
+	const index = developers.findIndex((n) => n.name === state.customIconForm.name);
+	const prevIndex = index - 1;
+	if (prevIndex !== -1) {
+		state.customIconForm = useCloneDeep(developers[prevIndex]);
+	} else {
+	}
+	console.log(index);
+	console.log(state.customIconForm);
+}
+function nextEditApp() {
+	console.log(state.customIconForm);
 }
 
 function open() {

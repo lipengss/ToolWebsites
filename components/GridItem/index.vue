@@ -1,5 +1,10 @@
 <template>
-	<div :class="`app-size-${props.size}`" class="app-wrapper" @contextmenu.stop="contextmenu">
+	<div
+		:class="`app-size-${props.size}`"
+		@contextmenu.stop="contextmenu"
+		:style="`--delay:${index}s`"
+		class="app-wrapper animate__animated animate__fadeIn page-app-icon"
+	>
 		<div class="app-box">
 			<slot />
 		</div>
@@ -13,6 +18,7 @@ import { useSettingsStore } from '~/stores/settings';
 import mitt from '~/assets/utils/mitt';
 
 interface Props {
+	index: number;
 	size: '1x1' | '1x2' | '2x2' | '5x2';
 	name?: string;
 	disabledContextmenu?: boolean;
@@ -53,6 +59,9 @@ $width: v-bind(appSize);
 $height: v-bind(appSize);
 $columnGap: v-bind(columnGap);
 $rowGap: v-bind(rowGap);
+.animate__animated {
+	animation-delay: calc(0.01 * var(--delay));
+}
 .app-wrapper {
 	position: relative;
 	opacity: v-bind(opacity);

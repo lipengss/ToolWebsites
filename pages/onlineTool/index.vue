@@ -1,7 +1,7 @@
 <template>
 	<GirdLayout>
-		<template v-for="app in getApps()">
-			<GridItem size="1x1" :name="app.name">
+		<template v-for="(app, index) in getApps()">
+			<GridItem size="1x1" :name="app.name" :index="index">
 				<Application :app="app" />
 			</GridItem>
 		</template>

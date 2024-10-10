@@ -1,13 +1,5 @@
 <template>
-	<el-dialog
-		v-model="state.visible"
-		:show-close="false"
-		width="900px"
-		append-to-body
-		:fullscreen="state.fullscreen"
-		draggable
-		@close="emits('onClose')"
-	>
+	<el-dialog v-model="state.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable @close="emits('onClose')">
 		<template #header>
 			<div class="flex-end">
 				<el-button :icon="FullScreen" circle size="small" @click="state.fullscreen = !state.fullscreen" />

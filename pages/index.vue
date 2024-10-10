@@ -14,10 +14,10 @@
 		</div>
 		<GirdLayout>
 			<template v-for="(app, index) in appList">
-				<GridItem v-if="app.type === 'card'" size="5x2" :name="app.name">
+				<GridItem v-if="app.type === 'card'" size="5x2" :name="app.name" :index="index">
 					<component :is="card[app.component]" />
 				</GridItem>
-				<GridItem v-else size="1x1" :name="app.name" :style="`--delay:${index}s`" class="animate__animated animate__fadeIn page-app-icon">
+				<GridItem v-else size="1x1" :name="app.name" :index="index">
 					<Application :app="app" />
 				</GridItem>
 			</template>
@@ -78,8 +78,5 @@ onMounted(() => {
 			}
 		}
 	}
-}
-.animate__animated {
-	animation-delay: calc(0.01 * var(--delay));
 }
 </style>

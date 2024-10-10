@@ -14,8 +14,8 @@
 				<span>删除</span>
 			</div>
 			<div class="item" @click="onLikeApp">
-				<el-icon><svg-icon name="like" /></el-icon>
-				<span>收藏</span>
+				<el-icon><svg-icon :name="appIsLike ? 'onLike' : 'like'" /></el-icon>
+				<span>{{ appIsLike ? '取消收藏' : '收藏' }}</span>
 			</div>
 		</template>
 		<template v-else>
@@ -90,14 +90,21 @@ function onDeleteApp() {
 	setGlobalSetting();
 }
 
+const appIsLike = computed(() => {
+	const strArr = setting.value.collectionWeb.map((item) => item.name);
+	return strArr.includes(curApp.value.name);
+});
+
 function onLikeApp() {
 	const { name } = curApp.value;
 	const names = setting.value.collectionWeb.map((item) => item.name);
 	if (!names.includes(name)) {
 		setting.value.collectionWeb.push(curApp.value);
-		ElMessage.success('已收藏了');
+		ElMessage.success('收藏成功！');
 	} else {
-		ElMessage.warning('已收藏了');
+		const index = setting.value.collectionWeb.findIndex((n) => n.name === name);
+		setting.value.collectionWeb.splice(index, 1);
+		ElMessage.warning('已取消收藏！');
 		return;
 	}
 	setGlobalSetting();
