@@ -22,6 +22,9 @@ const defaultSetting: ISetting = {
 		radius: 50,
 		opacity: 0.2,
 		history: true,
+		translate: false,
+		engines: 'Bing',
+		historyList: [],
 	},
 	bg: {
 		picture: imgList[0],
@@ -115,6 +118,12 @@ export const useSettingsStore = defineStore('settingStore', {
 			],
 		};
 	},
+	getters: {
+		currentEngine(state) {
+			const item = state.engineList.find((item) => item.name === this.setting.search.engines);
+			return item || {};
+		},
+	},
 	actions: {
 		// 初始化配置
 		initGlobalSetting() {
@@ -198,6 +207,17 @@ export const useSettingsStore = defineStore('settingStore', {
 				const { icon, rank } = item.meta;
 				this.setting.hotWebRanks[icon] = rank;
 			});
+		},
+		querySearch(queryString: string, cb: any) {
+			const { historyList } = this.setting.search;
+			console.log(queryString);
+			const results = queryString ? historyList.filter(this.createFilter(queryString)) : historyList;
+			cb(results);
+		},
+		removeHistoryRow(queryString: string) {
+			const index = this.setting.search.historyList.findIndex((item) => item === queryString);
+			this.setting.search.historyList.splice(index, 1);
+			this.setGlobalSetting();
 		},
 	},
 });

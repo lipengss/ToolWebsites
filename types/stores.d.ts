@@ -20,6 +20,9 @@ interface ISetting {
 		radius: number;
 		opacity: number;
 		history: boolean;
+		translate: boolean;
+		engines: string;
+		historyList: any[];
 	};
 	bg: {
 		picture: string[];

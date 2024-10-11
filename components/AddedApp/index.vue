@@ -93,7 +93,11 @@ import { Link, Edit } from '@element-plus/icons-vue';
 import { developers } from '~/assets/website/index';
 import { tagList, predefineColors, appTypeList } from '~/assets/utils/publicData';
 import { useCopy } from '~/hooks/useCopy';
-const state = reactive({
+const state: {
+	visible: boolean;
+	activeTab: string;
+	customIconForm: RouteItem;
+} = reactive({
 	visible: false,
 	activeTab: 'customIcons',
 	customIconForm: {
@@ -148,12 +152,20 @@ function prevEditApp() {
 	if (prevIndex !== -1) {
 		state.customIconForm = useCloneDeep(developers[prevIndex]);
 	} else {
+		state.customIconForm = useCloneDeep(developers[developers.length - 1]);
 	}
 	console.log(index);
 	console.log(state.customIconForm);
 }
 function nextEditApp() {
 	console.log(state.customIconForm);
+	const index = developers.findIndex((n) => n.name === state.customIconForm.name);
+	const prevIndex = index + 1;
+	if (prevIndex !== developers.length) {
+		state.customIconForm = useCloneDeep(developers[prevIndex]);
+	} else {
+		state.customIconForm = useCloneDeep(developers[developers.length - 1]);
+	}
 }
 
 function open() {
