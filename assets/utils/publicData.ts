@@ -56,6 +56,8 @@ const tagList = [
 	{ label: '学习', value: 'learning' },
 	{ label: '游戏', value: 'game' },
 	{ label: '购物', value: 'shopping' },
+	{ label: '前端', value: 'frontEnd' },
+	{ label: '后端', value: 'backEnd' },
 	{ label: '社交', value: 'socialize' },
 	{ label: '阅读', value: 'read' },
 	{ label: '出行', value: 'travel' },

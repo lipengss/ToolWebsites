@@ -45,4 +45,14 @@ export default defineNuxtConfig({
 			viewport: 'width=device-width, initial-scale=1',
 		},
 	},
+	app: {
+		head: {
+			viewport: 'width=device-width, initial-scale=1',
+		},
+		baseURL: '/',
+	},
+	target: 'static',
+	generate: {
+		dir: 'dist',
+	},
 });

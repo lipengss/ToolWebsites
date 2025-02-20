@@ -1,5 +1,14 @@
 <template>
-	<el-dialog v-model="state.visible" :show-close="false" width="900px" :fullscreen="state.fullscreen" draggable @close="emits('onClose')">
+	<el-dialog
+		v-model="state.visible"
+		:show-close="false"
+		width="900px"
+		append-to-body
+		:lock-scroll="false"
+		:fullscreen="state.fullscreen"
+		draggable
+		@close="emits('onClose')"
+	>
 		<template #header>
 			<div class="flex-end">
 				<el-button :icon="FullScreen" circle size="small" @click="state.fullscreen = !state.fullscreen" />
@@ -7,6 +16,13 @@
 			</div>
 		</template>
 		<slot />
+		<template #footer>
+			<slot name="footer" v-if="slotFooter" />
+			<div class="footer" v-else-if="slotFooter">
+				<el-button :type="cancelType">{{ cancelText }}</el-button>
+				<el-button :type="confirmType" class="confirm-btn"> {{ confirmText }} </el-button>
+			</div>
+		</template>
 	</el-dialog>
 </template>
 <script setup lang="ts">
@@ -17,10 +33,23 @@ import { CloseBold, FullScreen } from '@element-plus/icons-vue';
 
 const { setting } = storeToRefs(useSettingsStore());
 
+type btnType = '' | 'default' | 'success' | 'warning' | 'info' | 'primary' | 'text' | 'danger';
+
 interface Props {
 	visible: boolean;
+	confirmText?: string;
+	confirmType?: btnType;
+	cancelText?: string;
+	cancelType?: btnType;
+	slotFooter?: boolean;
 }
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {
+	confirmText: '确定',
+	confirmType: 'primary',
+	cancelText: '取消',
+	cancelType: 'default',
+	slotFooter: false,
+});
 
 const state = reactive({
 	visible: false,
@@ -41,8 +70,19 @@ watch(
 	}
 );
 </script>
-<style lang="scss" scoped>
-:deep .el-dialog {
+<style lang="scss">
+.el-dialog {
 	background-image: v-bind('picture.values');
+	.el-dialog__body {
+		height: calc(100vh - 34vh);
+	}
+	.footer {
+		padding-top: 16px;
+		border-top: 1px solid var(--el-color-info-light-7);
+		.confirm-btn {
+			padding-left: 40px;
+			padding-right: 40px;
+		}
+	}
 }
 </style>

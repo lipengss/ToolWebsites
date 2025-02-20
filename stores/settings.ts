@@ -85,7 +85,7 @@ export const useSettingsStore = defineStore('settingStore', {
 					icon: 'icon-chrome',
 					description: '最好用，但是访问需要点技术。',
 				},
-				{
+				{   
 					name: 'Bing',
 					link: 'https://www.bing.com/search?q=',
 					icon: 'icon-bing',
