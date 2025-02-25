@@ -18,6 +18,21 @@ export const websites: RouteItem[] = [
 		},
 	},
 	{
+		name: '抖音',
+		path: 'https://www.douyin.com/',
+		meta: {
+			rank: 0,
+			type: 'img',
+			value: 'https://p-pc-weboff.byteimg.com/tos-cn-i-9r5gewecjs/favicon.png',
+			tag: ['shortVideos'],
+			size: 60,
+			color: '#000000',
+			bgColor: '#000',
+			layout: '1x1',
+			description: '抖音让每一个人看见并连接更大的世界',
+		},
+	},
+	{
 		name: 'UI生成',
 		path: 'https://v0.dev/',
 		meta: {
@@ -411,6 +426,21 @@ export const websites: RouteItem[] = [
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '高质量的iconPark,字节跳动制造。',
+		},
+	},
+	{
+		name: '好看视频',
+		path: 'https://haokan.baidu.com/?sfrom=baidu-top',
+		meta: {
+			rank: 0,
+			type: 'img',
+			value: 'https://hk.bdstatic.com/app/favicon.ico',
+			tag: ['shortVideos'],
+			size: 60,
+			color: '#FFFFFF',
+			bgColor: '#fff',
+			layout: '1x1',
+			description: '好看视频是百度短视频旗舰品牌，拥有超百万的短视频创作者。',
 		},
 	},
 	{
