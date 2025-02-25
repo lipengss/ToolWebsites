@@ -28,6 +28,20 @@ export const categories = [
 		},
 	},
 	{
+		name: '金融',
+		path: '/finance',
+		meta: {
+			rank: 0,
+			icon: 'menu-editor',
+			tgas: [
+				{ label: '投资', value: 'Investment', checked: false },
+				{ label: '股市', value: 'StockMarket', checked: false },
+				{ label: '银行', value: 'Banking', checked: false },
+				{ label: '理财', value: 'WealthManagement', checked: false },
+			],
+		},
+	},
+	{
 		name: '娱乐',
 		path: '/amusement',
 		type: 'amusement',

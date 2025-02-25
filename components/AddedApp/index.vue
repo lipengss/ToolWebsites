@@ -167,9 +167,6 @@ function open() {
 function edit(app: RouteItem) {
 	open();
 	const cloneApp = useCloneDeep(app);
-	if (typeof cloneApp.type === 'string') {
-		cloneApp.type = [cloneApp.type];
-	}
 	nextTick(() => {
 		state.customIconForm = cloneApp;
 	});
