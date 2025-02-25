@@ -44,15 +44,14 @@ export default defineNuxtConfig({
 		head: {
 			viewport: 'width=device-width, initial-scale=1',
 		},
+		baseURL: '/ToolWebsites/',
+		buildAssetsDir: '/static/',
 	},
-	app: {
-		head: {
-			viewport: 'width=device-width, initial-scale=1',
+	ssr: false,
+	router: {
+		options: {
+			hashMode: true,
 		},
-		baseURL: '/',
 	},
 	target: 'static',
-	generate: {
-		dir: 'dist',
-	},
 });

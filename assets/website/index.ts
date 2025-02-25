@@ -1,35 +1,36 @@
-import { developers } from './developer';
+import { websites } from './websites';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 
 // 热点排行
 function filterHoutWebSiteList(type: string | string[]): Array<RouteItem> {
-	let excludeDevelopers: Array<RouteItem> = excludes(developers); // 更清晰的变量命名
-	if (typeof type === 'string') {
-		excludeDevelopers = type === '/' ? developers : excludeBySingleType(excludeDevelopers, type);
-	} else if (Array.isArray(type)) {
-		excludeDevelopers = excludeByMultipleTypes(excludeDevelopers, type);
-	}
-	return sortWebRanks(excludeDevelopers);
+	let filteredWebsites: Array<RouteItem> = excludes(websites); // 更清晰的变量命名
+	// if (typeof type === 'string') {
+	// 	filteredWebsites = type === '/' ? websites : excludeBySingleType(filteredWebsites, type);
+	// } else if (Array.isArray(type)) {
+	// 	filteredWebsites = excludeByMultipleTypes(filteredWebsites, type);
+	// }
+	return sortWebRanks(filteredWebsites);
 }
 
-// 根据单个类型字符串进行过滤
-function excludeBySingleType(developers: Array<RouteItem>, type: string): Array<RouteItem> {
-	return developers.filter((item) => item.type.includes(type));
-}
+// // 根据单个类型字符串进行过滤
+// function excludeBySingleType(developers: Array<RouteItem>, type: string): Array<RouteItem> {
+// 	return developers.filter((item) => item.type.includes(type));
+// }
 
-// 根据多个类型字符串进行过滤
-function excludeByMultipleTypes(developers: Array<RouteItem>, types: string[]): Array<RouteItem> {
-	return developers.filter((item) => {
-		if (typeof item.type === 'string') {
-			return types.includes(item.type);
-		}
-		if (Array.isArray(item.type)) {
-			return item.type.some((itemType) => types.includes(itemType));
-		}
-		return false; // 对于非字符串且非数组的item.type，默认返回false
-	});
-}
+// // 根据多个类型字符串进行过滤
+// function excludeByMultipleTypes(developers: Array<RouteItem>, types: string[]): Array<RouteItem> {
+// 	const list = developers.filter((item) => {
+// 		if (typeof item.type === 'string') {
+// 			return types.includes(item.type);
+// 		}
+// 		if (Array.isArray(item.type)) {
+// 			return item.type.some((itemType) => types.includes(itemType));
+// 		}
+// 		return false; // 对于非字符串且非数组的item.type，默认返回false
+// 	});
+// 	return list;
+// }
 
 function excludes(developers: Array<RouteItem>) {
 	const { setting } = storeToRefs(useSettingsStore());
@@ -55,4 +56,4 @@ function sortWebRanks(webList: Array<RouteItem>): Array<RouteItem> {
 	}
 }
 
-export { developers, sortWebRanks, filterHoutWebSiteList };
+export { websites, sortWebRanks, filterHoutWebSiteList };

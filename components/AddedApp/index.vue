@@ -1,90 +1,76 @@
 <template>
 	<ClientOnly>
 		<Dialog v-model:visible="state.visible" title="添加应用" width="70%">
-			<el-tabs tab-position="left" v-model="state.activeTab">
-				<el-tab-pane label="网址导航" name="website">
-					<el-tag v-for="tag in tagList" :key="tag.value" :wrap="true">{{ tag.label }}</el-tag>
-				</el-tab-pane>
-				<el-tab-pane label="自定义图标" name="customIcons">
-					<div class="split-pane">
-						<el-scrollbar>
-							<el-form :model="state.customIconForm" label-width="100px">
-								<el-form-item label="应用图标">
-									<div class="app-icon">
-										<Application :app="state.customIconForm" />
-									</div>
+			<div class="split-pane">
+				<el-scrollbar>
+					<el-form :model="state.customIconForm" label-width="100px">
+						<el-form-item label="应用图标">
+							<div class="app-icon">
+								<Application :app="state.customIconForm" />
+							</div>
+						</el-form-item>
+						<el-form-item label="应用名称" prop="name" :rules="{ required: true, message: '请输入应用名称' }">
+							<el-input v-model="state.customIconForm.name" placeholder="应用名称" :prefix-icon="Edit" />
+						</el-form-item>
+						<el-form-item label="访问地址" prop="path" :rules="{ required: true, message: '请输入访问地址' }">
+							<el-input v-model="state.customIconForm.path" placeholder="https://" :prefix-icon="Link">
+								<template #append>
+									<el-button @click="getWebsiteIcon">获取图标</el-button>
+								</template>
+							</el-input>
+						</el-form-item>
+						<el-form-item label="排行" prop="meta.rank">
+							<el-input-number v-model="state.customIconForm.meta.rank" />
+						</el-form-item>
+						<el-form-item label="图标类型">
+							<el-space>
+								<el-radio-group v-model="state.customIconForm.meta.type" @change="onChangeIconType">
+									<el-radio-button label="图标" value="icon" />
+									<el-radio-button label="文字" value="text" />
+									<el-radio-button label="图片" value="img" />
+								</el-radio-group>
+								<el-form-item prop="meta.value">
+									<el-input v-model="state.customIconForm.meta.value" placeholder="图标值" :prefix-icon="Edit" />
 								</el-form-item>
-								<el-form-item label="应用名称" prop="name" :rules="{ required: true, message: '请输入应用名称' }">
-									<el-input v-model="state.customIconForm.name" placeholder="应用名称" :prefix-icon="Edit" />
+								<el-form-item>
+									<ColorPicker v-model:color="state.customIconForm.meta.color" />
 								</el-form-item>
-								<el-form-item label="访问地址" prop="path" :rules="{ required: true, message: '请输入访问地址' }">
-									<el-input v-model="state.customIconForm.path" placeholder="https://" :prefix-icon="Link">
-										<template #append>
-											<el-button @click="getWebsiteIcon">获取图标</el-button>
-										</template>
-									</el-input>
-								</el-form-item>
-								<el-form-item label="应用分类" prop="type" :rules="{ required: true, message: '请选择应用分类' }">
-									<el-select v-model="state.customIconForm.type" multiple placeholder="选择应用分类">
-										<el-option v-for="menu in appTypeList.filter((n) => n.type !== '/')" :key="menu.name" :value="menu.type" :label="menu.name" />
-									</el-select>
-								</el-form-item>
-								<el-form-item label="排行" prop="meta.rank">
-									<el-input-number v-model="state.customIconForm.meta.rank" />
-								</el-form-item>
-								<el-form-item label="图标类型">
-									<el-space>
-										<el-radio-group v-model="state.customIconForm.meta.type" @change="onChangeIconType">
-											<el-radio-button label="图标" value="icon" />
-											<el-radio-button label="文字" value="text" />
-											<el-radio-button label="图片" value="img" />
-										</el-radio-group>
-										<el-form-item prop="meta.value">
-											<el-input v-model="state.customIconForm.meta.value" placeholder="图标值" :prefix-icon="Edit" />
-										</el-form-item>
-										<el-form-item>
-											<ColorPicker v-model:color="state.customIconForm.meta.color" />
-										</el-form-item>
-									</el-space>
-								</el-form-item>
-								<el-form-item label="图标背景色">
-									<ColorPicker :colorList="predefineColors" v-model:color="state.customIconForm.meta.bgColor" />
-								</el-form-item>
-								<el-form-item label="标签">
-									<el-checkbox-group v-model="state.customIconForm.meta.tag">
-										<el-checkbox v-for="tag in tagList" :key="tag.value" :label="tag.label" :value="tag.value" />
-									</el-checkbox-group>
-								</el-form-item>
-								<el-form-item label="图标大小" prop="size">
-									<el-slider v-model="state.customIconForm.meta.size" :min="40" :max="100" />
-								</el-form-item>
-								<el-form-item label="图标布局" prop="layout">
-									<el-radio-group v-model="state.customIconForm.meta.layout">
-										<el-radio-button label="1x1" value="1x1" />
-										<el-radio-button label="2x2" value="2x2" />
-										<el-radio-button label="5x2" value="5x2" />
-									</el-radio-group>
-								</el-form-item>
-								<el-form-item label="描述" prop="description">
-									<el-input v-model="state.customIconForm.meta.description" type="textarea" placeholder="应用介绍..." />
-								</el-form-item>
-							</el-form>
-						</el-scrollbar>
-						<el-form>
-							<el-form-item>
-								<el-input v-model="strJSON" :autosize="{ minRows: 27, maxRows: 27 }" resize="none" readonly type="textarea" />
-							</el-form-item>
-							<el-form-item>
-								<el-button type="primary" @click="onSave">复制JSON</el-button>
-							</el-form-item>
-						</el-form>
-					</div>
-				</el-tab-pane>
-			</el-tabs>
+							</el-space>
+						</el-form-item>
+						<el-form-item label="图标背景色">
+							<ColorPicker :colorList="predefineColors" v-model:color="state.customIconForm.meta.bgColor" />
+						</el-form-item>
+						<el-form-item label="标签">
+							<el-checkbox-group v-model="state.customIconForm.meta.tag" prop="">
+								<el-checkbox v-for="tag in tagList" :key="tag.value" :label="tag.label" :value="tag.value" />
+							</el-checkbox-group>
+						</el-form-item>
+						<el-form-item label="图标大小" prop="size">
+							<el-slider v-model="state.customIconForm.meta.size" :min="40" :max="100" />
+						</el-form-item>
+						<el-form-item label="图标布局" prop="layout">
+							<el-radio-group v-model="state.customIconForm.meta.layout">
+								<el-radio-button label="1x1" value="1x1" />
+								<el-radio-button label="2x2" value="2x2" />
+								<el-radio-button label="5x2" value="5x2" />
+							</el-radio-group>
+						</el-form-item>
+						<el-form-item label="描述" prop="description">
+							<el-input v-model="state.customIconForm.meta.description" type="textarea" placeholder="应用介绍..." />
+						</el-form-item>
+					</el-form>
+				</el-scrollbar>
+				<el-form>
+					<el-form-item>
+						<el-input v-model="strJSON" :autosize="{ minRows: 27, maxRows: 27 }" resize="none" type="textarea" />
+					</el-form-item>
+				</el-form>
+			</div>
 			<template #footer>
-				<el-button type="danger" @click="prevEditApp">上一个</el-button>
+				<el-button type="info" @click="onSave">复制JSON</el-button>
 				<el-button type="primary">保存并继续</el-button>
-				<el-button type="warning" @click="nextEditApp">下一个</el-button>
+				<el-button type="default" @click="prevEditApp">上一个</el-button>
+				<el-button type="default" @click="nextEditApp">下一个</el-button>
 			</template>
 		</Dialog>
 	</ClientOnly>
@@ -92,8 +78,10 @@
 <script setup lang="ts">
 import { nextTick } from 'vue';
 import { Link, Edit } from '@element-plus/icons-vue';
-import { developers } from '~/assets/website/index';
-import { tagList, predefineColors, appTypeList } from '~/assets/utils/publicData';
+import { websites } from '~/assets/website/index';
+import { predefineColors } from '~/assets/utils/publicData';
+import { categories } from '~/assets/website/categories';
+import { useRoute } from 'vue-router';
 import { useCopy } from '~/hooks/useCopy';
 const state: {
 	visible: boolean;
@@ -105,7 +93,6 @@ const state: {
 	customIconForm: {
 		name: '',
 		path: '',
-		type: [],
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -119,13 +106,16 @@ const state: {
 		},
 	},
 });
+const route = useRoute();
 
 const strJSON = computed(() => JSON.stringify(state.customIconForm, undefined, 4));
 
+const tagList = computed(() => categories.filter((n) => n.path === route.path)[0].meta.tgas);
+
 async function getWebsiteIcon() {
+	state.customIconForm.meta.type = 'img';
 	const { path } = state.customIconForm;
-	const img = document.createElement('img');
-	img.src = `${path}favicon.ico`;
+	state.customIconForm.meta.value = `${path}favicon.ico`;
 }
 
 function onChangeIconType(type: string | number | boolean | undefined) {
@@ -149,24 +139,24 @@ function onSave() {
 }
 
 function prevEditApp() {
-	const index = developers.findIndex((n) => n.name === state.customIconForm.name);
+	const index = websites.findIndex((n) => n.name === state.customIconForm.name);
 	const prevIndex = index - 1;
 	if (prevIndex !== -1) {
-		state.customIconForm = useCloneDeep(developers[prevIndex]);
+		state.customIconForm = useCloneDeep(websites[prevIndex]);
 	} else {
-		state.customIconForm = useCloneDeep(developers[developers.length - 1]);
+		state.customIconForm = useCloneDeep(websites[websites.length - 1]);
 	}
 	console.log(index);
 	console.log(state.customIconForm);
 }
 function nextEditApp() {
 	console.log(state.customIconForm);
-	const index = developers.findIndex((n) => n.name === state.customIconForm.name);
+	const index = websites.findIndex((n) => n.name === state.customIconForm.name);
 	const prevIndex = index + 1;
-	if (prevIndex !== developers.length) {
-		state.customIconForm = useCloneDeep(developers[prevIndex]);
+	if (prevIndex !== websites.length) {
+		state.customIconForm = useCloneDeep(websites[prevIndex]);
 	} else {
-		state.customIconForm = useCloneDeep(developers[developers.length - 1]);
+		state.customIconForm = useCloneDeep(websites[websites.length - 1]);
 	}
 }
 

@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import { reactive, defineAsyncComponent } from 'vue';
 import { Delete, Edit, CirclePlus } from '@element-plus/icons-vue';
-import { developers } from '~/assets/website/index';
+import { websites } from '~/assets/website/index';
 import { useSettingsStore } from '~/stores/settings';
 import mitt from '~/assets/utils/mitt';
 
@@ -81,9 +81,9 @@ function onDeleteApp() {
 	const { name } = curApp.value;
 	const names = setting.value.excludeWeb.map((item) => item.name);
 	if (!names.includes(name)) {
-		const index = developers.findIndex((item) => item.name === name);
+		const index = websites.findIndex((item) => item.name === name);
 		if (index !== -1) {
-			developers.splice(index, 1);
+			websites.splice(index, 1);
 		}
 		setting.value.excludeWeb.push(curApp.value);
 	}

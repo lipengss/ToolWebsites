@@ -1,50 +1,63 @@
-export const developers: RouteItem[] = [
+export const websites: RouteItem[] = [
+	{ name: '天气', meta: { rank: 0, color: '#fff', bgColor: '#cb3837', layout: '5x2', description: '', tag: ['card'] }, component: 'Weather' },
+	{ name: '日历', meta: { rank: 0, color: '#fff', bgColor: '#cb3837', layout: '5x2', description: '', tag: ['card'] }, component: 'Calendar' },
+	{ name: '下班倒计时', meta: { rank: 0, color: '#fff', bgColor: '#cb3837', layout: '5x2', description: '', tag: ['card'] }, component: 'OffWork' },
 	{
-		name: '天气',
-		type: 'card',
+		name: '腾讯元宝',
+		path: 'https://yuanbao.tencent.com/',
 		meta: {
 			rank: 0,
+			type: 'img',
+			value: 'https://cdn-bot.hunyuan.tencent.com/logo.png',
+			tag: ['ai'],
+			size: 60,
 			color: '#fff',
-			bgColor: '#cb3837',
-			layout: '5x2',
-			description: '',
+			bgColor: '#FFFFFF',
+			layout: '1x1',
+			description: '腾讯元宝是基于腾讯混元大模型的AI应用，可以帮你写作绘画文案翻译编程搜索阅读总结的全能助手',
 		},
-		component: 'Weather',
 	},
 	{
-		name: '日历',
-		type: 'card',
+		name: 'UI生成',
+		path: 'https://v0.dev/',
 		meta: {
 			rank: 0,
+			type: 'img',
+			value: 'https://v0.dev/assets/icon.svg',
+			tag: ['ai', 'frontEnd'],
+			size: 64,
 			color: '#fff',
-			bgColor: '#cb3837',
-			layout: '5x2',
-			description: '',
+			bgColor: '#000000',
+			layout: '1x1',
+			description: '使用简单的文本提示生成 UI。复制、粘贴、发送。',
 		},
-		component: 'Calendar',
 	},
 	{
-		name: '下班倒计时',
-		type: 'card',
+		name: '火山引擎',
+		path: 'https://console.volcengine.com/',
 		meta: {
 			rank: 0,
+			type: 'img',
+			value: 'https://res.volccdn.com/obj/volc-console-fe/images/favicon.52bcaa41.png',
+			tag: ['ai'],
+			size: 60,
 			color: '#fff',
-			bgColor: '#cb3837',
-			layout: '5x2',
-			description: '',
+			bgColor: '#FFFFFF',
+			layout: '1x1',
+			description: '上火山引擎，用豆包大模型。',
 		},
-		component: 'OffWork',
 	},
+
 	{
 		name: 'NPM',
 		path: 'https://www.npmjs.com/',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-npm',
 			color: '#fff',
 			bgColor: '#cb3837',
+			tag: ['frontEnd'],
 			layout: '1x1',
 			description: '是Node的开放式模块登记和管理系统',
 		},
@@ -52,12 +65,12 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Github',
 		path: 'https://github.com',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-github',
 			color: '#333',
+			tag: ['frontEnd'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '面向开源及私有软件项目的托管平台。',
@@ -66,13 +79,13 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Gitee',
 		path: 'https://gitee.com/',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-gitee',
 			color: '#333',
 			bgColor: '#c71d23',
+			tag: ['frontEnd'],
 			layout: '1x1',
 			description: '面向开源及私有软件项目的托管平台。',
 		},
@@ -80,13 +93,13 @@ export const developers: RouteItem[] = [
 	{
 		name: 'iconfont',
 		path: 'https://www.iconfont.cn/',
-		type: ['developer', 'designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-iconfont',
 			color: '#fff',
 			bgColor: '#1E1E1E',
+			tag: ['frontEnd', 'designer', 'designer'],
 			layout: '1x1',
 			description: '丰富的矢量图标库，提供矢量图标下载、在线存储、格式转换等功能。',
 		},
@@ -94,7 +107,6 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Animate.css',
 		path: 'https://animate.style/',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -104,12 +116,12 @@ export const developers: RouteItem[] = [
 			size: 70,
 			layout: '1x1',
 			description: 'Animate.css是一个现成的跨浏览器动画库。',
+			tag: ['developer'],
 		},
 	},
 	{
 		name: 'Echarts',
 		path: 'https://echarts.apache.org/zh/index.html',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -117,12 +129,12 @@ export const developers: RouteItem[] = [
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '一款基于JavaScript的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。',
+			tag: ['developer'],
 		},
 	},
 	{
 		name: '知乎',
 		path: 'https://www.zhihu.com',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -137,7 +149,6 @@ export const developers: RouteItem[] = [
 	{
 		name: '稀土掘金',
 		path: 'https://juejin.cn',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -152,7 +163,6 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Element-plus',
 		path: 'https://element-plus.org/zh-CN/',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -161,12 +171,12 @@ export const developers: RouteItem[] = [
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '一个 Vue 3 UI 框架 | Element Plus',
+			tag: ['developer'],
 		},
 	},
 	{
 		name: 'MDN',
 		path: 'https://developer.mozilla.org/zh-CN/',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -176,17 +186,17 @@ export const developers: RouteItem[] = [
 			size: 50,
 			layout: '1x1',
 			description: '自2005年以来记录web技术，包括CSS、HTML和JavaScript。',
+			tag: ['developer'],
 		},
 	},
 	{
 		name: '图片压缩',
 		path: 'https://squoosh.app/',
-		type: 'onlineTool',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-picture-zip',
-			tag: ['efficiency', 'picture', 'appliance'],
+			tag: ['efficiency', 'picture', 'appliance', 'onlineTool'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '在浏览器中压缩和比较不同编解码器的图像',
@@ -195,11 +205,10 @@ export const developers: RouteItem[] = [
 	{
 		name: '测网速',
 		path: 'https://www.speedtest.cn/',
-		type: ['onlineTool'],
 		meta: {
 			rank: 0,
 			type: 'icon',
-			tag: ['appliance'],
+			tag: ['appliance', 'onlineTool'],
 			value: 'app-network-speed',
 			bgColor: '#fff',
 			layout: '1x1',
@@ -209,7 +218,6 @@ export const developers: RouteItem[] = [
 	{
 		name: '菜鸟教程',
 		path: 'https://www.runoob.com/',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -224,7 +232,6 @@ export const developers: RouteItem[] = [
 	{
 		name: '在线渐变',
 		path: 'https://www.fly63.com/tool/gradient/',
-		type: ['developer', 'onlineTool'],
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -233,12 +240,12 @@ export const developers: RouteItem[] = [
 			size: 50,
 			layout: '1x1',
 			description: '在线渐变生成器。',
+			tag: ['developer', 'onlineTool'],
 		},
 	},
 	{
 		name: '字体库',
 		path: 'https://www.1001fonts.com/',
-		type: ['designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -248,12 +255,12 @@ export const developers: RouteItem[] = [
 			size: 36,
 			layout: '1x1',
 			description: '58238种免费字体，可直接下载。',
+			tag: ['designer'],
 		},
 	},
 	{
 		name: '即时设计',
 		path: 'https://js.design/workspace',
-		type: ['designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -263,19 +270,18 @@ export const developers: RouteItem[] = [
 			size: 62,
 			layout: '1x1',
 			description: '在线可协作的UI设计工具。',
-			tag: ['appliance', 'efficiency'],
+			tag: ['appliance', 'efficiency', 'designer'],
 		},
 	},
 	{
 		name: '美叶',
 		path: 'https://www.meiye.art/',
-		type: ['designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-meiye',
 			bgColor: '#202020',
-			tag: ['learning', 'picture'],
+			tag: ['learning', 'picture', 'designer'],
 			color: '#fff',
 			layout: '1x1',
 			description: '优质设计内容推荐平台。',
@@ -284,12 +290,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Figma',
 		path: 'https://www.figma.com/',
-		type: ['designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-figma',
-			tag: ['appliance', 'efficiency'],
+			tag: ['appliance', 'efficiency', 'designer'],
 			bgColor: '#202020',
 			layout: '1x1',
 			description: 'Figma支持多人同时在线编辑、查看和提供反馈，使得设计师、产品经理和开发人员等团队成员可以实时协作，提高设计效率。',
@@ -298,12 +303,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'bilibili',
 		path: 'https://www.bilibili.com/',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-bilibili',
-			tag: ['video', 'science', 'finance', 'learning'],
+			tag: ['video', 'science', 'finance', 'learning', 'amusement'],
 			color: '#fff',
 			bgColor: '#ff679a',
 			size: 62,
@@ -314,12 +318,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '虎 嗅 网',
 		path: 'https://www.bilibili.com/',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-huxiu',
-			tag: ['news', 'science', 'finance'],
+			tag: ['news', 'science', 'finance', 'amusement'],
 			color: '#ffff',
 			bgColor: '#fff',
 			size: 50,
@@ -330,12 +333,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '豆 瓣 网',
 		path: 'https://www.douban.com/',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-douban',
-			tag: ['read', 'socialize'],
+			tag: ['read', 'socialize', 'amusement'],
 			color: '#fff',
 			bgColor: '#2f973e',
 			size: 36,
@@ -346,12 +348,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'QQ音乐',
 		path: 'https://y.qq.com/',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-qq-music',
-			tag: ['video', 'appliance'],
+			tag: ['video', 'appliance', 'amusement'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: 'QQ音乐是腾讯公司推出的一款网络音乐服务产品',
@@ -360,12 +361,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '动态SVG图库',
 		path: 'https://livicons.com/',
-		type: ['designer', 'developer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-animation-svg',
-			tag: ['efficiency'],
+			tag: ['efficiency', 'designer'],
 			size: 50,
 			bgColor: '#20252a',
 			layout: '1x1',
@@ -375,12 +375,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Flaticon',
 		path: 'https://www.flaticon.com/',
-		type: 'designer',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-flaticon',
-			tag: ['efficiency'],
+			tag: ['efficiency', 'designer'],
 			bgColor: '#fff',
 			size: 62,
 			layout: '1x1',
@@ -390,12 +389,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Pexels',
 		path: 'https://www.pexels.com/zh-cn/',
-		type: 'designer',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-pexels',
-			tag: ['efficiency'],
+			tag: ['efficiency', 'designer'],
 			bgColor: '#07a081',
 			size: 62,
 			layout: '1x1',
@@ -405,27 +403,24 @@ export const developers: RouteItem[] = [
 	{
 		name: 'IconPark',
 		path: ' https://iconpark.oceanengine.com/',
-		type: ['designer', 'developer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-iconPark',
-			tag: ['efficiency'],
+			tag: ['efficiency', 'designer'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '高质量的iconPark,字节跳动制造。',
 		},
 	},
-
 	{
 		name: '西瓜视频',
 		path: 'https://www.ixigua.com/?wid_try=1',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-xigua',
-			tag: ['science', 'news', 'finance', 'video', 'appliance'],
+			tag: ['science', 'news', 'finance', 'video', 'appliance', 'amusement'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '让人们看到更丰富和有深度的世界，收获轻松的获得感，点亮对生活的好奇',
@@ -434,13 +429,12 @@ export const developers: RouteItem[] = [
 	{
 		name: '抖音',
 		path: 'https://www.douyin.com/?recommend=1',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-douyin',
 			bgColor: '#111',
-			tag: ['science', 'news', 'finance', 'video', 'appliance'],
+			tag: ['video'],
 			size: 50,
 			layout: '1x1',
 			description: '抖音让每一个人看见并连接更大的世界。',
@@ -449,12 +443,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '新浪微博',
 		path: 'https://weibo.com/',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-weibo',
-			tag: ['science', 'news', 'finance'],
+			tag: ['news'],
 			bgColor: '#fff',
 			size: 62,
 			layout: '1x1',
@@ -464,12 +457,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '今日头条',
 		path: 'https://www.toutiao.com/',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-toutiao',
-			tag: ['science', 'news', 'finance'],
+			tag: ['news'],
 			bgColor: '#fff',
 			size: 62,
 			layout: '1x1',
@@ -479,12 +471,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '36氪',
 		path: 'https://36kr.com/',
-		type: 'amusement',
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-36ke',
-			tag: ['science', 'news', 'finance'],
+			tag: ['news'],
 			bgColor: '#4182F1',
 			size: 62,
 			layout: '1x1',
@@ -494,12 +485,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'ChatGPT',
 		path: 'https://chat.openai.com/',
-		type: ['developer', 'c'],
 		meta: {
-			rank: 0,
+			rank: 100,
 			type: 'icon',
 			value: 'app-openAi',
-			tag: ['ai', 'science', 'appliance', 'efficiency'],
+			tag: ['ai'],
 			bgColor: '#75A99C',
 			color: '#fff',
 			layout: '1x1',
@@ -509,7 +499,6 @@ export const developers: RouteItem[] = [
 	{
 		name: '百度翻译',
 		path: 'https://fanyi.baidu.com/mtpe-individual/multimodal?aldtype=16047#/auto/zh',
-		type: 'developer',
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -524,12 +513,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '语雀',
 		path: 'https://www.yuque.com/',
-		type: ['developer', 'onlineTool'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-yuque',
-			tag: ['learning', 'appliance', 'efficiency'],
+			tag: ['learning', 'appliance', 'efficiency', 'onlineTool'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '博客技术栈在线工具资源网站UI库后端技术稀土掘金微信百...',
@@ -538,13 +526,12 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Discord',
 		path: 'https://discord.com/',
-		type: ['designer', 'amusement'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-discord',
 			bgColor: '#5865f2',
-			tag: ['socialize', 'appliance'],
+			tag: ['socialize', 'appliance', 'designer', 'amusement'],
 			color: '#fff',
 			layout: '1x1',
 			description: '用户可以创建和加入各种类型的服务器',
@@ -553,12 +540,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '高德地图',
 		path: 'https://ditu.amap.com/',
-		type: ['onlineTool'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-gaode',
-			tag: ['travel'],
+			tag: ['travel', 'onlineTool'],
 			bgColor: '#fff',
 			size: 66,
 			layout: '1x1',
@@ -568,12 +554,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'loading',
 		path: 'https://css-loaders.com/shapes/',
-		type: ['developer', 'designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-loading',
-			tag: ['other'],
+			tag: ['other', 'designer'],
 			bgColor: '#fff',
 			color: '#333',
 			layout: '1x1',
@@ -583,12 +568,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '人人都是产品经理',
 		path: 'http://www.woshipm.com/',
-		type: ['product'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-product',
-			tag: ['efficiency', 'learning', 'read'],
+			tag: ['designer'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '人人都是产品经理致力为产品新人',
@@ -597,12 +581,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '墨刀',
 		path: 'https://modao.cc/brand/',
-		type: ['product'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-modao',
-			tag: ['efficiency', 'appliance'],
+			tag: ['frontEnd', 'designer'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: 'AI时代的专业级原型设计工具',
@@ -611,26 +594,16 @@ export const developers: RouteItem[] = [
 	{
 		name: '腾讯视频',
 		path: 'https://v.qq.com/',
-		type: ['amusement'],
-		meta: {
-			rank: 0,
-			type: 'icon',
-			value: 'app-tenxun',
-			tag: ['video'],
-			bgColor: '#fff',
-			layout: '1x1',
-			description: '腾讯视频',
-		},
+		meta: { rank: 0, type: 'icon', value: 'app-tenxun', tag: ['video', 'amusement'], bgColor: '#fff', layout: '1x1', description: '腾讯视频' },
 	},
 	{
 		name: '菜鸟工具',
 		path: 'https://www.jyshare.com/',
-		type: ['developer'],
 		meta: {
 			rank: 0,
 			type: 'text',
 			value: '菜鸟',
-			tag: ['efficiency', 'learning'],
+			tag: ['frontEnd'],
 			color: '#d9534f',
 			bgColor: '#fff',
 			layout: '1x1',
@@ -640,12 +613,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '蓝湖',
 		path: 'https://lanhuapp.com/',
-		type: ['developer', 'product', 'designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-lanhu',
-			tag: ['efficiency', 'appliance'],
+			tag: ['designer'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '助互联网团队更好地管理文档和设计图',
@@ -654,12 +626,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'YouTube',
 		path: 'https://www.youtube.com/',
-		type: ['amusement'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-youguan',
-			tag: ['video'],
+			tag: ['video', 'amusement'],
 			bgColor: '#fff',
 			layout: '1x1',
 			description: '好看的外国自媒体网站，访问需要点手段。',
@@ -668,12 +639,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Chrome',
 		path: 'https://www.google.com/',
-		type: ['amusement', 'developer', 'product', 'designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-chrome',
-			tag: ['browser'],
+			tag: ['browser', 'amusement', 'product', 'designer'],
 			size: 50,
 			bgColor: '#fff',
 			layout: '1x1',
@@ -683,12 +653,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Bing',
 		path: 'https://www.bing.com/',
-		type: ['amusement', 'developer', 'product', 'designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-bing',
-			tag: ['browser'],
+			tag: ['browser', 'amusement', 'product', 'designer'],
 			size: 50,
 			bgColor: '#fff',
 			layout: '1x1',
@@ -698,12 +667,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '百度',
 		path: 'https://www.baidu.com/',
-		type: ['amusement', 'developer', 'product', 'designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-baidu',
-			tag: ['browser'],
+			tag: ['browser', 'amusement', 'product', 'designer'],
 			size: 50,
 			bgColor: '#fff',
 			layout: '1x1',
@@ -713,7 +681,6 @@ export const developers: RouteItem[] = [
 	{
 		name: 'jsRun',
 		path: 'http://cs.jsrun.net/',
-		type: ['developer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
@@ -728,12 +695,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'codesandbox',
 		path: 'https://codesandbox.io/',
-		type: ['developer', 'onlineTool'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-codesandbox',
-			tag: ['efficiency', 'learning', 'appliance'],
+			tag: ['efficiency', 'learning', 'appliance', 'onlineTool'],
 			size: 50,
 			color: '#000000',
 			bgColor: '#FFFFFF',
@@ -744,12 +710,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'unDraw',
 		path: 'https://undraw.co/',
-		type: ['designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-unDraw',
-			tag: ['picture'],
+			tag: ['picture', 'designer'],
 			size: 61,
 			color: '#fff',
 			bgColor: '#5952D1',
@@ -760,12 +725,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '搜狐新闻',
 		path: 'https://news.sohu.com/',
-		type: ['amusement'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-souhunews',
-			tag: ['finance', 'news', 'science'],
+			tag: ['finance', 'news', 'science', 'amusement'],
 			size: 62,
 			bgColor: '#F2C81C',
 			color: '#333',
@@ -776,12 +740,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'Uplabs',
 		path: 'https://www.uplabs.com/',
-		type: ['designer'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-Uplabs',
-			tag: ['appliance', 'picture'],
+			tag: ['appliance', 'picture', 'designer'],
 			color: '#fff',
 			bgColor: '#703BEA',
 			layout: '1x1',
@@ -791,12 +754,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '500PX',
 		path: 'https://500px.com.cn/community/index.html',
-		type: ['designer', 'amusement'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-500px',
-			tag: ['appliance', 'video'],
+			tag: ['appliance', 'video', 'designer', 'amusement'],
 			size: 40,
 			color: '#333',
 			bgColor: '#fff',
@@ -807,12 +769,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '35PHOTO',
 		path: 'https://35photo.pro/',
-		type: ['designer', 'amusement'],
 		meta: {
 			rank: 0,
 			type: 'text',
 			value: '摄',
-			tag: ['appliance', 'video'],
+			tag: ['appliance', 'video', 'designer', 'amusement'],
 			size: 20,
 			color: '#fff',
 			bgColor: '#FF4500',
@@ -823,12 +784,11 @@ export const developers: RouteItem[] = [
 	{
 		name: 'youtube',
 		path: 'https://www.youtube.com/',
-		type: ['amusement'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-youtube',
-			tag: ['appliance', 'video'],
+			tag: ['appliance', 'video', 'amusement'],
 			size: 40,
 			bgColor: '#fff',
 			layout: '1x1',
@@ -838,12 +798,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '有道云笔记',
 		path: 'https://note.youdao.com/web/',
-		type: ['developer', 'designer', 'product', 'onlineTool'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-youdaoyun',
-			tag: ['learning', 'efficiency', 'appliance'],
+			tag: ['learning', 'efficiency', 'appliance', 'designer', 'product', 'onlineTool'],
 			size: 62,
 			color: '#fff',
 			bgColor: '#FF4500',
@@ -854,12 +813,11 @@ export const developers: RouteItem[] = [
 	{
 		name: '小霸王',
 		path: 'https://www.yikm.net/',
-		type: ['amusement'],
 		meta: {
 			rank: 0,
 			type: 'icon',
 			value: 'app-xiaobawang',
-			tag: ['game'],
+			tag: ['game', 'amusement'],
 			size: 61,
 			layout: '1x1',
 			description: '小霸王，其乐无穷 。红白机，FC在线游戏，街机游戏，街机在线',

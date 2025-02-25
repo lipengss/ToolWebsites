@@ -72,7 +72,7 @@ import { storeToRefs } from 'pinia';
 import { Search, Close, CaretBottom } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
-import { developers } from '~/assets/website/developer';
+import { websites } from '~/assets/website/websites';
 
 const { setting, engineList } = storeToRefs(useSettingsStore());
 const { querySearch, setGlobalSetting, removeHistoryRow, currentEngine } = useSettingsStore();
@@ -134,7 +134,7 @@ function onActionSearch() {
 }
 
 function localSearch() {
-	const filterList = developers.filter((item) => {
+	const filterList = websites.filter((item) => {
 		if (item.name.includes(state.query) || item.meta.description?.includes(state.query)) {
 			return item;
 		}

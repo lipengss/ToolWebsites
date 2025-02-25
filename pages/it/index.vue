@@ -1,8 +1,8 @@
 <template>
 	<div class="container-vertical">
-		<filter-tag :filter="['frontEnd', 'backEnd']" />
+		<filter-tag v-model:active="active" />
 		<GirdLayout>
-			<template v-for="(app, index) in getApps()">
+			<template v-for="(app, index) in getApps(active)">
 				<GridItem size="1x1" :name="app.name" :index="index">
 					<Application :app="app" />
 				</GridItem>
@@ -12,7 +12,10 @@
 </template>
 <script setup lang="ts">
 import { useApp } from '~/hooks/useApp';
+
 const { getApps } = useApp();
+
+const active = ref('frontEnd');
 </script>
 <style lang="scss" scoped>
 .developer {

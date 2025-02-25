@@ -5,7 +5,7 @@
 				<div class="menu">
 					<div
 						class="item"
-						v-for="route in appTypeList"
+						v-for="route in categories"
 						:key="route.path"
 						:class="{ active: route.path === routePath }"
 						@click="onChangeMenu(route.path)"
@@ -52,7 +52,7 @@ import { useSettingsStore } from '~/stores/settings';
 import { useEyeDropper, useMouseInElement } from '@vueuse/core';
 import { Star } from '@element-plus/icons-vue';
 import { useRouter, useRoute } from 'vue-router';
-import { appTypeList } from '~/assets/utils/publicData';
+import { categories } from '~/assets/website/categories';
 const { openSettingDrawer, openTour } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 

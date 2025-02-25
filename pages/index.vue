@@ -1,9 +1,9 @@
 <template>
 	<div class="container-vertical">
-		<filter-tag :filter="[]" />
+		<filter-tag v-model:active="active" />
 		<GirdLayout>
-			<template v-for="(app, index) in appList">
-				<GridItem v-if="app.type === 'card'" size="5x2" :name="app.name" :index="index">
+			<template v-for="(app, index) in getApps(active).slice(0, 20)">
+				<GridItem v-if="app.meta.tag.includes('card')" size="5x2" :name="app.name" :index="index">
 					<component :is="card[app.component]" />
 				</GridItem>
 				<GridItem v-else size="1x1" :name="app.name" :index="index">
@@ -14,22 +14,14 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useSettingsStore } from '~/stores/settings';
-import { filterHoutWebSiteList } from '~/assets/website/index';
+import { useApp } from '~/hooks/useApp';
 const settingStore = useSettingsStore();
 const { initGlobalSetting } = settingStore;
 
-const activeTag = ref('all');
-
-const appList = computed(() => {
-	const list = filterHoutWebSiteList('/');
-	if (activeTag.value === 'all') {
-		return list;
-	} else {
-		return list.filter((n) => n.meta.tag && n.meta.tag.includes(activeTag.value));
-	}
-});
+const active = ref('all');
+const { getApps } = useApp();
 
 const card: { [key: string]: any } = {
 	Weather: resolveComponent('Weather'),

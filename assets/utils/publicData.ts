@@ -43,26 +43,26 @@ const pictureNotions = '图片不会上传到服务器转换，而是在浏览�
 const fontList = ['rocks-serif', 'SAIBA-45'];
 
 const tagList = [
-	{ label: '全部', value: 'all' },
-	{ label: '浏览器', value: 'browser' },
-	{ label: 'AI', value: 'ai' },
-	{ label: '热门', value: 'hot' },
-	{ label: '应用', value: 'appliance' },
-	{ label: '新闻', value: 'news' },
-	{ label: '影音', value: 'video' },
-	{ label: '科技', value: 'science' },
-	{ label: '图片', value: 'picture' },
-	{ label: '效率', value: 'efficiency' },
-	{ label: '学习', value: 'learning' },
-	{ label: '游戏', value: 'game' },
-	{ label: '购物', value: 'shopping' },
-	{ label: '前端', value: 'frontEnd' },
-	{ label: '后端', value: 'backEnd' },
-	{ label: '社交', value: 'socialize' },
-	{ label: '阅读', value: 'read' },
-	{ label: '出行', value: 'travel' },
-	{ label: '金融', value: 'finance' },
-	{ label: '其他', value: 'other' },
+	{ label: '全部', value: 'all', checked: false },
+	{ label: '浏览器', value: 'browser', checked: false },
+	{ label: 'AI', value: 'ai', checked: false },
+	{ label: '热门', value: 'hot', checked: false },
+	{ label: '应用', value: 'appliance', checked: false },
+	{ label: '新闻', value: 'news', checked: false },
+	{ label: '影音', value: 'video', checked: false },
+	{ label: '科技', value: 'science', checked: false },
+	{ label: '图片', value: 'picture', checked: false },
+	{ label: '效率', value: 'efficiency', checked: false },
+	{ label: '学习', value: 'learning', checked: false },
+	{ label: '游戏', value: 'game', checked: false },
+	{ label: '购物', value: 'shopping', checked: false },
+	{ label: '前端', value: 'frontEnd', checked: false },
+	{ label: '后端', value: 'backEnd', checked: false },
+	{ label: '社交', value: 'socialize', checked: false },
+	{ label: '阅读', value: 'read', checked: false },
+	{ label: '出行', value: 'travel', checked: false },
+	{ label: '金融', value: 'finance', checked: false },
+	{ label: '其他', value: 'other', checked: false },
 ];
 
 /**
@@ -89,39 +89,12 @@ const appTypeList: Array<RouteItem> = [
 		},
 	},
 	{
-		name: '程序员',
+		name: 'IT行业',
 		path: '/developer',
 		type: 'developer',
 		meta: {
 			rank: 0,
 			icon: 'menu-editor',
-		},
-	},
-	{
-		name: '设计师',
-		path: '/designer',
-		type: 'designer',
-		meta: {
-			rank: 0,
-			icon: 'menu-designer',
-		},
-	},
-	{
-		name: '产品',
-		path: '/product',
-		type: 'product',
-		meta: {
-			rank: 0,
-			icon: 'menu-product',
-		},
-	},
-	{
-		name: '工具',
-		path: '/onlineTool',
-		type: 'onlineTool',
-		meta: {
-			rank: 0,
-			icon: 'menu-tools',
 		},
 	},
 	{
@@ -131,6 +104,33 @@ const appTypeList: Array<RouteItem> = [
 		meta: {
 			rank: 0,
 			icon: 'menu-amusement',
+		},
+	},
+	// {
+	// 	name: '设计师',
+	// 	path: '/designer',
+	// 	type: 'designer',
+	// 	meta: {
+	// 		rank: 0,
+	// 		icon: 'menu-designer',
+	// 	},
+	// },
+	// {
+	// 	name: '产品',
+	// 	path: '/product',
+	// 	type: 'product',
+	// 	meta: {
+	// 		rank: 0,
+	// 		icon: 'menu-product',
+	// 	},
+	// },
+	{
+		name: '工具',
+		path: '/onlineTool',
+		type: 'onlineTool',
+		meta: {
+			rank: 0,
+			icon: 'menu-tools',
 		},
 	},
 ];

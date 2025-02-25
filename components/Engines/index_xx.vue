@@ -43,7 +43,7 @@ import { computed, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
-import { developers, sortWebRanks } from '~/assets/website/index';
+import { websites, sortWebRanks } from '~/assets/website/index';
 
 const { setting } = storeToRefs(useSettingsStore());
 const { format, formatWeek } = useDateFormat();
@@ -63,7 +63,7 @@ const state = reactive({
 });
 
 const hotRankList = computed(() =>
-	sortWebRanks(developers)
+	sortWebRanks(websites)
 		.filter((item: RouteItem) => item.type !== 'card')
 		.slice(0, 20)
 );
@@ -74,7 +74,7 @@ const currentWeek = computed(() => formatWeek());
 
 const list = computed(() => {
 	if (state.query === '') return hotRankList.value;
-	return developers.filter((item) => {
+	return websites.filter((item) => {
 		if (item.name.includes(state.query) || item.meta.description?.includes(state.query)) {
 			return item;
 		} else {

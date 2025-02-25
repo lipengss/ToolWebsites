@@ -1,7 +1,6 @@
 interface RouteItem {
 	name: string;
 	path?: string;
-	type: string | string[];
 	component?: any;
 	children?: Array<RouteItem>;
 	meta: {

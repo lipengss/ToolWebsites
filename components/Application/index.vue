@@ -30,6 +30,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {});
 
 const size = computed(() => props.app.meta.size + 'px');
+const bgColor = computed(() => props.app.meta.bgColor || '#fff');
 
 function onclick() {
 	window.open(props.app.path);
@@ -91,7 +92,7 @@ function onContextmenu(event: any) {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background-color: #fff;
+			background-color: v-bind(bgColor);
 		}
 	}
 }

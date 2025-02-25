@@ -88,11 +88,11 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { Delete, Edit } from '@element-plus/icons-vue';
-import { developers, filterHoutWebSiteList } from '~/assets/website/index';
+import { websites, filterHoutWebSiteList } from '~/assets/website/index';
 import { tagList, appTypeList } from '~/assets/utils/publicData';
 import mitt from '~/assets/utils/mitt';
 const settingStore = useSettingsStore();
-const { setting, showDrawer, activeTag } = storeToRefs(useSettingsStore());
+const { setting, showDrawer } = storeToRefs(useSettingsStore());
 const { initGlobalSetting, changeWallpaper, setGlobalSetting } = settingStore;
 
 let swiper: any = null;
@@ -145,9 +145,9 @@ function onDeleteApp() {
 	const { name } = curApp.value;
 	const names = setting.value.excludeWeb.map((item) => item.name);
 	if (!names.includes(name)) {
-		const index = developers.findIndex((item) => item.name === name);
+		const index = websites.findIndex((item) => item.name === name);
 		if (index !== -1) {
-			developers.splice(index, 1);
+			websites.splice(index, 1);
 		}
 		setting.value.excludeWeb.push(curApp.value);
 	}
@@ -158,9 +158,9 @@ function onLikeApp() {
 	const { name } = curApp.value;
 	const names = setting.value.collectionWeb.map((item) => item.name);
 	if (!names.includes(name)) {
-		// const index = developers.findIndex((item) => item.name === name);
+		// const index = websites.findIndex((item) => item.name === name);
 		// if (index !== -1) {
-		//   developers.splice(index, 1);
+		//   websites.splice(index, 1);
 		// }
 		setting.value.excludeWeb.push(curApp.value);
 		ElMessage.success('已收藏了');

@@ -3,7 +3,7 @@ import { useChangeColor } from '~/hooks/useColor';
 import { Local } from '~/assets/utils/storage';
 import { getRandomNumber } from '~/assets/utils/tools';
 import { GLOBAL_SETTING, predefineColors } from '~/assets/utils/publicData';
-import { developers } from '~/assets/website';
+import { websites } from '~/assets/website';
 
 const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v: any) => v.default);
 
@@ -85,7 +85,7 @@ export const useSettingsStore = defineStore('settingStore', {
 					icon: 'icon-chrome',
 					description: '最好用，但是访问需要点技术。',
 				},
-				{   
+				{
 					name: 'Bing',
 					link: 'https://www.bing.com/search?q=',
 					icon: 'icon-bing',
@@ -202,10 +202,10 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		// 设置默认的网站排行
 		setDefaultHotWebSiteList() {
-			const hot = developers.filter((item) => item.meta.rank !== 0);
+			const hot = websites.filter((item) => item.meta.rank !== 0);
 			hot.forEach((item) => {
-				const { icon, rank } = item.meta;
-				this.setting.hotWebRanks[icon] = rank;
+				const { rank } = item.meta;
+				this.setting.hotWebRanks[item.name] = rank;
 			});
 		},
 		querySearch(queryString: string, cb: any) {
