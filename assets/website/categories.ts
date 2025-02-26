@@ -9,16 +9,15 @@ export const categories = [
 		},
 	},
 	{
-		name: 'IT领域',
-		path: '/it',
+		name: '科技',
+		path: '/developer',
 		meta: {
 			rank: 0,
 			icon: 'menu-editor',
 			tgas: [
 				{ label: '人工智能', value: 'ai', checked: false },
 				{ label: '大数据', value: 'bigData', checked: false },
-				{ label: '前端', value: 'frontEnd', checked: false },
-				{ label: '后端', value: 'backEnd', checked: false },
+				{ label: '软件开发', value: 'developer', checked: false },
 				{ label: '网络安全', value: 'cybersecurity', checked: false },
 				{ label: '虚拟现实 VR', value: 'vr', checked: false },
 				{ label: '物联网 LOT', value: 'lot', checked: false },
@@ -49,10 +48,11 @@ export const categories = [
 			rank: 0,
 			icon: 'menu-amusement',
 			tgas: [
-				{ label: '电影', value: 'movies', checked: false },
+				{ label: '艺术', value: 'art', checked: false },
 				{ label: '游戏', value: 'games', checked: false },
-				{ label: '短视频', value: 'shortVideos', checked: false },
+				{ label: '视频', value: 'videos', checked: false },
 				{ label: '资讯', value: 'news', checked: false },
+				{ label: '学习/效率', value: 'efficiency', checked: false },
 			],
 		},
 	},

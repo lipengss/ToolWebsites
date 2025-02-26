@@ -2,7 +2,7 @@
 	<div class="container-vertical">
 		<filter-tag v-model:active="active" />
 		<GirdLayout>
-			<template v-for="(app, index) in getApps(active).slice(0, 20)">
+			<template v-for="(app, index) in getApps(active)">
 				<GridItem v-if="app.meta.tag.includes('card')" size="5x2" :name="app.name" :index="index">
 					<component :is="card[app.component]" />
 				</GridItem>

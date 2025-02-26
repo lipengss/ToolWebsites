@@ -15,7 +15,7 @@ import { useApp } from '~/hooks/useApp';
 
 const { getApps } = useApp();
 
-const active = ref('frontEnd');
+const active = ref('developer');
 </script>
 <style lang="scss" scoped>
 .developer {

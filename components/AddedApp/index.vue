@@ -19,8 +19,16 @@
 								</template>
 							</el-input>
 						</el-form-item>
+						<el-form-item label="标签" prop="meta.tag" :rules="{ required: true, message: '必选选择一个标签' }">
+							<el-checkbox-group v-model="state.customIconForm.meta.tag">
+								<el-checkbox v-for="tag in tagList" :key="tag.value" :label="tag.label" :value="tag.value" />
+							</el-checkbox-group>
+						</el-form-item>
 						<el-form-item label="排行" prop="meta.rank">
-							<el-input-number v-model="state.customIconForm.meta.rank" />
+							<el-space>
+								<el-input-number v-model="state.customIconForm.meta.rank" />
+								<img src="/assets/img/fire.gif" width="22" height="22" alt="" />
+							</el-space>
 						</el-form-item>
 						<el-form-item label="图标类型">
 							<el-space>
@@ -40,11 +48,6 @@
 						<el-form-item label="图标背景色">
 							<ColorPicker :colorList="predefineColors" v-model:color="state.customIconForm.meta.bgColor" />
 						</el-form-item>
-						<el-form-item label="标签">
-							<el-checkbox-group v-model="state.customIconForm.meta.tag" prop="">
-								<el-checkbox v-for="tag in tagList" :key="tag.value" :label="tag.label" :value="tag.value" />
-							</el-checkbox-group>
-						</el-form-item>
 						<el-form-item label="图标大小" prop="size">
 							<el-slider v-model="state.customIconForm.meta.size" :min="40" :max="100" />
 						</el-form-item>
@@ -55,7 +58,7 @@
 								<el-radio-button label="5x2" value="5x2" />
 							</el-radio-group>
 						</el-form-item>
-						<el-form-item label="描述" prop="description">
+						<el-form-item label="描述" prop="meta.description" :rules="{ required: true, message: '请输入描述信息' }">
 							<el-input v-model="state.customIconForm.meta.description" type="textarea" placeholder="应用介绍..." />
 						</el-form-item>
 					</el-form>
