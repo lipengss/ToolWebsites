@@ -1,6 +1,6 @@
 <template>
 	<ClientOnly>
-		<Dialog v-model:visible="state.visible" title="添加应用" width="70%">
+		<Dialog v-model:visible="state.visible" title="添加应用" width="80%">
 			<div class="split-pane">
 				<el-scrollbar>
 					<el-form :model="state.customIconForm" label-width="100px">

@@ -15,8 +15,7 @@ export const categories = [
 			rank: 0,
 			icon: 'menu-editor',
 			tgas: [
-				{ label: '人工智能', value: 'ai', checked: false },
-				{ label: '大数据', value: 'bigData', checked: false },
+				{ label: 'AI', value: 'ai', checked: false },
 				{ label: '软件开发', value: 'developer', checked: false },
 				{ label: '网络安全', value: 'cybersecurity', checked: false },
 				{ label: '虚拟现实 VR', value: 'vr', checked: false },

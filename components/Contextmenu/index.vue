@@ -124,11 +124,11 @@ onMounted(() => {
 	window.addEventListener('click', () => {
 		context.show = false;
 	});
-	window.addEventListener('contextmenu', (event) => {
-		context.type = 'global';
-		event.preventDefault();
-		contextmenu(event);
-	});
+	// window.addEventListener('contextmenu', (event) => {
+	// 	context.type = 'global';
+	// 	event.preventDefault();
+	// 	contextmenu(event);
+	// });
 });
 </script>
 <style lang="scss" scoped>

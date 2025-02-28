@@ -119,9 +119,9 @@ export const useSettingsStore = defineStore('settingStore', {
 		};
 	},
 	getters: {
-		currentEngine(state) {
+		currentEngine(state): IEngineItem {
 			const item = state.engineList.find((item) => item.name === this.setting.search.engines);
-			return item || {};
+			return item || ({} as IEngineItem);
 		},
 	},
 	actions: {
@@ -208,9 +208,12 @@ export const useSettingsStore = defineStore('settingStore', {
 				this.setting.hotWebRanks[item.name] = rank;
 			});
 		},
+		clearHistory() {
+			this.setting.search.historyList = [];
+			this.setGlobalSetting();
+		},
 		querySearch(queryString: string, cb: any) {
 			const { historyList } = this.setting.search;
-			console.log(queryString);
 			const results = queryString ? historyList.filter(this.createFilter(queryString)) : historyList;
 			cb(results);
 		},

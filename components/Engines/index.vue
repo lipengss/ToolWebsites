@@ -7,60 +7,118 @@
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
 				</div>
 				<template v-if="setting.search.show">
-					<el-autocomplete
+					<el-input
 						v-if="setting.search.history"
 						v-model="state.query"
-						:fetch-suggestions="querySearch"
+						class="my-search"
 						placeholder="请输入搜索内容"
 						size="large"
+						:suffix-icon="Search"
 						@keyup.enter="onActionSearch"
 						@select="handleSelect"
+						ref="recordRef"
+						@focus="isShowRecord = true"
 					>
-						<template #suffix>
-							<el-icon :size="20">
-								<Search />
-							</el-icon>
-						</template>
-						<template #prefix>
+						<template #prepend>
 							<div class="icon-wrap" ref="buttonRef">
 								<el-icon :size="30">
 									<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
 								</el-icon>
 								<el-icon :size="14"> <CaretBottom /> </el-icon>
 							</div>
-							<el-popover ref="popoverRef" :virtual-ref="buttonRef" trigger="click" title="经常搜索" virtual-triggering>
-								<div class="flex-around serach-engines">
-									<el-tooltip v-for="item in engineList" :key="item.name" effect="light" :content="item.description" placement="top">
+							<el-popover
+								ref="popoverRef"
+								:virtual-ref="buttonRef"
+								show-arrow
+								:offset="20"
+								width="auto"
+								effect="light"
+								popper-class="engines-popper"
+								trigger="click"
+								virtual-triggering
+							>
+								<div class="serach-engines">
+									<el-tooltip v-for="item in engineList" :key="item.name" effect="light" :content="item.description" placement="left">
 										<el-link
-											:type="setting.search.engines === item.name ? 'primary' : 'info'"
+											:underline="false"
 											class="engines-item"
+											:type="setting.search.engines === item.name ? 'primary' : 'info'"
+											:class="{ 'engines-selected': setting.search.engines === item.name }"
 											@click="onChangeEngines(item.name)"
 										>
+											<el-icon size="30px">
+												<svg-icon :name="item.icon" />
+											</el-icon>
 											{{ item.name }}
 										</el-link>
 									</el-tooltip>
 								</div>
 							</el-popover>
 						</template>
-						<template #default="{ item }">
-							<div class="flex-between">
-								<div class="value">{{ item }}</div>
-								<el-button :icon="Close" circle type="danger" size="small" plain @click.stop="removeHistoryRow(item)" />
+					</el-input>
+					<el-popover
+						v-model:visible="isShowRecord"
+						trigger="focus"
+						popper-class="engines-record"
+						width="376px"
+						placement="bottom-end"
+						:virtual-ref="recordRef"
+						virtual-triggering
+					>
+						<el-scrollbar height="300px">
+							<template v-if="setting.search.historyList.length > 0 && setting.search.engines !== '本地'">
+								<h4 class="engines-record-title flex-between">
+									<span>搜索历史</span>
+									<el-link type="danger" :underline="false" style="font-size: 12px" @click="clearHistory">清空</el-link>
+								</h4>
+								<div style="padding: 0 14px">
+									<el-space wrap>
+										<el-tag
+											type="info"
+											effect="dark"
+											style="cursor: pointer"
+											v-for="item in setting.search.historyList"
+											closable
+											@close="removeHistoryRow(item)"
+											:key="item"
+											@click="toJumpQuery(item)"
+										>
+											{{ item }}
+										</el-tag>
+									</el-space>
+								</div>
+							</template>
+							<template v-if="state.query && setting.search.engines === '本地'">
+								<h3 class="engines-record-title">相关应用</h3>
+								<div v-for="(app, index) in filterAppList" class="hot-app-item" @click="toJumpApp(app.path || '')">
+									<span class="hot-app-index">
+										<el-icon :size="16" color="#999"><Clock /></el-icon>
+									</span>
+									<div class="hot-app-icon"><Application :app="app" :link="false" /></div>
+									<div class="info">
+										<p class="title">{{ app.name }}</p>
+										<p class="desc">{{ app.meta.description }}</p>
+									</div>
+								</div>
+							</template>
+							<h3 class="engines-record-title">热门应用</h3>
+							<div
+								v-for="(app, index) in getApps('all')
+									.filter((item) => !item.meta.tag.includes('card'))
+									.slice(0, 10)"
+								class="hot-app-item"
+								@click="toJumpApp(app.path || '')"
+							>
+								<span class="hot-app-index" :class="{ 'hot-app-index-active': index < 3 }">{{ index + 1 }}</span>
+								<div class="hot-app-icon"><Application :app="app" :link="false" /></div>
+								<div class="info">
+									<p class="title">{{ app.name }}</p>
+									<p class="desc">{{ app.meta.description }}</p>
+								</div>
+								<img v-if="index < 3" src="/assets/img/fire.gif" alt="hot" width="18" height="18" class="hot-app-icon-hot" />
 							</div>
-						</template>
-					</el-autocomplete>
-					<!-- <el-input v-else class="my-search" v-model="state.query" size="large" placeholder="请输入搜索内容" @keyup.enter="onActionSearch">
-						<template #suffix>
-							<el-icon :size="20">
-								<Search />
-							</el-icon>
-						</template>
-						<template #prefix>
-							<el-icon :size="30">
-								<svg-icon :name="currentEngine.icon" class="animate__animated animate__rotateInDownLeft" />
-							</el-icon>
-						</template>
-					</el-input> -->
+						</el-scrollbar>
+					</el-popover>
 				</template>
 			</el-col>
 		</el-row>
@@ -69,14 +127,15 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
-import { Search, Close, CaretBottom } from '@element-plus/icons-vue';
+import { CaretBottom, Clock, Search } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
-import { websites } from '~/assets/website/websites';
+import { useApp } from '~/hooks/useApp';
 
-const { setting, engineList } = storeToRefs(useSettingsStore());
-const { querySearch, setGlobalSetting, removeHistoryRow, currentEngine } = useSettingsStore();
+const { setting, engineList, currentEngine } = storeToRefs(useSettingsStore());
+const { setGlobalSetting, removeHistoryRow, clearHistory } = useSettingsStore();
 const { format, formatWeek } = useDateFormat();
+const { getApps } = useApp();
 
 const inputHeight = computed(() => `${setting.value.search.height}px`);
 const inputRadius = computed(() => `${setting.value.search.radius}px`);
@@ -85,15 +144,14 @@ const dateColor = computed(() => setting.value.date.color);
 const dateFont = computed(() => setting.value.date.font);
 const dateSize = computed(() => `${setting.value.date.size}px`);
 const dateBold = computed(() => (setting.value.date.date.includes('bold') ? 'bold' : 'normal'));
-const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
-const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 
 const state = reactive({
 	query: '',
 	date: format(new Date(), 'YYYY年MM月DD日'),
 	time: '',
 });
-
+const recordRef = ref();
+const isShowRecord = ref(false);
 let timer: any = null;
 const buttonRef = ref();
 onMounted(() => {
@@ -104,10 +162,21 @@ onMounted(() => {
 });
 
 function handleSelect(item: Record<string, any> | string): void {
-	if (typeof item === 'string') jumpQuery(item);
+	if (typeof item === 'string') toJumpQuery(item);
 }
 
 const currentWeek = computed(() => formatWeek());
+
+const filterAppList = computed(() => {
+	if (setting.value.search.engines === '本地') {
+		return getApps('all').filter((item) => {
+			if (item.name.includes(state.query) || item.meta.description?.includes(state.query)) {
+				return item;
+			}
+		});
+	}
+	return [];
+});
 
 function onChangeEngines(key: string) {
 	setting.value.search.engines = key;
@@ -121,28 +190,24 @@ function onChangeEngines(key: string) {
 	}
 }
 
+function toJumpApp(path: string) {
+	state.query = '';
+	if (path) window.open(path, '_blank');
+}
+
 function onActionSearch() {
 	if (setting.value.search.engines === '本地') {
-		localSearch();
 		return;
 	}
 	if (setting.value.search.historyList.some((queryString) => queryString === state.query)) return;
 	setting.value.search.historyList.push(state.query);
-	jumpQuery(state.query);
+	toJumpQuery(state.query);
 	state.query = '';
 	setGlobalSetting();
 }
 
-function localSearch() {
-	const filterList = websites.filter((item) => {
-		if (item.name.includes(state.query) || item.meta.description?.includes(state.query)) {
-			return item;
-		}
-	});
-	console.log(filterList);
-}
-
-function jumpQuery(queryString: string) {
+function toJumpQuery(queryString: string) {
+	if (!queryString) return;
 	const searchUrl = `${currentEngine.value.link}${queryString}`;
 	window.open(searchUrl, '_blank');
 }
@@ -177,20 +242,6 @@ function jumpQuery(queryString: string) {
 				font-weight: v-bind(dateBold);
 			}
 		}
-		.serach-engines {
-			width: 100%;
-			margin-bottom: 4px;
-			.engines-item {
-				font-size: 14px;
-				font-weight: bold;
-				text-shadow: 1px 1px 1px #000;
-				padding: 6px 4px;
-				// font-family: gomarice_rocks_serif;
-			}
-			.el-link--info {
-				color: var(--el-color-white);
-			}
-		}
 	}
 	.icon-wrap {
 		cursor: pointer;
@@ -198,18 +249,133 @@ function jumpQuery(queryString: string) {
 		align-items: center;
 	}
 }
-:deep .my-search,
-:deep .el-autocomplete {
+:deep .my-search {
 	width: 100%;
 	.el-input__wrapper {
 		height: v-bind(inputHeight);
-		border-radius: v-bind(inputRadius);
+		border-top-right-radius: v-bind(inputRadius);
+		border-bottom-right-radius: v-bind(inputRadius);
 		background-color: v-bind(inputOpacity);
 		backdrop-filter: blur(10px);
 		font-size: 18px;
 		.el-input__inner {
 			letter-spacing: 1px;
 			color: #fff;
+		}
+	}
+	.el-input-group__prepend {
+		border-top-left-radius: v-bind(inputRadius);
+		border-bottom-left-radius: v-bind(inputRadius);
+		background-color: v-bind(inputOpacity);
+		backdrop-filter: blur(10px);
+	}
+}
+</style>
+<style lang="scss">
+.el-autocomplete__popper.el-popper {
+	border: 1px solid var(--el-border) !important;
+	background-color: v-bind(inputOpacity) !important;
+	backdrop-filter: blur(10px);
+}
+.engines-record {
+	max-height: 300px;
+	overflow: hidden;
+	padding: 10px !important;
+	background-color: v-bind(inputOpacity) !important;
+	border: 1px solid var(--el-border) !important;
+	.engines-record-title {
+		font-size: 14px;
+		font-weight: bold;
+		padding: 10px 14px;
+		margin: 0;
+		letter-spacing: 1px;
+		color: #fff;
+	}
+	.hot-app-item {
+		display: flex;
+		align-items: center;
+		padding-left: 10px;
+		padding-right: 10px;
+		cursor: pointer;
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+		.hot-app-index {
+			width: 22px;
+			flex-shrink: 0;
+			text-align: left;
+			font-size: 16px;
+			font-weight: bold;
+			font-style: italic;
+			padding-left: 2px;
+			color: #999;
+		}
+		.hot-app-index-active {
+			color: #fff;
+		}
+		.hot-app-icon {
+			width: 60px;
+			height: 60px;
+			margin-left: -6px;
+			transform: scale(0.7);
+			flex-shrink: 0;
+			margin-right: 6px;
+			border-radius: 6px;
+			overflow: hidden;
+		}
+		.info {
+			flex: 1;
+			.title {
+				font-weight: bold;
+				margin: 0;
+				margin-bottom: 4px;
+				color: #fff;
+			}
+			.desc {
+				margin: 0;
+				font-size: 12px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+			}
+		}
+		.hot-app-icon-hot {
+			align-items: flex-end;
+		}
+	}
+}
+.engines-popper {
+	min-width: auto !important;
+	min-height: auto !important;
+	background-color: v-bind(inputOpacity) !important;
+	border: 1px solid var(--el-border) !important;
+	.serach-engines {
+		width: 100%;
+		margin-bottom: 4px;
+		display: flex;
+		flex-direction: column;
+		.engines-item {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			font-size: 14px;
+			text-shadow: 1px 1px 1px #000;
+			padding: 6px 14px 6px 10px;
+			.el-icon {
+				margin-right: 4px;
+			}
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.2);
+			}
+		}
+		.engines-selected {
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+		.el-link--info {
+			color: var(--el-color-white);
 		}
 	}
 }

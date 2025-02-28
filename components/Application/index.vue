@@ -4,7 +4,7 @@
 			<div class="mask"></div>
 			<div class="icon-wrap" :style="{ backgroundColor: app.meta.bgColor }">
 				<div v-if="app.meta.type === 'img'" class="favicon" :width="app.meta.size" :height="app.meta.size">
-					<img :src="app.meta.value" width="70%" height="70%" />
+					<img :src="app.meta.value" width="100%" height="100%" />
 				</div>
 				<el-icon v-else-if="app.meta.type === 'icon' && app.meta.value" :size="app.meta.size || 40">
 					<svg-icon :name="app.meta.value" :color="app.meta.color"></svg-icon>
@@ -25,15 +25,17 @@ const { setGlobalSetting } = useSettingsStore();
 
 interface Props {
 	app: RouteItem;
+	link?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {
+	link: true,
+});
 
 const size = computed(() => props.app.meta.size + 'px');
 const bgColor = computed(() => props.app.meta.bgColor || '#fff');
 
 function onclick() {
-	window.open(props.app.path);
 	const { name } = props.app;
 	if (!name) return;
 	if (Object.prototype.hasOwnProperty.call(setting.value.hotWebRanks, name)) {
@@ -42,6 +44,7 @@ function onclick() {
 		setting.value.hotWebRanks[name] = 1;
 	}
 	setGlobalSetting();
+	if (props.link) window.open(props.app.path);
 }
 
 function onContextmenu(event: any) {
