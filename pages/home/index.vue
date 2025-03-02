@@ -50,7 +50,7 @@
 		</Swiper> -->
 	</div>
 	<!-- 菜单 -->
-	<MenuBar />
+	<!-- <MenuBar /> -->
 	<!-- 右键菜单 -->
 	<Contextmenu ref="contextmenuRef">
 		<template v-if="global">

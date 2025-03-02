@@ -1,7 +1,8 @@
 <template>
 	<ClientOnly>
-		<el-row class="engines">
-			<el-col :xs="22" :sm="12" :md="10" :lg="8" :xl="7" class="content">
+		<div class="engines">
+			<div class="content fixed-top">
+				<!-- <el-affix> -->
 				<div class="date-wrapper" v-if="setting.date.show">
 					<div class="time">{{ state.time }}</div>
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
@@ -120,8 +121,9 @@
 						</el-scrollbar>
 					</el-popover>
 				</template>
-			</el-col>
-		</el-row>
+				<!-- </el-affix> -->
+			</div>
+		</div>
 	</ClientOnly>
 </template>
 <script setup lang="ts">
@@ -144,6 +146,7 @@ const dateColor = computed(() => setting.value.date.color);
 const dateFont = computed(() => setting.value.date.font);
 const dateSize = computed(() => `${setting.value.date.size}px`);
 const dateBold = computed(() => (setting.value.date.date.includes('bold') ? 'bold' : 'normal'));
+const menuWdith = computed(() => `${setting.value.menuBar.width}px`);
 
 const state = reactive({
 	query: '',
@@ -216,11 +219,14 @@ function toJumpQuery(queryString: string) {
 .engines {
 	display: flex;
 	box-sizing: border-box;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: center;
 	width: 100%;
-	padding-top: 10vh;
-	margin-bottom: 20px;
+	height: 240px;
+	padding-bottom: 20px;
+	box-sizing: border-box;
+	// padding-top: 10vh;
+	// margin-bottom: 20px;
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -242,41 +248,56 @@ function toJumpQuery(queryString: string) {
 				font-weight: v-bind(dateBold);
 			}
 		}
+		:deep .my-search {
+			width: 460px;
+			.el-input__wrapper {
+				height: v-bind(inputHeight);
+				border-top-right-radius: v-bind(inputRadius);
+				border-bottom-right-radius: v-bind(inputRadius);
+				background-color: v-bind(inputOpacity);
+				backdrop-filter: blur(10px);
+				font-size: 18px;
+				.el-input__inner {
+					letter-spacing: 1px;
+					color: #fff;
+				}
+			}
+			.el-input-group__prepend {
+				border-top-left-radius: v-bind(inputRadius);
+				border-bottom-left-radius: v-bind(inputRadius);
+				background-color: v-bind(inputOpacity);
+				backdrop-filter: blur(10px);
+			}
+		}
 	}
 	.icon-wrap {
 		cursor: pointer;
 		display: flex;
 		align-items: center;
 	}
-}
-:deep .my-search {
-	width: 100%;
-	.el-input__wrapper {
-		height: v-bind(inputHeight);
-		border-top-right-radius: v-bind(inputRadius);
-		border-bottom-right-radius: v-bind(inputRadius);
-		background-color: v-bind(inputOpacity);
-		backdrop-filter: blur(10px);
-		font-size: 18px;
-		.el-input__inner {
-			letter-spacing: 1px;
-			color: #fff;
-		}
-	}
-	.el-input-group__prepend {
-		border-top-left-radius: v-bind(inputRadius);
-		border-bottom-left-radius: v-bind(inputRadius);
-		background-color: v-bind(inputOpacity);
-		backdrop-filter: blur(10px);
-	}
+	// .fixed-top {
+	// 	position: fixed;
+	// 	top: 0;
+	// 	left: v-bind(menuWdith);
+	// 	right: 0;
+	// 	display: flex;
+	// 	padding: 10px 20px;
+	// 	box-sizing: border-box;
+	// 	flex-direction: row;
+	// 	align-items: center;
+	// 	justify-content: space-between;
+	// 	background-color: rgba(255, 255, 255, 0.1);
+	// 	backdrop-filter: blur(10px);
+	// 	.date-wrapper {
+	// 		margin-bottom: 0;
+	// 	}
+	// 	.my-search {
+	// 		width: 400px;
+	// 	}
+	// }
 }
 </style>
 <style lang="scss">
-.el-autocomplete__popper.el-popper {
-	border: 1px solid var(--el-border) !important;
-	background-color: v-bind(inputOpacity) !important;
-	backdrop-filter: blur(10px);
-}
 .engines-record {
 	max-height: 300px;
 	overflow: hidden;
