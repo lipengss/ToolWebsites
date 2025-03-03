@@ -3,55 +3,65 @@ import path from 'path';
 
 // 'element-plus/dist/index.css',
 export default defineNuxtConfig({
-	devtools: { enabled: true },
-	css: ['~/assets/css/common.scss', 'animate.css'],
-	modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-swiper'],
-	elementPlus: {
-		themes: ['dark'],
-		importStyle: 'scss',
+ devtools: { enabled: true },
+ css: ['~/assets/css/common.scss', 'animate.css'],
+ modules: ['nuxt-lodash', '@element-plus/nuxt', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-swiper'],
+
+ elementPlus: {
+					themes: ['dark'],
+					importStyle: 'scss',
 	},
-	pinia: {
-		storesDirs: ['./stores/**'],
+
+ pinia: {
+					storesDirs: ['./stores/**'],
 	},
-	// buildModules: ['@nuxtjs/router-extras'],
+
+ // buildModules: ['@nuxtjs/router-extras'],
 	devServer: {
-		port: 8669,
-		host: 'localhost',
+					port: 8669,
+					host: 'localhost',
 	},
-	server: {
-		host: '0.0.0.0',
-		port: 8669,
+
+ server: {
+					host: '0.0.0.0',
+					port: 8669,
 	},
-	vite: {
-		plugins: [
-			createSvgIconsPlugin({
-				iconDirs: [path.resolve(process.cwd(), 'assets/svg')],
-			}),
-			{
-				src: '~/plugins/VueGridLayout.client.js',
-				ssr: false,
-			},
-		],
-		css: {
-			preprocessorOptions: {
-				scss: {
-					additionalData: `@use "@/assets/css/element-variables.scss" as element;`,
-				},
-			},
-		},
+
+ vite: {
+					plugins: [
+									createSvgIconsPlugin({
+													iconDirs: [path.resolve(process.cwd(), 'assets/svg')],
+									}),
+									{
+													src: '~/plugins/VueGridLayout.client.js',
+													ssr: false,
+									},
+					],
+					css: {
+									preprocessorOptions: {
+													scss: {
+																	additionalData: `@use "@/assets/css/element-variables.scss" as element;`,
+													},
+									},
+					},
 	},
-	app: {
-		head: {
-			viewport: 'width=device-width, initial-scale=1',
-		},
-		baseURL: '/ToolWebsites/',
-		buildAssetsDir: '/static/',
+
+ app: {
+					head: {
+									viewport: 'width=device-width, initial-scale=1',
+					},
+					baseURL: '/ToolWebsites/',
+					buildAssetsDir: '/static/',
 	},
-	ssr: false,
-	router: {
-		options: {
-			hashMode: true,
-		},
+
+ ssr: false,
+
+ router: {
+					options: {
+									hashMode: true,
+					},
 	},
-	target: 'static',
+
+ target: 'static',
+ compatibilityDate: '2025-03-03',
 });
