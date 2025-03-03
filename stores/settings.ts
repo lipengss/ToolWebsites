@@ -9,6 +9,7 @@ const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager:
 
 const defaultSetting: ISetting = {
 	theme: '#2b793b',
+	isMobile: false,
 	date: {
 		show: true,
 		size: 35,
@@ -35,7 +36,7 @@ const defaultSetting: ISetting = {
 	},
 	menuBar: {
 		position: 'left',
-		defaultRoute: '/',
+		routePath: '/',
 		width: 60,
 		blur: 6,
 		bgColor: 'rgba(255, 255, 255, 0.1)',
@@ -142,6 +143,7 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		// 更新配置
 		setGlobalSetting() {
+			console.log('xxaaa');
 			Local.set(GLOBAL_SETTING, this.setting);
 			this.initGlobalSetting();
 		},

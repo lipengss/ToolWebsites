@@ -84,6 +84,9 @@ $rowGap: v-bind(rowGap);
 	justify-content: center;
 	border-radius: v-bind(radius);
 	overflow: hidden;
+	&:hover {
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	}
 }
 .app-size-1x1 {
 	width: $width;

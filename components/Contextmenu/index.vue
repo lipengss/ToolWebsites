@@ -55,7 +55,6 @@ const appDialogRef = ref();
 const curApp = ref<RouteItem>({
 	name: '',
 	path: '',
-	type: '',
 	meta: {
 		rank: 0,
 		icon: '',
@@ -124,11 +123,15 @@ onMounted(() => {
 	window.addEventListener('click', () => {
 		context.show = false;
 	});
-	// window.addEventListener('contextmenu', (event) => {
-	// 	context.type = 'global';
-	// 	event.preventDefault();
-	// 	contextmenu(event);
-	// });
+	const container = document.querySelector('.nuxt-container');
+	if (container) {
+		container.addEventListener('contextmenu', (event) => {
+			context.type = 'container';
+			event.preventDefault();
+			event.stopPropagation();
+			contextmenu(event);
+		});
+	}
 });
 </script>
 <style lang="scss" scoped>

@@ -1,5 +1,5 @@
 <template>
-	<el-space class="filter-tag">
+	<el-space class="filter-tag" v-if="filterTagList.length > 1">
 		<el-check-tag v-for="tag in filterTagList" :key="tag.value" effect="light" round :checked="tag.value === props.active" @click="onActive(tag)">
 			{{ tag.label }}
 		</el-check-tag>
@@ -19,10 +19,15 @@ const route = useRoute();
 const emit = defineEmits(['update:active']);
 
 const filterTagList = computed(() => {
-	return categories.filter((n) => n.path === route.path)[0].meta.tgas;
+	const currentRoute = categories.find((n) => n.path === route.path);
+	if (currentRoute && currentRoute.meta.tgas) {
+		return currentRoute.meta.tgas;
+	} else {
+		return [];
+	}
 });
 
-function onActive(tag: { value: string }) {
+function onActive(tag: { value: string; label: string; checked: boolean }) {
 	emit('update:active', tag.value);
 }
 </script>

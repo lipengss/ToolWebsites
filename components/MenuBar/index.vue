@@ -7,7 +7,7 @@
 						class="item"
 						v-for="route in categories"
 						:key="route.path"
-						:class="{ active: route.path === routePath }"
+						:class="{ active: route.path === setting.menuBar.routePath }"
 						@click="onChangeMenu(route.path)"
 					>
 						<el-icon>
@@ -26,14 +26,14 @@
 					</div>
 				</el-tooltip>
 				<el-tooltip content="收藏" placement="right" effect="light">
-					<div class="item" :class="{ active: '/collection' === routePath }" @click="onChangeMenu('/collection')">
+					<div class="item" :class="{ active: '/collection' === setting.menuBar.routePath }" @click="onChangeMenu('/collection')">
 						<el-icon :size="20" class="icon zoom" id="global-setting">
 							<Star />
 						</el-icon>
 					</div>
 				</el-tooltip>
 				<el-tooltip content="回收站" placement="right" effect="light">
-					<div class="item" :class="{ active: '/trash' === routePath }" @click="onChangeMenu('/trash')">
+					<div class="item" :class="{ active: '/trash' === setting.menuBar.routePath }" @click="onChangeMenu('/trash')">
 						<el-icon :size="18" class="icon zoom">
 							<svg-icon name="trash" />
 						</el-icon>
@@ -53,10 +53,9 @@ import { useEyeDropper, useMouseInElement } from '@vueuse/core';
 import { Star } from '@element-plus/icons-vue';
 import { useRouter, useRoute } from 'vue-router';
 import { categories } from '~/assets/website/categories';
-const { openSettingDrawer, openTour } = useSettingsStore();
+const { openSettingDrawer } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
-const route = useRoute();
 const router = useRouter();
 
 const { x, y } = useMouseInElement();
@@ -100,12 +99,10 @@ const hideSidebar = computed(() => {
 
 const { sRGBHex } = useEyeDropper();
 
-const routePath = ref(route.path);
-
 function onChangeMenu(path: string | undefined) {
 	if (typeof path !== 'string') return;
 	router.push({ path });
-	routePath.value = path;
+	setting.value.menuBar.routePath = path;
 }
 
 watch(

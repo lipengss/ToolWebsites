@@ -7,6 +7,7 @@ interface IEngineItem {
 
 interface ISetting {
 	theme: string;
+	isMobile: boolean;
 	date: {
 		show: boolean;
 		size: number;
@@ -38,7 +39,7 @@ interface ISetting {
 		bgColor: string; // 背景颜色
 		color: string; // 字体颜色
 		autoHide: boolean;
-		defaultRoute: string;
+		routePath: string;
 	};
 	offWork: {
 		name: '下班倒计时';

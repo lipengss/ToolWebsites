@@ -12,33 +12,33 @@ export const categories = [
 		},
 	},
 	{
-		name: '科技',
+		name: 'AI',
+		path: '/ai',
+		meta: {
+			rank: 0,
+			icon: 'menu-editor',
+			tgas: [
+				{
+					label: 'AI',
+					value: 'ai',
+					checked: false,
+				},
+			],
+		},
+	},
+	{
+		name: '编程',
 		path: '/developer',
 		meta: {
 			rank: 0,
 			icon: 'menu-editor',
 			tgas: [
-				{ label: 'AI', value: 'ai', checked: false },
 				{ label: '软件开发', value: 'developer', checked: false },
 				{ label: '网络安全', value: 'cybersecurity', checked: false },
 				{ label: '虚拟现实 VR', value: 'vr', checked: false },
 				{ label: '物联网 LOT', value: 'lot', checked: false },
 				{ label: '硬件开发', value: 'hardwareDevelopment', checked: false },
 				{ label: '产品/设计', value: 'designer', checked: false },
-			],
-		},
-	},
-	{
-		name: '金融',
-		path: '/finance',
-		meta: {
-			rank: 0,
-			icon: 'menu-editor',
-			tgas: [
-				{ label: '投资', value: 'Investment', checked: false },
-				{ label: '股市', value: 'StockMarket', checked: false },
-				{ label: '银行', value: 'Banking', checked: false },
-				{ label: '理财', value: 'WealthManagement', checked: false },
 			],
 		},
 	},

@@ -1,6 +1,6 @@
 <template>
 	<div class="container-vertical">
-		<filter-tag v-model:active="active" />
+		<!-- <filter-tag v-model:active="active" /> -->
 		<GirdLayout>
 			<template v-for="(app, index) in getApps(active)">
 				<GridItem size="1x1" :name="app.name" :index="index">
@@ -15,7 +15,7 @@ import { useApp } from '~/hooks/useApp';
 
 const { getApps } = useApp();
 
-const active = ref('StockMarket');
+const active = ref('ai');
 </script>
 <style lang="scss" scoped>
 .developer {

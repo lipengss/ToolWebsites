@@ -1,8 +1,10 @@
 <template>
 	<ClientOnly>
 		<div class="engines">
+			<el-button class="toggle-menu">
+				<el-icon color="#fff"><Operation /></el-icon>
+			</el-button>
 			<div class="content fixed-top">
-				<!-- <el-affix> -->
 				<div class="date-wrapper" v-if="setting.date.show">
 					<div class="time">{{ state.time }}</div>
 					<div class="date">{{ state.date }} {{ currentWeek }}</div>
@@ -121,7 +123,6 @@
 						</el-scrollbar>
 					</el-popover>
 				</template>
-				<!-- </el-affix> -->
 			</div>
 		</div>
 	</ClientOnly>
@@ -132,6 +133,7 @@ import { storeToRefs } from 'pinia';
 import { CaretBottom, Clock, Search } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
+import { Operation } from '@element-plus/icons-vue';
 import { useApp } from '~/hooks/useApp';
 
 const { setting, engineList, currentEngine } = storeToRefs(useSettingsStore());
@@ -226,9 +228,15 @@ function toJumpQuery(queryString: string) {
 	padding-bottom: 20px;
 	box-sizing: border-box;
 	scroll-snap-type: y mandatory;
+	.toggle-menu {
+		position: absolute;
+		left: 14px;
+		top: 14px;
+	}
 	// padding-top: 10vh;
 	// margin-bottom: 20px;
 	.content {
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -305,6 +313,7 @@ function toJumpQuery(queryString: string) {
 	padding: 10px !important;
 	background-color: v-bind(inputOpacity) !important;
 	border: 1px solid var(--el-border) !important;
+	backdrop-filter: blur(10px);
 	.engines-record-title {
 		font-size: 14px;
 		font-weight: bold;
@@ -361,6 +370,7 @@ function toJumpQuery(queryString: string) {
 				display: -webkit-box;
 				-webkit-line-clamp: 1;
 				-webkit-box-orient: vertical;
+				color: #eee;
 			}
 		}
 		.hot-app-icon-hot {
@@ -373,6 +383,7 @@ function toJumpQuery(queryString: string) {
 	min-height: auto !important;
 	background-color: v-bind(inputOpacity) !important;
 	border: 1px solid var(--el-border) !important;
+	backdrop-filter: blur(10px);
 	.serach-engines {
 		width: 100%;
 		margin-bottom: 4px;

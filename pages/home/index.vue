@@ -1,5 +1,5 @@
 <template>
-	<div class="container" @contextmenu.prevent="contextmenu">
+	<div class="container">
 		<Engines />
 		<NuxtChild />
 		<!-- <Swiper
@@ -52,7 +52,7 @@
 	<!-- 菜单 -->
 	<!-- <MenuBar /> -->
 	<!-- 右键菜单 -->
-	<Contextmenu ref="contextmenuRef">
+	<!-- <Contextmenu ref="contextmenuRef">
 		<template v-if="global">
 			<div class="item" @click="changeWallpaper">
 				<el-icon><svg-icon name="menu-picture" /></el-icon>
@@ -81,7 +81,7 @@
 				<span>收藏</span>
 			</div>
 		</template>
-	</Contextmenu>
+	</Contextmenu> -->
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
