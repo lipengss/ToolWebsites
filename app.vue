@@ -4,8 +4,8 @@
 			<!-- 菜单 -->
 			<MenuBar />
 			<NuxtLayout>
-				<el-scrollbar>
-					<Engines />
+				<Engines />
+				<el-scrollbar view-class="nuxt-page-scroll">
 					<NuxtPage />
 				</el-scrollbar>
 			</NuxtLayout>
@@ -26,7 +26,7 @@ import { ref } from 'vue';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-const { initGlobalSetting } = useSettingsStore();
+const { initGlobalSetting, setGlobalSetting } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
 const bgOpacity = computed(() => `rgba(0,0,0,${setting.value.bg.opacity})`);
@@ -34,7 +34,25 @@ const bgBlur = computed(() => `blur(${setting.value.bg.blur}px)`);
 const menuWidth = computed(() => setting.value.menuBar.width + 'px');
 const style = computed(() => `padding-${setting.value.menuBar.position}: ${menuWidth.value}`);
 
+// 判断是移动端给body加一个类名
+const isMobileFn = () => {
+	if (window.innerWidth < 768 || /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+		document.body.classList.add('mobile');
+
+		setting.value.app.async = false;
+		setting.value.app.columnGap = 10;
+		setting.value.app.rowGap = 30;
+		setting.value.app.screenWidth = 100;
+		setGlobalSetting();
+	} else {
+		document.body.classList.remove('mobile');
+	}
+};
+
+window.addEventListener('resize', isMobileFn);
+
 onMounted(() => {
+	isMobileFn();
 	initGlobalSetting();
 });
 
@@ -50,6 +68,8 @@ const locale = ref(zhCn);
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 	&:before,
 	&:before {
 		content: '';
@@ -74,6 +94,9 @@ const locale = ref(zhCn);
 	left: 0;
 	top: 0;
 	background-color: blue;
+}
+.nuxt-page-scroll {
+	scroll-snap-type: y mandatory;
 }
 .tooltip {
 	width: 200px;

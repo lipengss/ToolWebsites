@@ -1,6 +1,6 @@
 <template>
 	<ClientOnly>
-		<el-aside :width="menuWidth" :class="[hideSidebar, setting.menuBar.position]">
+		<el-aside :width="menuWidth" :class="[hideSidebar, setting.menuBar.position]" class="menu-aside">
 			<el-scrollbar>
 				<div class="menu">
 					<div

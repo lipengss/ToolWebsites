@@ -67,6 +67,7 @@ $rowGap: v-bind(rowGap);
 	opacity: v-bind(opacity);
 	.name {
 		width: 100%;
+		min-height: 24px;
 		height: v-bind(columnGap);
 		line-height: 24px;
 		position: absolute;

@@ -6,6 +6,9 @@ export const categories = [
 		meta: {
 			rank: 0,
 			icon: 'menu-home',
+			// tgas: [
+			// 	{ label: 'AI', value: 'ai', checked: false }
+			// ],
 		},
 	},
 	{

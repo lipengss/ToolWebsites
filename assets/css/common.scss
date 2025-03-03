@@ -100,3 +100,21 @@ ol {
 		}
 	}
 }
+
+// 移动端适配
+@media screen and (max-width: 768px) {
+	.mobile {
+		.nuxt-container {
+			padding-left: 0 !important;
+			.engines .content .my-search {
+				width: 100%;
+			}
+		}
+		.menu-aside {
+			display: none !important;
+		}
+		.container-grid {
+			padding: 10px 0 60px !important;
+		}
+	}
+}

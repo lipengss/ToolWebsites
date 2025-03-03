@@ -225,6 +225,7 @@ function toJumpQuery(queryString: string) {
 	height: 240px;
 	padding-bottom: 20px;
 	box-sizing: border-box;
+	scroll-snap-type: y mandatory;
 	// padding-top: 10vh;
 	// margin-bottom: 20px;
 	.content {
