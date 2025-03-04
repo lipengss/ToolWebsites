@@ -1,1 +1,0 @@
-import{dn as u,a4 as t}from"./DWUcAaq9.js";function l(o){const{copy:a}=u({source:o.value});function e(){a(o.value),t.success("复制成功")}function n(s){s.value=o.value}return{onCopy:e,onPaste:n}}export{l as u};
