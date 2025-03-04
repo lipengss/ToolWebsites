@@ -101,6 +101,64 @@ ol {
 	}
 }
 
+.custom-dialog {
+	padding: 0 !important;
+	display: flex;
+	flex-direction: column;
+	.el-dialog__header {
+		padding: 16px;
+	}
+	.el-dialog__body {
+		flex: 1;
+		padding: 0;
+		.el-scrollbar__view {
+			padding: 0 16px 16px;
+		}
+	}
+	.el-dialog__footer {
+		padding-top: 0;
+		padding: 16px;
+		border-top: 1px solid var(--el-color-info-light-7);
+		.footer {
+			.confirm-btn {
+				padding-left: 40px;
+				padding-right: 40px;
+			}
+		}
+	}
+}
+
+.my-calendar {
+	.el-calendar__header {
+		padding: 10px 0;
+	}
+	.el-calendar__body {
+		padding: 0;
+		margin-right: 16px;
+		.el-calendar-table {
+			.el-calendar-day {
+				height: 60px;
+				padding: 0;
+			}
+			tr td,
+			th {
+				&:first-child {
+					&.prev {
+						color: var(--el-color-danger-light-5);
+					}
+					color: var(--el-color-danger);
+				}
+				&:last-child {
+					&.next {
+						color: var(--el-color-danger-light-5);
+					}
+					color: var(--el-color-danger);
+				}
+			}
+		}
+	}
+}
+
 // 移动端适配
 @media screen and (max-width: 768px) {
 	.mobile {

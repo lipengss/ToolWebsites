@@ -51,7 +51,7 @@ import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 import { useEyeDropper, useMouseInElement } from '@vueuse/core';
 import { Star } from '@element-plus/icons-vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { categories } from '~/assets/website/categories';
 const { openSettingDrawer } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
@@ -101,8 +101,9 @@ const { sRGBHex } = useEyeDropper();
 
 function onChangeMenu(path: string | undefined) {
 	if (typeof path !== 'string') return;
-	router.push({ path });
-	setting.value.menuBar.routePath = path;
+	router.push({ path }).then(() => {
+		setting.value.menuBar.routePath = path;
+	});
 }
 
 watch(

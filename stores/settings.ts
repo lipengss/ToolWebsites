@@ -143,7 +143,6 @@ export const useSettingsStore = defineStore('settingStore', {
 		},
 		// 更新配置
 		setGlobalSetting() {
-			console.log('xxaaa');
 			Local.set(GLOBAL_SETTING, this.setting);
 			this.initGlobalSetting();
 		},

@@ -3,7 +3,7 @@
 		<Dialog v-model:visible="state.visible" title="添加应用" width="80%">
 			<div class="split-pane">
 				<el-scrollbar>
-					<el-form :model="state.customIconForm" label-width="100px">
+					<el-form ref="formRef" :model="state.customIconForm" label-width="100px">
 						<el-form-item label="应用图标">
 							<div class="app-icon">
 								<Application :app="state.customIconForm" />
@@ -79,13 +79,13 @@
 	</ClientOnly>
 </template>
 <script setup lang="ts">
-import { nextTick } from 'vue';
+import { nextTick, ref } from 'vue';
 import { Link, Edit } from '@element-plus/icons-vue';
 import { websites } from '~/assets/website/index';
 import { predefineColors } from '~/assets/utils/publicData';
 import { categories } from '~/assets/website/categories';
-import { useRoute } from 'vue-router';
 import { useCopy } from '~/hooks/useCopy';
+import { flatten } from 'lodash';
 const state: {
 	visible: boolean;
 	activeTab: string;
@@ -103,17 +103,18 @@ const state: {
 			tag: [],
 			size: 60,
 			color: '#fff',
-			bgColor: '#FF4500',
+			bgColor: '#fff',
 			layout: '1x1',
 			description: '',
 		},
 	},
 });
-const route = useRoute();
+
+const formRef = ref();
 
 const strJSON = computed(() => JSON.stringify(state.customIconForm, undefined, 4));
 
-const tagList = computed(() => categories.filter((n) => n.path === route.path)[0].meta.tgas);
+const tagList = computed(() => flatten(categories.filter((n) => n.meta.tags && n.meta.tags.length).map((n) => n.meta.tags)));
 
 async function getWebsiteIcon() {
 	state.customIconForm.meta.type = 'img';
@@ -135,10 +136,22 @@ function onChangeIconType(type: string | number | boolean | undefined) {
 	}
 }
 
+function onValidate(callback?: () => void) {
+	formRef.value.validate((valid: boolean) => {
+		if (valid) {
+			callback && callback();
+		} else {
+			ElMessage.error('请检查表单信息是否填写完整');
+		}
+	});
+}
+
 function onSave() {
 	const str = JSON.stringify(state.customIconForm, null, '\t');
-	const { onCopy } = useCopy(toRef(JSON.stringify(state.customIconForm)));
-	onCopy();
+	const { onCopy } = useCopy(toRef(JSON.stringify(state.customIconForm, undefined, 2)));
+	onValidate(() => {
+		onCopy();
+	});
 }
 
 function prevEditApp() {
@@ -149,11 +162,8 @@ function prevEditApp() {
 	} else {
 		state.customIconForm = useCloneDeep(websites[websites.length - 1]);
 	}
-	console.log(index);
-	console.log(state.customIconForm);
 }
 function nextEditApp() {
-	console.log(state.customIconForm);
 	const index = websites.findIndex((n) => n.name === state.customIconForm.name);
 	const prevIndex = index + 1;
 	if (prevIndex !== websites.length) {
@@ -210,5 +220,6 @@ defineExpose({ open, edit });
 	height: 60px;
 	border-radius: 10px;
 	overflow: hidden;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 </style>

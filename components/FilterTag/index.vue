@@ -20,8 +20,8 @@ const emit = defineEmits(['update:active']);
 
 const filterTagList = computed(() => {
 	const currentRoute = categories.find((n) => n.path === route.path);
-	if (currentRoute && currentRoute.meta.tgas) {
-		return currentRoute.meta.tgas;
+	if (currentRoute && currentRoute.meta.tags) {
+		return currentRoute.meta.tags;
 	} else {
 		return [];
 	}

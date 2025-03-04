@@ -1,7 +1,7 @@
 <template>
 	<el-row>
 		<el-col :xs="24" :md="17" :xl="17">
-			<el-calendar v-model="state.date" ref="calendar">
+			<el-calendar v-model="state.date" ref="calendar" class="my-calendar">
 				<template #header="{ date }">
 					<el-space :wrap="false">
 						<el-button-group>
@@ -20,11 +20,11 @@
 					</el-space>
 				</template>
 				<template #date-cell="{ data: { date } }">
-					<div class="date" :class="formatHoliday(date).cls">
+					<div class="date" :class="formatHoliday(dayjs(date)).cls">
 						<div class="day">{{ format(date, 'DD') }}</div>
 						<div class="lunar-day singe-line" :class="formatLunar(date).lightColor" :title="formatLunar(date).text">{{ formatLunar(date).text }}</div>
-						<div class="holiday" v-if="formatHoliday(date).text !== ''">
-							{{ formatHoliday(date).text }}
+						<div class="holiday" v-if="formatHoliday(dayjs(date)).text !== ''">
+							{{ formatHoliday(dayjs(date)).text }}
 						</div>
 					</div>
 				</template>
@@ -276,27 +276,7 @@ watch(
 		background-color: var(--el-color-warning-light-3);
 	}
 }
-:deep .el-calendar-table {
-	.el-calendar-day {
-		height: 60px;
-		padding: 0;
-	}
-	tr td,
-	th {
-		&:first-child {
-			&.prev {
-				color: var(--el-color-danger-light-5);
-			}
-			color: var(--el-color-danger);
-		}
-		&:last-child {
-			&.next {
-				color: var(--el-color-danger-light-5);
-			}
-			color: var(--el-color-danger);
-		}
-	}
-}
+
 .date-info {
 	.day-info {
 		display: flex;
@@ -305,6 +285,12 @@ watch(
 		line-height: 20px;
 		font-size: 12px;
 		margin-bottom: 10px;
+		.date {
+			font-size: 14px;
+			font-weight: bold;
+			margin-top: 6px;
+			margin-bottom: 4px;
+		}
 		.day {
 			width: 60px;
 			height: 60px;

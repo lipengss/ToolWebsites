@@ -6,6 +6,7 @@ export const categories = [
 		meta: {
 			rank: 0,
 			icon: 'menu-home',
+			tags: [],
 			// tgas: [
 			// 	{ label: 'AI', value: 'ai', checked: false }
 			// ],
@@ -17,7 +18,7 @@ export const categories = [
 		meta: {
 			rank: 0,
 			icon: 'menu-editor',
-			tgas: [
+			tags: [
 				{
 					label: 'AI',
 					value: 'ai',
@@ -32,12 +33,10 @@ export const categories = [
 		meta: {
 			rank: 0,
 			icon: 'menu-editor',
-			tgas: [
+			tags: [
 				{ label: '软件开发', value: 'developer', checked: false },
-				{ label: '网络安全', value: 'cybersecurity', checked: false },
 				{ label: '虚拟现实 VR', value: 'vr', checked: false },
 				{ label: '物联网 LOT', value: 'lot', checked: false },
-				{ label: '硬件开发', value: 'hardwareDevelopment', checked: false },
 				{ label: '产品/设计', value: 'designer', checked: false },
 			],
 		},
@@ -49,7 +48,7 @@ export const categories = [
 		meta: {
 			rank: 0,
 			icon: 'menu-amusement',
-			tgas: [
+			tags: [
 				{ label: '艺术', value: 'art', checked: false },
 				{ label: '游戏', value: 'games', checked: false },
 				{ label: '视频', value: 'videos', checked: false },

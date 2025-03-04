@@ -1,5 +1,6 @@
 <template>
 	<el-dialog
+		class="custom-dialog"
 		v-model="state.visible"
 		:show-close="false"
 		width="900px"
@@ -7,7 +8,7 @@
 		:lock-scroll="false"
 		:fullscreen="state.fullscreen"
 		draggable
-		@close="emits('onClose')"
+		@close="onClose"
 	>
 		<template #header>
 			<div class="flex-end">
@@ -15,12 +16,14 @@
 				<el-button :icon="CloseBold" circle size="small" @click="emits('update:visible', false)" />
 			</div>
 		</template>
-		<slot />
+		<el-scrollbar wrap-class="el-dialog__body" :view-style="{ maxHeight: 'calc(100vh - 40vh)' }">
+			<slot />
+		</el-scrollbar>
 		<template #footer>
 			<slot name="footer" v-if="$slots.footer" />
 			<div class="footer" v-else>
-				<el-button :type="cancelType">{{ cancelText }}</el-button>
-				<el-button :type="confirmType" class="confirm-btn"> {{ confirmText }} </el-button>
+				<el-button :type="cancelType" @click="emits('update:visible', false)">{{ cancelText }}</el-button>
+				<el-button v-if="showConfirm" :type="confirmType" class="confirm-btn"> {{ confirmText }} </el-button>
 			</div>
 		</template>
 	</el-dialog>
@@ -41,8 +44,10 @@ interface Props {
 	confirmType?: btnType;
 	cancelText?: string;
 	cancelType?: btnType;
+	showConfirm?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
+	showConfirm: false,
 	confirmText: '确定',
 	confirmType: 'primary',
 	cancelText: '取消',
@@ -56,7 +61,11 @@ const state = reactive({
 
 const picture = computed(() => setting.value.bg.picture);
 
-const emits = defineEmits(['update:visible', 'onClose']);
+const emits = defineEmits(['update:visible']);
+
+const onClose = () => {
+	emits('update:visible', false);
+};
 
 watch(
 	() => props.visible,
@@ -68,20 +77,3 @@ watch(
 	}
 );
 </script>
-<style lang="scss">
-.el-dialog {
-	background-image: v-bind('picture.values');
-	.el-dialog__body {
-		height: calc(100vh - 34vh);
-		overflow-y: auto;
-	}
-	.footer {
-		padding-top: 16px;
-		border-top: 1px solid var(--el-color-info-light-7);
-		.confirm-btn {
-			padding-left: 40px;
-			padding-right: 40px;
-		}
-	}
-}
-</style>
