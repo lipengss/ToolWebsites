@@ -1,14 +1,18 @@
 <template>
-	<div
-		:class="`app-size-${props.size}`"
-		@contextmenu.stop="contextmenu"
-		:style="`--delay:${index}s`"
-		class="app-wrapper animate__animated animate__fadeIn page-app-icon"
-	>
-		<div class="app-box">
-			<slot />
+	<div :class="`app-container-size-${meta.layout} animate__animated animate__fadeIn`" :style="`--delay:${index}s`">
+		<div v-if="meta.tag.includes('card') && meta.layout === '5x2'" class="app-item">
+			<component :is="card[app.component]" />
 		</div>
-		<div v-if="setting.app.showTitle" class="name singe-line">{{ props.name }}</div>
+		<template v-else>
+			<div class="app-item" @contextmenu.stop="onContextmenu" @click="onclick" data-type="app">
+				<div class="mask"></div>
+				<Application :app="app" />
+			</div>
+			<div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center">
+				<div class="app-name">{{ props.app.name }}</div>
+				<div v-if="meta.layout === '3x1'" class="description">{{ meta.description }}</div>
+			</div>
+		</template>
 	</div>
 </template>
 <script setup lang="ts">
@@ -19,95 +23,165 @@ import mitt from '~/assets/utils/mitt';
 
 interface Props {
 	index: number;
-	size: '1x1' | '1x2' | '2x2' | '5x2';
-	name?: string;
+	app: RouteItem;
 	disabledContextmenu?: boolean;
-	color?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-	size: '1x1',
 	disabledContextmenu: false,
 });
 
-const { setting } = storeToRefs(useSettingsStore());
-const appSize = computed(() => `${setting.value.app.size}px`);
-const columnGap = computed(() => {
-	const { async, gap, columnGap } = setting.value.app;
-	return (async ? gap : columnGap) + 'px';
-});
+const card: { [key: string]: any } = {
+	Weather: resolveComponent('Weather'),
+	Calendar: resolveComponent('Calendar'),
+	OffWork: resolveComponent('OffWork'),
+};
 
-const columnPosition = computed(() => -columnGap.value);
+const meta = computed(() => props.app.meta);
+
+const { setting, getRowGap, getColumnGap } = storeToRefs(useSettingsStore());
+const { setGlobalSetting } = useSettingsStore();
+
+// 应用全局设置
+const appSize = computed(() => `${setting.value.app.size}px`);
+
+const radius = computed(() => setting.value.app.radius + 'px');
+const opacity = computed(() => setting.value.app.opacity);
 
 function contextmenu(event: Event) {
 	event.preventDefault();
 	if (props.disabledContextmenu) return;
-	mitt.emit('contextmenuApp', { event: event, name: props.name });
+	mitt.emit('contextmenuApp', { event: event, name: meta.value.name });
 }
 
-const color = computed(() => props.color || '#fff');
+// 应用个性化设置
+const color = computed(() => meta.value.color || '#fff');
+const bgColor = computed(() => meta.value.bgColor || '#000');
 
-const rowGap = computed(() => {
-	const { async, gap, rowGap } = setting.value.app;
-	return (async ? gap : rowGap) + 'px';
-});
+function onclick() {
+	if (meta.value.tag.includes('card')) return;
+	const { name } = props.app;
+	if (!name) return;
+	if (Object.prototype.hasOwnProperty.call(setting.value.hotWebRanks, name)) {
+		setting.value.hotWebRanks[name]++;
+	} else {
+		setting.value.hotWebRanks[name] = 1;
+	}
+	setGlobalSetting();
+	window.open(props.app.path);
+}
 
-const radius = computed(() => setting.value.app.radius + 'px');
-const opacity = computed(() => setting.value.app.opacity);
+function onContextmenu(event: any) {
+	event.preventDefault();
+	const { clientX, clientY } = event;
+	const { type } = event.target.parentNode.dataset;
+	mitt.emit('contextmenuApp', {
+		app: props.app,
+		type,
+		clientX,
+		clientY,
+	});
+}
 </script>
 <style lang="scss" scoped>
-$width: v-bind(appSize);
-$height: v-bind(appSize);
-$columnGap: v-bind(columnGap);
-$rowGap: v-bind(rowGap);
+$columnGap: v-bind(getColumnGap);
+$rowGap: v-bind(getRowGap);
 .animate__animated {
 	animation-delay: calc(0.01 * var(--delay));
 }
-.app-wrapper {
+div[class*='app-container'] {
+	cursor: pointer;
 	position: relative;
 	opacity: v-bind(opacity);
-	.name {
-		width: 100%;
-		min-height: 24px;
-		height: v-bind(columnGap);
+	border-radius: v-bind(radius);
+	.app-name {
+		height: 24px;
 		line-height: 24px;
-		position: absolute;
-		bottom: v-bind(columnPosition);
 		font-size: 12px;
-		text-align: center;
 		color: v-bind(color);
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.mask {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 100;
 	}
 }
-.app-box {
-	height: 100%;
+.app-container-size-1x1 {
+	width: v-bind(appSize);
+	height: v-bind(appSize);
+	.app-item {
+		width: v-bind(appSize);
+		height: v-bind(appSize);
+		border-radius: v-bind(radius);
+		background-color: v-bind(bgColor);
+		overflow: hidden;
+		&:hover {
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		}
+	}
+	.app-name {
+		flex: 1;
+		width: 100%;
+		font-size: 12px;
+		text-align: center;
+	}
+}
+.app-container-size-3x1 {
+	width: calc((v-bind(appSize) * 3) + (2 * $columnGap));
+	height: v-bind(appSize);
+	grid-column: span 3;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: v-bind(radius);
-	overflow: hidden;
+	background-color: v-bind(bgColor);
 	&:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	}
+	.app-item {
+		width: v-bind(appSize);
+		height: v-bind(appSize);
+		border-radius: v-bind(radius);
+		background-color: v-bind(bgColor);
+		overflow: hidden;
+		flex-shrink: 0;
+	}
+	.app-name {
+		height: 20px !important;
+		line-height: 20px !important;
+		margin-bottom: -2px;
+		text-align: left;
+		font-weight: bold;
+	}
+	.description {
+		text-align: justify;
+		font-size: 12px;
+		padding-right: 6px;
+		line-height: 18px;
+		box-sizing: border-box;
+		color: v-bind(color);
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		opacity: 0.6;
+	}
 }
-.app-size-1x1 {
-	width: $width;
-	height: $width;
-}
-.app-size-1x2 {
-	width: $width;
-	height: calc(($height * 2) + $rowGap);
-	grid-column: span 1;
-	grid-row: span 2;
-}
-.app-size-2x2 {
-	width: calc(($width * 2) + $columnGap);
-	height: calc(($height * 2) + $rowGap);
-	grid-column: span 2;
-	grid-row: span 2;
-}
-.app-size-5x2 {
-	width: calc(($width * 5) + (4 * $columnGap));
-	height: calc(($width * 2) + $rowGap);
+.app-container-size-5x2 {
+	width: calc((v-bind(appSize) * 5) + (4 * $columnGap));
+	height: calc((v-bind(appSize) * 2) + $rowGap);
 	grid-column: span 5;
 	grid-row: span 2;
+	.app-item {
+		width: 100%;
+		height: 100%;
+		border-radius: v-bind(radius);
+		overflow: hidden;
+	}
+	.app-name {
+		text-align: center;
+	}
 }
 </style>

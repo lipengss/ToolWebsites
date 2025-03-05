@@ -3,9 +3,9 @@
 		<div class="calendar-panel" @click="state.visible = true">
 			<div class="left">
 				<div class="month">
-					<el-link class="btn" :underline="false" :icon="ArrowLeft" @click="subtractMonth" />
+					<el-link class="btn" :underline="false" :icon="ArrowLeft" @click.stop="subtractMonth" />
 					{{ format(state.date, 'YYYY年MM月') }}
-					<el-link class="btn" :underline="false" :icon="ArrowRight" @click="addMonth" />
+					<el-link class="btn" :underline="false" :icon="ArrowRight" @click.stop="addMonth" />
 				</div>
 				<div class="day">{{ format(state.date, 'D') }}</div>
 				<div class="week">第{{ dayOfYear(state.date) }}天 第{{ week(state.date) }}周</div>

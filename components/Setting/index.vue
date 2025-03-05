@@ -113,14 +113,6 @@
 							<el-switch v-model="setting.app.async" @change="setGlobalSetting" />
 						</el-form-item>
 						<template v-if="setting.app.async">
-							<el-form-item label="图标间距">
-								<div class="slider-wrap">
-									<el-slider v-model="setting.app.gap" :min="20" :max="60" :step="1" @change="setGlobalSetting" />
-									<el-tag type="primary">{{ setting.app.gap }}PX</el-tag>
-								</div>
-							</el-form-item>
-						</template>
-						<template v-else>
 							<el-form-item label="X间距">
 								<div class="slider-wrap">
 									<el-slider v-model="setting.app.columnGap" :min="20" :max="60" :step="1" @change="setGlobalSetting" />
@@ -131,6 +123,14 @@
 								<div class="slider-wrap">
 									<el-slider v-model="setting.app.rowGap" :min="20" :max="60" :step="1" @change="setGlobalSetting" />
 									<el-tag type="primary">{{ setting.app.rowGap }}PX</el-tag>
+								</div>
+							</el-form-item>
+						</template>
+						<template v-else>
+							<el-form-item label="图标间距">
+								<div class="slider-wrap">
+									<el-slider v-model="setting.app.gap" :min="20" :max="60" :step="1" @change="setGlobalSetting" />
+									<el-tag type="primary">{{ setting.app.gap }}PX</el-tag>
 								</div>
 							</el-form-item>
 						</template>

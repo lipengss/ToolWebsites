@@ -124,6 +124,14 @@ export const useSettingsStore = defineStore('settingStore', {
 			const item = state.engineList.find((item) => item.name === this.setting.search.engines);
 			return item || ({} as IEngineItem);
 		},
+		getRowGap(state) {
+			const { async, gap, rowGap } = state.setting.app;
+			return (async ? rowGap : gap) + 'px';
+		},
+		getColumnGap(state) {
+			const { async, gap, columnGap } = state.setting.app;
+			return (async ? columnGap : gap) + 'px';
+		},
 	},
 	actions: {
 		// 初始化配置
@@ -133,6 +141,7 @@ export const useSettingsStore = defineStore('settingStore', {
 				this.setting = Local.get(GLOBAL_SETTING);
 			} else {
 				this.setDefaultHotWebSiteList();
+				console.log('this.setting', this.setting);
 				Local.set(GLOBAL_SETTING, this.setting);
 			}
 			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);

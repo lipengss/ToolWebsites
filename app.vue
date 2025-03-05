@@ -72,19 +72,25 @@ function onScroll({ scrollTop }: { scrollLeft: number; scrollTop: number }) {
 	}
 }
 
-const nuxtPageWrapWheel = useThrottle((event: any) => {
-	let delta = 0;
-	delta += event.deltaY;
-	if (delta > 50) {
-		console.log('向下滚动');
-		routerPush('down');
-		delta = 0;
-	} else if (delta < -50) {
-		console.log('向上滚动');
-		routerPush('up');
-		delta = 0;
-	}
-}, 2000);
+let totalDeltaY = 0; // 记录累计滚动距离
+let scrollTimeout: any;
+
+function nuxtPageWrapWheel(event: any) {
+	clearTimeout(scrollTimeout);
+	// 累计滚动幅度
+	totalDeltaY += event.deltaY;
+	scrollTimeout = setTimeout(() => {
+		if (Math.abs(totalDeltaY) >= 50) {
+			if (totalDeltaY > 0) {
+				routerPush('down');
+			} else {
+				routerPush('up');
+			}
+		}
+		// 重置累计滚动值
+		totalDeltaY = 0;
+	}, 300); // 300ms 作为滚轮停止的判断时间
+}
 
 function routerPush(direction?: 'up' | 'down') {
 	// 获取当前路由所在分类的索引
