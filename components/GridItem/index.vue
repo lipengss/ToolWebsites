@@ -1,8 +1,11 @@
 <template>
 	<div :class="`app-container-size-${meta.layout} animate__animated animate__fadeIn`" :style="`--delay:${index}s`">
-		<div v-if="meta.tag.includes('card') && meta.layout === '5x2'" class="app-item">
-			<component :is="card[app.component]" />
-		</div>
+		<template v-if="meta.tag.includes('card') && meta.layout === '5x2'">
+			<div class="app-item">
+				<component :is="card[app.component]" />
+			</div>
+			<div class="app-name">{{ props.app.name }}</div>
+		</template>
 		<template v-else>
 			<div class="app-item" @contextmenu.stop="onContextmenu" @click="onclick" data-type="app">
 				<div class="mask"></div>
