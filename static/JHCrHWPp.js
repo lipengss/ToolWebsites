@@ -1,1 +1,0 @@
-import{d2 as n,a4 as t}from"./DHA6yrn7.js";function l(o){const{copy:a}=n({source:o.value});function e(){a(o.value),t.success("复制成功")}function s(u){u.value=o.value}return{onCopy:e,onPaste:s}}export{l as u};
