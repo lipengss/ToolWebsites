@@ -6,7 +6,7 @@
 					<el-form ref="formRef" :model="state.customIconForm" label-width="100px">
 						<el-form-item label="应用图标">
 							<div class="app-icon">
-								<Application :app="state.customIconForm" />
+								<GridItem :app="state.customIconForm" :index="0" />
 							</div>
 						</el-form-item>
 						<el-form-item label="应用名称" prop="name" :rules="{ required: true, message: '请输入应用名称' }">
@@ -54,7 +54,7 @@
 						<el-form-item label="图标布局" prop="layout">
 							<el-radio-group v-model="state.customIconForm.meta.layout">
 								<el-radio-button label="1x1" value="1x1" />
-								<el-radio-button label="2x2" value="2x2" />
+								<el-radio-button label="3x1" value="3x1" />
 								<el-radio-button label="5x2" value="5x2" />
 							</el-radio-group>
 						</el-form-item>
@@ -212,14 +212,14 @@ defineExpose({ open, edit });
 .split-pane {
 	display: grid;
 	grid-gap: 20px;
-	grid-template-columns: 1fr 450px;
+	grid-template-columns: 1fr 350px;
 }
 
-.app-icon {
-	width: 60px;
-	height: 60px;
-	border-radius: 10px;
-	overflow: hidden;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+// .app-icon {
+// 	width: 60px;
+// 	height: 60px;
+// 	border-radius: 10px;
+// 	overflow: hidden;
+// 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+// }
 </style>

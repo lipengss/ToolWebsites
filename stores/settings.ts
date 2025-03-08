@@ -35,7 +35,7 @@ const defaultSetting: ISetting = {
 		autoTime: 60000,
 	},
 	menuBar: {
-		position: 'left',
+		position: 'right',
 		routePath: '/',
 		width: 60,
 		blur: 6,
@@ -55,7 +55,7 @@ const defaultSetting: ISetting = {
 		bgColor: predefineColors[0],
 	},
 	app: {
-		screenWidth: 80,
+		screenWidth: 96,
 		unit: '%',
 		size: 60,
 		radius: 10,

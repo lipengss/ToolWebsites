@@ -53,13 +53,14 @@ const isMobileFn = () => {
 		setting.value.isMobile = true;
 		setGlobalSetting();
 	} else {
+		const { async, columnGap, gap, rowGap, screenWidth } = setting.value.app;
 		document.body.classList.remove('mobile');
 		setting.value.isMobile = false;
-		setting.value.app.async = true;
-		setting.value.app.gap = 30;
-		setting.value.app.columnGap = 30;
-		setting.value.app.rowGap = 30;
-		setting.value.app.screenWidth = 90;
+		setting.value.app.async = async;
+		setting.value.app.gap = gap;
+		setting.value.app.columnGap = columnGap;
+		setting.value.app.rowGap = rowGap;
+		setting.value.app.screenWidth = screenWidth;
 		setGlobalSetting();
 	}
 };

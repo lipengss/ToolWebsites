@@ -1,16 +1,32 @@
-/* 页面宽度小于800px
-------------------------------- */
-@media screen and (max-width: 800px) {
-	.el-dialog {
-		width: 96% !important;
+// 移动端适配
+@media screen and (max-width: 768px) {
+	.mobile {
+		.el-dialog {
+			width: 96% !important;
+		}
+		.el-dialog.is-fullscreen {
+			width: 100% !important;
+		}
+		.nuxt-container {
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+			.engines .content .my-search {
+				width: 90%;
+			}
+		}
+		.menu-aside {
+			display: none !important;
+		}
+		.container-grid {
+			width: 100%;
+			padding: 10px 0 60px !important;
+		}
 	}
-	.el-dialog.is-fullscreen {
-		width: 100% !important;
-	}
-  .container-grid{
-    width: 100%;
-  }
-	.el-container-child{
-		padding: 0 !important;
+}
+
+// 页面最小宽度 1200px
+@media screen and (min-width: 1200px) {
+	.container-grid {
+		width: 1200px !important;
 	}
 }
