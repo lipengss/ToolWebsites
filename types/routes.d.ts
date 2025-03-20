@@ -3,6 +3,8 @@ interface RouteItem {
 	path?: string;
 	component?: any;
 	children?: Array<RouteItem>;
+	classify?: string | string[];
+	companyName?: string;
 	meta: {
 		[key: string]: any;
 		value?: string; // 图标

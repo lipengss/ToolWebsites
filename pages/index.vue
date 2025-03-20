@@ -2,7 +2,7 @@
 	<div class="container-vertical">
 		<filter-tag v-model:active="active" />
 		<GirdLayout>
-			<GridItem v-for="(app, index) in getApps(active)" :app="app" :index="index" />
+			<Card v-for="(app, index) in getApps(active)" :app="app" :index="index" />
 		</GirdLayout>
 	</div>
 </template>

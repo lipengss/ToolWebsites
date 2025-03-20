@@ -10,7 +10,7 @@
 						:class="{ active: route.path === setting.menuBar.routePath }"
 						@click="onChangeMenu(route.path)"
 					>
-						<el-icon>
+						<el-icon :size="route.meta.size">
 							<svg-icon v-if="route.meta.icon" :name="route.meta.icon" />
 						</el-icon>
 						<div class="title">{{ route.name }}</div>

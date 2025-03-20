@@ -6,10 +6,8 @@ export const categories = [
 		meta: {
 			rank: 0,
 			icon: 'menu-home',
-			tags: [],
-			// tgas: [
-			// 	{ label: 'AI', value: 'ai', checked: false }
-			// ],
+			size: 18,
+			classify: 'all',
 		},
 	},
 	{
@@ -17,28 +15,50 @@ export const categories = [
 		path: '/ai',
 		meta: {
 			rank: 0,
-			icon: 'menu-editor',
-			tags: [
-				{
-					label: 'AI',
-					value: 'ai',
-					checked: false,
-				},
-			],
+			icon: 'menu-ai',
+			size: 18,
+			classify: 'ai',
 		},
 	},
 	{
-		name: '编程',
+		name: '设计',
+		path: '/design',
+		meta: {
+			rank: 0,
+			icon: 'menu-designer',
+			size: 18,
+			classify: 'design',
+		},
+	},
+	{
+		name: '前端',
 		path: '/developer',
 		meta: {
 			rank: 0,
-			icon: 'menu-editor',
-			tags: [
-				{ label: '软件开发', value: 'developer', checked: false },
-				{ label: '虚拟现实 VR', value: 'vr', checked: false },
-				{ label: '物联网 LOT', value: 'lot', checked: false },
-				{ label: '产品/设计', value: 'designer', checked: false },
-			],
+			icon: 'menu-frontend',
+			size: 14,
+			classify: 'frontend',
+		},
+	},
+	{
+		name: '后端',
+		path: '/developer',
+		meta: {
+			rank: 0,
+			icon: 'menu-backend',
+			size: 15,
+			classify: 'backend',
+		},
+	},
+	{
+		name: '新闻',
+		path: '/news',
+		type: 'news',
+		meta: {
+			rank: 0,
+			icon: 'menu-news',
+			size: 20,
+			classify: 'news',
 		},
 	},
 	{
@@ -48,13 +68,8 @@ export const categories = [
 		meta: {
 			rank: 0,
 			icon: 'menu-amusement',
-			tags: [
-				{ label: '艺术', value: 'art', checked: false },
-				{ label: '游戏', value: 'games', checked: false },
-				{ label: '视频', value: 'videos', checked: false },
-				{ label: '资讯', value: 'news', checked: false },
-				{ label: '学习/效率', value: 'efficiency', checked: false },
-			],
+			size: 18,
+			classify: 'amusement',
 		},
 	},
 ];
