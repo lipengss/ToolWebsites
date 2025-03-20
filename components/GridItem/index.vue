@@ -1,15 +1,19 @@
 <template>
 	<div :class="`app-container-size-${meta.layout} animate__animated animate__fadeIn`" :style="`--delay:${index}s`">
-		<div v-if="meta.tag.includes('card') && meta.layout === '5x2'" class="app-item">
-			<component :is="card[app.component]" />
-		</div>
+		<template v-if="meta.tag.includes('card') && meta.layout === '5x2'">
+			<div class="app-item">
+				<component :is="card[app.component]" />
+			</div>
+			<div v-if="showTitle" class="app-name">{{ props.app.name }}</div>
+		</template>
 		<template v-else>
 			<div class="app-item" @contextmenu.stop="onContextmenu" @click="onclick" data-type="app">
 				<div class="mask"></div>
 				<Application :app="app" />
 			</div>
 			<div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center">
-				<div class="app-name">{{ props.app.name }}</div>
+				<div v-if="meta.layout === '1x1' && showTitle" class="app-name">{{ props.app.name }}</div>
+				<div v-if="meta.layout === '3x1'" class="app-name">{{ props.app.name }}</div>
 				<div v-if="meta.layout === '3x1'" class="description">{{ meta.description }}</div>
 			</div>
 		</template>
@@ -43,15 +47,9 @@ const { setGlobalSetting } = useSettingsStore();
 
 // 应用全局设置
 const appSize = computed(() => `${setting.value.app.size}px`);
-
 const radius = computed(() => setting.value.app.radius + 'px');
 const opacity = computed(() => setting.value.app.opacity);
-
-function contextmenu(event: Event) {
-	event.preventDefault();
-	if (props.disabledContextmenu) return;
-	mitt.emit('contextmenuApp', { event: event, name: meta.value.name });
-}
+const showTitle = computed(() => setting.value.app.showTitle);
 
 // 应用个性化设置
 const color = computed(() => meta.value.color || '#fff');
@@ -91,7 +89,6 @@ $rowGap: v-bind(getRowGap);
 div[class*='app-container'] {
 	cursor: pointer;
 	position: relative;
-	opacity: v-bind(opacity);
 	border-radius: v-bind(radius);
 	.app-name {
 		height: 24px;
@@ -100,6 +97,7 @@ div[class*='app-container'] {
 		color: v-bind(color);
 		overflow: hidden;
 		text-overflow: ellipsis;
+		opacity: v-bind(opacity);
 	}
 	.mask {
 		width: 100%;
@@ -119,6 +117,7 @@ div[class*='app-container'] {
 		border-radius: v-bind(radius);
 		background-color: v-bind(bgColor);
 		overflow: hidden;
+		opacity: v-bind(opacity);
 		&:hover {
 			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 		}
@@ -136,6 +135,7 @@ div[class*='app-container'] {
 	grid-column: span 3;
 	display: flex;
 	background-color: v-bind(bgColor);
+	opacity: v-bind(opacity) !important;
 	&:hover {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	}
@@ -143,7 +143,6 @@ div[class*='app-container'] {
 		width: v-bind(appSize);
 		height: v-bind(appSize);
 		border-radius: v-bind(radius);
-		background-color: v-bind(bgColor);
 		overflow: hidden;
 		flex-shrink: 0;
 	}
@@ -166,7 +165,7 @@ div[class*='app-container'] {
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
-		opacity: 0.6;
+		opacity: v-bind(opacity);
 	}
 }
 .app-container-size-5x2 {
@@ -178,6 +177,7 @@ div[class*='app-container'] {
 		width: 100%;
 		height: 100%;
 		border-radius: v-bind(radius);
+		opacity: v-bind(opacity);
 		overflow: hidden;
 	}
 	.app-name {

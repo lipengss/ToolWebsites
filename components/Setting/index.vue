@@ -238,7 +238,6 @@ const activeName = ref('theme');
 
 function changeThemeColor() {
 	onColorPickerChange();
-	// setGlobalSetting();
 }
 </script>
 <style lang="scss" scoped>

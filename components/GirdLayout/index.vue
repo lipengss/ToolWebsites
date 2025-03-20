@@ -24,7 +24,7 @@ const appSize = computed(() => setting.value.app.size + 'px');
 	row-gap: v-bind(getRowGap);
 	margin: 0 auto;
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 20px 0;
 	padding-bottom: 60px;
 }
 </style>
