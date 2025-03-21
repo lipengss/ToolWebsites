@@ -1,4 +1,4 @@
-import { websites } from './websiteList';
+import websites from './website.json';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 

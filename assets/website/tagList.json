@@ -1,0 +1,87 @@
+[
+	{
+		"label": "工具",
+		"value": "tool",
+		"color": "#fff67a"
+	},
+	{
+		"label": "平台",
+		"value": "platform",
+		"color": "#e1eaff"
+	},
+	{
+		"label": "在线",
+		"value": "online",
+		"color": "#d9f5d6"
+	},
+	{
+		"label": "免费",
+		"value": "free",
+		"color": "#f0fbef"
+	},
+	{
+		"label": "生成",
+		"value": "ai",
+		"color": "#f98e8b"
+	},
+	{
+		"label": "大模型",
+		"value": "language",
+		"color": "#ad82f7"
+	},
+	{
+		"label": "学习",
+		"value": "learning",
+		"color": "#ffba6b"
+	},
+	{
+		"label": "效率",
+		"value": "efficiency",
+		"color": "#8ee085"
+	},
+	{
+		"label": "视频",
+		"value": "videos",
+		"color": "#82a7fc"
+	},
+	{
+		"label": "新闻",
+		"value": "news",
+		"color": "#14c0ff"
+	},
+	{
+		"label": "设计",
+		"value": "designer",
+		"color": "#d9f3fd"
+	},
+	{
+		"label": "资源",
+		"value": "assets",
+		"color": "#f8b7db"
+	},
+	{
+		"label": "开发",
+		"value": "dev",
+		"color": "#ffa53d"
+	},
+	{
+		"label": "动效",
+		"value": "animation",
+		"color": "#feead2"
+	},
+	{
+		"label": "可视化",
+		"value": "visualize",
+		"color": "#fdddef"
+	},
+	{
+		"label": "社区",
+		"value": "community",
+		"color": "#fbbfbc"
+	},
+	{
+		"label": "社交",
+		"value": "community",
+		"color": "#e9eafb"
+	}
+]

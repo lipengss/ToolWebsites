@@ -125,12 +125,12 @@ onMounted(() => {
 	});
 	const container = document.querySelector('.nuxt-container');
 	if (container) {
-		container.addEventListener('contextmenu', (event) => {
-			context.type = 'container';
-			event.preventDefault();
-			event.stopPropagation();
-			contextmenu(event);
-		});
+		// container.addEventListener('contextmenu', (event) => {
+		// 	context.type = 'container';
+		// 	event.preventDefault();
+		// 	event.stopPropagation();
+		// 	contextmenu(event);
+		// });
 	}
 });
 </script>

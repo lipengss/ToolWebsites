@@ -9,7 +9,7 @@ import { useSettingsStore } from '~/stores/settings';
 const { setting, getColumnGap, getRowGap } = storeToRefs(useSettingsStore());
 
 const screenWidth = computed(() => setting.value.app.screenWidth + setting.value.app.unit);
-const appSize = computed(() => setting.value.app.size + 'px');
+const width = computed(() => setting.value.app.width + 'px');
 </script>
 
 <style lang="scss" scoped>
@@ -17,8 +17,7 @@ const appSize = computed(() => setting.value.app.size + 'px');
 	width: v-bind(screenWidth);
 	display: grid;
 	justify-content: center;
-	grid-template-columns: repeat(auto-fill, 260px);
-	// grid-template-rows: repeat(auto-fill, 80px);
+	grid-template-columns: repeat(auto-fill, v-bind(width));
 	grid-auto-flow: dense;
 	column-gap: v-bind(getColumnGap);
 	row-gap: v-bind(getRowGap);

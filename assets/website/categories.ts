@@ -22,17 +22,17 @@ export const categories = [
 	},
 	{
 		name: '设计',
-		path: '/design',
+		path: '/designer',
 		meta: {
 			rank: 0,
 			icon: 'menu-designer',
 			size: 18,
-			classify: 'design',
+			classify: 'designer',
 		},
 	},
 	{
 		name: '前端',
-		path: '/developer',
+		path: '/frontend',
 		meta: {
 			rank: 0,
 			icon: 'menu-frontend',
@@ -42,7 +42,7 @@ export const categories = [
 	},
 	{
 		name: '后端',
-		path: '/developer',
+		path: '/backend',
 		meta: {
 			rank: 0,
 			icon: 'menu-backend',

@@ -55,7 +55,7 @@ interface ISetting {
 	app: {
 		screenWidth: number;
 		unit: '%' | 'px';
-		size: number;
+		width: number;
 		radius: number;
 		async: boolean;
 		gap: number;

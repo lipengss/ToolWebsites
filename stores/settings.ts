@@ -57,7 +57,7 @@ const defaultSetting: ISetting = {
 	app: {
 		screenWidth: 96,
 		unit: '%',
-		size: 60,
+		width: 260,
 		radius: 10,
 		async: true,
 		gap: 20,

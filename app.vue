@@ -15,8 +15,6 @@
 		<div id="tooltip" class="tooltip">
 			<div class="name"></div>
 		</div>
-		<div id="x-line" class="x-line"></div>
-		<div id="y-line" class="y-line"></div>
 	</el-config-provider>
 	<!-- 右键菜单 -->
 	<Contextmenu />
@@ -25,12 +23,10 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-import { categories } from '~/assets/website/categories';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 
 const route = useRoute();
-const router = useRouter();
 
 const { setGlobalSetting } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
@@ -63,36 +59,11 @@ const isMobileFn = () => {
 	}
 };
 
-function routerPush(direction?: 'up' | 'down') {
-	// 获取当前路由所在分类的索引
-	const index = categories.findIndex((item) => item.path === route.path);
-	if (index !== -1) {
-		if (direction === 'up') {
-			if (index === 0) {
-				router.push({ path: categories[categories.length - 1].path });
-				setting.value.menuBar.routePath = categories[categories.length - 1].path;
-			} else {
-				router.push({ path: categories[index - 1].path });
-				setting.value.menuBar.routePath = categories[index - 1].path;
-			}
-		} else if (direction === 'down') {
-			if (index === categories.length - 1) {
-				router.push({ path: categories[0].path });
-				setting.value.menuBar.routePath = categories[0].path;
-			} else {
-				router.push({ path: categories[index + 1].path });
-				setting.value.menuBar.routePath = categories[index + 1].path;
-			}
-		}
-	}
-}
-
 window.addEventListener('resize', isMobileFn);
 
 onMounted(() => {
 	isMobileFn();
 	setting.value.menuBar.routePath = route.path;
-	routerPush();
 });
 
 useSeoMeta({
@@ -125,15 +96,7 @@ const locale = ref(zhCn);
 		backdrop-filter: v-bind(bgBlur);
 	}
 }
-.x-line,
-.y-line {
-	width: 1px;
-	height: 1px;
-	position: fixed;
-	left: 0;
-	top: 0;
-	background-color: blue;
-}
+
 .tooltip {
 	width: 200px;
 	height: 240px;
