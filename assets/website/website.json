@@ -371,7 +371,7 @@
 			"tag": ["news"],
 			"color": "#ffff",
 			"bgColor": "#303133",
-			"size": 50,
+			"size": 64,
 			"layout": "3x1",
 			"description": "科技资讯,商业评论,明星公司,动态,宏观,趋势,创业,精选,有料,干货,有用,细节,内幕。"
 		}
@@ -426,6 +426,7 @@
 	{
 		"name": "Flaticon",
 		"path": "https://www.flaticon.com/",
+		"classify": "designer",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -440,6 +441,7 @@
 	{
 		"name": "Pexels",
 		"path": "https://www.pexels.com/zh-cn/",
+		"classify": "designer",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -454,6 +456,7 @@
 	{
 		"name": "IconPark",
 		"path": " https://iconpark.oceanengine.com/",
+		"classify": "designer",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -461,6 +464,7 @@
 			"tag": ["designer"],
 			"bgColor": "#fff",
 			"layout": "1x1",
+			"size": 40,
 			"description": "高质量的iconPark,字节跳动制造。"
 		}
 	},
@@ -531,6 +535,7 @@
 	{
 		"name": "今日头条",
 		"path": "https://www.toutiao.com/",
+		"classify": "news",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -544,6 +549,7 @@
 	},
 	{
 		"name": "36氪",
+		"classify": "news",
 		"path": "https://36kr.com/",
 		"meta": {
 			"rank": 0,
@@ -574,22 +580,9 @@
 		}
 	},
 	{
-		"name": "百度翻译",
-		"path": "https://fanyi.baidu.com/mtpe-individual/multimodal?aldtype=16047#/auto/zh",
-		"meta": {
-			"rank": 0,
-			"type": "icon",
-			"value": "app-baidufanyi",
-			"tag": ["efficiency"],
-			"bgColor": "#0299FF",
-			"color": "#fff",
-			"layout": "1x1",
-			"description": "百度翻译"
-		}
-	},
-	{
 		"name": "语雀",
 		"path": "https://www.yuque.com/",
+		"classify": "hot",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -597,6 +590,7 @@
 			"tag": ["efficiency"],
 			"bgColor": "#fff",
 			"layout": "1x1",
+			"size": 40,
 			"description": "博客技术栈在线工具资源网站UI库后端技术稀土掘金微信百..."
 		}
 	},
@@ -619,6 +613,7 @@
 	{
 		"name": "高德地图",
 		"path": "https://ditu.amap.com/",
+		"classify": "hot",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -633,6 +628,7 @@
 	{
 		"name": "loading",
 		"path": "https://css-loaders.com/shapes/",
+		"classify": "designer",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -641,12 +637,14 @@
 			"bgColor": "#fff",
 			"color": "#333",
 			"layout": "1x1",
+			"size": 40,
 			"description": "加载状态"
 		}
 	},
 	{
 		"name": "人人都是产品经理",
 		"path": "http://www.woshipm.com/",
+		"classify": "designer",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -654,6 +652,7 @@
 			"tag": ["designer"],
 			"bgColor": "#fff",
 			"layout": "1x1",
+			"size": 40,
 			"description": "人人都是产品经理致力为产品新人"
 		}
 	},
@@ -880,7 +879,7 @@
 			"type": "text",
 			"value": "摄",
 			"tag": ["assets"],
-			"size": 20,
+			"size": 36,
 			"color": "#fff",
 			"bgColor": "#FF4500",
 			"layout": "1x1",

@@ -326,7 +326,7 @@ export const websites: RouteItem[] = [
 			tag: ['news'],
 			color: '#ffff',
 			bgColor: '#303133',
-			size: 50,
+			size: 60,
 			layout: '3x1',
 			description: '科技资讯,商业评论,明星公司,动态,宏观,趋势,创业,精选,有料,干货,有用,细节,内幕。',
 		},

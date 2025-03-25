@@ -6,7 +6,7 @@
 				<el-icon v-else-if="app.meta.type === 'icon' && app.meta.value" :size="app.meta.size" color="red">
 					<svg-icon :name="app.meta.value" :color="app.meta.color"></svg-icon>
 				</el-icon>
-				<div v-else class="icon-text" :style="{ width: app.meta.size + 'px', height: app.meta.size + 'px' }">{{ app.meta.value }}</div>
+				<span v-else class="icon-text" :style="{ fontSize: app.meta.size + 'px', color: app.meta.color }">{{ app.meta.value }}</span>
 			</div>
 			<div class="right">
 				<div class="title">{{ app.name }}</div>
