@@ -1,11 +1,12 @@
 <template>
 	<GirdLayout>
-		<GridItem size="1x1" v-for="(app, index) in siteList" :name="app.name" :index="index" disabledContextmenu>
-			<Application :app="app" />
-			<div class="mask" @click="onResetWebSite(app)">
-				<el-icon :size="20"><Refresh /></el-icon>
-			</div>
-		</GridItem>
+		<Card size="1x1" v-for="(app, index) in siteList" :app="app" :index="index" disabledContextmenu>
+			<template #default>
+				<div class="mask" @click="onResetWebSite(app)">
+					<el-icon :size="20"><Refresh /></el-icon>
+				</div>
+			</template>
+		</Card>
 	</GirdLayout>
 </template>
 <script setup lang="ts">

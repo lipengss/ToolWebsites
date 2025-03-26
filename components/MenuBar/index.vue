@@ -52,7 +52,7 @@ import { useSettingsStore } from '~/stores/settings';
 import { useEyeDropper, useMouseInElement } from '@vueuse/core';
 import { Star } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
-import { categories } from '~/assets/website/categories';
+import categories from '~/assets/website/menu.json';
 const { openSettingDrawer } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
@@ -144,6 +144,7 @@ watch(
 			.title {
 				font-size: 12px;
 				padding-top: 4px;
+				letter-spacing: 1px;
 			}
 			.el-icon {
 				transition: all 0.2s ease-in-out;

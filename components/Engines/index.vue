@@ -1,9 +1,6 @@
 <template>
 	<ClientOnly>
 		<div class="engines">
-			<!-- <el-button class="toggle-menu">
-				<el-icon color="#fff"><Operation /></el-icon>
-			</el-button> -->
 			<div class="content fixed-top">
 				<div class="date-wrapper" v-if="setting.date.show">
 					<div class="time">{{ state.time }}</div>
@@ -95,7 +92,7 @@
 								<h3 class="engines-record-title">相关应用</h3>
 								<div v-for="(app, index) in filterAppList" class="hot-app-item" @click="toJumpApp(app.path || '')">
 									<span class="hot-app-index">
-										<el-icon :size="16" color="#999"><Clock /></el-icon>
+										<el-icon :size="16" color="#666"><Clock /></el-icon>
 									</span>
 									<div class="hot-app-icon"><Application :app="app" :link="false" /></div>
 									<div class="info">
@@ -133,7 +130,6 @@ import { storeToRefs } from 'pinia';
 import { CaretBottom, Clock, Search } from '@element-plus/icons-vue';
 import { useDateFormat } from '~/hooks/useDateFormat';
 import { useSettingsStore } from '~/stores/settings';
-import { Operation } from '@element-plus/icons-vue';
 import { useApp } from '~/hooks/useApp';
 
 const { setting, engineList, currentEngine } = storeToRefs(useSettingsStore());
@@ -284,26 +280,6 @@ function toJumpQuery(queryString: string) {
 		display: flex;
 		align-items: center;
 	}
-	// .fixed-top {
-	// 	position: fixed;
-	// 	top: 0;
-	// 	left: v-bind(menuWdith);
-	// 	right: 0;
-	// 	display: flex;
-	// 	padding: 10px 20px;
-	// 	box-sizing: border-box;
-	// 	flex-direction: row;
-	// 	align-items: center;
-	// 	justify-content: space-between;
-	// 	background-color: rgba(255, 255, 255, 0.1);
-	// 	backdrop-filter: blur(10px);
-	// 	.date-wrapper {
-	// 		margin-bottom: 0;
-	// 	}
-	// 	.my-search {
-	// 		width: 400px;
-	// 	}
-	// }
 }
 </style>
 <style lang="scss">
@@ -360,7 +336,7 @@ function toJumpQuery(queryString: string) {
 				font-weight: bold;
 				margin: 0;
 				margin-bottom: 4px;
-				color: #fff;
+				color: #333;
 			}
 			.desc {
 				margin: 0;
@@ -369,8 +345,9 @@ function toJumpQuery(queryString: string) {
 				text-overflow: ellipsis;
 				display: -webkit-box;
 				-webkit-line-clamp: 1;
+				line-clamp: 1;
 				-webkit-box-orient: vertical;
-				color: #eee;
+				color: #666;
 			}
 		}
 		.hot-app-icon-hot {

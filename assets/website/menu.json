@@ -1,0 +1,86 @@
+[
+	{
+		"name": "热门",
+		"path": "/",
+		"type": "/",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-home",
+			"size": 18,
+			"classify": "hot"
+		}
+	},
+	{
+		"name": "智能",
+		"path": "/ai",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-ai",
+			"size": 18,
+			"classify": "ai"
+		}
+	},
+	{
+		"name": "新闻",
+		"path": "/news",
+		"type": "news",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-news",
+			"size": 22,
+			"classify": "news"
+		}
+	},
+	{
+		"name": "娱乐",
+		"path": "/amusement",
+		"type": "amusement",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-amusement",
+			"size": 17,
+			"classify": "amusement"
+		}
+	},
+	{
+		"name": "效率",
+		"path": "/efficiency",
+		"type": "efficiency",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-efficiency",
+			"size": 18,
+			"classify": "efficiency"
+		}
+	},
+	{
+		"name": "设计",
+		"path": "/designer",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-designer",
+			"size": 20,
+			"classify": "designer"
+		}
+	},
+	{
+		"name": "前端",
+		"path": "/frontend",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-frontend",
+			"size": 14,
+			"classify": "frontend"
+		}
+	},
+	{
+		"name": "后端",
+		"path": "/backend",
+		"meta": {
+			"rank": 0,
+			"icon": "menu-backend",
+			"size": 15,
+			"classify": "backend"
+		}
+	}
+]

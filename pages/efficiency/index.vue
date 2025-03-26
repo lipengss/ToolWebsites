@@ -7,24 +7,17 @@
 	</div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useSettingsStore } from '~/stores/settings';
 import { useApp } from '~/hooks/useApp';
-const settingStore = useSettingsStore();
-const { initGlobalSetting } = settingStore;
 
-const active = ref('hot');
 const { getApps } = useApp();
 
-onMounted(() => {
-	initGlobalSetting();
-});
+const active = ref('efficiency');
 </script>
 <style lang="scss" scoped>
-.filter-tag {
-	margin: 0 auto;
-	.el-tag {
-		cursor: pointer;
-	}
+.developer {
+	position: relative;
+	z-index: 100;
+	font-size: 24px;
+	color: #fff;
 }
 </style>

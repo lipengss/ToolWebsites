@@ -8,7 +8,7 @@
 						<el-form-item prop="name" :rules="{ required: true, message: '请输入应用名称' }">
 							<el-input v-model="state.customIconForm.name" placeholder="应用名称" :prefix-icon="Edit" />
 						</el-form-item>
-						<el-form-item prop="name" :rules="{ required: true, message: '请输入所属机构' }">
+						<el-form-item prop="companyName" :rules="{ required: true, message: '请输入所属机构' }">
 							<el-input v-model="state.customIconForm.companyName" placeholder="所属机构">
 								<template #prefix>
 									<svg-icon name="company" />
@@ -23,7 +23,7 @@
 							</el-input>
 						</el-form-item>
 						<el-form-item prop="meta.tag" :rules="{ required: true, message: '必选选择一个标签' }">
-							<el-select v-model="state.customIconForm.meta.tag" multiple placeholder="Select" style="width: 100%">
+							<el-select v-model="state.customIconForm.meta.tag" multiple placeholder="选择一个标签" style="width: 100%">
 								<el-option v-for="tag in tagList" :key="tag.value" :label="tag.label" :value="tag.value">
 									<div class="option-item">
 										<div class="block" :style="`--bgColor:${tag.color}`">
@@ -54,10 +54,10 @@
 								</el-form-item>
 							</el-space>
 						</el-form-item>
-						<el-form-item>
+						<el-form-item prop="meta.bgColor">
 							<ColorPicker :colorList="predefineColors" v-model:color="state.customIconForm.meta.bgColor" />
 						</el-form-item>
-						<el-form-item prop="size">
+						<el-form-item prop="meta.size">
 							<el-slider v-model="state.customIconForm.meta.size" :min="40" :max="100" />
 						</el-form-item>
 						<el-form-item prop="meta.description" :rules="{ required: true, message: '请输入描述信息' }">
@@ -147,7 +147,6 @@ function onValidate(callback?: () => void) {
 }
 
 function onSave() {
-	const str = JSON.stringify(state.customIconForm, null, '\t');
 	const { onCopy } = useCopy(toRef(JSON.stringify(state.customIconForm, undefined, 2)));
 	onValidate(() => {
 		onCopy();
@@ -175,6 +174,7 @@ function nextEditApp() {
 
 function open() {
 	state.visible = true;
+	formRef.value.resetFields();
 }
 
 function edit(app: RouteItem) {

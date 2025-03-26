@@ -5,7 +5,7 @@
 			<MenuBar />
 			<NuxtLayout>
 				<Engines />
-				<el-scrollbar>
+				<el-scrollbar @contextmenu.prevent="onContextmenu">
 					<NuxtPage />
 				</el-scrollbar>
 			</NuxtLayout>
@@ -25,6 +25,8 @@ import { useRoute } from 'vue-router';
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
+import mitt from '~/assets/utils/mitt';
+import website from '~/assets/website/website.json';
 
 const route = useRoute();
 
@@ -60,6 +62,31 @@ const isMobileFn = () => {
 };
 
 window.addEventListener('resize', isMobileFn);
+
+function onContextmenu(event: any) {
+	// 阻止默认的右键菜单
+	event.preventDefault();
+	const card = event.target.closest('.card');
+	const { clientX, clientY } = event;
+	if (card) {
+		const name = card.dataset.appName;
+		const curApp = website.find((web) => web.name === name);
+		if (!curApp) return;
+		mitt.emit('contextmenuApp', {
+			app: curApp,
+			type: 'app',
+			clientX,
+			clientY,
+		});
+	} else {
+		mitt.emit('contextmenuApp', {
+			app: {},
+			type: '',
+			clientX,
+			clientY,
+		});
+	}
+}
 
 onMounted(() => {
 	isMobileFn();

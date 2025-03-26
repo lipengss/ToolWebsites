@@ -1,8 +1,6 @@
 <template>
 	<GirdLayout>
-		<GridItem size="1x1" v-for="(app, index) in siteList" :name="app.name" disabledContextmenu :index="index">
-			<Application :app="app" />
-		</GridItem>
+		<Card size="1x1" v-for="(app, index) in siteList" :app="app" :index="index" />
 	</GirdLayout>
 </template>
 <script setup lang="ts">

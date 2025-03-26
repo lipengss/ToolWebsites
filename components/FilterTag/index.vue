@@ -7,7 +7,7 @@
 </template>
 <script setup lang="ts">
 import { computed, defineEmits } from 'vue';
-import { categories } from '~/assets/website/categories';
+import categories from '~/assets/website/menu.json';
 import { useRoute } from 'vue-router';
 
 const props = defineProps<{
@@ -19,12 +19,13 @@ const route = useRoute();
 const emit = defineEmits(['update:active']);
 
 const filterTagList = computed(() => {
-	const currentRoute = categories.find((n) => n.path === route.path);
-	if (currentRoute && currentRoute.meta.tags) {
-		return currentRoute.meta.tags;
-	} else {
-		return [];
-	}
+	// const currentRoute = categories.find((n) => n.path === route.path);
+	// if (currentRoute && currentRoute.meta.tags) {
+	// 	return currentRoute.meta.tags;
+	// } else {
+	// 	return [];
+	// }
+	return [];
 });
 
 function onActive(tag: { value: string; label: string; checked: boolean }) {

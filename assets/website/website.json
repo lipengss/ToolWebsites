@@ -2,7 +2,7 @@
 	{
 		"name": "腾讯元宝",
 		"path": "https://yuanbao.tencent.com/",
-		"classify": "AI",
+		"classify": "ai",
 		"companyName": "深圳市腾讯计算机系统有限公司",
 		"meta": {
 			"rank": 1000,
@@ -19,7 +19,7 @@
 	{
 		"name": "UI生成",
 		"path": "https://v0.dev/",
-		"classify": "AI",
+		"classify": "ai",
 		"companyName": "深圳市腾讯计算机系统有限公司",
 		"meta": {
 			"rank": 0,
@@ -36,7 +36,7 @@
 	{
 		"name": "火山引擎",
 		"path": "https://console.volcengine.com/",
-		"classify": "AI",
+		"classify": "ai",
 		"companyName": "北京火山引擎科技有限公司",
 		"meta": {
 			"rank": 0,
@@ -205,6 +205,7 @@
 	{
 		"name": "MDN",
 		"path": "https://developer.mozilla.org/zh-CN/",
+		"classify": "frontend",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -221,7 +222,7 @@
 	{
 		"name": "图片压缩",
 		"path": "https://squoosh.app/",
-		"classify": "designer",
+		"classify": ["designer", "efficiency"],
 		"companyName": "GoogleChromeLabs",
 		"meta": {
 			"rank": 0,
@@ -237,7 +238,7 @@
 	{
 		"name": "测网速",
 		"path": "https://www.speedtest.cn/",
-		"classify": "amusement",
+		"classify": ["efficiency", "hot"],
 		"companyName": "巨擎网络科技（济南）有限公司",
 		"meta": {
 			"rank": 0,
@@ -253,6 +254,7 @@
 	{
 		"name": "菜鸟",
 		"path": "https://www.runoob.com/",
+		"classify": ["frontend"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -364,6 +366,7 @@
 	{
 		"name": "虎 嗅 网",
 		"path": "https://www.bilibili.com/",
+		"classify": "news",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -379,6 +382,7 @@
 	{
 		"name": "豆 瓣 网",
 		"path": "https://www.douban.com/",
+		"classify": ["amusement", "hot"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -565,7 +569,7 @@
 	{
 		"name": "ChatGPT",
 		"path": "https://chat.openai.com/",
-		"classify": "ai",
+		"classify": ["ai", "hot"],
 		"companyName": "openAi",
 		"meta": {
 			"rank": 100,
@@ -582,7 +586,7 @@
 	{
 		"name": "语雀",
 		"path": "https://www.yuque.com/",
-		"classify": "hot",
+		"classify": "efficiency",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -597,6 +601,7 @@
 	{
 		"name": "Discord",
 		"path": "https://discord.com/",
+		"classify": "efficiency",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -613,12 +618,12 @@
 	{
 		"name": "高德地图",
 		"path": "https://ditu.amap.com/",
-		"classify": "hot",
+		"classify": "efficiency",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-gaode",
-			"tag": ["efficiency"],
+			"tag": ["efficiency", "platform"],
 			"bgColor": "#fff",
 			"size": 66,
 			"layout": "1x1",
@@ -718,11 +723,12 @@
 	{
 		"name": "Chrome",
 		"path": "https://www.google.com/",
+		"classify": ["efficiency", "hot"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-chrome",
-			"tag": ["news"],
+			"tag": ["platform", "efficiency"],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -732,11 +738,12 @@
 	{
 		"name": "Bing",
 		"path": "https://www.bing.com/",
+		"classify": ["efficiency", "hot"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-bing",
-			"tag": ["news"],
+			"tag": ["platform", "efficiency"],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -746,11 +753,12 @@
 	{
 		"name": "百度",
 		"path": "https://www.baidu.com/",
+		"classify": ["efficiency", "hot"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-baidu",
-			"tag": ["news"],
+			"tag": ["platform", "efficiency"],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -791,7 +799,7 @@
 	{
 		"name": "DeepSeek",
 		"path": "https://chat.deepseek.com/",
-		"classify": "ai",
+		"classify": ["ai", "hot"],
 		"companyName": "杭州深度求索人工智能基础技术研究有限公司",
 		"meta": {
 			"rank": 180,
@@ -808,7 +816,7 @@
 	{
 		"name": "AiPPT",
 		"path": "https://www.aippt.cn",
-		"classify": "ai",
+		"classify": ["ai", "hot"],
 		"companyName": "北京饼干科技有限公司",
 		"meta": {
 			"rank": 0,
@@ -825,6 +833,7 @@
 	{
 		"name": "unDraw",
 		"path": "https://undraw.co/",
+		"classify": ["designer"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -889,11 +898,12 @@
 	{
 		"name": "有道云笔记",
 		"path": "https://note.youdao.com/web/",
+		"classify": ["efficiency"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-youdaoyun",
-			"tag": ["efficiency"],
+			"tag": ["efficiency", "online"],
 			"size": 62,
 			"color": "#fff",
 			"bgColor": "#FF4500",
@@ -904,11 +914,12 @@
 	{
 		"name": "小霸王",
 		"path": "https://www.yikm.net/",
+		"classify": "amusement",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-xiaobawang",
-			"tag": ["games"],
+			"tag": ["amusement"],
 			"size": 61,
 			"layout": "1x1",
 			"description": "小霸王，其乐无穷 。红白机，FC在线游戏，街机游戏，街机在线"
@@ -982,11 +993,12 @@
 	{
 		"name": "3D资源",
 		"path": "https://polyhaven.com/",
+		"classify": "designer",
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "https://polyhaven.com/favicon.ico",
-			"tag": ["designer", "vr"],
+			"tag": ["designer", "assets"],
 			"size": 46,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -997,11 +1009,12 @@
 	{
 		"name": "Pixi.js",
 		"path": "https://pixijs.huashengweilai.com/",
+		"classify": "frontend",
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "https://pixijs.huashengweilai.com/favicon.png",
-			"tag": ["developer"],
+			"tag": ["http", "animation"],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -1012,11 +1025,12 @@
 	{
 		"name": "GSAP",
 		"path": "https://gsap.com/",
+		"classify": "frontend",
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "http://192.168.1.82:8669/ToolWebsites/static/assets/img/app-gsap.webp",
-			"tag": ["developer"],
+			"tag": ["dev", "animation"],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -1027,11 +1041,12 @@
 	{
 		"name": "WebPickerTools",
 		"path": "https://www.codeandweb.com/",
+		"classify": "frontend",
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "https://www.codeandweb.com/favicons/icon-144x144-cf4325912be17b4b1dd1914fefcba95f.png",
-			"tag": ["developer"],
+			"tag": ["dev", "tool"],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -1092,11 +1107,12 @@
 	{
 		"name": "探索点子",
 		"path": "https://www.pinterest.com/",
+		"classify": "designer",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-pinterest",
-			"tag": ["designer"],
+			"tag": ["designer", "assets"],
 			"size": 45,
 			"color": "#333",
 			"bgColor": "#fff",
@@ -1151,5 +1167,22 @@
 			"layout": "3x1",
 			"description": "世界上最优秀的开发人员、设计师"
 		}
+	},
+	{
+		"name": "维基百科",
+		"path": "https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5",
+		"classify": "efficiency",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://zh.wikipedia.org/static/favicon/wikipedia.ico",
+			"tag": ["learning", "efficiency"],
+			"color": "#ffff",
+			"bgColor": "#FFFFFF",
+			"size": 45,
+			"layout": "3x1",
+			"description": "自由内容、自由编辑、自由著作权。目前是全球网络上最大且最受大众欢迎的参考工具书。"
+		},
+		"companyName": "维基媒体基金会"
 	}
 ]

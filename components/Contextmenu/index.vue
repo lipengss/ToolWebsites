@@ -69,13 +69,6 @@ const context = reactive({
 	type: '',
 });
 
-function contextmenu(event: any) {
-	const { clientX, clientY } = event;
-	context.clientX = clientX;
-	context.clientY = clientY;
-	context.show = true;
-}
-
 function onDeleteApp() {
 	const { name } = curApp.value;
 	const names = setting.value.excludeWeb.map((item) => item.name);
@@ -110,12 +103,23 @@ function onLikeApp() {
 }
 
 mitt.on('contextmenuApp', ({ app, type, clientX, clientY }: { app: RouteItem; type: string; clientX: number; clientY: number }) => {
+	context.clientX = clientX;
+	context.clientY = clientY;
+	context.show = true;
 	if (type === 'app') {
 		curApp.value = app;
 		context.type = type;
-		context.clientX = clientX;
-		context.clientY = clientY;
-		context.show = true;
+	} else {
+		curApp.value = {
+			name: '',
+			path: '',
+			meta: {
+				rank: 0,
+				icon: '',
+				layout: '',
+			},
+		};
+		context.type = type;
 	}
 });
 
@@ -123,15 +127,6 @@ onMounted(() => {
 	window.addEventListener('click', () => {
 		context.show = false;
 	});
-	const container = document.querySelector('.nuxt-container');
-	if (container) {
-		// container.addEventListener('contextmenu', (event) => {
-		// 	context.type = 'container';
-		// 	event.preventDefault();
-		// 	event.stopPropagation();
-		// 	contextmenu(event);
-		// });
-	}
 });
 </script>
 <style lang="scss" scoped>

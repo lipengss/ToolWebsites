@@ -1,5 +1,5 @@
 <template>
-	<div class="card" @contextmenu.prevent="onContextmenu" @click="onclick">
+	<div class="card" :data-app-name="app.name" @click="onclick">
 		<div class="top">
 			<div class="logo">
 				<img v-if="app.meta.type === 'img'" :src="app.meta.value" :width="app.meta.size" :height="app.meta.size" />
@@ -25,6 +25,7 @@
 				<el-text class="mx-1" type="primary">详情</el-text>
 			</div>
 		</div>
+		<slot />
 	</div>
 </template>
 <script setup lang="ts">
@@ -61,19 +62,6 @@ function onclick() {
 const bgColor = computed(() => props.app.meta.bgColor);
 
 const tags = computed(() => tagList.filter((item) => props.app.meta.tag.includes(item.value)));
-
-function onContextmenu(event: any) {
-	const card = event.target.closest('.card');
-	if (card) {
-		const { clientX, clientY } = event;
-		mitt.emit('contextmenuApp', {
-			app: props.app,
-			type: 'app',
-			clientX,
-			clientY,
-		});
-	}
-}
 </script>
 
 <style lang="scss" scoped>
@@ -83,6 +71,7 @@ function onContextmenu(event: any) {
 	background-color: #fff;
 	cursor: pointer;
 	transition: all 0.2s ease;
+	position: relative;
 	&:hover {
 		transform: translateY(-2px);
 		box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
