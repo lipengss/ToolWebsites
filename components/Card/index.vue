@@ -100,6 +100,7 @@ const tags = computed(() => tagList.filter((item) => props.app.meta.tag.includes
 			.title {
 				font-size: 14px;
 				font-weight: bold;
+				color: #333;
 			}
 			.company {
 				overflow: hidden;
@@ -114,6 +115,7 @@ const tags = computed(() => tagList.filter((item) => props.app.meta.tag.includes
 				padding: 2px 8px;
 				border-radius: 20px;
 				background-color: var(--bg-color);
+				color: #333;
 			}
 		}
 	}

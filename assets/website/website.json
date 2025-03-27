@@ -17,6 +17,23 @@
 		}
 	},
 	{
+		"name": "Planner5d",
+		"path": "https://planner5d.com/",
+		"classify": ["designer"],
+		"companyName": "Planner5d",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://planner5d.com/favicon.ico",
+			"tag": ["tool", "platform"],
+			"size": 60,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "直接拖拽家具、灯光、装饰品到场景中，模拟真实直播间布局。"
+		}
+	},
+	{
 		"name": "UI生成",
 		"path": "https://v0.dev/",
 		"classify": "ai",
@@ -648,7 +665,7 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-yuque",
-			"tag": ["efficiency", "online","tool"],
+			"tag": ["efficiency", "online", "tool"],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
@@ -681,7 +698,7 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-gaode",
-			"tag": ["efficiency", "platform","tool"],
+			"tag": ["efficiency", "platform", "tool"],
 			"bgColor": "#fff",
 			"size": 66,
 			"layout": "1x1",
@@ -960,19 +977,14 @@
 	},
 	{
 		"name": "新华网",
-		"classify": [
-			"news"
-		],
+		"classify": ["news"],
 		"path": "https://www.xinhuanet.com/",
 		"companyName": "新华网股份有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "https://www.xinhuanet.com/favicon.ico",
-			"tag": [
-				"news",
-				"online"
-			],
+			"tag": ["news", "online"],
 			"size": 48,
 			"bgColor": "#fff",
 			"color": "#333",
@@ -983,19 +995,13 @@
 	{
 		"name": "国家统计局",
 		"path": "https://www.stats.gov.cn/",
-		"classify": [
-			"news"
-		],
+		"classify": ["news"],
 		"companyName": "国家统计局",
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "https://www.stats.gov.cn/favicon.ico",
-			"tag": [
-				"tool",
-				"platform",
-				"online"
-			],
+			"tag": ["tool", "platform", "online"],
 			"size": 51,
 			"color": "#fff",
 			"bgColor": "#fff",
