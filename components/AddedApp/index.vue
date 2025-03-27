@@ -22,6 +22,16 @@
 								</template>
 							</el-input>
 						</el-form-item>
+						<el-form-item prop="classify" :rules="{ required: true, message: '请选择应用分类' }">
+							<el-select v-model="state.customIconForm.classify" multiple placeholder="请选择应用分类" style="width: 100%">
+								<el-option v-for="classify in classifyList" :key="classify.meta.classify" :label="classify.name" :value="classify.meta.classify">
+									<div class="option-item">
+										<svg-icon :name="classify.meta.icon" />
+										<div class="block"> {{ classify.name }} </div>
+									</div>
+								</el-option>
+							</el-select>
+						</el-form-item>
 						<el-form-item prop="meta.tag" :rules="{ required: true, message: '必选选择一个标签' }">
 							<el-select v-model="state.customIconForm.meta.tag" multiple placeholder="选择一个标签" style="width: 100%">
 								<el-option v-for="tag in tagList" :key="tag.value" :label="tag.label" :value="tag.value">
@@ -76,7 +86,7 @@
 	</ClientOnly>
 </template>
 <script setup lang="ts">
-import { nextTick, ref } from 'vue';
+import { nextTick, ref, onMounted } from 'vue';
 import { Link, Edit } from '@element-plus/icons-vue';
 import { websites } from '~/assets/website/index';
 import { predefineColors } from '~/assets/utils/publicData';
@@ -84,6 +94,7 @@ import tagList from '~/assets/website/tagList.json';
 import { useCopy } from '~/hooks/useCopy';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
+import classifyList from '~/assets/website/menu.json';
 
 const state: {
 	visible: boolean;
@@ -95,6 +106,7 @@ const state: {
 	customIconForm: {
 		name: '',
 		path: '',
+		classify: [],
 		companyName: '',
 		meta: {
 			rank: 0,
@@ -184,6 +196,10 @@ function edit(app: RouteItem) {
 		state.customIconForm = cloneApp;
 	});
 }
+
+onMounted(() => {
+	state.customIconForm.classify = [setting.value.menuBar.routePath.slice(1)]
+});
 
 defineExpose({ open, edit });
 </script>

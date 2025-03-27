@@ -11,7 +11,7 @@ import { useApp } from '~/hooks/useApp';
 
 const { getApps } = useApp();
 
-const active = ref('efficiency');
+const active = ref('all');
 </script>
 <style lang="scss" scoped>
 .developer {

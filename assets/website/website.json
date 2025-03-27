@@ -959,6 +959,51 @@
 		}
 	},
 	{
+		"name": "新华网",
+		"classify": [
+			"news"
+		],
+		"path": "https://www.xinhuanet.com/",
+		"companyName": "新华网股份有限公司",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://www.xinhuanet.com/favicon.ico",
+			"tag": [
+				"news",
+				"online"
+			],
+			"size": 48,
+			"bgColor": "#fff",
+			"color": "#333",
+			"layout": "1x1",
+			"description": "中国主要重点新闻网站,依托新华社遍布全球的采编网络,记者遍布世界100多个国家和地区,地方频道分布全国31个省市自治区,每天24小时同时使用6种语言滚动发稿,权威、准确、及时播发国内外重要新闻和重大突发事件,受众覆盖200多个国家和地区,发展论坛是全球知名的中文论坛。"
+		}
+	},
+	{
+		"name": "国家统计局",
+		"path": "https://www.stats.gov.cn/",
+		"classify": [
+			"news"
+		],
+		"companyName": "国家统计局",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://www.stats.gov.cn/favicon.ico",
+			"tag": [
+				"tool",
+				"platform",
+				"online"
+			],
+			"size": 51,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "国家统计局"
+		}
+	},
+	{
 		"name": "有道云笔记",
 		"path": "https://note.youdao.com/web/",
 		"classify": ["efficiency"],
