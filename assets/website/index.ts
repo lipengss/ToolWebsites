@@ -3,34 +3,41 @@ import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 
 // 热点排行
-function filterHoutWebSiteList(type: string | string[]): Array<RouteItem> {
-	let filteredWebsites: Array<RouteItem> = excludes(websites); // 更清晰的变量命名
+function filterHoutWebSiteList(type: string): Array<RouteItem> {
+	let filteredWebsites: Array<RouteItem> = excludes(websites as RouteItem[]); // 更清晰的变量命名
 	// if (typeof type === 'string') {
-	// 	filteredWebsites = type === '/' ? websites : excludeBySingleType(filteredWebsites, type);
+	// 	filteredWebsites = type === '/' ? websites as RouteItem[] : excludeBySingleType(filteredWebsites, type);
 	// } else if (Array.isArray(type)) {
 	// 	filteredWebsites = excludeByMultipleTypes(filteredWebsites, type);
 	// }
+	filteredWebsites = filteredWebsites.filter(n => {
+		if (typeof n.classify ==='string') {
+			return n.classify === type;	
+		} else {
+			return n.classify.includes(type);
+		}
+	})
 	return sortWebRanks(filteredWebsites);
 }
 
-// // 根据单个类型字符串进行过滤
-// function excludeBySingleType(developers: Array<RouteItem>, type: string): Array<RouteItem> {
-// 	return developers.filter((item) => item.type.includes(type));
-// }
+// 根据单个类型字符串进行过滤
+function excludeBySingleType(developers: Array<RouteItem>, type: string): Array<RouteItem> {
+	return developers.filter((item) => item.classify.includes(type));
+}
 
-// // 根据多个类型字符串进行过滤
-// function excludeByMultipleTypes(developers: Array<RouteItem>, types: string[]): Array<RouteItem> {
-// 	const list = developers.filter((item) => {
-// 		if (typeof item.type === 'string') {
-// 			return types.includes(item.type);
-// 		}
-// 		if (Array.isArray(item.type)) {
-// 			return item.type.some((itemType) => types.includes(itemType));
-// 		}
-// 		return false; // 对于非字符串且非数组的item.type，默认返回false
-// 	});
-// 	return list;
-// }
+// 根据多个类型字符串进行过滤
+function excludeByMultipleTypes(developers: Array<RouteItem>, types: string[]): Array<RouteItem> {
+	const list = developers.filter((item) => {
+		if (typeof item.classify === 'string') {
+			return types.includes(item.classify);
+		}
+		if (Array.isArray(item.classify)) {
+			return item.classify.some((itemType) => types.includes(itemType));
+		}
+		return false; // 对于非字符串且非数组的item.type，默认返回false
+	});
+	return list;
+}
 
 function excludes(developers: Array<RouteItem>) {
 	const { setting } = storeToRefs(useSettingsStore());

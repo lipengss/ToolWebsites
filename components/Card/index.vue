@@ -31,7 +31,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue';
 import tagList from '~/assets/website/tagList.json';
-import mitt from '~/assets/utils/mitt';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
 

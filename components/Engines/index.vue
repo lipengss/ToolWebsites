@@ -89,10 +89,12 @@
 								</div>
 							</template>
 							<template v-if="state.query && setting.search.engines === '本地'">
-								<h3 class="engines-record-title">相关应用</h3>
+								<el-affix>
+									<h3 class="engines-record-title">相关应用</h3>
+								</el-affix>
 								<div v-for="(app, index) in filterAppList" class="hot-app-item" @click="toJumpApp(app.path || '')">
 									<span class="hot-app-index">
-										<el-icon :size="16" color="#666"><Clock /></el-icon>
+										<el-icon :size="16"><Clock /></el-icon>
 									</span>
 									<div class="hot-app-icon"><Application :app="app" :link="false" /></div>
 									<div class="info">
@@ -101,7 +103,9 @@
 									</div>
 								</div>
 							</template>
-							<h3 class="engines-record-title">热门应用</h3>
+							<el-affix>
+								<h3 class="engines-record-title">热门应用</h3>
+							</el-affix>
 							<div
 								v-for="(app, index) in getApps('all')
 									.filter((item) => !item.meta.tag.includes('card'))
@@ -287,9 +291,15 @@ function toJumpQuery(queryString: string) {
 	max-height: 300px;
 	overflow: hidden;
 	padding: 10px !important;
-	background-color: v-bind(inputOpacity) !important;
+	background-color: rgba(0, 0, 0, 0.5) !important;
 	border: 1px solid var(--el-border) !important;
 	backdrop-filter: blur(10px);
+	.el-affix--fixed {
+		.engines-record-title {
+			background-color: rgba(0, 0, 0, 0.5);
+			backdrop-filter: blur(10px);
+		}
+	}
 	.engines-record-title {
 		font-size: 14px;
 		font-weight: bold;
@@ -336,7 +346,7 @@ function toJumpQuery(queryString: string) {
 				font-weight: bold;
 				margin: 0;
 				margin-bottom: 4px;
-				color: #333;
+				color: #fff;
 			}
 			.desc {
 				margin: 0;
@@ -347,7 +357,7 @@ function toJumpQuery(queryString: string) {
 				-webkit-line-clamp: 1;
 				line-clamp: 1;
 				-webkit-box-orient: vertical;
-				color: #666;
+				color: #eee;
 			}
 		}
 		.hot-app-icon-hot {
@@ -358,7 +368,7 @@ function toJumpQuery(queryString: string) {
 .engines-popper {
 	min-width: auto !important;
 	min-height: auto !important;
-	background-color: v-bind(inputOpacity) !important;
+	background-color: rgba(0, 0, 0, 0.5) !important;
 	border: 1px solid var(--el-border) !important;
 	backdrop-filter: blur(10px);
 	.serach-engines {

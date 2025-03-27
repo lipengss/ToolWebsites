@@ -228,7 +228,7 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-picture-zip",
-			"tag": ["efficiency", "platform"],
+			"tag": ["efficiency", "platform", "tool"],
 			"bgColor": "#fff",
 			"size": 40,
 			"layout": "1x1",
@@ -365,7 +365,9 @@
 	},
 	{
 		"name": "虎 嗅 网",
-		"path": "https://www.bilibili.com/",
+		"path": "https://www.huxiu.com/",
+		"companyName": "北京虎嗅信息科技股份有限公司",
+		"companyQCCUrl": "https://www.qcc.com/firm/b0576d5c5949666ed2da20362238fd7b.html",
 		"classify": "news",
 		"meta": {
 			"rank": 0,
@@ -382,17 +384,35 @@
 	{
 		"name": "豆 瓣 网",
 		"path": "https://www.douban.com/",
+		"companyName": "北京豆网科技有限公司",
 		"classify": ["amusement", "hot"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-douban",
-			"tag": ["news"],
+			"tag": ["learning", "community"],
 			"color": "#fff",
 			"bgColor": "#2f973e",
 			"size": 36,
 			"layout": "1x1",
 			"description": "提供图书、电影、音乐唱片的推荐、评论和价格比较，以及城市独特的文化生活。"
+		}
+	},
+	{
+		"name": "企查查",
+		"path": "https://www.qcc.com/",
+		"companyName": "企查查科技股份有限公司",
+		"classify": ["efficiency", "hot"],
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://qcc-static.qcc.com/resources/web/omaterial/favicon.png",
+			"tag": ["platform", "efficiency"],
+			"size": 62,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "企查查,查公司,查企业,查老板,查风险,查老赖,失信被执行人,企业查询,公司查询,工商查询"
 		}
 	},
 	{
@@ -404,7 +424,7 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-qq-music",
-			"tag": ["videos"],
+			"tag": ["platform", "online", "muisc"],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
@@ -523,7 +543,7 @@
 	{
 		"name": "新浪微博",
 		"path": "https://weibo.com/",
-		"companyName": "​微博公司​",
+		"companyName": "北京微梦创科网络技术有限公司",
 		"classify": ["amusement", "news"],
 		"meta": {
 			"rank": 0,
@@ -540,6 +560,7 @@
 		"name": "今日头条",
 		"path": "https://www.toutiao.com/",
 		"classify": "news",
+		"companyName": "北京抖音信息服务有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -554,6 +575,7 @@
 	{
 		"name": "36氪",
 		"classify": "news",
+		"companyName": "北京多氪信息科技有限公司",
 		"path": "https://36kr.com/",
 		"meta": {
 			"rank": 0,
@@ -584,14 +606,49 @@
 		}
 	},
 	{
+		"name": "Boords",
+		"path": "https://app.boords.com/",
+		"companyName": "BOORDS",
+		"classify": "amusement",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://app.boords.com/favicon.svg",
+			"tag": ["photo", "tool", "online"],
+			"size": 60,
+			"color": "#fff",
+			"bgColor": "#121212",
+			"layout": "1x1",
+			"description": "在线分镜脚本制作，拖拽式操作，支持团队协作。短视频、广告脚本策划。"
+		}
+	},
+	{
+		"name": "Shotdeck",
+		"path": "https://shotdeck.com/welcome/home",
+		"classify": "amusement",
+		"companyName": "SHOTDECK",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": " https://shotdeck.com/favicon.png",
+			"tag": ["assets", "photo", "efficiency"],
+			"size": 44,
+			"color": "#fff",
+			"bgColor": "#231F20",
+			"layout": "1x1",
+			"description": " ​专业级电影截图数据库，​收录超 1000+ 部电影，涵盖不同年代、风格（如科幻、黑色电影、文艺片等）。"
+		}
+	},
+	{
 		"name": "语雀",
 		"path": "https://www.yuque.com/",
 		"classify": "efficiency",
+		"companyName": "蚂蚁科技集团股份有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-yuque",
-			"tag": ["efficiency"],
+			"tag": ["efficiency", "online","tool"],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
@@ -619,15 +676,16 @@
 		"name": "高德地图",
 		"path": "https://ditu.amap.com/",
 		"classify": "efficiency",
+		"companyName": "高德软件有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-gaode",
-			"tag": ["efficiency", "platform"],
+			"tag": ["efficiency", "platform","tool"],
 			"bgColor": "#fff",
 			"size": 66,
 			"layout": "1x1",
-			"description": "高德地图"
+			"description": "高德地图拥有导航电子地图甲级测绘资质和互联网地图服务甲级测绘资质"
 		}
 	},
 	{
@@ -688,8 +746,9 @@
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
-			"description": "腾讯视频"
-		}
+			"description": "移动端及客厅产品等多种形态为用户提供高清流畅的视频娱乐体验。"
+		},
+		"companyName": "腾讯科技（北京）有限公司"
 	},
 	{
 		"name": "蓝湖",
@@ -708,6 +767,7 @@
 	{
 		"name": "YouTube",
 		"classify": "amusement",
+		"companyName": "Google公司",
 		"path": "https://www.youtube.com/",
 		"meta": {
 			"rank": 0,
@@ -723,12 +783,13 @@
 	{
 		"name": "Chrome",
 		"path": "https://www.google.com/",
+		"companyName": "Alphabet",
 		"classify": ["efficiency", "hot"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-chrome",
-			"tag": ["platform", "efficiency"],
+			"tag": ["platform", "efficiency", "engine"],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -739,11 +800,12 @@
 		"name": "Bing",
 		"path": "https://www.bing.com/",
 		"classify": ["efficiency", "hot"],
+		"companyName": "Microsoft Bing",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-bing",
-			"tag": ["platform", "efficiency"],
+			"tag": ["platform", "efficiency", "engine"],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -753,12 +815,13 @@
 	{
 		"name": "百度",
 		"path": "https://www.baidu.com/",
+		"companyName": "百度（中国）有限公司",
 		"classify": ["efficiency", "hot"],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-baidu",
-			"tag": ["platform", "efficiency"],
+			"tag": ["platform", "efficiency", "engine"],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -871,7 +934,7 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-500px",
-			"tag": ["assets"],
+			"tag": ["assets", "photo"],
 			"size": 40,
 			"color": "#333",
 			"bgColor": "#fff",
@@ -887,7 +950,7 @@
 			"rank": 0,
 			"type": "text",
 			"value": "摄",
-			"tag": ["assets"],
+			"tag": ["assets", "photo"],
 			"size": 36,
 			"color": "#fff",
 			"bgColor": "#FF4500",
@@ -899,16 +962,17 @@
 		"name": "有道云笔记",
 		"path": "https://note.youdao.com/web/",
 		"classify": ["efficiency"],
+		"companyName": "网易",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-youdaoyun",
-			"tag": ["efficiency", "online"],
+			"tag": ["efficiency", "online", "tool"],
 			"size": 62,
 			"color": "#fff",
 			"bgColor": "#FF4500",
 			"layout": "1x1",
-			"description": "记录，成为更好的自己"
+			"description": "分类整理笔记，高效管理个人知识，快速搜索，分类查找，安全备份云端笔记，存储永不丢失的珍贵资料。"
 		}
 	},
 	{
@@ -1091,6 +1155,7 @@
 	{
 		"name": "Tripo",
 		"path": "https://www.tripo3d.ai/",
+		"companyName": "VAST",
 		"classify": "ai",
 		"meta": {
 			"rank": 0,

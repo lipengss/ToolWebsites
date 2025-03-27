@@ -13,7 +13,7 @@ import { useApp } from '~/hooks/useApp';
 const settingStore = useSettingsStore();
 const { initGlobalSetting } = settingStore;
 
-const active = ref('hot');
+const active = ref('all');
 const { getApps } = useApp();
 
 onMounted(() => {

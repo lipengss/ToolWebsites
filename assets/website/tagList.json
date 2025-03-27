@@ -83,5 +83,20 @@
 		"label": "社交",
 		"value": "community",
 		"color": "#e9eafb"
+	},
+	{
+		"label": "搜索",
+		"value": "engine",
+		"color": "#14c0ff"
+	},
+	{
+		"label": "摄影",
+		"value": "photo",
+		"color": "#fff67a"
+	},
+	{
+		"label": "音乐",
+		"value": "muisc",
+		"color": "#ffba6b"
 	}
 ]

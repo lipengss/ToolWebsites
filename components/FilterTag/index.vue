@@ -1,42 +1,70 @@
 <template>
-	<el-space class="filter-tag" v-if="filterTagList.length > 1">
-		<el-check-tag v-for="tag in filterTagList" :key="tag.value" effect="light" round :checked="tag.value === props.active" @click="onActive(tag)">
-			{{ tag.label }}
-		</el-check-tag>
-	</el-space>
+  <el-space class="filter-tag" v-if="filterTagList.length > 1">
+    <div
+      v-for="tag in filterTagList"
+      :key="tag.value"
+      class="tag-wrap"
+      :class="{ active: tag.value === props.active }"
+      :style="{ '--color': tag.color }"
+      @click="onActive(tag)"
+    >
+      <div class="tag">{{ tag.label }}</div>
+    </div>
+  </el-space>
 </template>
+
 <script setup lang="ts">
-import { computed, defineEmits } from 'vue';
-import categories from '~/assets/website/menu.json';
-import { useRoute } from 'vue-router';
+import { defineProps, defineEmits, computed } from 'vue';
+import tagList from '~/assets/website/tagList.json';
+
+interface Tag {
+  value: string;
+  label: string;
+  color: string;
+}
 
 const props = defineProps<{
-	active: string;
+  active: string;
+  tags: string[];
 }>();
 
-const route = useRoute();
+const emit = defineEmits<{
+  'update:active': [value: string];
+}>();
 
-const emit = defineEmits(['update:active']);
-
-const filterTagList = computed(() => {
-	// const currentRoute = categories.find((n) => n.path === route.path);
-	// if (currentRoute && currentRoute.meta.tags) {
-	// 	return currentRoute.meta.tags;
-	// } else {
-	// 	return [];
-	// }
-	return [];
+const filterTagList = computed<Tag[]>(() => {
+  return tagList.filter((tag) => props.tags?.includes(tag.value)).concat({ value: 'all', label: '全部', color: '#fff'}).reverse();
 });
 
-function onActive(tag: { value: string; label: string; checked: boolean }) {
-	emit('update:active', tag.value);
+function onActive(tag: Tag) {
+  emit('update:active', tag.value);
 }
 </script>
+
 <style lang="scss" scoped>
 .filter-tag {
-	margin: 0 auto;
-	.el-tag {
-		cursor: pointer;
-	}
+	min-height: 30px;
+  margin: 0 auto;
+  .tag-wrap {
+    border-radius: 20px;
+    transition: all 0.3s ease;
+		padding: 2px;
+    &.active {
+      border: 1px solid var(--color);
+    }
+    .tag {
+      padding: 4px 16px;
+      font-size: 12px;
+      color: #333;
+      border-radius: 20px;
+      background-color: var(--color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
 }
 </style>

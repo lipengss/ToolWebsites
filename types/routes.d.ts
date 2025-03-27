@@ -3,12 +3,12 @@ interface RouteItem {
 	path?: string;
 	component?: any;
 	children?: Array<RouteItem>;
-	classify?: string | string[];
+	classify: string | string[];
 	companyName?: string;
 	meta: {
 		[key: string]: any;
 		value?: string; // 图标
-		type?: 'img' | 'icon' | 'text';
+		type: 'img' | 'icon' | 'text' | undefined;
 		rank: number; // 排序
 		size?: number; // 图标大小
 		layout?: string; // 1x1 2x2 5x2
