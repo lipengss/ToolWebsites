@@ -186,14 +186,18 @@ function nextEditApp() {
 
 function open() {
 	state.visible = true;
-	formRef.value.resetFields();
+	
 }
 
 function edit(app: RouteItem) {
 	open();
 	const cloneApp = useCloneDeep(app);
 	nextTick(() => {
+		console.log('cloneApp', cloneApp)
 		state.customIconForm = cloneApp;
+		if (typeof cloneApp.classify === 'string') {
+			state.customIconForm.classify = [cloneApp.classify]
+		}
 	});
 }
 

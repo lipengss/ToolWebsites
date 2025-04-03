@@ -317,18 +317,23 @@
 	{
 		"name": "美叶",
 		"path": "https://www.meiye.art/",
-		"classify": "designer",
-		"companyName": "",
+		"classify": [
+			"designer"
+		],
+		"companyName": "广州市美叶科技有限公司",
 		"meta": {
-			"rank": 0,
+			"rank": 1,
 			"type": "icon",
 			"value": "app-meiye",
-			"tag": ["designer", "assets"],
+			"tag": [
+				"designer",
+				"assets"
+			],
 			"bgColor": "#202020",
 			"color": "#fff",
 			"layout": "1x1",
 			"size": 40,
-			"description": "优质设计内容推荐平台。"
+			"description": "美叶是一个发现美，学习美，创作美的设计网站，收集和归类不同设计领域的杰出代表，提供有价值的灵感参照。"
 		}
 	},
 	{
@@ -450,47 +455,68 @@
 	{
 		"name": "Flaticon",
 		"path": "https://www.flaticon.com/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
-			"rank": 0,
+			"rank": 1,
 			"type": "icon",
 			"value": "app-flaticon",
-			"tag": ["designer"],
+			"tag": [
+				"designer",
+				"icon",
+				"assets"
+			],
 			"bgColor": "#fff",
 			"size": 62,
 			"layout": "1x1",
-			"description": "下载免费的图标和贴纸为您的项目"
-		}
+			"description": "是一个专业的图标素材平台，致力于为用户提供高质量、多样化的图标资源。"
+		},
+		"companyName": "Flaticon"
 	},
 	{
 		"name": "Pexels",
 		"path": "https://www.pexels.com/zh-cn/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
-			"rank": 0,
+			"rank": 1,
 			"type": "icon",
 			"value": "app-pexels",
-			"tag": ["designer"],
+			"tag": [
+				"designer",
+				"assets",
+				"picture"
+			],
 			"bgColor": "#07a081",
 			"size": 62,
 			"layout": "1x1",
 			"description": "免费图库，图片质量不错。"
-		}
+		},
+		"companyName": "Pexels"
 	},
 	{
 		"name": "IconPark",
 		"path": " https://iconpark.oceanengine.com/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-iconPark",
-			"tag": ["designer"],
+			"tag": [
+				"designer",
+				"icon",
+				"assets"
+			],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
 			"description": "高质量的iconPark,字节跳动制造。"
-		}
+		},
+		"companyName": "字节跳动"
 	},
 	{
 		"name": "好看视频",
@@ -705,34 +731,69 @@
 		}
 	},
 	{
+		"name": "iStock",
+		"path": "https://www.istockphoto.com/",
+		"classify": ["amusement"],
+		"companyName": "iStockphoto",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://www.istockphoto.com/favicon.ico",
+			"tag": [
+				"designer",
+				"assets",
+				"photo"
+			],
+			"size": 44,
+			"color": "#fff",
+			"bgColor": "#000000",
+			"layout": "1x1",
+			"description": "iStock是一家免版税的国际微型图片供应商，该公司总部位于加拿大艾伯塔省的卡尔加里。该公司提供数以百万计的照片、插图、剪贴画、视频和音频。"
+		}
+	},
+	{
 		"name": "人人都是产品经理",
 		"path": "http://www.woshipm.com/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-product",
-			"tag": ["designer"],
+			"tag": [
+				"designer",
+				"learning",
+				"community"
+			],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
-			"description": "人人都是产品经理致力为产品新人"
-		}
+			"description": "人人都是产品经理是产品经理学习、交流、分享平台，目标人群是产品新人、产品经理等广大产品爱好者。"
+		},
+		"companyName": "深圳聚力创想信息科技"
 	},
 	{
 		"name": "墨刀",
 		"path": "https://modao.cc/brand/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-modao",
-			"tag": ["designer", "platform", "online"],
+			"tag": [
+				"designer",
+				"platform",
+				"online"
+			],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
 			"description": "AI时代的专业级原型设计工具"
-		}
+		},
+		"companyName": "北京磨刀刻石科技有限公司"
 	},
 	{
 		"name": "腾讯视频",
@@ -752,17 +813,24 @@
 	},
 	{
 		"name": "蓝湖",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"path": "https://lanhuapp.com/",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-lanhu",
-			"tag": ["designer", "platform", "online"],
+			"tag": [
+				"designer",
+				"platform",
+				"online"
+			],
 			"bgColor": "#fff",
 			"size": 40,
 			"description": "助互联网团队更好地管理文档和设计图"
-		}
+		},
+		"companyName": "北京尽微致广信息技术有限公司"
 	},
 	{
 		"name": "YouTube",
@@ -896,18 +964,25 @@
 	{
 		"name": "unDraw",
 		"path": "https://undraw.co/",
-		"classify": ["designer"],
+		"classify": [
+			"designer"
+		],
 		"meta": {
-			"rank": 0,
+			"rank": 1,
 			"type": "icon",
 			"value": "app-unDraw",
-			"tag": ["developer", "designer"],
+			"tag": [
+				"designer",
+				"assets",
+				"icon"
+			],
 			"size": 61,
 			"color": "#fff",
 			"bgColor": "#5952D1",
 			"layout": "1x1",
 			"description": "svg插图,免费下载"
-		}
+		},
+		"companyName": "Katerina Limpitsouni"
 	},
 	{
 		"name": "搜狐新闻",
@@ -1102,18 +1177,24 @@
 	{
 		"name": "3D资源",
 		"path": "https://polyhaven.com/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
-			"rank": 0,
+			"rank": 1,
 			"type": "img",
 			"value": "https://polyhaven.com/favicon.ico",
-			"tag": ["designer", "assets"],
+			"tag": [
+				"designer",
+				"assets"
+			],
 			"size": 46,
 			"color": "#fff",
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"description": "公共3D资源库"
-		}
+		},
+		"companyName": "Poly Haven"
 	},
 	{
 		"name": "Pixi.js",
@@ -1217,34 +1298,47 @@
 	{
 		"name": "探索点子",
 		"path": "https://www.pinterest.com/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-pinterest",
-			"tag": ["designer", "assets"],
+			"tag": [
+				"designer",
+				"assets"
+			],
 			"size": 45,
 			"color": "#333",
 			"bgColor": "#fff",
 			"layout": "3x1",
 			"description": "发现想要尝试的食谱、家居创意、时尚灵感及其他创意点子。"
-		}
+		},
+		"companyName": "PINS"
 	},
 	{
 		"name": "Dribbble",
 		"path": "https://dribbble.com/",
-		"classify": "designer",
+		"classify": [
+			"designer"
+		],
 		"meta": {
-			"rank": 0,
+			"rank": 1,
 			"type": "img",
 			"value": "https://cdn.dribbble.com/assets/favicon-99944ff731bb44d3a947810ca8728f177f8deac035a3a4342120c385fd7acb9d.svg",
-			"tag": ["designer", "assets"],
+			"tag": [
+				"designer",
+				"assets",
+				"picture"
+			],
 			"size": 45,
 			"color": "#333",
 			"bgColor": "#fff",
 			"layout": "3x1",
 			"description": "探索世界顶级设计师"
-		}
+		},
+		"companyName": "Tiny公司"
 	},
 	{
 		"name": "design",

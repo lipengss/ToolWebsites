@@ -87,16 +87,25 @@
 	{
 		"label": "搜索",
 		"value": "engine",
-		"color": "#14c0ff"
+		"color": "#65CDF3"
 	},
 	{
 		"label": "摄影",
 		"value": "photo",
-		"color": "#fff67a"
+		"color": "#DAD04B"
 	},
 	{
 		"label": "音乐",
 		"value": "muisc",
-		"color": "#ffba6b"
+		"color": "#F7921E"
+	},{
+		"label": "图标",
+		"value": "icon",
+		"color": "#D15A51"
+	},
+	{
+		"label": "图片",
+		"value": "picture",
+		"color": "#C459EE"
 	}
 ]

@@ -26,7 +26,7 @@ interface ISetting {
 		historyList: any[];
 	};
 	bg: {
-		picture: string[];
+		picture: string;
 		opacity: number; // 遮罩层透明度
 		blur: number; // 遮罩层模糊度
 		auto: boolean;

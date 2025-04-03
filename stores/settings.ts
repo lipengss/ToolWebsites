@@ -141,7 +141,6 @@ export const useSettingsStore = defineStore('settingStore', {
 				this.setting = Local.get(GLOBAL_SETTING);
 			} else {
 				this.setDefaultHotWebSiteList();
-				console.log('this.setting', this.setting);
 				Local.set(GLOBAL_SETTING, this.setting);
 			}
 			document.body.style.setProperty('background-image', `url(${this.setting.bg.picture})`);

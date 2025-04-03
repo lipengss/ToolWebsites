@@ -53,8 +53,11 @@ import { useEyeDropper, useMouseInElement } from '@vueuse/core';
 import { Star } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
 import categories from '~/assets/website/menu.json';
-const { openSettingDrawer } = useSettingsStore();
+const { openSettingDrawer, changeWallpaper } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
+
+
+const imgList = Object.values(import.meta.glob('/assets/wallpaper/*.*', { eager: true })).map((v: any) => v.default);
 
 const router = useRouter();
 
@@ -104,6 +107,13 @@ function onChangeMenu(path: string | undefined) {
 	router.push({ path }).then(() => {
 		setting.value.menuBar.routePath = path;
 	});
+	let picture = ''
+	if (path === '/') {
+		picture = setting.value.bg.picture
+	} else {
+		picture = imgList.find(v => v.includes(path))
+	}
+	document.body.style.setProperty('background-image', `url(${picture})`);
 }
 
 watch(
