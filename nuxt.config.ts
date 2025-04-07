@@ -44,7 +44,17 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-
+	build: {
+		chunkSizeWarningLimit: 1000,
+// 将 chunkSizeWarningLimit 移至 vite 配置中，因为在 build 配置中不支持该属性
+		rollupOptions: {
+			output: {
+				manualChunks: {
+					'lodash-es': ['lodash-es'],
+				},
+			},
+		}
+	},
 	app: {
 		head: {
 			viewport: 'width=device-width, initial-scale=1',

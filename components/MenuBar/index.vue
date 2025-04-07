@@ -53,7 +53,7 @@ import { useEyeDropper, useMouseInElement } from '@vueuse/core';
 import { Star } from '@element-plus/icons-vue';
 import { useRouter } from 'vue-router';
 import categories from '~/assets/website/menu.json';
-const { openSettingDrawer, changeWallpaper } = useSettingsStore();
+const { openSettingDrawer } = useSettingsStore();
 const { setting } = storeToRefs(useSettingsStore());
 
 

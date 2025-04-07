@@ -8,7 +8,7 @@
 			"rank": 1000,
 			"type": "img",
 			"value": "https://cdn-bot.hunyuan.tencent.com/logo.png",
-			"tag": ["platform", "language", "online"],
+			"tag": ["ai", "efficiency"],
 			"size": 45,
 			"color": "#333",
 			"bgColor": "#FFFFFF",
@@ -1388,5 +1388,50 @@
 			"description": "自由内容、自由编辑、自由著作权。目前是全球网络上最大且最受大众欢迎的参考工具书。"
 		},
 		"companyName": "维基媒体基金会"
+	},
+	{
+		"name": "VJ师网",
+		"path": "https://www.vjshi.com/",
+		"classify": [
+			"amusement"
+		],
+		"companyName": "成都光厂创意科技有限公司",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://www.vjshi.com/favicon.ico",
+			"tag": [
+				"photo",
+				"assets"
+			],
+			"size": 55,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "光厂（VJ师网）拥有数千万正版视频素材，AE模板，在这里卖方可以将创意变现，买方可以快速找到所需素材。"
+		}
+	},
+	{
+		"name": "新片场",
+		"path": "https://www.xinpianchang.com/",
+		"classify": [
+			"amusement"
+		],
+		"companyName": "北京新片场传媒股份有限公司",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://www.xinpianchang.com/favicon.ico",
+			"tag": [
+				"videos",
+				"assets",
+				"photo"
+			],
+			"size": 40,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "新片场汇聚全球原创优质视频及创作人，提供4K、无广告、无水印视频观看，专业的视频艺术学习教程，正版视觉素材交易等，与百万创作人一起成长。"
+		}
 	}
 ]
