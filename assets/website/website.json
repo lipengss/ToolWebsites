@@ -8,7 +8,10 @@
 			"rank": 1000,
 			"type": "img",
 			"value": "https://cdn-bot.hunyuan.tencent.com/logo.png",
-			"tag": ["ai", "efficiency"],
+			"tag": [
+				"ai",
+				"efficiency"
+			],
 			"size": 45,
 			"color": "#333",
 			"bgColor": "#FFFFFF",
@@ -25,7 +28,12 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-v0",
-			"tag": ["ai", "dev", "designer", "efficiency"],
+			"tag": [
+				"ai",
+				"dev",
+				"designer",
+				"efficiency"
+			],
 			"size": 64,
 			"color": "#fff",
 			"bgColor": "#000",
@@ -42,7 +50,11 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://res.volccdn.com/obj/volc-console-fe/images/favicon.52bcaa41.png",
-			"tag": ["ai", "platform", "online"],
+			"tag": [
+				"ai",
+				"platform",
+				"online"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
@@ -53,13 +65,18 @@
 	{
 		"name": "NPM",
 		"path": "https://www.npmjs.com/",
-		"classify": ["frontend", "backend"],
+		"classify": [
+			"frontend",
+			"backend"
+		],
 		"companyName": "深圳市腾讯计算机系统有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-npm",
-			"tag": ["platform"],
+			"tag": [
+				"platform"
+			],
 			"color": "#cb3837",
 			"bgColor": "#fff",
 			"size": 40,
@@ -70,13 +87,18 @@
 	{
 		"name": "Github",
 		"path": "https://github.com",
-		"classify": ["frontend", "backend"],
+		"classify": [
+			"frontend",
+			"backend"
+		],
 		"companyName": "Microsoft",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-github",
-			"tag": ["platform"],
+			"tag": [
+				"platform"
+			],
 			"color": "#333",
 			"size": 40,
 			"bgColor": "#fff",
@@ -87,13 +109,18 @@
 	{
 		"name": "Gitee",
 		"path": "https://gitee.com/",
-		"classify": ["frontend", "backend"],
+		"classify": [
+			"frontend",
+			"backend"
+		],
 		"companyName": "深圳市奥思网络科技有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-gitee",
-			"tag": ["platform"],
+			"tag": [
+				"platform"
+			],
 			"color": "#c71d23",
 			"bgColor": "#fff",
 			"size": 40,
@@ -104,13 +131,20 @@
 	{
 		"name": "iconfont",
 		"path": "https://www.iconfont.cn/",
-		"classify": ["frontend", "designer"],
+		"classify": [
+			"frontend",
+			"designer"
+		],
 		"companyName": "杭州舜易广告有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-iconfont",
-			"tag": ["free", "designer", "assets"],
+			"tag": [
+				"free",
+				"designer",
+				"assets"
+			],
 			"color": "#fff",
 			"bgColor": "#1E1E1E",
 			"size": 40,
@@ -127,7 +161,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-animate",
-			"tag": ["animation", "dev"],
+			"tag": [
+				"animation",
+				"dev"
+			],
 			"bgColor": "#fff",
 			"color": "#1E1E1E",
 			"size": 70,
@@ -144,7 +181,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-echarts",
-			"tag": ["dev", "visualize"],
+			"tag": [
+				"dev",
+				"visualize"
+			],
 			"bgColor": "#fff",
 			"size": 40,
 			"layout": "1x1",
@@ -160,7 +200,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-zhihu",
-			"tag": ["news", "community"],
+			"tag": [
+				"news",
+				"community"
+			],
 			"color": "#0066ff",
 			"bgColor": "#fff",
 			"size": 40,
@@ -171,13 +214,19 @@
 	{
 		"name": "稀土掘金",
 		"path": "https://juejin.cn",
-		"classify": ["frontend", "backend"],
+		"classify": [
+			"frontend",
+			"backend"
+		],
 		"companyName": "北京北比信息技术有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-juejin",
-			"tag": ["community", "dev"],
+			"tag": [
+				"community",
+				"dev"
+			],
 			"color": "#1E80FF",
 			"bgColor": "#fff",
 			"size": 40,
@@ -194,7 +243,9 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-element-plus",
-			"tag": ["dev"],
+			"tag": [
+				"dev"
+			],
 			"color": "#fff",
 			"bgColor": "#fff",
 			"size": 40,
@@ -210,7 +261,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-mdn",
-			"tag": ["learning", "efficiency", "dev"],
+			"tag": [
+				"learning",
+				"efficiency",
+				"dev"
+			],
 			"color": "#303133",
 			"bgColor": "#303133",
 			"size": 50,
@@ -222,13 +277,20 @@
 	{
 		"name": "图片压缩",
 		"path": "https://squoosh.app/",
-		"classify": ["designer", "efficiency"],
+		"classify": [
+			"designer",
+			"efficiency"
+		],
 		"companyName": "GoogleChromeLabs",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-picture-zip",
-			"tag": ["efficiency", "platform", "tool"],
+			"tag": [
+				"efficiency",
+				"platform",
+				"tool"
+			],
 			"bgColor": "#fff",
 			"size": 40,
 			"layout": "1x1",
@@ -238,12 +300,18 @@
 	{
 		"name": "测网速",
 		"path": "https://www.speedtest.cn/",
-		"classify": ["efficiency", "hot"],
+		"classify": [
+			"efficiency",
+			"hot"
+		],
 		"companyName": "巨擎网络科技（济南）有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
-			"tag": ["online", "tool"],
+			"tag": [
+				"online",
+				"tool"
+			],
 			"value": "app-network-speed",
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -254,12 +322,16 @@
 	{
 		"name": "菜鸟",
 		"path": "https://www.runoob.com/",
-		"classify": ["frontend"],
+		"classify": [
+			"frontend"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-cainiao",
-			"tag": ["dev"],
+			"tag": [
+				"dev"
+			],
 			"bgColor": "#90c751",
 			"size": 64,
 			"layout": "1x1",
@@ -274,7 +346,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-jianbian",
-			"tag": ["designer", "dev"],
+			"tag": [
+				"designer",
+				"dev"
+			],
 			"bgColor": "#00a0e9",
 			"size": 50,
 			"layout": "1x1",
@@ -290,7 +365,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-font",
-			"tag": ["designer", "assets"],
+			"tag": [
+				"designer",
+				"assets"
+			],
 			"bgColor": "#8e151e",
 			"color": "#fff",
 			"size": 36,
@@ -306,7 +384,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-jishisheji",
-			"tag": ["online", "tool", "platform"],
+			"tag": [
+				"online",
+				"tool",
+				"platform"
+			],
 			"bgColor": "#202020",
 			"color": "#fff",
 			"size": 62,
@@ -344,7 +426,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-figma",
-			"tag": ["platform", "online", "tool"],
+			"tag": [
+				"platform",
+				"online",
+				"tool"
+			],
 			"bgColor": "#202020",
 			"layout": "1x1",
 			"size": 40,
@@ -360,7 +446,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-bilibili",
-			"tag": ["videos", "learning", "platform"],
+			"tag": [
+				"videos",
+				"learning",
+				"platform"
+			],
 			"color": "#fff",
 			"bgColor": "#ff679a",
 			"size": 62,
@@ -378,7 +468,9 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-huxiu",
-			"tag": ["news"],
+			"tag": [
+				"news"
+			],
 			"color": "#ffff",
 			"bgColor": "#303133",
 			"size": 64,
@@ -390,12 +482,18 @@
 		"name": "豆 瓣 网",
 		"path": "https://www.douban.com/",
 		"companyName": "北京豆网科技有限公司",
-		"classify": ["amusement", "hot"],
+		"classify": [
+			"amusement",
+			"hot"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-douban",
-			"tag": ["learning", "community"],
+			"tag": [
+				"learning",
+				"community"
+			],
 			"color": "#fff",
 			"bgColor": "#2f973e",
 			"size": 36,
@@ -407,12 +505,18 @@
 		"name": "企查查",
 		"path": "https://www.qcc.com/",
 		"companyName": "企查查科技股份有限公司",
-		"classify": ["efficiency", "hot"],
+		"classify": [
+			"efficiency",
+			"hot"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "https://qcc-static.qcc.com/resources/web/omaterial/favicon.png",
-			"tag": ["platform", "efficiency"],
+			"tag": [
+				"platform",
+				"efficiency"
+			],
 			"size": 62,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -429,7 +533,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-qq-music",
-			"tag": ["platform", "online", "muisc"],
+			"tag": [
+				"platform",
+				"online",
+				"muisc"
+			],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
@@ -445,7 +553,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-animation-svg",
-			"tag": ["designer", "assets"],
+			"tag": [
+				"designer",
+				"assets"
+			],
 			"size": 50,
 			"bgColor": "#20252a",
 			"layout": "1x1",
@@ -527,7 +638,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-haokanshiping",
-			"tag": ["videos", "platform"],
+			"tag": [
+				"videos",
+				"platform"
+			],
 			"size": 60,
 			"color": "#FFFFFF",
 			"bgColor": "#fff",
@@ -544,7 +658,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-xigua",
-			"tag": ["videos", "platform"],
+			"tag": [
+				"videos",
+				"platform"
+			],
 			"bgColor": "#fff",
 			"size": 40,
 			"description": "让人们看到更丰富和有深度的世界，收获轻松的获得感，点亮对生活的好奇"
@@ -559,7 +676,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-douyin",
-			"tag": ["videos", "platform"],
+			"tag": [
+				"videos",
+				"platform"
+			],
 			"bgColor": "#111",
 			"size": 50,
 			"layout": "1x1",
@@ -570,12 +690,18 @@
 		"name": "新浪微博",
 		"path": "https://weibo.com/",
 		"companyName": "北京微梦创科网络技术有限公司",
-		"classify": ["amusement", "news"],
+		"classify": [
+			"amusement",
+			"news"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-weibo",
-			"tag": ["news", "community"],
+			"tag": [
+				"news",
+				"community"
+			],
 			"bgColor": "#fff",
 			"size": 62,
 			"layout": "1x1",
@@ -591,7 +717,9 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-toutiao",
-			"tag": ["news"],
+			"tag": [
+				"news"
+			],
 			"bgColor": "#fff",
 			"size": 62,
 			"layout": "1x1",
@@ -607,7 +735,9 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-36ke",
-			"tag": ["news"],
+			"tag": [
+				"news"
+			],
 			"bgColor": "#4182F1",
 			"size": 62,
 			"layout": "1x1",
@@ -617,13 +747,21 @@
 	{
 		"name": "ChatGPT",
 		"path": "https://chat.openai.com/",
-		"classify": ["ai", "hot"],
+		"classify": [
+			"ai",
+			"hot"
+		],
 		"companyName": "openAi",
 		"meta": {
 			"rank": 100,
 			"type": "icon",
 			"value": "app-openAi",
-			"tag": ["ai", "online", "language", "efficiency"],
+			"tag": [
+				"ai",
+				"online",
+				"language",
+				"efficiency"
+			],
 			"bgColor": "#000",
 			"color": "#333",
 			"size": 40,
@@ -640,7 +778,11 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://app.boords.com/favicon.svg",
-			"tag": ["photo", "tool", "online"],
+			"tag": [
+				"photo",
+				"tool",
+				"online"
+			],
 			"size": 60,
 			"color": "#fff",
 			"bgColor": "#121212",
@@ -657,7 +799,11 @@
 			"rank": 0,
 			"type": "img",
 			"value": " https://shotdeck.com/favicon.png",
-			"tag": ["assets", "photo", "efficiency"],
+			"tag": [
+				"assets",
+				"photo",
+				"efficiency"
+			],
 			"size": 44,
 			"color": "#fff",
 			"bgColor": "#231F20",
@@ -674,7 +820,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-yuque",
-			"tag": ["efficiency", "online","tool"],
+			"tag": [
+				"efficiency",
+				"online",
+				"tool"
+			],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
@@ -690,7 +840,11 @@
 			"type": "icon",
 			"value": "app-discord",
 			"bgColor": "#5865f2",
-			"tag": ["ai", "platform", "community"],
+			"tag": [
+				"ai",
+				"platform",
+				"community"
+			],
 			"color": "#fff",
 			"layout": "1x1",
 			"description": "Discord 是一款功能强大、灵活多变的社交平台，适用于游戏、兴趣社区、学习和工作等多种场景。",
@@ -707,7 +861,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-gaode",
-			"tag": ["efficiency", "platform","tool"],
+			"tag": [
+				"efficiency",
+				"platform",
+				"tool"
+			],
 			"bgColor": "#fff",
 			"size": 66,
 			"layout": "1x1",
@@ -722,7 +880,9 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-loading",
-			"tag": ["designer"],
+			"tag": [
+				"designer"
+			],
 			"bgColor": "#fff",
 			"color": "#333",
 			"layout": "1x1",
@@ -733,7 +893,9 @@
 	{
 		"name": "iStock",
 		"path": "https://www.istockphoto.com/",
-		"classify": ["amusement"],
+		"classify": [
+			"amusement"
+		],
 		"companyName": "iStockphoto",
 		"meta": {
 			"rank": 0,
@@ -803,7 +965,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-tenxun",
-			"tag": ["videos", "platform"],
+			"tag": [
+				"videos",
+				"platform"
+			],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
@@ -841,7 +1006,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-youguan",
-			"tag": ["videos", "platform"],
+			"tag": [
+				"videos",
+				"platform"
+			],
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"size": 40,
@@ -852,12 +1020,19 @@
 		"name": "Chrome",
 		"path": "https://www.google.com/",
 		"companyName": "Alphabet",
-		"classify": ["efficiency", "hot"],
+		"classify": [
+			"efficiency",
+			"hot"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-chrome",
-			"tag": ["platform", "efficiency", "engine"],
+			"tag": [
+				"platform",
+				"efficiency",
+				"engine"
+			],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -867,13 +1042,20 @@
 	{
 		"name": "Bing",
 		"path": "https://www.bing.com/",
-		"classify": ["efficiency", "hot"],
+		"classify": [
+			"efficiency",
+			"hot"
+		],
 		"companyName": "Microsoft Bing",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-bing",
-			"tag": ["platform", "efficiency", "engine"],
+			"tag": [
+				"platform",
+				"efficiency",
+				"engine"
+			],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -884,12 +1066,19 @@
 		"name": "百度",
 		"path": "https://www.baidu.com/",
 		"companyName": "百度（中国）有限公司",
-		"classify": ["efficiency", "hot"],
+		"classify": [
+			"efficiency",
+			"hot"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-baidu",
-			"tag": ["platform", "efficiency", "engine"],
+			"tag": [
+				"platform",
+				"efficiency",
+				"engine"
+			],
 			"size": 50,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -899,12 +1088,19 @@
 	{
 		"name": "jsRun",
 		"path": "http://cs.jsrun.net/",
-		"classify": ["frontend", "backend"],
+		"classify": [
+			"frontend",
+			"backend"
+		],
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-jsRun",
-			"tag": ["dev", "online", "platform"],
+			"tag": [
+				"dev",
+				"online",
+				"platform"
+			],
 			"size": 61,
 			"bgColor": "#fff",
 			"layout": "1x1",
@@ -919,7 +1115,11 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-codesandbox",
-			"tag": ["dev", "online", "platform"],
+			"tag": [
+				"dev",
+				"online",
+				"platform"
+			],
 			"size": 50,
 			"color": "#000000",
 			"bgColor": "#FFFFFF",
@@ -930,13 +1130,20 @@
 	{
 		"name": "DeepSeek",
 		"path": "https://chat.deepseek.com/",
-		"classify": ["ai", "hot"],
+		"classify": [
+			"ai",
+			"hot"
+		],
 		"companyName": "杭州深度求索人工智能基础技术研究有限公司",
 		"meta": {
 			"rank": 180,
 			"type": "img",
 			"value": "https://chat.deepseek.com/favicon.svg",
-			"tag": ["platform", "online", "language"],
+			"tag": [
+				"platform",
+				"online",
+				"language"
+			],
 			"size": 45,
 			"color": "#333",
 			"bgColor": "#FFFFFF",
@@ -947,13 +1154,20 @@
 	{
 		"name": "AiPPT",
 		"path": "https://www.aippt.cn",
-		"classify": ["ai", "hot"],
+		"classify": [
+			"ai",
+			"hot"
+		],
 		"companyName": "北京饼干科技有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "img",
 			"value": "https://www.aippt.cn/favicon.ico",
-			"tag": ["ai", "efficiency", "language"],
+			"tag": [
+				"ai",
+				"efficiency",
+				"language"
+			],
 			"size": 60,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
@@ -993,7 +1207,9 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-souhunews",
-			"tag": ["news"],
+			"tag": [
+				"news"
+			],
 			"size": 62,
 			"bgColor": "#F2C81C",
 			"color": "#333",
@@ -1009,7 +1225,10 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-500px",
-			"tag": ["assets", "photo"],
+			"tag": [
+				"assets",
+				"photo"
+			],
 			"size": 40,
 			"color": "#333",
 			"bgColor": "#fff",
@@ -1025,7 +1244,10 @@
 			"rank": 0,
 			"type": "text",
 			"value": "摄",
-			"tag": ["assets", "photo"],
+			"tag": [
+				"assets",
+				"photo"
+			],
 			"size": 36,
 			"color": "#fff",
 			"bgColor": "#FF4500",
@@ -1081,13 +1303,19 @@
 	{
 		"name": "有道云笔记",
 		"path": "https://note.youdao.com/web/",
-		"classify": ["efficiency"],
+		"classify": [
+			"efficiency"
+		],
 		"companyName": "网易",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
 			"value": "app-youdaoyun",
-			"tag": ["efficiency", "online", "tool"],
+			"tag": [
+				"efficiency",
+				"online",
+				"tool"
+			],
 			"size": 62,
 			"color": "#fff",
 			"bgColor": "#FF4500",
@@ -1103,7 +1331,9 @@
 			"rank": 0,
 			"type": "icon",
 			"value": "app-xiaobawang",
-			"tag": ["amusement"],
+			"tag": [
+				"amusement"
+			],
 			"size": 61,
 			"layout": "1x1",
 			"description": "小霸王，其乐无穷 。红白机，FC在线游戏，街机游戏，街机在线"
@@ -1118,7 +1348,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://gamma.app/favicons/favicon-192.svg",
-			"tag": ["ai", "efficiency"],
+			"tag": [
+				"ai",
+				"efficiency"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
@@ -1133,8 +1366,11 @@
 		"meta": {
 			"rank": 0,
 			"type": "img",
-			"value": "http://192.168.1.82:8669/ToolWebsites/static/assets/img/app-nest.png",
-			"tag": ["dev", "learning"],
+			"value": "/ToolWebsites/static/assets/img/app-nest.png",
+			"tag": [
+				"dev",
+				"learning"
+			],
 			"size": 45,
 			"color": "#FFFFFF",
 			"bgColor": "#FFFFFF",
@@ -1150,7 +1386,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://nodejs.org/static/images/favicons/favicon.png",
-			"tag": ["dev", "learning"],
+			"tag": [
+				"dev",
+				"learning"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
@@ -1166,7 +1405,11 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://fastly.jsdelivr.net/npm/@vant/assets/logo.png",
-			"tag": ["dev", "learning", "assets"],
+			"tag": [
+				"dev",
+				"learning",
+				"assets"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
@@ -1204,7 +1447,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://pixijs.huashengweilai.com/favicon.png",
-			"tag": ["http", "animation"],
+			"tag": [
+				"http",
+				"animation"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -1219,8 +1465,11 @@
 		"meta": {
 			"rank": 0,
 			"type": "img",
-			"value": "http://192.168.1.82:8669/ToolWebsites/static/assets/img/app-gsap.webp",
-			"tag": ["dev", "animation"],
+			"value": "/ToolWebsites/static/assets/img/app-gsap.webp",
+			"tag": [
+				"dev",
+				"animation"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -1236,7 +1485,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://www.codeandweb.com/favicons/icon-144x144-cf4325912be17b4b1dd1914fefcba95f.png",
-			"tag": ["dev", "tool"],
+			"tag": [
+				"dev",
+				"tool"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
@@ -1253,7 +1505,11 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://statics.moonshot.cn/kimi-chat/favicon.ico",
-			"tag": ["ai", "language", "efficiency"],
+			"tag": [
+				"ai",
+				"language",
+				"efficiency"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#000",
@@ -1270,7 +1526,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://app.leonardo.ai/favicon.ico",
-			"tag": ["ai", "designer"],
+			"tag": [
+				"ai",
+				"designer"
+			],
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#000000",
@@ -1287,7 +1546,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://www.tripo3d.ai/favicon.ico",
-			"tag": ["designer", "ai"],
+			"tag": [
+				"designer",
+				"ai"
+			],
 			"size": 57,
 			"color": "#fff",
 			"bgColor": "#0f0f0f",
@@ -1348,7 +1610,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://www.designspiration.com/favicon.ico",
-			"tag": ["designer", "assets"],
+			"tag": [
+				"designer",
+				"assets"
+			],
 			"size": 45,
 			"color": "#333",
 			"bgColor": "#fff",
@@ -1364,7 +1629,9 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://assets.awwwards.com/assets/images/favicon-safari.svg",
-			"tag": ["designer"],
+			"tag": [
+				"designer"
+			],
 			"size": 50,
 			"color": "#333",
 			"bgColor": "#fff",
@@ -1380,7 +1647,10 @@
 			"rank": 0,
 			"type": "img",
 			"value": "https://zh.wikipedia.org/static/favicon/wikipedia.ico",
-			"tag": ["learning", "efficiency"],
+			"tag": [
+				"learning",
+				"efficiency"
+			],
 			"color": "#ffff",
 			"bgColor": "#FFFFFF",
 			"size": 45,
@@ -1432,6 +1702,72 @@
 			"bgColor": "#fff",
 			"layout": "1x1",
 			"description": "新片场汇聚全球原创优质视频及创作人，提供4K、无广告、无水印视频观看，专业的视频艺术学习教程，正版视觉素材交易等，与百万创作人一起成长。"
+		}
+	},
+	{
+		"name": "Code Images",
+		"path": "https://ray.so/",
+		"classify": [
+			"frontend"
+		],
+		"companyName": "未知",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://ray.so/favicon.ico",
+			"tag": [
+				"platform",
+				"ai",
+				"picture"
+			],
+			"size": 64,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "将您的代码转换成精美的图像。从一系列语法颜色中进行选择，隐藏或显示背景，并在深色和浅色窗口之间切换。"
+		}
+	},
+	{
+		"name": "Color Hunt",
+		"path": "https://colorhunt.co/",
+		"classify": "designer",
+		"companyName": "未知",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://colorhunt.co//img/colorhunt-favicon.svg",
+			"tag": [
+				"assets",
+				"efficiency"
+			],
+			"size": 51,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "探索“色彩狩猎”最新精选调色板。为您的设计和艺术项目获取色彩灵感。"
+		}
+	},
+	{
+		"name": "手绘风流程图",
+		"path": "https://excalidraw.com/",
+		"classify": [
+			"frontend",
+			"backend"
+		],
+		"companyName": "未知",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://excalidraw.com/favicon.ico",
+			"tag": [
+				"tool",
+				"online"
+			],
+			"size": 57,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "包括双链，文件拖拽，嵌入笔记并实时更新，脚本系统，图库系统，手写压感，pdf 批注和引用等。"
 		}
 	}
 ]
