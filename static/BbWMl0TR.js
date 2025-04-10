@@ -1,1 +1,0 @@
-import{d as t,g as n,v as s,x as a,A as r,B as c,C as m}from"./BVOoKVd1.js";/* empty css        */const l={class:"container"},i=t({__name:"compress",setup(p){return(_,o)=>{const e=n("TwoColumnLayout");return a(),s("div",l,[r(e,null,{default:c(()=>o[0]||(o[0]=[m("图片压缩")])),_:1})])}}});export{i as default};
