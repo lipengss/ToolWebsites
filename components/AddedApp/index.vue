@@ -116,7 +116,6 @@ const state: {
 			size: 60,
 			color: '#fff',
 			bgColor: '#fff',
-			layout: '1x1',
 			description: '',
 		},
 	},

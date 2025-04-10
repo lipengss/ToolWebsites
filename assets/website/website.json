@@ -1388,8 +1388,23 @@
 			"size": 60,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "有了“Google 新闻”，您就可以针对“全球”主题尽情阅读完整报道、观看相关视频、浏览数以千计的相关刊物及其他资源。"
+		}
+	},
+	{
+		"name": "卡通分镜",
+		"path": "https://www.storyboardthat.com/",
+		"classify": ["amusement"],
+		"companyName": "storyboardthat",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://cdn.storyboardthat.com/site-images/site-pages/favicons/apple-touch-icon-114x114.png",
+			"tag": ["photo", "tool", "online"],
+			"size": 57,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"description": "使用我们的免费故事板软件创建故事板！电影制作人、教师和学生都喜欢使用 Storyboard That 制作故事板和在线漫画！"
 		}
 	},
 	{
@@ -1410,7 +1425,6 @@
 			"size": 48,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "人民网，是世界十大报纸之一《人民日报》建设的以新闻为主的大型网上信息发布平台，也是互联网上最大的中文和多语种新闻网站之一。"
 		}
 	},

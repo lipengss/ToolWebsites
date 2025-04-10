@@ -11,7 +11,6 @@ interface RouteItem {
 		type: 'img' | 'icon' | 'text' | undefined;
 		rank: number; // 排序
 		size?: number; // 图标大小
-		layout?: string; // 1x1 2x2 5x2
 		description?: string; // 描述
 		hidden?: boolean; // 是否隐藏
 		keepAlive?: boolean; // 是否缓存
