@@ -107,6 +107,7 @@ const tags = computed(() => tagList.filter((item) => props.app.meta.tag.includes
 				white-space: nowrap;
 				font-size: 12px;
 				color: #999;
+				margin-bottom: 2px;
 			}
 			.tag {
 				text-wrap: nowrap;

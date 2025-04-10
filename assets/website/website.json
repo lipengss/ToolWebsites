@@ -325,6 +325,7 @@
 		"classify": [
 			"frontend"
 		],
+		"companyName": "菜鸟教程",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -380,6 +381,7 @@
 		"name": "即时设计",
 		"path": "https://js.design/workspace",
 		"classify": "designer",
+		"companyName": "北京雪云锐创科技有限公司",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -422,6 +424,7 @@
 		"name": "Figma",
 		"path": "https://www.figma.com/",
 		"classify": "designer",
+		"companyName": "Adobe",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -1088,6 +1091,7 @@
 	{
 		"name": "jsRun",
 		"path": "http://cs.jsrun.net/",
+		"companyName": "jsRun",
 		"classify": [
 			"frontend",
 			"backend"
@@ -1111,6 +1115,7 @@
 		"name": "codesandbox",
 		"classify": "frontend",
 		"path": "https://codesandbox.io/",
+		"companyName": "codesandbox",
 		"meta": {
 			"rank": 0,
 			"type": "icon",
@@ -1149,6 +1154,50 @@
 			"bgColor": "#FFFFFF",
 			"layout": "3x1",
 			"description": "深度求索, AGI, 人工智能底层模型, 开源模型"
+		}
+	},
+	{
+		"name": "五彩纸屑",
+		"path": "https://www.kirilv.com/canvas-confetti/",
+		"classify": [
+			"designer",
+			"frontend"
+		],
+		"companyName": "五彩纸屑",
+		"meta": {
+			"rank": 0,
+			"type": "text",
+			"value": "B",
+			"tag": [
+				"animation",
+				"ai"
+			],
+			"size": 47,
+			"color": "#F9322C",
+			"bgColor": "#EBC417",
+			"layout": "1x1",
+			"description": "爆炸五彩纸屑特性，有多种特效"
+		}
+	},
+	{
+		"name": "爱给网",
+		"path": "https://www.aigei.com/",
+		"classify": "designer",
+		"companyName": "武汉爱给在线网络科技有限公司",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://cdn-sqn.aigei.com/assets/site/img/icon/favicon.ico",
+			"tag": [
+				"assets",
+				"picture",
+				"platform"
+			],
+			"size": 40,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "数字娱乐免费素材下载网站,免费提供免费的音效配乐|3D模型|视频|游戏素材资源下载。"
 		}
 	},
 	{
@@ -1363,6 +1412,7 @@
 		"name": "Nest.js",
 		"classify": "backend",
 		"path": "https://docs.nestjs.cn/10/introduction",
+		"companyName": "Kamil Mysliwiec",
 		"meta": {
 			"rank": 0,
 			"type": "img",
@@ -1382,6 +1432,7 @@
 		"name": "Node.js",
 		"path": "https://nodejs.org/en",
 		"classify": "backend",
+		"companyName": "Node.js Foundation",
 		"meta": {
 			"rank": 0,
 			"type": "img",
@@ -1401,6 +1452,7 @@
 		"name": "Vant",
 		"path": "https://vant-ui.github.io/vant/#/zh-CN",
 		"classify": "frontend",
+		"companyName": "有赞团队",
 		"meta": {
 			"rank": 0,
 			"type": "img",
@@ -1443,6 +1495,7 @@
 		"name": "Pixi.js",
 		"path": "https://pixijs.huashengweilai.com/",
 		"classify": "frontend",
+		"companyName": "Pixi.js",
 		"meta": {
 			"rank": 0,
 			"type": "img",
@@ -1462,6 +1515,7 @@
 		"name": "GSAP",
 		"path": "https://gsap.com/",
 		"classify": "frontend",
+		"companyName": "GSAP",
 		"meta": {
 			"rank": 0,
 			"type": "img",
@@ -1606,6 +1660,7 @@
 		"name": "design",
 		"path": "https://www.designspiration.com/",
 		"classify": "designer",
+		"companyName": "Tiny公司",
 		"meta": {
 			"rank": 0,
 			"type": "img",
@@ -1625,6 +1680,7 @@
 		"name": "WES",
 		"path": "https://www.awwwards.com/",
 		"classify": "designer",
+		"companyName": "Tiny公司",
 		"meta": {
 			"rank": 0,
 			"type": "img",
