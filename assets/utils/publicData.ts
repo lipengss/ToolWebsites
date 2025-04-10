@@ -42,28 +42,6 @@ const pictureNotions = '图片不会上传到服务器转换，而是在浏览�
 
 const fontList = ['rocks-serif', 'SAIBA-45'];
 
-const tagList = [
-	{ label: '全部', value: 'all', checked: false },
-	{ label: '浏览器', value: 'browser', checked: false },
-	{ label: 'AI', value: 'ai', checked: false },
-	{ label: '热门', value: 'hot', checked: false },
-	{ label: '应用', value: 'appliance', checked: false },
-	{ label: '新闻', value: 'news', checked: false },
-	{ label: '影音', value: 'video', checked: false },
-	{ label: '科技', value: 'science', checked: false },
-	{ label: '图片', value: 'picture', checked: false },
-	{ label: '效率', value: 'efficiency', checked: false },
-	{ label: '学习', value: 'learning', checked: false },
-	{ label: '游戏', value: 'game', checked: false },
-	{ label: '购物', value: 'shopping', checked: false },
-	{ label: '前端', value: 'frontEnd', checked: false },
-	{ label: '后端', value: 'backEnd', checked: false },
-	{ label: '社交', value: 'socialize', checked: false },
-	{ label: '阅读', value: 'read', checked: false },
-	{ label: '出行', value: 'travel', checked: false },
-	{ label: '金融', value: 'finance', checked: false },
-	{ label: '其他', value: 'other', checked: false },
-];
 
 /**
  * 将num1除以num2并返回结果
@@ -78,64 +56,8 @@ function divide(num1: number, num2: number): number {
 	return numeral(num1).divide(num2).format('0.1');
 }
 
-const appTypeList: Array<RouteItem> = [
-	{
-		name: '主页',
-		path: '/',
-		type: '/',
-		meta: {
-			rank: 0,
-			icon: 'menu-home',
-		},
-	},
-	{
-		name: 'IT行业',
-		path: '/developer',
-		type: 'developer',
-		meta: {
-			rank: 0,
-			icon: 'menu-editor',
-		},
-	},
-	{
-		name: '娱乐',
-		path: '/amusement',
-		type: 'amusement',
-		meta: {
-			rank: 0,
-			icon: 'menu-amusement',
-		},
-	},
-	// {
-	// 	name: '设计师',
-	// 	path: '/designer',
-	// 	type: 'designer',
-	// 	meta: {
-	// 		rank: 0,
-	// 		icon: 'menu-designer',
-	// 	},
-	// },
-	// {
-	// 	name: '产品',
-	// 	path: '/product',
-	// 	type: 'product',
-	// 	meta: {
-	// 		rank: 0,
-	// 		icon: 'menu-product',
-	// 	},
-	// },
-	{
-		name: '工具',
-		path: '/onlineTool',
-		type: 'onlineTool',
-		meta: {
-			rank: 0,
-			icon: 'menu-tools',
-		},
-	},
-];
 
 // 预定颜色
 const predefineColors = ['#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585'];
 
-export { aspectRatios, pictureNotions, predefineColors, OFF_WORK, GLOBAL_SETTING, timeStepList, fontList, tagList, appTypeList };
+export { aspectRatios, pictureNotions, predefineColors, OFF_WORK, GLOBAL_SETTING, timeStepList, fontList };

@@ -21,8 +21,9 @@
 		</div>
 		<div class="bottom">
 			<div class="desc">
-				{{ app.meta.description }}
-				<el-text class="mx-1" type="primary">详情</el-text>
+				<el-tooltip :content="app.meta.description" placement="top">
+					{{ app.meta.description }}
+				</el-tooltip>
 			</div>
 		</div>
 		<slot />
@@ -59,6 +60,8 @@ function onclick() {
 }
 
 const bgColor = computed(() => props.app.meta.bgColor);
+const radius = computed(() => setting.value.app.radius + 'px');
+const opacity = computed(() => setting.value.app.opacity);
 
 const tags = computed(() => tagList.filter((item) => props.app.meta.tag.includes(item.value)));
 </script>
@@ -68,6 +71,7 @@ const tags = computed(() => tagList.filter((item) => props.app.meta.tag.includes
 	padding: 12px;
 	border-radius: 10px;
 	background-color: #fff;
+	opacity: v-bind(opacity);
 	cursor: pointer;
 	transition: all 0.2s ease;
 	position: relative;
@@ -85,7 +89,7 @@ const tags = computed(() => tagList.filter((item) => props.app.meta.tag.includes
 			align-items: center;
 			justify-content: center;
 			margin-right: 10px;
-			border-radius: 14px;
+			border-radius: v-bind(radius);
 			background-color: v-bind(bgColor);
 			box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 			flex-shrink: 0;

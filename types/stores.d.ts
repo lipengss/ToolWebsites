@@ -40,6 +40,7 @@ interface ISetting {
 		color: string; // 字体颜色
 		autoHide: boolean;
 		routePath: string;
+		defaultRoute: string;
 	};
 	offWork: {
 		name: '下班倒计时';

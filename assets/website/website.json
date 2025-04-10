@@ -37,7 +37,6 @@
 			"size": 64,
 			"color": "#fff",
 			"bgColor": "#000",
-			"layout": "1x1",
 			"description": "专注于生成用户界面的代码，专为开发人员和设计师设计。"
 		}
 	},
@@ -58,7 +57,6 @@
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
-			"layout": "1x1",
 			"description": "上火山引擎，用豆包大模型。"
 		}
 	},
@@ -80,7 +78,6 @@
 			"color": "#cb3837",
 			"bgColor": "#fff",
 			"size": 40,
-			"layout": "1x1",
 			"description": "是Node的开放式模块登记和管理系统"
 		}
 	},
@@ -102,7 +99,6 @@
 			"color": "#333",
 			"size": 40,
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "面向开源及私有软件项目的托管平台。"
 		}
 	},
@@ -124,7 +120,6 @@
 			"color": "#c71d23",
 			"bgColor": "#fff",
 			"size": 40,
-			"layout": "1x1",
 			"description": "面向开源及私有软件项目的托管平台。"
 		}
 	},
@@ -148,7 +143,6 @@
 			"color": "#fff",
 			"bgColor": "#1E1E1E",
 			"size": 40,
-			"layout": "1x1",
 			"description": "丰富的矢量图标库，提供矢量图标下载、在线存储、格式转换等功能。"
 		}
 	},
@@ -168,7 +162,6 @@
 			"bgColor": "#fff",
 			"color": "#1E1E1E",
 			"size": 70,
-			"layout": "1x1",
 			"description": "Animate.css是一个现成的跨浏览器动画库。"
 		}
 	},
@@ -187,7 +180,6 @@
 			],
 			"bgColor": "#fff",
 			"size": 40,
-			"layout": "1x1",
 			"description": "一款基于JavaScript的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。"
 		}
 	},
@@ -207,7 +199,6 @@
 			"color": "#0066ff",
 			"bgColor": "#fff",
 			"size": 40,
-			"layout": "1x1",
 			"description": "中文互联网高质量的问答社区和创作者聚集的原创内容平台"
 		}
 	},
@@ -230,7 +221,6 @@
 			"color": "#1E80FF",
 			"bgColor": "#fff",
 			"size": 40,
-			"layout": "1x1",
 			"description": "掘金是面向全球中文开发者的技术内容分享与交流平台"
 		}
 	},
@@ -249,7 +239,6 @@
 			"color": "#fff",
 			"bgColor": "#fff",
 			"size": 40,
-			"layout": "1x1",
 			"description": "一个 Vue 3 UI 框架 | Element Plus"
 		}
 	},
@@ -269,7 +258,6 @@
 			"color": "#303133",
 			"bgColor": "#303133",
 			"size": 50,
-			"layout": "1x1",
 			"description": "自2005年以来记录web技术，包括CSS、HTML和JavaScript。"
 		},
 		"companyName": "Mozilla 基金会"
@@ -293,7 +281,6 @@
 			],
 			"bgColor": "#fff",
 			"size": 40,
-			"layout": "1x1",
 			"description": "在浏览器中压缩和比较不同编解码器的图像"
 		}
 	},
@@ -314,7 +301,6 @@
 			],
 			"value": "app-network-speed",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "提供网速测试，网络质量测试，宽带测速，Wi-Fi测速，5G测速等..."
 		}
@@ -335,7 +321,6 @@
 			],
 			"bgColor": "#90c751",
 			"size": 64,
-			"layout": "1x1",
 			"description": "各种编程语言的基础知识。"
 		}
 	},
@@ -353,7 +338,6 @@
 			],
 			"bgColor": "#00a0e9",
 			"size": 50,
-			"layout": "1x1",
 			"description": "在线渐变生成器。"
 		}
 	},
@@ -373,7 +357,6 @@
 			"bgColor": "#8e151e",
 			"color": "#fff",
 			"size": 36,
-			"layout": "1x1",
 			"description": "58238种免费字体，可直接下载。"
 		}
 	},
@@ -394,7 +377,6 @@
 			"bgColor": "#202020",
 			"color": "#fff",
 			"size": 62,
-			"layout": "1x1",
 			"description": "在线可协作的UI设计工具。"
 		}
 	},
@@ -415,7 +397,6 @@
 			],
 			"bgColor": "#202020",
 			"color": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "美叶是一个发现美，学习美，创作美的设计网站，收集和归类不同设计领域的杰出代表，提供有价值的灵感参照。"
 		}
@@ -435,7 +416,6 @@
 				"tool"
 			],
 			"bgColor": "#202020",
-			"layout": "1x1",
 			"size": 40,
 			"description": "Figma支持多人同时在线编辑、查看和提供反馈，使得设计师、产品经理和开发人员等团队成员可以实时协作，提高设计效率。"
 		}
@@ -457,7 +437,6 @@
 			"color": "#fff",
 			"bgColor": "#ff679a",
 			"size": 62,
-			"layout": "1x1",
 			"description": "视频弹幕网站，这里有及时的动漫新番，活跃的ACG氛围，有创意的Up主。"
 		}
 	},
@@ -500,7 +479,6 @@
 			"color": "#fff",
 			"bgColor": "#2f973e",
 			"size": 36,
-			"layout": "1x1",
 			"description": "提供图书、电影、音乐唱片的推荐、评论和价格比较，以及城市独特的文化生活。"
 		}
 	},
@@ -523,7 +501,6 @@
 			"size": 62,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "企查查,查公司,查企业,查老板,查风险,查老赖,失信被执行人,企业查询,公司查询,工商查询"
 		}
 	},
@@ -542,7 +519,6 @@
 				"muisc"
 			],
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "QQ音乐是腾讯公司推出的一款网络音乐服务产品"
 		}
@@ -562,7 +538,6 @@
 			],
 			"size": 50,
 			"bgColor": "#20252a",
-			"layout": "1x1",
 			"description": "动画SVG图库"
 		}
 	},
@@ -583,7 +558,6 @@
 			],
 			"bgColor": "#fff",
 			"size": 62,
-			"layout": "1x1",
 			"description": "是一个专业的图标素材平台，致力于为用户提供高质量、多样化的图标资源。"
 		},
 		"companyName": "Flaticon"
@@ -605,7 +579,6 @@
 			],
 			"bgColor": "#07a081",
 			"size": 62,
-			"layout": "1x1",
 			"description": "免费图库，图片质量不错。"
 		},
 		"companyName": "Pexels"
@@ -626,7 +599,6 @@
 				"assets"
 			],
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "高质量的iconPark,字节跳动制造。"
 		},
@@ -648,7 +620,6 @@
 			"size": 60,
 			"color": "#FFFFFF",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "好看视频是百度短视频旗舰品牌，拥有超百万的短视频创作者。"
 		}
 	},
@@ -685,7 +656,6 @@
 			],
 			"bgColor": "#111",
 			"size": 50,
-			"layout": "1x1",
 			"description": "抖音让每一个人看见并连接更大的世界。"
 		}
 	},
@@ -707,7 +677,6 @@
 			],
 			"bgColor": "#fff",
 			"size": 62,
-			"layout": "1x1",
 			"description": "新浪微博致力于为用户提供高质量的内容，同时通过创作者扶持计划推动内容生态的健康发展。"
 		}
 	},
@@ -725,7 +694,6 @@
 			],
 			"bgColor": "#fff",
 			"size": 62,
-			"layout": "1x1",
 			"description": "今日头条，头条，头条网，头条新闻，今日头条官网。"
 		}
 	},
@@ -743,7 +711,6 @@
 			],
 			"bgColor": "#4182F1",
 			"size": 62,
-			"layout": "1x1",
 			"description": "独家的视角为用户深度剖析最前沿的资讯"
 		}
 	},
@@ -789,7 +756,6 @@
 			"size": 60,
 			"color": "#fff",
 			"bgColor": "#121212",
-			"layout": "1x1",
 			"description": "在线分镜脚本制作，拖拽式操作，支持团队协作。短视频、广告脚本策划。"
 		}
 	},
@@ -810,7 +776,6 @@
 			"size": 44,
 			"color": "#fff",
 			"bgColor": "#231F20",
-			"layout": "1x1",
 			"description": " ​专业级电影截图数据库，​收录超 1000+ 部电影，涵盖不同年代、风格（如科幻、黑色电影、文艺片等）。"
 		}
 	},
@@ -829,7 +794,6 @@
 				"tool"
 			],
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "博客技术栈在线工具资源网站UI库后端技术稀土掘金微信百..."
 		}
@@ -849,7 +813,6 @@
 				"community"
 			],
 			"color": "#fff",
-			"layout": "1x1",
 			"description": "Discord 是一款功能强大、灵活多变的社交平台，适用于游戏、兴趣社区、学习和工作等多种场景。",
 			"size": 40
 		},
@@ -871,7 +834,6 @@
 			],
 			"bgColor": "#fff",
 			"size": 66,
-			"layout": "1x1",
 			"description": "高德地图拥有导航电子地图甲级测绘资质和互联网地图服务甲级测绘资质"
 		}
 	},
@@ -888,7 +850,6 @@
 			],
 			"bgColor": "#fff",
 			"color": "#333",
-			"layout": "1x1",
 			"size": 40,
 			"description": "加载状态"
 		}
@@ -912,7 +873,6 @@
 			"size": 44,
 			"color": "#fff",
 			"bgColor": "#000000",
-			"layout": "1x1",
 			"description": "iStock是一家免版税的国际微型图片供应商，该公司总部位于加拿大艾伯塔省的卡尔加里。该公司提供数以百万计的照片、插图、剪贴画、视频和音频。"
 		}
 	},
@@ -932,7 +892,6 @@
 				"community"
 			],
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "人人都是产品经理是产品经理学习、交流、分享平台，目标人群是产品新人、产品经理等广大产品爱好者。"
 		},
@@ -954,7 +913,6 @@
 				"online"
 			],
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "AI时代的专业级原型设计工具"
 		},
@@ -973,7 +931,6 @@
 				"platform"
 			],
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "移动端及客厅产品等多种形态为用户提供高清流畅的视频娱乐体验。"
 		},
@@ -1014,7 +971,6 @@
 				"platform"
 			],
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"size": 40,
 			"description": "好看的外国自媒体网站，访问需要点手段。"
 		}
@@ -1038,7 +994,6 @@
 			],
 			"size": 50,
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "最棒的浏览器，访问需要点手段。"
 		}
 	},
@@ -1061,7 +1016,6 @@
 			],
 			"size": 50,
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "微软的也不错，适合程序员。"
 		}
 	},
@@ -1084,7 +1038,6 @@
 			],
 			"size": 50,
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "适合搜娱乐八卦之类的。"
 		}
 	},
@@ -1107,7 +1060,6 @@
 			],
 			"size": 61,
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "js在线运行，C#在线编译。"
 		}
 	},
@@ -1128,7 +1080,6 @@
 			"size": 50,
 			"color": "#000000",
 			"bgColor": "#FFFFFF",
-			"layout": "1x1",
 			"description": "很强的在线编辑器。"
 		}
 	},
@@ -1175,7 +1126,6 @@
 			"size": 47,
 			"color": "#F9322C",
 			"bgColor": "#EBC417",
-			"layout": "1x1",
 			"description": "爆炸五彩纸屑特性，有多种特效"
 		}
 	},
@@ -1196,7 +1146,6 @@
 			"size": 40,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "数字娱乐免费素材下载网站,免费提供免费的音效配乐|3D模型|视频|游戏素材资源下载。"
 		}
 	},
@@ -1220,7 +1169,6 @@
 			"size": 60,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
-			"layout": "1x1",
 			"description": "提供一键生成高质量PPT的解决方案"
 		}
 	},
@@ -1242,7 +1190,6 @@
 			"size": 61,
 			"color": "#fff",
 			"bgColor": "#5952D1",
-			"layout": "1x1",
 			"description": "svg插图,免费下载"
 		},
 		"companyName": "Katerina Limpitsouni"
@@ -1262,7 +1209,6 @@
 			"size": 62,
 			"bgColor": "#F2C81C",
 			"color": "#333",
-			"layout": "1x1",
 			"description": "搜狐新闻，偶尔会给你个大爆料。"
 		}
 	},
@@ -1281,7 +1227,6 @@
 			"size": 40,
 			"color": "#333",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "视觉500px摄影师社区"
 		}
 	},
@@ -1300,7 +1245,6 @@
 			"size": 36,
 			"color": "#fff",
 			"bgColor": "#FF4500",
-			"layout": "1x1",
 			"description": "专业作者照片目录"
 		}
 	},
@@ -1314,16 +1258,57 @@
 		"meta": {
 			"rank": 0,
 			"type": "img",
-			"value": "https://www.xinhuanet.com/favicon.ico",
+			"value": "/ToolWebsites/static/assets/img/xinhuawang.png",
 			"tag": [
 				"news",
 				"online"
 			],
-			"size": 48,
+			"size": 60,
 			"bgColor": "#fff",
 			"color": "#333",
-			"layout": "1x1",
 			"description": "中国主要重点新闻网站,依托新华社遍布全球的采编网络,记者遍布世界100多个国家和地区,地方频道分布全国31个省市自治区,每天24小时同时使用6种语言滚动发稿,权威、准确、及时播发国内外重要新闻和重大突发事件,受众覆盖200多个国家和地区,发展论坛是全球知名的中文论坛。"
+		}
+	},
+	{
+		"name": "BBC",
+		"path": "https://www.bbc.com/",
+		"classify": [
+			"news"
+		],
+		"companyName": "英国广播公司",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://www.bbc.com/favicon.ico",
+			"tag": [
+				"news",
+				"efficiency"
+			],
+			"size": 55,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"description": "BBC是世界第一家由国家成立的广播机构，也是全球最大的媒体。"
+		}
+	},
+	{
+		"name": "澎湃新闻",
+		"path": "https://www.thepaper.cn/",
+		"classify": [
+			"news"
+		],
+		"companyName": "上海报业集团",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "/ToolWebsites/static/assets/img/pengpai.png",
+			"tag": [
+				"efficiency",
+				"news"
+			],
+			"size": 60,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"description": "专注于时政与思想的媒体开放平台，对外提供互联网新闻信息采编发布服务，也就是通常所说拥有一类资质的新闻网站。"
 		}
 	},
 	{
@@ -1336,16 +1321,15 @@
 		"meta": {
 			"rank": 0,
 			"type": "img",
-			"value": "https://www.stats.gov.cn/favicon.ico",
+			"value": "/ToolWebsites/static/assets/img/guojiatongjiju.png",
 			"tag": [
 				"tool",
 				"platform",
 				"online"
 			],
-			"size": 51,
+			"size": 60,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "国家统计局"
 		}
 	},
@@ -1368,7 +1352,6 @@
 			"size": 62,
 			"color": "#fff",
 			"bgColor": "#FF4500",
-			"layout": "1x1",
 			"description": "分类整理笔记，高效管理个人知识，快速搜索，分类查找，安全备份云端笔记，存储永不丢失的珍贵资料。"
 		}
 	},
@@ -1384,8 +1367,51 @@
 				"amusement"
 			],
 			"size": 61,
-			"layout": "1x1",
 			"description": "小霸王，其乐无穷 。红白机，FC在线游戏，街机游戏，街机在线"
+		}
+	},
+	{
+		"name": "谷歌新闻",
+		"path": "https://news.google.com/",
+		"classify": [
+			"news"
+		],
+		"companyName": "Google",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "/ToolWebsites/static/assets/img/google-news.webp",
+			"tag": [
+				"news",
+				"online"
+			],
+			"size": 60,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "有了“Google 新闻”，您就可以针对“全球”主题尽情阅读完整报道、观看相关视频、浏览数以千计的相关刊物及其他资源。"
+		}
+	},
+	{
+		"name": "人民日报",
+		"path": "http://www.people.com.cn/",
+		"classify": [
+			"news"
+		],
+		"companyName": "官媒",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "/ToolWebsites/static/assets/img/renminribao.png",
+			"tag": [
+				"news",
+				"online"
+			],
+			"size": 48,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"layout": "1x1",
+			"description": "人民网，是世界十大报纸之一《人民日报》建设的以新闻为主的大型网上信息发布平台，也是互联网上最大的中文和多语种新闻网站之一。"
 		}
 	},
 	{
@@ -1404,7 +1430,6 @@
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
-			"layout": "1x1",
 			"description": "提出想法的新媒介。\n由人工智能提供支持。"
 		}
 	},
@@ -1424,7 +1449,6 @@
 			"size": 45,
 			"color": "#FFFFFF",
 			"bgColor": "#FFFFFF",
-			"layout": "1x1",
 			"description": "可扩展的 Node.js 服务器端应用程序的框架。"
 		}
 	},
@@ -1444,7 +1468,6 @@
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
-			"layout": "1x1",
 			"description": "Node.js® 是一个免费、开源、跨平台的 JavaScript 运行环境，可让开发人员创建服务器、Web 应用程序、命令行工具和脚本。"
 		}
 	},
@@ -1465,7 +1488,6 @@
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#FFFFFF",
-			"layout": "1x1",
 			"description": "轻量、可定制的移动端 Vue 组件库"
 		}
 	},
@@ -1486,7 +1508,6 @@
 			"size": 46,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "公共3D资源库"
 		},
 		"companyName": "Poly Haven"
@@ -1507,7 +1528,6 @@
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "PixiJS的强项是速度。在2D渲染方面，PixiJS是最快的。"
 		}
 	},
@@ -1527,7 +1547,6 @@
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "动画库"
 		}
 	},
@@ -1546,7 +1565,6 @@
 			"size": 45,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "适用于您的 2D 游戏项目的精灵表打包器工具"
 		}
 	},
@@ -1716,6 +1734,72 @@
 		"companyName": "维基媒体基金会"
 	},
 	{
+		"name": "Windy",
+		"path": "https://www.windy.com/",
+		"classify": [
+			"efficiency"
+		],
+		"companyName": "捷克共和国布拉格",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://www.windy.com/favicon.ico",
+			"tag": [
+				"tool",
+				"online",
+				"platform"
+			],
+			"size": 49,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"description": "为风筝冲浪者、滑翔伞爱好者、飞行员、水手及其他任何人提供天气雷达、风浪预报。"
+		}
+	},
+	{
+		"name": "谷歌地图",
+		"path": "https://www.google.com/maps",
+		"classify": [
+			"efficiency"
+		],
+		"companyName": "Google",
+		"meta": {
+			"rank": 0,
+			"type": "icon",
+			"value": "app-google-map",
+			"tag": [
+				"tool",
+				"platform",
+				"online"
+			],
+			"size": 40,
+			"color": "#fff",
+			"bgColor": "#fff",
+			"description": "浏览 Google 地图，探索美丽世界。在各种设备上体验街景、3D 地图、精细路线导航和室内地图等功能。"
+		}
+	},
+	{
+		"name": "World Vector Logo",
+		"path": "https://worldvectorlogo.com/",
+		"classify": [
+			"efficiency"
+		],
+		"companyName": "WORLDVECTORLOGO",
+		"meta": {
+			"rank": 0,
+			"type": "img",
+			"value": "https://worldvectorlogo.com/static/img/favicon.ico",
+			"tag": [
+				"free",
+				"assets",
+				"online"
+			],
+			"size": 40,
+			"color": "#fff",
+			"bgColor": "#0C5BBA",
+			"description": "收录最全，国内国外知名的品牌logo都能在上面找到，并且是矢量svg格式，高清可编辑，还会实时跟踪品牌的logo变化，获取最新的logo图。"
+		}
+	},
+	{
 		"name": "VJ师网",
 		"path": "https://www.vjshi.com/",
 		"classify": [
@@ -1733,7 +1817,6 @@
 			"size": 55,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "光厂（VJ师网）拥有数千万正版视频素材，AE模板，在这里卖方可以将创意变现，买方可以快速找到所需素材。"
 		}
 	},
@@ -1756,7 +1839,6 @@
 			"size": 40,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "新片场汇聚全球原创优质视频及创作人，提供4K、无广告、无水印视频观看，专业的视频艺术学习教程，正版视觉素材交易等，与百万创作人一起成长。"
 		}
 	},
@@ -1779,7 +1861,6 @@
 			"size": 64,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "将您的代码转换成精美的图像。从一系列语法颜色中进行选择，隐藏或显示背景，并在深色和浅色窗口之间切换。"
 		}
 	},
@@ -1799,7 +1880,6 @@
 			"size": 51,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "探索“色彩狩猎”最新精选调色板。为您的设计和艺术项目获取色彩灵感。"
 		}
 	},
@@ -1822,7 +1902,6 @@
 			"size": 57,
 			"color": "#fff",
 			"bgColor": "#fff",
-			"layout": "1x1",
 			"description": "包括双链，文件拖拽，嵌入笔记并实时更新，脚本系统，图库系统，手写压感，pdf 批注和引用等。"
 		}
 	}

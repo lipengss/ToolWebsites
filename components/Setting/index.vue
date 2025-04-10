@@ -60,7 +60,7 @@
 						</el-form-item>
 						<el-form-item label="默认菜单">
 							<el-select v-model="setting.menuBar.defaultRoute" @change="setGlobalSetting">
-								<el-option v-for="route in appTypeList" :key="route.path" :value="route.path" :label="route.name" />
+								<el-option v-for="route in menuList" :key="route.path" :value="route.path" :label="route.name" />
 							</el-select>
 						</el-form-item>
 						<el-form-item label="自动隐藏">
@@ -91,12 +91,12 @@
 								<el-switch v-model="setting.app.showTitle" @change="setGlobalSetting" />
 							</div>
 						</el-form-item>
-						<el-form-item label="图标大小">
+						<!-- <el-form-item label="图标大小">
 							<div class="slider-wrap">
 								<el-slider v-model="setting.app.size" :min="60" :max="100" :step="1" @change="setGlobalSetting" />
 								<el-tag type="primary">{{ setting.app.size }}PX</el-tag>
 							</div>
-						</el-form-item>
+						</el-form-item> -->
 						<el-form-item label="图标圆角">
 							<div class="slider-wrap">
 								<el-slider v-model="setting.app.radius" :min="0" :max="50" :step="1" @change="setGlobalSetting" />
@@ -222,11 +222,12 @@
 import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useSettingsStore } from '~/stores/settings';
-import { predefineColors, timeStepList, fontList, appTypeList } from '~/assets/utils/publicData';
+import menuList from '~/assets/website/menu.json';
+import { predefineColors, timeStepList, fontList } from '~/assets/utils/publicData';
 import { CopyDocument, RefreshRight, Search } from '@element-plus/icons-vue';
 import { useDark, useToggle } from '@vueuse/core';
 
-const { setting, showDrawer, engineList } = storeToRefs(useSettingsStore());
+const { setting, showDrawer } = storeToRefs(useSettingsStore());
 const { setGlobalSetting, clearGlobalSetting, onColorPickerChange } = useSettingsStore();
 
 const isDark = useDark();

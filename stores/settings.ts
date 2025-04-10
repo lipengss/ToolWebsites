@@ -37,6 +37,7 @@ const defaultSetting: ISetting = {
 	menuBar: {
 		position: 'right',
 		routePath: '/',
+		defaultRoute: '/',
 		width: 60,
 		blur: 6,
 		bgColor: 'rgba(255, 255, 255, 0.1)',
@@ -152,7 +153,7 @@ export const useSettingsStore = defineStore('settingStore', {
 		// 更新配置
 		setGlobalSetting() {
 			Local.set(GLOBAL_SETTING, this.setting);
-			this.initGlobalSetting();
+			// this.initGlobalSetting();
 		},
 		// 打开配置
 		openSettingDrawer() {
